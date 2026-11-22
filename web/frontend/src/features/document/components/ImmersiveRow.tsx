@@ -25,9 +25,10 @@ interface ImmersiveRowProps {
   retranslateOptions: RetranslateOption[];
 }
 
-function renderSource(paragraph: Paragraph, isApproved: boolean) {
+function renderSource(paragraph: Paragraph) {
   const elementType = paragraph.element_type ?? 'p';
-  const bgClass = isApproved ? 'bg-green-50' : 'bg-bg-secondary';
+  // 已确认不再整段刷绿底：状态写在段落左上角
+  const bgClass = 'bg-bg-tertiary/50';
 
   if (elementType === 'image') {
     return (
@@ -57,7 +58,7 @@ function renderSource(paragraph: Paragraph, isApproved: boolean) {
     );
   }
 
-  return <p className="whitespace-pre-wrap text-base leading-7 text-text-primary">{paragraph.source}</p>;
+  return <p className="whitespace-pre-wrap font-[family-name:var(--font-source)] text-[15px] leading-[1.78] text-text-secondary">{paragraph.source}</p>;
 }
 
 export function ImmersiveRow({
@@ -133,7 +134,7 @@ export function ImmersiveRow({
 
   const calculateRows = (text: string) => {
     const lines = text.split('\n').length;
-    return Math.max(3, Math.min(lines + 1, 20));
+    return Math.max(2, Math.min(lines + 1, 20));
   };
 
   const handleRowClick = () => {
@@ -146,9 +147,9 @@ export function ImmersiveRow({
     <div
       onClick={handleRowClick}
       className={cn(
-        'border-b border-border-subtle p-2 transition-all',
-        isApproved ? 'bg-green-50' : 'bg-bg-card',
-        hasError && 'border-error/60',
+        'group border-b border-border-subtle px-3 py-3 transition-colors last:border-b-0 sm:px-5',
+        'bg-white focus-within:bg-paper-hover/50 hover:bg-paper-hover/40',
+        hasError && 'bg-error-light/40',
         isSelectionMode && 'cursor-pointer hover:opacity-90',
         isSelectionMode && isSelected && 'ring-2 ring-primary-500'
       )}
@@ -164,9 +165,15 @@ export function ImmersiveRow({
         </div>
       )}
 
-      <div className="grid gap-3 lg:grid-cols-2">
-        <div className={`min-h-20 overflow-auto rounded p-2 ${isApproved ? 'bg-green-50' : 'bg-bg-secondary'}`}>
-          {renderSource(paragraph, isApproved)}
+      <div className="grid gap-3 lg:grid-cols-2 lg:gap-6">
+        <div className="min-w-0 overflow-auto">
+          <div className="mb-1.5 flex items-center gap-2 text-xs text-text-muted">
+            <span className="tabular-nums">#{paragraph.index}</span>
+            {isApproved ? (
+              <span className="inline-flex items-center gap-1 text-success"><Check className="h-3.5 w-3.5" />已确认</span>
+            ) : null}
+          </div>
+          {renderSource(paragraph)}
         </div>
 
         <textarea
@@ -174,19 +181,25 @@ export function ImmersiveRow({
           onChange={event => onChange(event.target.value)}
           onClick={event => event.stopPropagation()}
           rows={calculateRows(draft)}
-          className={`min-h-20 w-full resize-y rounded border border-border p-2 text-base leading-7 text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 ${
-            isApproved ? 'bg-green-50' : 'bg-bg-secondary'
-          }`}
+          // 平时像正文，鼠标移上去或点进去才出现输入框的边
+          className="min-h-16 w-full resize-none rounded-lg border border-transparent bg-transparent [field-sizing:content] px-3 py-2 font-[family-name:var(--font-display)] text-[15.5px] leading-[1.9] text-text-primary placeholder:font-[family-name:var(--font-body)] placeholder:text-sm placeholder:text-text-disabled hover:border-border focus:border-primary-400 focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-primary-500/12"
           placeholder="输入或修改译文..."
         />
       </div>
 
-      <div className="mt-2 flex items-center justify-end gap-2" onClick={event => event.stopPropagation()}>
+      {/* 操作按钮：桌面上鼠标移到这段（或在这段里打字）才出现，免得满屏按钮；手机上一直显示 */}
+      <div
+        className={cn(
+          'mt-1 flex items-center justify-end gap-2 transition-opacity lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
+          (showRetranslateMenu || isSaving || isRetranslating || hasError) && 'lg:opacity-100'
+        )}
+        onClick={event => event.stopPropagation()}
+      >
         <div className="relative" ref={menuButtonRef}>
           {showRetranslateMenu && (
             <div
               className={cn(
-                'absolute right-0 z-10 w-96 rounded-lg border border-border bg-bg-primary shadow-lg',
+                'absolute right-0 z-10 w-[min(24rem,calc(100vw-2rem))] rounded-xl border border-border-subtle bg-white shadow-pop',
                 menuPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'
               )}
             >
@@ -243,7 +256,8 @@ export function ImmersiveRow({
             <button
               onClick={handleToggleMenu}
               disabled={isRetranslating || isSaving}
-              className="flex items-center justify-center rounded-r-lg border border-border bg-bg-secondary px-2 hover:bg-bg-tertiary disabled:opacity-50"
+              className="flex items-center justify-center rounded-r-md border border-border bg-white px-2 text-text-muted hover:bg-primary-50 hover:text-primary-700 disabled:opacity-50"
+              aria-label="更多重译方式"
             >
               <ChevronDown className={`h-4 w-4 transition-transform ${showRetranslateMenu ? 'rotate-180' : ''}`} />
             </button>
@@ -251,14 +265,16 @@ export function ImmersiveRow({
         </div>
 
         <Button
-          variant="default"
+          variant={isApproved ? 'ghost' : 'default'}
           size="sm"
           onClick={onConfirm}
           isLoading={isSaving}
           disabled={isRetranslating}
           leftIcon={<Check className="h-4 w-4" />}
+          className={isApproved ? 'text-success' : undefined}
+          title={isApproved ? '已确认；改过译文后再点一次保存' : '确认这段译文'}
         >
-          确认
+          {isApproved ? '已确认' : '确认'}
         </Button>
       </div>
 

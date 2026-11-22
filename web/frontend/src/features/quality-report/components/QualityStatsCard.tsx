@@ -32,7 +32,7 @@ export function QualityStatsCard({ title, value, subtitle, variant = 'default' }
       <CardContent className="p-6">
         <div className="flex flex-col gap-2">
           <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className={cn('text-3xl font-bold', valueStyles[variant])}>{value}</p>
+          <p className={cn('font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none', valueStyles[variant])}>{value}</p>
           {subtitle && <p className="text-xs text-gray-500">{subtitle}</p>}
         </div>
       </CardContent>

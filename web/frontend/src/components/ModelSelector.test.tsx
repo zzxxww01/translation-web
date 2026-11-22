@@ -7,7 +7,7 @@ import { ModelSelector } from './ModelSelector';
 
 vi.mock('../shared/api/models', () => ({ modelsApi: { getModels: vi.fn(async () => ({ providers: [{
   id: 'openai-official', name: 'OpenAI 官方 API', models: [{ alias: 'gpt-6.1-sol',
-  real_model: 'gpt-6.1-sol', name: 'GPT-6.1 Sol（OpenAI 官方）', available: true }],
+  real_model: 'gpt-6.1-sol', name: 'GPT-6.1 Sol', available: true }],
 }] })) } }));
 vi.mock('@/components/ui/select', () => ({
   Select: ({ children, value, onValueChange }: {children:ReactNode;value:string;onValueChange:(v:string)=>void}) =>
@@ -25,7 +25,7 @@ it('offers official OpenAI without changing default and sends exact alias', asyn
     const select = host.querySelector('select')!;
     expect(select.value).toBe('default');
     expect(onChange).not.toHaveBeenCalled();
-    expect(host.textContent).toContain('GPT-6.1 Sol（OpenAI 官方）');
+    expect(host.textContent).toContain('GPT-6.1 Sol');
     await act(async () => { select.value = 'gpt-6.1-sol'; select.dispatchEvent(new Event('change', {bubbles:true})); });
     expect(onChange).toHaveBeenCalledWith('gpt-6.1-sol');
   } finally { await act(async () => root.unmount()); host.remove(); }

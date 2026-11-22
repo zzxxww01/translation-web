@@ -62,24 +62,29 @@ export function PostFeature() {
 
   return (
     <div className="min-h-full overflow-auto">
-      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-12 pt-4 sm:px-8 sm:pt-5">
         <PageHeader
           className="mb-5"
           title="帖子翻译"
           actions={
             <>
               <PendingChip ws={ws} />
-              <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">
-                <History className="h-4 w-4" /> 历史记录
-              </Button>
-              <div className="w-56" title="翻译用的模型">
+              <div className="hidden w-48 sm:block" title="翻译用的模型">
                 <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
               </div>
+              <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">
+                <History className="h-4 w-4" /> <span className="hidden sm:inline">历史记录</span>
+              </Button>
             </>
           }
         />
 
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
+        {/* 手机顶栏放不下模型选择，挪到正文最上面 */}
+        <div className="mb-3 sm:hidden">
+          <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
+        </div>
+        {/* 上面原文 / 译文两张等高的纸，下面一排优化和标题；手机上依次往下排 */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-5">
           <SourceInput
             value={ws.originalText}
             onChange={ws.setOriginalText}
@@ -89,7 +94,7 @@ export function PostFeature() {
             isTranslating={ws.pendingAction === 'translate'}
             canClear={!!(ws.originalText.trim() || ws.versions.length > 0 || ws.currentContent)}
           />
-          <WorkColumn ws={ws} showTitle />
+          <WorkColumn ws={ws} showTitle layout="page" />
         </div>
       </div>
 
@@ -109,14 +114,16 @@ export function PostFeature() {
 }
 
 /** 译文、优化指令、标题三块：帖子翻译页和 Slack 翻译模式共用 */
-export function WorkColumn({ ws, extraActions, showTitle = false }: {
+export function WorkColumn({ ws, extraActions, showTitle = false, layout = 'column' }: {
   ws: ReturnType<typeof usePostWorkspace>;
   extraActions?: React.ReactNode;
   /** 帖子翻译页保留原来的「译文」小标题；Slack 分栏里栏头已经写了 */
   showTitle?: boolean;
+  /** page：帖子翻译页，译文和原文并排、优化和标题排到下一行；column：Slack 分栏里一列排下来 */
+  layout?: 'page' | 'column';
 }) {
   return (
-    <div className={showTitle ? 'flex min-w-0 flex-col gap-5' : 'flex flex-col gap-5 p-4'}>
+    <div className={layout === 'page' ? 'contents' : 'flex flex-col gap-5 p-4'}>
       <TranslationOutput
         hideTitle={!showTitle}
         versions={ws.versions}

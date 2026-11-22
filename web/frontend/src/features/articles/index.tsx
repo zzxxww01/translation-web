@@ -73,7 +73,8 @@ export function ArticlesFeature() {
           <div className="m-auto max-w-sm px-6 text-center text-text-muted">
             <Newspaper className="mx-auto h-8 w-8 text-text-disabled" />
             <p className="mt-3 text-sm leading-relaxed">
-              左边选一篇文章。没导入的先看中文摘要，再选怎么翻（网页版、Agent 或两个都翻）；已导入的直接进三栏对照。
+              从左边选一篇文章开始。<br />
+              已导入的直接打开对照编辑；没导入的先看摘要，一键导入翻译。
             </p>
           </div>
         )}

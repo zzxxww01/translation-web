@@ -204,8 +204,9 @@ describe('NewRunForm', () => {
     await click(button('刷新模型'), '刷新模型');
     expect(models).toHaveBeenLastCalledWith('claude', true);
     await click(radio('模型', 'Codex'), 'Codex');
-    expect(host.textContent).toContain('Codex CLI 本地缓存');
-    expect(host.textContent).toContain('刷新会重读缓存');
+    // 清单来源写在「刷新模型」按钮的悬停提示里
+    expect(button('刷新模型')!.title).toContain('Codex CLI 本地缓存');
+    expect(button('刷新模型')!.title).toContain('刷新会重读缓存');
   });
 
   it('keeps default and custom choices available when Gemini discovery is unavailable', async () => {

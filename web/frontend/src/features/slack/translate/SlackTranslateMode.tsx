@@ -272,7 +272,6 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-[11px] text-text-muted">鼠标移到图上可以调顺序、下载或去掉；在右边原帖里点图片可以再加。</p>
           </>
         )}
       </section>
@@ -282,7 +281,6 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const threadPane = (
     <div className="pb-6 pt-2">
       {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
-      <p className="px-5 pb-2 text-xs text-text-muted">左边有竖线的消息是 AI 挑原文用的；点图片可以加进配图或去掉。</p>
       {messages.map(m => (
         <MessageItem
           key={m.ts}

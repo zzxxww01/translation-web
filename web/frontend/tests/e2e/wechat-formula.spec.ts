@@ -32,8 +32,8 @@ test('微信排版把公式渲染成公众号可用的内嵌 SVG', async ({ page
 
   await page.goto('/wechat');
 
+  // 默认「保留原链接」：边写边预览，停手 0.8 秒自动转换，不用再点「转换」
   await page.getByLabel('Markdown 内容').fill(MARKDOWN);
-  await page.getByRole('button', { name: '转换' }).click();
 
   const preview = page.frameLocator('iframe[title="微信排版预览"]');
   // MathJax 是懒加载的（约 2.2MB），首次渲染要等 bundle 落地

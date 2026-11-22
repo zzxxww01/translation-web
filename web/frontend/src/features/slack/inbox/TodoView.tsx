@@ -116,7 +116,7 @@ export function TodoView({ onOpen, onTranslate }: {
           <Sparkles className="h-4 w-4 shrink-0 text-primary-500" />
           <span className="min-w-0 flex-1 text-sm text-text-primary">
             有人在 thread 里 @我 时，自动把那个帖子翻好
-            <span className="block text-xs text-text-muted">后台自动跑提取 → 翻译 → 标题，翻好的会标「已自动翻好」</span>
+            <span className="block text-xs text-text-muted">自动找原文、翻译、起标题，翻好的会标「已自动翻好」</span>
           </span>
           <button
             type="button"

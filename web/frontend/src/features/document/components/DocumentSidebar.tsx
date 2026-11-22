@@ -324,7 +324,7 @@ export function DocumentSidebar({
                     <label className="flex items-start gap-2 text-xs text-text-muted">
                       <input type="checkbox" checked={compactReview} disabled={isTranslateBusy || selectedMethod !== 'four-step'}
                         onChange={(event) => setCompactReview(event.target.checked)} />
-                      <span>紧凑审校报告（实验）：保留完整检查，只减少重复说明和评分输出。</span>
+                      <span>精简审校说明：检查照常做，只是少写重复的说明和评分。</span>
                     </label>
                   </div>
                 </CollapsibleContent>

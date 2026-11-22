@@ -279,69 +279,61 @@ export function ImmersiveEditor({
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-bg-primary">
-      <div className="border-b border-border-subtle bg-white px-6 py-3 shadow-sm">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-base font-medium text-text-primary">{latestSection.title}</h2>
-            <span className="text-sm text-text-muted">已确认 {approvedCount}/{paragraphs.length} 段</span>
+      {/* 顶栏：章节名 + 进度；操作都写字，不再是一排猜不出意思的图标 */}
+      <div className="shrink-0 border-b border-border-subtle bg-bg-primary">
+        <div className="flex min-h-14 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2 sm:px-6">
+          <div className="flex min-w-0 items-baseline gap-3">
+            <h2 className="truncate text-[17px] text-text-primary">{latestSection.title}</h2>
+            <span className="shrink-0 text-xs tabular-nums text-text-muted">已确认 {approvedCount}/{paragraphs.length} 段</span>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleSelectionMode}
-              className={`flex items-center justify-center rounded-lg border p-2 transition-colors ${
-                isSelectionMode
-                  ? 'border-primary-500 bg-primary-500 text-white hover:bg-primary-600'
-                  : 'border-border bg-bg-secondary text-text-primary hover:bg-bg-tertiary'
-              }`}
-              title={isSelectionMode ? '退出选择' : '批量选择'}
-            >
-              <CheckSquare className="h-5 w-5" />
-            </button>
-
+          <div className="flex flex-wrap items-center gap-1.5">
             {isSelectionMode && (
-              <div className="flex items-center gap-2 border-l border-border-subtle pl-2">
-                <span className="text-sm text-text-muted">
+              <>
+                <span className="mr-1 text-xs tabular-nums text-text-muted">
                   已选 {selectedIds.size}/{MAX_BATCH_SELECTION}
                 </span>
-                <button
-                  onClick={() => toggleSelectAll(filteredParagraphs.map(paragraph => paragraph.id))}
-                  className="rounded-lg border border-border bg-bg-secondary px-3 py-1.5 text-sm text-text-primary hover:bg-bg-tertiary"
-                  title={isAllFilteredSelected ? '取消全选' : '全选'}
-                >
+                <Button variant="ghost" size="sm" onClick={() => toggleSelectAll(filteredParagraphs.map(paragraph => paragraph.id))}>
                   {isAllFilteredSelected ? '取消全选' : '全选'}
-                </button>
-                <button
-                  onClick={() => void batchConfirmSelected()}
-                  disabled={selectedIds.size === 0 || retranslatingCount > 0 || savingCount > 0}
-                  className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
-                  title="批量确认"
-                >
-                  <Check className="h-5 w-5" />
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={() => setShowBatchRetranslateDialog(true)}
                   disabled={selectedIds.size === 0 || retranslatingCount > 0}
-                  className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
-                  title="批量重译"
+                  leftIcon={<RotateCw className="h-4 w-4" />}
                 >
-                  <RotateCw className="h-5 w-5" />
-                </button>
-              </div>
+                  重译所选
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={() => void batchConfirmSelected()}
+                  disabled={selectedIds.size === 0 || retranslatingCount > 0 || savingCount > 0}
+                  leftIcon={<Check className="h-4 w-4" />}
+                >
+                  确认所选
+                </Button>
+              </>
             )}
-
-            <button
-              onClick={handleClose}
-              className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary"
-              title="退出沉浸编辑"
+            <Button
+              variant={isSelectionMode ? 'secondary' : 'ghost'}
+              size="sm"
+              onClick={toggleSelectionMode}
+              leftIcon={<CheckSquare className="h-4 w-4" />}
             >
-              <X className="h-5 w-5" />
-            </button>
+              {isSelectionMode ? '退出多选' : '多选'}
+            </Button>
+            <Button variant="ghost" size="sm" onClick={handleClose} leftIcon={<X className="h-4 w-4" />} title="退出沉浸编辑（Esc）">
+              退出
+            </Button>
           </div>
+        </div>
+        <div className="h-0.5 bg-border-subtle" role="progressbar" aria-valuenow={approvedCount} aria-valuemin={0} aria-valuemax={paragraphs.length} aria-label="确认进度">
+          <div className="h-full bg-primary-500 transition-[width] duration-500" style={{ width: `${paragraphs.length ? (approvedCount / paragraphs.length) * 100 : 0}%` }} />
         </div>
       </div>
 
-      <div ref={listContainerRef} className="flex-1 overflow-auto px-6 py-2" onScroll={handleListScroll}>
-        <div className="space-y-1">
+      <div ref={listContainerRef} className="flex-1 overflow-auto px-2 py-4 sm:px-6" onScroll={handleListScroll}>
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-border-subtle bg-white shadow-paper">
           {displayedParagraphs.map(paragraph => (
             <div
               key={paragraph.id}
@@ -386,7 +378,7 @@ export function ImmersiveEditor({
 
       {showBatchRetranslateDialog && (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/50 p-4"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(43,39,48,0.36)] p-4 backdrop-blur-[2px]"
           onClick={() => setShowBatchRetranslateDialog(false)}
         >
           <div
@@ -395,7 +387,7 @@ export function ImmersiveEditor({
             aria-modal="true"
             aria-labelledby="batch-retranslate-title"
             onClick={event => event.stopPropagation()}
-            className="w-full max-w-md rounded-lg border border-border bg-bg-primary p-6 shadow-xl"
+            className="w-full max-w-md rounded-xl border border-border-subtle bg-bg-primary p-6 shadow-pop"
           >
             <h3 id="batch-retranslate-title" className="mb-4 text-lg font-semibold text-text-primary">
               批量重译 {selectedIds.size} 个段落
@@ -406,7 +398,7 @@ export function ImmersiveEditor({
                   key={option.id}
                   onClick={() => handleBatchRetranslate(option.id)}
                   disabled={retranslatingCount > 0}
-                  className="w-full rounded-lg border border-border bg-bg-secondary px-4 py-3 text-left text-sm text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
+                  className="w-full rounded-lg border border-border-subtle bg-white px-4 py-3 text-left text-sm text-text-primary transition-colors hover:border-primary-200 hover:bg-paper-hover disabled:opacity-50"
                 >
                   <div className="font-medium">{option.label}</div>
                   {option.description && (

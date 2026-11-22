@@ -1,84 +1,33 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import type { Task } from '../types';
 
-type CurrentTool = 'tasks' | 'translator' | 'email' | 'timezone' | 'slack-reply';
+export type CurrentTool = 'translator' | 'email' | 'timezone';
+
+const TOOLS: CurrentTool[] = ['translator', 'email', 'timezone'];
 
 /**
- * 工具箱状态
+ * 工具箱状态：只记住上次打开的是哪个工具。
+ * 2026-11-22 去掉了「任务管理」和「Slack 回复（旧版）」；以前存下来的这两个值回到文本翻译。
  */
 interface ToolsState {
-  // 当前选中的工具
   currentTool: CurrentTool;
-  // 任务列表
-  tasks: Task[];
-  // 是否正在处理
-  isProcessing: boolean;
-
-  // Actions
   setCurrentTool: (tool: CurrentTool) => void;
-  setTasks: (tasks: Task[]) => void;
-  addTask: (task: Task) => void;
-  updateTask: (id: string, updates: Partial<Task>) => void;
-  deleteTask: (id: string) => void;
-  toggleTask: (id: string) => void;
-  setProcessing: (isProcessing: boolean) => void;
-  reset: () => void;
 }
-
-const initialState = {
-  currentTool: 'timezone' as CurrentTool,
-  tasks: [
-    { id: '1', text: '示例任务 1', completed: false },
-    { id: '2', text: '示例任务 2', completed: false },
-  ],
-  isProcessing: false,
-};
 
 export const useToolsStore = create<ToolsState>()(
   devtools(
     persist(
       set => ({
-        ...initialState,
-
+        currentTool: 'translator',
         setCurrentTool: currentTool => set({ currentTool }),
-
-        setTasks: tasks => set({ tasks }),
-
-        addTask: task =>
-          set(state => ({
-            tasks: [...state.tasks, task],
-          })),
-
-        updateTask: (id, updates) =>
-          set(state => ({
-            tasks: state.tasks.map(t => (t.id === id ? { ...t, ...updates } : t)),
-          })),
-
-        deleteTask: id =>
-          set(state => ({
-            tasks: state.tasks.filter(t => t.id !== id),
-          })),
-
-        toggleTask: id =>
-          set(state => ({
-            tasks: state.tasks.map(t =>
-              t.id === id ? { ...t, completed: !t.completed } : t
-            ),
-          })),
-
-        setProcessing: isProcessing => set({ isProcessing }),
-
-        reset: () => set(initialState),
       }),
       {
         name: 'ToolsStore',
-        // C33: 不再持久化 tasks。tasks 的初始值是内置示例任务，
-        // 持久化后会把示例数据/陈旧任务长期写入 localStorage；
-        // 这里只保留轻量的当前工具选择作为 UI 偏好。
-        partialize: state => ({
-          currentTool: state.currentTool,
-        }),
+        partialize: state => ({ currentTool: state.currentTool }),
+        merge: (persisted, current) => {
+          const saved = (persisted as Partial<ToolsState> | undefined)?.currentTool;
+          return { ...current, currentTool: saved && TOOLS.includes(saved) ? saved : 'translator' };
+        },
       }
     ),
     { name: 'ToolsStore' }

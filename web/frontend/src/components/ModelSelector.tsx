@@ -65,21 +65,22 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
     );
   }
 
-  // 只列模型名，不分来源分组；多个别名指向同一个真实模型时只显示第一个。
+  // 只列模型名，不分来源分组。同一家供应商里多个别名指向同一个真实模型时只显示第一个；
+  // 同一个模型接了不同供应商时各留一个（后端已在名字后面标上供应商）。
   // 当前选中的若是被折叠的别名，仍保留它，否则选择框会显示成空白。
   const seenModels = new Set<string>();
-  const models = providers.flatMap(provider => provider.models).filter(model => {
-    const key = model.real_model || model.alias;
+  const models = providers.flatMap(provider => provider.models.map(model => ({ model, provider: provider.id }))).filter(({ model, provider }) => {
+    const key = `${provider}:${model.real_model || model.alias}`;
     if (seenModels.has(key) && model.alias !== value) return false;
     seenModels.add(key);
     return true;
-  });
+  }).map(({ model }) => model);
 
   return (
     <Select value={value || 'default'} onValueChange={(val) => onChange(val === 'default' ? '' : val)} disabled={disabled}>
       <SelectTrigger className={className}>
-        <div className="flex items-center gap-2">
-          <Cpu className="h-3.5 w-3.5 text-text-muted" />
+        <div className="flex min-w-0 items-center gap-2 [&>span]:truncate">
+          <Cpu className="h-3.5 w-3.5 shrink-0 text-text-muted" />
           <SelectValue placeholder="默认模型" />
         </div>
       </SelectTrigger>
