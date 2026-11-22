@@ -57,6 +57,21 @@ def test_sessions_are_listed_newest_first_renamed_and_deleted(monkeypatch, tmp_p
     assert client.get("/api/tools/chat/sessions/c_bad").status_code == 400
 
 
+def test_pinned_sessions_come_first_and_pinning_does_not_count_as_activity(monkeypatch, tmp_path):
+    client, _ = make_client(monkeypatch, tmp_path, search=None)
+    old = client.post("/api/tools/chat/sessions", json={}).json()
+    new = client.post("/api/tools/chat/sessions", json={}).json()
+    client.post(f"/api/tools/chat/sessions/{new['id']}/messages", json={"content": "最近聊的"})
+    pinned = client.put(f"/api/tools/chat/sessions/{old['id']}/pin", json={"pinned": True}).json()
+    assert pinned["pinned_at"] and pinned["updated_at"] == old["updated_at"]
+    listed = client.get("/api/tools/chat/sessions").json()["sessions"]
+    assert [s["id"] for s in listed] == [old["id"], new["id"]] and listed[0]["pinned_at"]
+
+    client.put(f"/api/tools/chat/sessions/{old['id']}/pin", json={"pinned": False})
+    listed = client.get("/api/tools/chat/sessions").json()["sessions"]
+    assert [s["id"] for s in listed] == [new["id"], old["id"]] and listed[1]["pinned_at"] is None
+
+
 def test_old_browser_conversation_is_imported(monkeypatch, tmp_path):
     client, _ = make_client(monkeypatch, tmp_path)
     doc = client.post("/api/tools/chat/sessions", json={"messages": [

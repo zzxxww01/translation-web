@@ -29,6 +29,8 @@ export interface RunMeta {
   queued_at?: number | null;
   /** 挂起的消息：agent 干活时发的话，这一轮结束后按顺序发 */
   held?: HeldMessage[];
+  /** 置顶的时间（epoch 秒）；没置顶为 null。列表里置顶的在前，各自按 updated_at 从新到旧 */
+  pinned_at?: number | null;
 }
 
 export interface HeldMessage {

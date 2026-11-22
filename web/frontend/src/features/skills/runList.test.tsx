@@ -29,9 +29,10 @@ describe('RunList delete', () => {
     document.body.innerHTML = '';
   });
 
-  const render = (onDelete: (id: string) => Promise<void>) => act(() => root.render(
-    <RunList runs={[run('20261028-000000-aaaaaa', 'idle'), run('20261028-000001-bbbbbb', 'running')]}
-      catalog={normalizeCatalog([])} selectedId={null} onSelect={vi.fn()} onNew={vi.fn()} onDelete={onDelete} />,
+  const render = (onDelete: (id: string) => Promise<void>, onPin = vi.fn(async () => undefined),
+    runs = [run('20261028-000000-aaaaaa', 'idle'), run('20261028-000001-bbbbbb', 'running')]) => act(() => root.render(
+    <RunList runs={runs}
+      catalog={normalizeCatalog([])} selectedId={null} onSelect={vi.fn()} onNew={vi.fn()} onDelete={onDelete} onPin={onPin} />,
   ));
   const deleteButtons = () => Array.from(host.querySelectorAll<HTMLButtonElement>('button[aria-label^="删除对话"]'));
 
@@ -44,6 +45,18 @@ describe('RunList delete', () => {
     const confirm = Array.from(document.querySelectorAll('button')).find(b => b.textContent === '删除')!;
     await act(async () => { confirm.click(); });
     expect(onDelete).toHaveBeenCalledWith('20261028-000000-aaaaaa');
+  });
+
+  it('pins and unpins, and marks pinned conversations', async () => {
+    const onPin = vi.fn(async () => undefined);
+    render(vi.fn(), onPin, [{ ...run('20261028-000000-aaaaaa', 'idle'), pinned_at: 1_793_000_100 }, run('20261028-000001-bbbbbb', 'running')]);
+    const unpin = host.querySelector<HTMLButtonElement>('button[aria-label^="取消置顶"]')!;
+    const pin = host.querySelector<HTMLButtonElement>('button[aria-label^="置顶"]')!;
+    expect(host.querySelectorAll('[aria-label="已置顶"]')).toHaveLength(1);
+    await act(async () => { unpin.click(); });
+    await act(async () => { pin.click(); });
+    expect(onPin).toHaveBeenNthCalledWith(1, '20261028-000000-aaaaaa', false);
+    expect(onPin).toHaveBeenNthCalledWith(2, '20261028-000001-bbbbbb', true);
   });
 
   it('does not let a running conversation be deleted', () => {

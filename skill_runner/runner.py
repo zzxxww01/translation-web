@@ -298,7 +298,15 @@ class Runner:
     def list_runs(self) -> list[RunMeta]:
         metas = self.store.list_meta()
         # 内存里的状态比磁盘新（磁盘只在状态切换时写）
-        return [self._runs[m.id].meta if m.id in self._runs else m for m in metas]
+        metas = [self._runs[m.id].meta if m.id in self._runs else m for m in metas]
+        # 置顶的在前；各自按最近活跃（updated_at：每次发消息、每轮结束都会更新）从新到旧
+        return sorted(metas, key=lambda m: (m.pinned_at is not None, m.updated_at), reverse=True)
+
+    def pin(self, run_id: str, pinned: bool) -> RunMeta:
+        run = self._get(run_id)
+        run.meta.pinned_at = time.time() if pinned else None
+        self.store.save_meta(run.meta)
+        return run.meta
 
     def active_count(self) -> int:
         return sum(1 for run in self._runs.values() if run.meta.status in ACTIVE_STATUSES or self._session_busy(run))

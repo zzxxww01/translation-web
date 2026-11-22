@@ -1,4 +1,4 @@
-import { Plus, Trash2 } from 'lucide-react';
+import { Pin, PinOff, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { findAgent } from '../agents';
@@ -23,10 +23,14 @@ interface RunListProps {
   onSelect: (id: string) => void;
   onNew: () => void;
   onDelete: (id: string) => Promise<void>;
+  onPin: (id: string, pinned: boolean) => Promise<void>;
 }
 
-/** 左栏：「新对话」按钮 + 对话记录。每条写清是哪个 Agent、什么时候、现在什么状态。 */
-export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete }: RunListProps) {
+/**
+ * 左栏：「新对话」按钮 + 对话记录。每条写清是哪个 Agent、最近一次活跃的时间、现在什么状态。
+ * 顺序由后端排好：置顶的在前，各自按最近活跃从新到旧。
+ */
+export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete, onPin }: RunListProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="px-3 pb-3 pt-4">
@@ -40,6 +44,7 @@ export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete }
         {runs.map(run => {
           const agent = findAgent(catalog, run.skill);
           const active = run.status === 'running' || run.status === 'waiting';
+          const pinned = run.pinned_at != null;
           return (
             <li key={run.id} className="group relative">
               <button
@@ -47,18 +52,30 @@ export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete }
                 onClick={() => onSelect(run.id)}
                 aria-current={run.id === selectedId ? 'true' : undefined}
                 className={cn(
-                  'flex w-full items-start gap-2.5 rounded-lg py-2.5 pl-2.5 pr-9 text-left transition-colors',
+                  'flex w-full items-start gap-2.5 rounded-lg py-2.5 pl-2.5 pr-16 text-left transition-colors',
                   run.id === selectedId ? 'bg-primary-50' : 'hover:bg-bg-hover group-hover:bg-bg-hover'
                 )}
               >
                 <AgentAvatar icon={agent.icon} size="sm" className="mt-0.5" />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm text-text-primary">{runTitle(run.title)}</span>
+                  <span className="flex items-center gap-1 text-sm text-text-primary">
+                    {pinned && <Pin aria-label="已置顶" className="h-3 w-3 shrink-0 fill-primary-500 text-primary-500" />}
+                    <span className="truncate">{runTitle(run.title)}</span>
+                  </span>
                   <span className="mt-0.5 flex items-center gap-2 text-xs text-text-muted">
-                    <span className="truncate">{agent.title} · {formatTime(run.created_at)}</span>
+                    <span className="truncate">{agent.title} · {formatTime(run.updated_at)}</span>
                     <StatusPill status={displayStatus(run.status, run.awaiting_reply)} className="ml-auto" />
                   </span>
                 </span>
+              </button>
+              <button
+                type="button"
+                aria-label={`${pinned ? '取消置顶' : '置顶'}：${runTitle(run.title)}`}
+                title={pinned ? '取消置顶' : '置顶'}
+                onClick={() => void onPin(run.id, !pinned)}
+                className="absolute right-8 top-2 rounded-md p-1.5 text-text-muted transition-opacity hover:bg-bg-hover hover:text-text-primary [@media(hover:hover)]:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100"
+              >
+                {pinned ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
               </button>
               <DeleteRunDialog onConfirm={() => onDelete(run.id)}>
                 <button

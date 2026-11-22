@@ -42,6 +42,10 @@ class HeldBody(BaseModel):
     text: str = Field(max_length=100_000)
 
 
+class PinBody(BaseModel):
+    pinned: bool
+
+
 def _strip_billing_overrides() -> None:
     for name in BILLING_OVERRIDE_ENV:
         if os.environ.pop(name, None) is not None:
@@ -281,6 +285,10 @@ def create_app(
     @api.post("/runs/{run_id}/held/{hid}/send")
     async def send_held(run_id: str, hid: str):
         return (await runner.send_held(run_id, hid)).to_dict()
+
+    @api.put("/runs/{run_id}/pin")
+    async def pin_run(run_id: str, body: PinBody):
+        return runner.pin(run_id, body.pinned).to_dict()
 
     @api.post("/runs/{run_id}/answer")
     async def answer(run_id: str, body: AnswerBody):

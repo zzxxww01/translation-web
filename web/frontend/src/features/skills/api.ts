@@ -30,6 +30,7 @@ export const skillsApi = {
   interrupt: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/interrupt`, undefined, { retry: false }),
   stop: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/stop`, undefined, { retry: false, timeout: 90_000 }),
   remove: (runId: string) => apiClient.delete<{ ok: boolean }>(`/skills/runs/${runId}`),
+  pin: (runId: string, pinned: boolean) => apiClient.put<RunMeta>(`/skills/runs/${runId}/pin`, { pinned }, { retry: false }),
   editHeld: (runId: string, hid: string, text: string) =>
     apiClient.put<RunMeta>(`/skills/runs/${runId}/held/${hid}`, { text }, { retry: false }),
   deleteHeld: (runId: string, hid: string) => apiClient.delete<RunMeta>(`/skills/runs/${runId}/held/${hid}`),

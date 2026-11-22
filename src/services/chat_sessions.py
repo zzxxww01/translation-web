@@ -59,6 +59,7 @@ def summarize(doc: Dict[str, Any]) -> Dict[str, Any]:
         "count": len(messages),
         "created_at": doc.get("created_at"),
         "updated_at": doc.get("updated_at"),
+        "pinned_at": doc.get("pinned_at"),
     }
 
 
@@ -93,7 +94,7 @@ class ChatSessionStore:
         return self._read(session_id)
 
     def list(self, limit: int = 300) -> List[Dict[str, Any]]:
-        """按最近更新从新到旧。"""
+        """置顶的在前，各自按最近更新从新到旧。"""
         docs = []
         if self.root.is_dir():
             for path in self.root.glob("c_*.json"):
@@ -101,7 +102,7 @@ class ChatSessionStore:
                     docs.append(json.loads(path.read_text(encoding="utf-8")))
                 except (OSError, ValueError):
                     continue
-        docs.sort(key=lambda d: d.get("updated_at") or 0, reverse=True)
+        docs.sort(key=lambda d: (d.get("pinned_at") is not None, d.get("updated_at") or 0), reverse=True)
         return [summarize(d) for d in docs[:limit]]
 
     def create(self, messages: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
@@ -123,6 +124,16 @@ class ChatSessionStore:
             doc = self._read(session_id)
             doc["title"] = title
             doc["titled"] = True
+            return self._write(doc)
+
+    def pin(self, session_id: str, pinned: bool) -> Dict[str, Any]:
+        """置顶 / 取消置顶；不算更新，不动 updated_at。"""
+        with self._lock:
+            doc = self._read(session_id)
+            if pinned:
+                doc["pinned_at"] = time.time()
+            else:
+                doc.pop("pinned_at", None)
             return self._write(doc)
 
     def delete(self, session_id: str) -> bool:

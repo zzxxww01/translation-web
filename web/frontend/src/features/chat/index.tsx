@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  ArrowUp, Check, Copy, Globe, History, Info, Loader2, MessageSquarePlus, Pencil, RotateCcw, Trash2,
+  ArrowUp, Check, Copy, Globe, History, Info, Loader2, MessageSquarePlus, Pencil, Pin, PinOff, RotateCcw, Trash2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
@@ -180,6 +180,15 @@ export function ChatFeature() {
     }
   };
 
+  const pin = async (id: string, pinned: boolean) => {
+    try {
+      await chatApi.pin(id, pinned);
+      await refreshList();
+    } catch (e) {
+      toast.error(`${pinned ? '置顶' : '取消置顶'}没成功：${errorText(e)}`);
+    }
+  };
+
   const remove = async (item: ChatSessionSummary) => {
     const ok = await confirmAction({ title: `删除对话「${item.title}」？`, description: '删除后找不回来。', confirmLabel: '删除', destructive: true });
     if (!ok) return;
@@ -193,7 +202,7 @@ export function ChatFeature() {
   };
 
   const list = (
-    <SessionList sessions={sessions} currentId={currentId} busyId={pendingFor} onOpen={open} onRename={rename} onRemove={remove} />
+    <SessionList sessions={sessions} currentId={currentId} busyId={pendingFor} onOpen={open} onRename={rename} onPin={pin} onRemove={remove} />
   );
   const shown: ChatMessage[] = pendingQuestion && pending
     ? [...messages, { id: 'pending', role: 'user', content: pendingQuestion }]
@@ -299,12 +308,14 @@ export function ChatFeature() {
   );
 }
 
-function SessionList({ sessions, currentId, busyId, onOpen, onRename, onRemove }: {
+/** 会话列表：后端排好序，置顶的在前，各自按最近更新从新到旧 */
+function SessionList({ sessions, currentId, busyId, onOpen, onRename, onPin, onRemove }: {
   sessions: ChatSessionSummary[];
   currentId: string | null;
   busyId: string | null;
   onOpen: (id: string) => void;
   onRename: (id: string, title: string) => void;
+  onPin: (id: string, pinned: boolean) => void;
   onRemove: (item: ChatSessionSummary) => void;
 }) {
   const [editing, setEditing] = useState<string | null>(null);
@@ -332,12 +343,18 @@ function SessionList({ sessions, currentId, busyId, onOpen, onRename, onRemove }
             <div className={cn('group flex items-center rounded-md text-sm',
               item.id === currentId ? 'bg-primary-50 text-primary-700' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary')}>
               <button type="button" onClick={() => onOpen(item.id)} className="flex min-w-0 flex-1 items-center gap-2 px-2.5 py-2 text-left">
+                {item.pinned_at != null && <Pin aria-label="已置顶" className="h-3 w-3 shrink-0 fill-primary-500 text-primary-500" />}
                 <span className="min-w-0 flex-1 truncate">{item.title}</span>
                 {busyId === item.id
                   ? <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-text-muted" />
                   : <span className="shrink-0 text-[11px] text-text-muted group-hover:hidden">{shortTime(item.updated_at)}</span>}
               </button>
               <div className="hidden shrink-0 pr-1 group-hover:flex">
+                <button type="button" title={item.pinned_at != null ? '取消置顶' : '置顶'}
+                  aria-label={`${item.pinned_at != null ? '取消置顶' : '置顶'}：${item.title}`} onClick={() => onPin(item.id, item.pinned_at == null)}
+                  className="rounded p-1 text-text-muted hover:bg-ink-wash hover:text-text-primary">
+                  {item.pinned_at != null ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
+                </button>
                 <button type="button" title="改名" aria-label={`改名：${item.title}`} onClick={() => { setTitle(item.title); setEditing(item.id); }}
                   className="rounded p-1 text-text-muted hover:bg-ink-wash hover:text-text-primary"><Pencil className="h-3.5 w-3.5" /></button>
                 <button type="button" title="删除" aria-label={`删除：${item.title}`} onClick={() => onRemove(item)}
