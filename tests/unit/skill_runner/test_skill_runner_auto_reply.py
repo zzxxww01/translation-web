@@ -47,7 +47,7 @@ async def test_turn_ending_with_mark_is_awaiting_and_auto_continues(runner, stor
     meta = runner.meta(run_id)
     assert meta.status == "running"
     assert not meta.awaiting_reply and meta.auto_reply_at is None and meta.auto_replies == 1
-    assert "（自动确认）" in session.sent[-1]
+    assert session.sent[-1] == "继续，按照你的想法做就行了，不需要和我确认"
     assert store.read_events(run_id)[-2]["type"] == "user"  # 自动回复也记成一条消息，页面上看得到
 
 

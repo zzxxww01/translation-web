@@ -49,10 +49,8 @@ AWAIT_MARK = "【等待确认】"
 _AWAIT_AT_END = re.compile(re.escape(AWAIT_MARK) + r"\s*$")
 AUTO_REPLY_LIMIT = 3
 DETACH_MESSAGE = "用户暂时没回答，问题已保留在页面上；回答会作为下一条消息发来。请就此结束这一轮，先不要继续做。"
-AUTO_REPLY_TEXT = (
-    "（自动确认）{wait}没有收到回复。请按你推荐的方案确认（比如术语表全部采用建议译法），"
-    "接下来不要再停下来等确认，直接完成剩下的全部步骤。"
-)
+# 等确认超时后替用户发的话（页面上另有一行小字说明这是自动发的）
+AUTO_REPLY_TEXT = "继续，按照你的想法做就行了，不需要和我确认"
 
 
 def awaits_reply(text: str) -> bool:
@@ -978,9 +976,8 @@ class Runner:
             if run.meta.status != "idle" or not run.meta.awaiting_reply:
                 return
             self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回复，自动按推荐方案继续"})
-            text = AUTO_REPLY_TEXT.format(wait=waited)
             try:
-                await self._deliver(run, text, [], text)
+                await self._deliver(run, AUTO_REPLY_TEXT, [], AUTO_REPLY_TEXT)
             except RunnerError:
                 logger.exception("auto reply failed for run %s", run.meta.id)
         finally:
