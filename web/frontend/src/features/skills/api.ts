@@ -79,7 +79,7 @@ export const AUTO_REPLY_MINUTES = 10;
 export function startRun(
   input: {
     skill: string; message: string; files: File[]; harness?: Harness; model?: string; autoReplyMinutes?: number; title?: string;
-    /** momo Slack 页给会话 / thread 配 agent 时传；同一个 source 服务端只建一个对话 */
+    /** 翻译服务 Slack 页给会话 / thread 配 agent 时传；同一个 source 服务端只建一个对话 */
     source?: string;
   },
   onProgress?: (percent: number) => void

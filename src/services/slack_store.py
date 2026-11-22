@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS conv_state (
     refreshed_at REAL NOT NULL DEFAULT 0  -- 上次重拉最近几天（补编辑、删除、回复数）的时间
 );
 
--- momo 自己的已读位置（Slack 是只读的，不往回写）。thread_ts 为空串表示整个会话
+-- 翻译服务自己的已读位置（Slack 是只读的，不往回写）。thread_ts 为空串表示整个会话
 CREATE TABLE IF NOT EXISTS read_state (
     channel_id TEXT NOT NULL,
     thread_ts TEXT NOT NULL DEFAULT '',
@@ -227,7 +227,7 @@ class SlackStore:
                 (channel_id, thread_ts, state["newest_ts"], state["fetched_at"], state["full_at"]),
             )
 
-    # -- momo 本地已读
+    # -- 翻译服务本地已读
 
     def read_position(self, channel_id: str, thread_ts: str = "") -> Optional[str]:
         with self._lock:

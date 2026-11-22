@@ -37,7 +37,7 @@ async function refineVersion(version: string, chinese: string) {
 /**
  * 私信右栏的回复面板（2026-11-22 起不用 agent，直接调接口）：
  * 对方要什么 + A/B/C 三版回复；可以改某一版的中文意思、一键调整措辞、写「我想说」；每次结果记一组，可翻回去。
- * 对方有未读新消息时打开就自动生成一次。momo 从不发送，复制后自己去 Slack 发。
+ * 对方有未读新消息时打开就自动生成一次。翻译服务从不发送，复制后自己去 Slack 发。
  */
 export function DmReplyPanel({ channelId, latestTs, hasUnreads, slackLink }: {
   channelId: string;

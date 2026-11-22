@@ -209,7 +209,7 @@ async def test_options_load_user_skills_and_route_permissions(tmp_path):
     assert options.max_buffer_size > 1024 * 1024
     assert options.cwd == str(tmp_path) and options.resume == "sess-1"
     assert json.loads(options.settings)["sandbox"]["enabled"] is True
-    assert "momo" in options.system_prompt["append"]
+    assert "翻译服务" in options.system_prompt["append"]
 
     context = ToolPermissionContext(tool_use_id="tu-1")
     allowed = await options.can_use_tool("AskUserQuestion", {"questions": []}, context)

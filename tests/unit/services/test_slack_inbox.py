@@ -308,7 +308,7 @@ def test_activity_lists_new_posts_without_replies(inbox):
     post = posts[0]
     assert post["type"] == "thread" and post["root"]["user_name"] == "Bob B" and post["last"] is None
     assert post["has_unreads"] is True  # 比频道已读位置新
-    # 在 momo 里打开过（按 thread 记了已读）就不再算未读
+    # 在翻译服务里打开过（按 thread 记了已读）就不再算未读
     inbox.mark_thread("C000000001", post["thread_ts"], post["thread_ts"])
     again = next(i for i in inbox.activity()["items"] if i["thread_ts"] == post["thread_ts"])
     assert again["has_unreads"] is False

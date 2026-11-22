@@ -71,7 +71,7 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
     if (atBottom.current) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
-  // 看到了就记为已读（只记在 momo 本地，Slack 里的未读不变）
+  // 看到了就记为已读（只记在翻译服务本地，Slack 里的未读不变）
   const newest = newestTs(messages);
   const { mutate: mark } = markRead;
   // 同一条消息只发一次：会话列表刷新有延迟，不能靠它来判断

@@ -5,7 +5,7 @@ Muse 自动化接口：给本机 CLI（src/cli/automation.py，命令名 transla
 接口本身再拒绝一切带转发头或不是本机来的请求。凭证只在这个进程里用，响应里从不出现。
 
 - updates：先同步（Substack 最新一页 + Slack 只读同步），再查 since 之后的新文章和 @我。
-  不导入、不翻译、不改 Slack 和 momo 本地的已读。
+  不导入、不翻译、不改 Slack 和翻译服务本地的已读。
 - translate-article：导入（已导入复用）→ 起四步法翻译（自动采用术语建议）；在跑 / 已译完就返回已有项目。
 - translate-slack：一条 Slack 消息（或整个 thread）走帖子翻译链路（GPT Sol），同步返回译文；
   结果按内容缓存，同样的内容再调直接返回，不重复花钱。Slack 端照旧只读。

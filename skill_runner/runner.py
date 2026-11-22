@@ -197,7 +197,7 @@ def harness_label(harness: str) -> str:
     return {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}.get(harness, harness)
 
 
-# momo Slack 页：slack:<会话 ID>，thread 再加 :<thread_ts>
+# 翻译服务 Slack 页：slack:<会话 ID>，thread 再加 :<thread_ts>
 SOURCE_RE = re.compile(r"^slack:[CDG][A-Z0-9]{6,20}(:\d{9,11}\.\d{1,6})?$")
 
 

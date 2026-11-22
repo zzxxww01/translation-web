@@ -1,7 +1,7 @@
 """
 Slack 收件箱：展示「我」所在的频道、私信和 thread，支持附件下载和导出。
 
-完全只读：后端只调白名单里的查询接口，不发送、不改 Slack 里的已读状态。「已读」只记在 momo 本地。
+完全只读：后端只调白名单里的查询接口，不发送、不改 Slack 里的已读状态。「已读」只记在翻译服务本地。
 见 src/services/slack_inbox.py。
 """
 
@@ -41,7 +41,7 @@ from ..middleware.rate_limit import limiter
 
 router = APIRouter(prefix="/slack-inbox")
 
-# 浏览器里直接内联显示的图片类型；其余一律当附件下载，避免 HTML/SVG 在 momo 域名下执行
+# 浏览器里直接内联显示的图片类型；其余一律当附件下载，避免 HTML/SVG 在翻译服务域名下执行
 _INLINE_IMAGE_TYPES = {"image/png", "image/jpeg", "image/gif", "image/webp"}
 
 
@@ -124,7 +124,7 @@ class SlackMarkRequest(BaseModel):
     ts: str = Field(..., min_length=1, max_length=32)
 
 
-# 标记已读：只写 momo 本地的已读位置，不调 Slack
+# 标记已读：只写翻译服务本地的已读位置，不调 Slack
 @router.post("/conversations/{channel_id}/mark")
 @limiter.limit("60/minute")
 async def mark_conversation(request: Request, channel_id: str, body: SlackMarkRequest):
@@ -260,7 +260,7 @@ async def thread_summary(request: Request, channel_id: str, thread_ts: str):
 
 
 
-# ---------------------------------------------------------------- 设置（只存在 momo 本地）
+# ---------------------------------------------------------------- 设置（只存在翻译服务本地）
 
 SETTINGS_DEFAULTS = {"auto_translate_mentions": True}
 

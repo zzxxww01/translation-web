@@ -1,14 +1,14 @@
 # skill-runner
 
 在服务器上用**本人的 Claude 订阅**跑 skill（four-step-translate、video-bilingual-subber、podcast-cn-dubber），
-momo 的「Claude」页（`/skills`）负责触发和交互：选 skill、传文件或贴链接、在 skill 的关卡上作答、下载产出。
+翻译服务的「Claude」页（`/skills`）负责触发和交互：选 skill、传文件或贴链接、在 skill 的关卡上作答、下载产出。
 也可以不选 skill 直接对话（`skill` 留空，消息原样发给 Claude，它仍能按需调用已装的 skill）。
 设计见 `docs/superpowers/specs/2026-10-24-skill-runner-design.md`。
 
 ```
 浏览器 momo.beauty/skills
 nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录，独立的 systemd 用户服务）
-      └─ 其他 /api/*    ──► momo 后端（不变）
+      └─ 其他 /api/*    ──► 翻译服务后端（不变）
 ```
 
 每次运行是一个 Claude Agent SDK 会话，工作目录 `$SKILL_RUNNER_HOME/runs/<run_id>/`。事件先落盘再推给页面，
@@ -20,7 +20,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 ## 首次部署
 
 以下在服务器上以 zxw 执行。skill-runner 的代码用本仓库的一个独立 clone（`~/skill-runner/src`），
-不放进 momo 的发布目录，两边各自更新、互不打断。
+不放进翻译服务的发布目录，两边各自更新、互不打断。
 
 1. **系统依赖**：`sudo apt-get install -y bubblewrap socat`（沙箱必需；Ubuntu 24.04 还要给 bwrap 加 AppArmor 配置，见 PORTING.md）。
 2. **代码和两个 venv**：
@@ -47,7 +47,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
    输出「自检通过」才继续。沙箱起不来时这里会直接失败（`failIfUnavailable`），不会在沙箱外偷偷跑。
 6. **常驻**：按 `deploy/skill-runner.service` 顶部的注释安装用户服务。
 7. **nginx**：把 `deploy/nginx-skill-runner.conf` 加进 momo.beauty 的 443 server 块，`sudo nginx -t && sudo systemctl reload nginx`。
-8. **前端**：Skill 页随 momo 正常发版上线（替换了原来的「终端」页，旧的 `/terminal` 链接会跳到 `/skills`）。
+8. **前端**：Skill 页随翻译服务正常发版上线（替换了原来的「终端」页，旧的 `/terminal` 链接会跳到 `/skills`）。
 9. **迁 skill**：见 `PORTING.md`。
 
 ## 日常运维
@@ -165,7 +165,7 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
-  2026-11-21 起这是**整个 momo 的登录**：cookie `momo_session` 挂在 `/` 下，nginx 用 `auth_request` 问 `/api/skills/auth/check` 给 momo 其余 `/api`、`/ws` 把关（`deploy/nginx-momo-auth.conf`），前端 `AuthGate` 没登录时整页只显示口令框。旧的 `skill_runner_session`（只挂在 `/api/skills`）仍认，下次请求时自动换成新 cookie。
+  2026-11-21 起这是**整个翻译服务的登录**：cookie `momo_session` 挂在 `/` 下，nginx 用 `auth_request` 问 `/api/skills/auth/check` 给翻译服务其余 `/api`、`/ws` 把关（`deploy/nginx-momo-auth.conf`），前端 `AuthGate` 没登录时整页只显示口令框。旧的 `skill_runner_session`（只挂在 `/api/skills`）仍认，下次请求时自动换成新 cookie。
 - 权限：命令和改文件不逐条确认（这是选定的工作方式），默认由两层兜底：
   - Bash 及其子进程在沙箱里：只能写运行目录和 `SKILL_RUNNER_EXTRA_WRITE`，网络只放行白名单域名，不允许绕出沙箱；
   - Edit/Write 等文件工具不受沙箱约束，由 `policy.py` 按同一份白名单拦截，拦截会显示在页面上。

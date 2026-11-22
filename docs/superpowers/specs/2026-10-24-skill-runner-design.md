@@ -12,13 +12,13 @@ four-step-translate、video-bilingual-subber、podcast-cn-dubber），全程网�
 ## 约束（已确认）
 
 - **只有本人使用。** 订阅 OAuth 只允许本人、官方 Claude Code 程序使用（Agent SDK 驱动的就是它）；
-  不得让他人经由 momo 使用本订阅。服务环境里**不设** `ANTHROPIC_API_KEY` / `ANTHROPIC_BASE_URL`，
+  不得让他人经由翻译服务使用本订阅。服务环境里**不设** `ANTHROPIC_API_KEY` / `ANTHROPIC_BASE_URL`，
   否则会改走 API 计费。
-- **必须在 momo 里交互**（不用 claude.ai/code 的 Remote Control）。
+- **必须在翻译服务里交互**（不用 claude.ai/code 的 Remote Control）。
 - **通用对话页**：一个页面适用所有 skill，不为单个 skill 定制界面。
 - **权限**：命令和改文件自动执行，靠沙箱兜底；只在 skill 关卡停下等人。
 - **素材**：主要贴链接（服务器自己下载），本地上传偶尔、单个文件 ≤ 1 GB。
-- momo 现有页面和后端不动，不给整个 momo 加登录。
+- 翻译服务现有页面和后端不动，不给整个翻译服务加登录。
 
 ## 架构
 
@@ -26,13 +26,13 @@ four-step-translate、video-bilingual-subber、podcast-cn-dubber），全程网�
 浏览器 momo.beauty/skills（同一个前端 SPA，替换「终端」导航）
    │
 nginx ── /api/skills/*  ──► skill-runner（127.0.0.1:18090，独立 systemd 用户服务）
-      └─ 其他 /api/*     ──► momo 后端（54321，不动）
+      └─ 其他 /api/*     ──► 翻译服务后端（54321，不动）
 
 skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
 磁盘：$SKILL_RUNNER_HOME/runs/<run_id>/{meta.json, events.jsonl, input/, ...产出}
 ```
 
-- 代码在本仓库 `skill_runner/`，有自己的依赖文件和 systemd unit；momo 发版不重启它。
+- 代码在本仓库 `skill_runner/`，有自己的依赖文件和 systemd unit；翻译服务发版不重启它。
 - 每次运行 = 一个 `ClaudeSDKClient` 流式会话，`cwd` = 运行目录，`setting_sources=["user"]`
   （加载服务用户的 `~/.claude/skills`）。
 - Claude 认证：服务器上 `claude setup-token` 生成的 `CLAUDE_CODE_OAUTH_TOKEN`，写在服务的 env 文件。
@@ -138,4 +138,4 @@ skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
 
 ## 不做（YAGNI）
 
-模型选择、多用户、按 skill 定制界面、视频分片上传、给 momo 整站加登录。
+模型选择、多用户、按 skill 定制界面、视频分片上传、给翻译服务整站加登录。

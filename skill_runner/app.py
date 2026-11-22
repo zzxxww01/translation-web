@@ -1,4 +1,4 @@
-"""HTTP 接口，全部挂在 /api/skills 下（nginx 把这个前缀转给本服务，其余 /api 仍归 momo 后端）。"""
+"""HTTP 接口，全部挂在 /api/skills 下（nginx 把这个前缀转给本服务，其余 /api 仍归翻译服务后端）。"""
 
 from __future__ import annotations
 
@@ -144,7 +144,7 @@ def create_app(
 
     @public.get("/auth/check")
     async def auth_check(request: Request):
-        """nginx auth_request 用：momo 其余 /api 请求先问这里，204 放行、401 拒绝。只认全站 cookie。"""
+        """nginx auth_request 用：翻译服务其余 /api 请求先问这里，204 放行、401 拒绝。只认全站 cookie。"""
         if not auth.verify_token(config.session_secret, request.cookies.get(auth.COOKIE_NAME)):
             raise HTTPException(status_code=401, detail="请先登录")
         return Response(status_code=204)
@@ -234,7 +234,7 @@ def create_app(
         # 等确认时多少分钟没回复就自动按推荐方案继续；0 = 一直等
         auto_reply_minutes: int = Form(0, ge=0, le=1440),
         title: str = Form("", max_length=200),  # 对话标题，不给就从消息里取
-        # momo Slack 页给会话 / thread 配 agent 时传 slack:<会话>[:<thread_ts>]；同一个 source 只建一个
+        # 翻译服务 Slack 页给会话 / thread 配 agent 时传 slack:<会话>[:<thread_ts>]；同一个 source 只建一个
         source: str = Form("", max_length=64),
         files: list[UploadFile] = File(default=[]),
     ):
