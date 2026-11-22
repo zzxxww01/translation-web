@@ -485,3 +485,60 @@ async def test_slack_todos_uses_the_web_todos(env):
     assert todo["where"] == "#social" and todo["conversation_id"] == "C0123456789"
     assert todo["draft"] == {"draft_id": DRAFT_ID, "status": "draft", "versions": 1, "no_post": False}
     assert todo["latest_at"].endswith("Z") and result["fyi"] == []
+
+
+# ---------------------------------------------------------------- translate-post / slack-reply
+
+
+@pytest.mark.asyncio
+async def test_translate_post_uses_web_pipeline_without_hashtags(env):
+    calls = _fake_post(env)
+    result = await automation.translate_post_text(_request(), automation.TranslatePostRequest(content="Hello"))
+    assert result["translation"] == "译文：Hello"
+    (body,) = calls
+    assert body.include_hashtags is False and body.model is None
+    await automation.translate_post_text(_request(), automation.TranslatePostRequest(content="Hi", hashtags=True))
+    assert calls[1].include_hashtags is True
+
+
+@pytest.mark.asyncio
+async def test_translate_post_rejects_blank(env):
+    calls = _fake_post(env)
+    with pytest.raises(APIException) as exc:
+        await automation.translate_post_text(_request(), automation.TranslatePostRequest(content="   "))
+    assert exc.value.error_code == "EMPTY_MESSAGE" and calls == []
+
+
+def _fake_reply(env):
+    calls = []
+    variant = SimpleNamespace(version="A", style="简洁", english="Sounds good.", chinese="好的。")
+
+    async def process(*, request, body):
+        calls.append(("incoming", body))
+        return SimpleNamespace(translation="听起来不错", suggested_replies=[variant], model_used="m")
+
+    async def compose(*, request, body):
+        calls.append(("compose", body))
+        return SimpleNamespace(versions=[variant], model_used="m")
+
+    env.monkeypatch.setattr(automation, "process_slack_message", SimpleNamespace(__wrapped__=process))
+    env.monkeypatch.setattr(automation, "compose_slack_message", SimpleNamespace(__wrapped__=compose))
+    return calls
+
+
+@pytest.mark.asyncio
+async def test_slack_reply_picks_mode_and_passes_history(env):
+    calls = _fake_reply(env)
+    history = [{"role": "them", "content": "Can you check?"}]
+    incoming = await automation.slack_reply(_request(), automation.SlackReplyRequest(
+        text="Looks good to me", history=history))
+    assert incoming["mode"] == "incoming" and incoming["translation"] == "听起来不错"
+    assert incoming["replies"] == [{"version": "A", "style": "简洁", "english": "Sounds good.", "chinese": "好的。"}]
+    assert calls[0][1].message == "Looks good to me" and calls[0][1].conversation_history[0].role == "them"
+
+    compose = await automation.slack_reply(_request(), automation.SlackReplyRequest(text="我明天看一下"))
+    assert compose["mode"] == "compose" and compose["translation"] is None
+    assert calls[1][0] == "compose" and calls[1][1].content == "我明天看一下"
+
+    forced = await automation.slack_reply(_request(), automation.SlackReplyRequest(text="我明天看", mode="incoming"))
+    assert forced["mode"] == "incoming"

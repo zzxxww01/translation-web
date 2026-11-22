@@ -13,6 +13,8 @@ Muse 自动化接口：给本机 CLI（src/cli/automation.py，命令名 transla
 - slack-todos：和网页「我的待办」同一份（会调一次轻量模型概括每件事，Slack 端只读）。
 - drafts / draft：翻译记录（网页「我翻译的」/「全部翻译记录」）。draft 带原始配图（base64），只读。
 - translate-slack-post：一个 thread 走网页「翻译这个帖子」同一条流程（提取 → 翻译 → 标题），存成翻译稿。
+- translate-post：直接给一段帖子原文，走网页「帖子翻译」同一条链路，同步返回译文（不存翻译稿）。
+- slack-reply：网页「Slack 回复」同一套：对方英文消息 → 中文理解 + 3 版英文回复；中文草稿 → 3 版英文。
 """
 
 from __future__ import annotations
@@ -45,6 +47,9 @@ from .post_drafts import _draft_error, get_draft_store, run_slack_pipeline
 from .slack_inbox import _run_ai, build_todos
 from .slack_inbox import _to_api_error as _slack_api_error
 from .slack_inbox import get_slack_inbox
+from .slack_compose import compose_slack_message
+from .slack_models import ConversationMessage, SlackComposeRequest, SlackProcessRequest
+from .slack_process import process_slack_message
 from .substack import (
     _imported_projects,
     _to_api_error,
@@ -562,3 +567,59 @@ async def translate_slack_post(body: TranslateSlackPostRequest):
     except DraftError as error:
         raise _draft_error(error) from error
     return await _draft_result(doc, body.with_images)
+
+
+# ---------------------------------------------------------------- translate-post / slack-reply
+
+
+class TranslatePostRequest(BaseModel):
+    content: str = Field(..., min_length=1, max_length=MAX_POST_CONTENT_LENGTH)
+    hashtags: bool = False  # 网页默认带小红书话题标签；给机器人默认不带
+
+
+@router.post("/translate-post")
+async def translate_post_text(request: Request, body: TranslatePostRequest):
+    if not body.content.strip():
+        raise APIException(status_code=400, detail="原文是空的", error_code="EMPTY_MESSAGE")
+    result = await translate_post.__wrapped__(  # 绕过网页用的限流
+        request=request, body=PostTranslateRequest(content=body.content, include_hashtags=body.hashtags))
+    return {"translation": result.translation, "model": result.model_used}
+
+
+class SlackReplyRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=50000)
+    mode: str = Field("auto", pattern="^(auto|incoming|compose)$")
+    history: List[ConversationMessage] = Field(default_factory=list, max_length=100)
+
+
+def resolve_reply_mode(text: str, mode: str) -> str:
+    """auto：中文占三成以上算自己的中文草稿（compose），否则算对方发来的消息（incoming）。"""
+    if mode != "auto":
+        return mode
+    compact = "".join(text.split())
+    if not compact:
+        return "incoming"
+    chinese = sum("\u4e00" <= char <= "\u9fff" for char in compact)
+    return "compose" if chinese / len(compact) > 0.3 else "incoming"
+
+
+@router.post("/slack-reply")
+async def slack_reply(request: Request, body: SlackReplyRequest):
+    if not body.text.strip():
+        raise APIException(status_code=400, detail="内容是空的", error_code="EMPTY_MESSAGE")
+    mode = resolve_reply_mode(body.text, body.mode)
+    if mode == "compose":
+        result = await compose_slack_message.__wrapped__(
+            request=request, body=SlackComposeRequest(content=body.text, conversation_history=body.history))
+        replies, translation = result.versions, None
+    else:
+        result = await process_slack_message.__wrapped__(
+            request=request, body=SlackProcessRequest(message=body.text, conversation_history=body.history))
+        replies, translation = result.suggested_replies, result.translation
+    return {
+        "mode": mode,
+        "translation": translation,  # incoming 时是对方消息的中文理解
+        "replies": [{"version": r.version, "style": r.style, "english": r.english, "chinese": r.chinese}
+                    for r in replies],
+        "model": result.model_used,
+    }

@@ -264,3 +264,61 @@ def test_ssh_mode_allows_new_commands(std, monkeypatch):
     monkeypatch.setenv("SSH_ORIGINAL_COMMAND", "translation-agent drafts --status all")
     code, _ = _run(std, ["--ssh"])
     assert code == 0 and "status=all" in seen[0].full_url
+
+
+# ---------------------------------------------------------------- translate-post / slack-reply
+
+
+class _Stdin:
+    def __init__(self, text, tty=False):
+        self.buffer = io.BytesIO(text.encode("utf-8"))
+        self.tty = tty
+
+    def isatty(self):
+        return self.tty
+
+
+def test_translate_post_text_from_argument_or_stdin(std, monkeypatch):
+    seen = _capture(monkeypatch, {"translation": "你好"})
+    code, out = _run(std, ["translate-post", "Hello"])
+    assert code == 0 and out["translation"] == "你好"
+    assert seen[0].full_url.endswith("/internal/automation/translate-post")
+    assert json.loads(seen[0].data) == {"content": "Hello", "hashtags": False}
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    monkeypatch.setattr(cli.sys, "stdin", _Stdin("Long post\nwith 'quotes'"))
+    _run(std, ["translate-post", "--hashtags"])
+    assert json.loads(seen[1].data) == {"content": "Long post\nwith 'quotes'", "hashtags": True}
+
+
+@pytest.mark.parametrize("argv,stdin", [
+    (["translate-post"], _Stdin("", tty=True)),
+    (["translate-post", "   "], None),
+    (["translate-post", "x" * 10001], None),
+    (["slack-reply", "hi", "--history", "not json"], None),
+    (["slack-reply", "hi", "--history", '[{"role":"boss","content":"x"}]'], None),
+    (["slack-reply", "hi", "--mode", "weird"], None),
+])
+def test_translate_post_and_slack_reply_reject_bad_input(std, monkeypatch, argv, stdin):
+    seen = _capture(monkeypatch)
+    if stdin is not None:
+        monkeypatch.setattr(cli.sys, "stdin", stdin)
+    code, _ = _run(std, argv)
+    assert code == 1 and seen == []
+
+
+def test_slack_reply_body(std, monkeypatch):
+    seen = _capture(monkeypatch, {"mode": "incoming", "replies": []})
+    history = '[{"role":"them","content":"Can you check?"}]'
+    code, _ = _run(std, ["slack-reply", "Looks good", "--history", history])
+    assert code == 0 and seen[0].full_url.endswith("/internal/automation/slack-reply")
+    assert json.loads(seen[0].data) == {"text": "Looks good", "mode": "auto",
+                                        "history": [{"role": "them", "content": "Can you check?"}]}
+
+
+def test_ssh_mode_allows_translate_post_with_stdin(std, monkeypatch):
+    seen = _capture(monkeypatch, {"translation": "你好"})
+    monkeypatch.setenv("SSH_ORIGINAL_COMMAND", "translation-agent translate-post")
+    monkeypatch.setattr(cli.sys, "stdin", _Stdin("Hello"))
+    code, _ = _run(std, ["--ssh"])
+    assert code == 0 and json.loads(seen[0].data)["content"] == "Hello"

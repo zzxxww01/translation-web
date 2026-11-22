@@ -94,7 +94,7 @@ translation-web/
 │   ├── services/          # 服务层：批量翻译、术语确认、Substack、微信排版、检查点等
 │   ├── prompts/           # 提示词模板与微信主题 CSS
 │   ├── html2md/           # HTML → Markdown 转换
-│   ├── cli/               # 命令行入口（translate-post、slack-reply、cost_report）
+│   ├── cli/               # 命令行入口（automation=给机器人的 translation-agent、translate-post、slack-reply、cost_report）
 │   └── settings.py        # 环境变量配置
 ├── skill_runner/          # momo「Agent」页后端（独立 systemd 服务，见 skill_runner/README.md）
 ├── web/frontend/          # React 前端（Vite + TypeScript + Tailwind）
@@ -126,6 +126,8 @@ translation-web/
 - 支持 Slack 和微信集成
 
 服务启动后，也可以通过仓库根目录的 CLI 调用与网页相同的帖子翻译链路（含术语库、默认模型、故障转移与话题标签后处理）：
+
+> 给 Muse 这类机器人用的是统一入口 `translation-agent translate-post` / `translation-agent slack-reply`（输出 JSON），见 `docs/Muse自动化.md`；下面两个是给人在终端用的。
 
 ```bash
 # 直接传入一条帖子
