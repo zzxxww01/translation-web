@@ -99,7 +99,7 @@ async def test_answering_in_time_cancels_the_timer(runner, store, factory):
     session = factory.last
     asked = asyncio.create_task(session.spec.on_permission("AskUserQuestion", {"questions": QUESTIONS}, "tu-1"))
     await settle()
-    runner.answer(run_id, "tu-1", {"术语表可以吗？": "修改"})
+    await runner.answer(run_id, "tu-1", {"术语表可以吗？": "修改"})
     outcome = await asked
     assert outcome.updated_input["answers"] == {"术语表可以吗？": "修改"}
     assert runner.meta(run_id).auto_reply_at is None

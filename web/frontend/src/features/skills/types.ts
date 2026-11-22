@@ -1,7 +1,8 @@
 /** skill-runner（/api/skills）的数据结构，与 skill_runner/ 后端一一对应。 */
 import type { Harness } from './harness';
 
-export type RunStatus = 'running' | 'waiting' | 'idle' | 'error';
+/** queued：名额满了在排队，有空位自动开始 */
+export type RunStatus = 'running' | 'waiting' | 'idle' | 'error' | 'queued';
 
 export interface RunMeta {
   id: string;
@@ -24,6 +25,24 @@ export interface RunMeta {
   auto_reply_at?: number | null;
   /** 谁开的：空 = Claude 页；slack:<会话>[:<thread_ts>] = momo Slack 页给会话 / thread 配的 agent */
   source?: string;
+  /** 排队开始的时间（epoch 秒）；不在排队时为 null */
+  queued_at?: number | null;
+  /** 挂起的消息：agent 干活时发的话，这一轮结束后按顺序发 */
+  held?: HeldMessage[];
+}
+
+export interface HeldMessage {
+  id: string;
+  text: string;
+  files: string[];
+  created_at: number;
+}
+
+/** Agent 详情页：skill 目录里的文件 */
+export interface SkillFiles {
+  /** 服务器上的目录（~ 开头） */
+  root: string;
+  files: { path: string; size: number }[];
 }
 
 /** 页面上的一个 Agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串是通用 Agent（直接对话）。 */
@@ -100,6 +119,7 @@ export type SkillEvent = Base &
     | { type: 'question'; qid: string; questions: Question[] }
     | { type: 'answer'; qid: string; answers?: Answers; response?: string }
     | { type: 'todos'; items: TodoItem[] }
+    | { type: 'held'; items: HeldMessage[] }
     | { type: 'status'; status: RunStatus; error: string | null; awaiting?: boolean }
     | { type: 'result'; is_error: boolean; subtype: string; duration_ms: number; num_turns: number; errors: string[] }
     | { type: 'notice'; level: 'info' | 'warn' | 'error'; text: string }

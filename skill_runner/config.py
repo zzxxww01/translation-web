@@ -48,8 +48,16 @@ class Config:
     skills: tuple[str, ...] = DEFAULT_SKILLS
     skills_dir: Path = field(default_factory=lambda: Path.home() / ".claude" / "skills")
     agents_file: Path = field(default_factory=lambda: Path(__file__).with_name("agents.json"))
-    max_active: int = 2
-    idle_timeout_s: float = 600.0
+    # 同时活着的 agent 进程上限（重活算 2 个，见 heavy_skills）。2 GB 内存，一个 Claude 进程约 250–400 MB
+    max_active: int = 3
+    # 一轮结束后进程留多久等下一句（秒）。不常驻：几秒后就关，下次发消息按会话 ID 续接
+    idle_timeout_s: float = 5.0
+    # 提问挂着超过这么久没回答，先关进程（问题留在页面上，回答时续接），不白占名额和内存
+    question_detach_s: float = 300.0
+    # 开新进程前系统可用内存低于这个数（MB）就排队，哪怕名额没满
+    min_free_mb: int = 350
+    # 跑 ffmpeg / 转写的 skill，一个算 2 个名额
+    heavy_skills: tuple[str, ...] = ("video-bilingual-subber", "podcast-cn-dubber")
     max_upload_bytes: int = 1024 * 1024 * 1024
     sandbox: bool = True
     extra_write: tuple[Path, ...] = ()
@@ -90,8 +98,10 @@ class Config:
             skills=_split(env.get("SKILL_RUNNER_SKILLS"), ",") or DEFAULT_SKILLS,
             skills_dir=Path(skills_dir).expanduser() if skills_dir else Path.home() / ".claude" / "skills",
             agents_file=Path(agents_file).expanduser() if agents_file else Path(__file__).with_name("agents.json"),
-            max_active=int(env.get("SKILL_RUNNER_MAX_ACTIVE") or 2),
-            idle_timeout_s=float(env.get("SKILL_RUNNER_IDLE_TIMEOUT_S") or 600),
+            max_active=int(env.get("SKILL_RUNNER_MAX_ACTIVE") or 3),
+            idle_timeout_s=float(env.get("SKILL_RUNNER_IDLE_TIMEOUT_S") or 5),
+            question_detach_s=float(env.get("SKILL_RUNNER_QUESTION_DETACH_S") or 300),
+            min_free_mb=int(env.get("SKILL_RUNNER_MIN_FREE_MB") or 350),
             max_upload_bytes=int(env.get("SKILL_RUNNER_MAX_UPLOAD_MB") or 1024) * 1024 * 1024,
             sandbox=_flag(env.get("SKILL_RUNNER_SANDBOX"), True),
             extra_write=tuple(Path(p).expanduser() for p in _split(env.get("SKILL_RUNNER_EXTRA_WRITE"), os.pathsep)),

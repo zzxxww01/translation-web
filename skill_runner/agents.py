@@ -77,3 +77,47 @@ def prompt_note(catalog: list[dict[str, Any]], skill: str) -> str:
         f"- 这是和通用 Agent 的对话。页面上另有专职 Agent，各管一件事：{listing}。"
         "用户要做的正好是其中某个的活时，请用户点「新对话」选对应的 Agent 来做，不要自己调用这些 skill。\n"
     )
+
+
+# ---- skill 详情：页面上点进 agent 能看它的 SKILL.md 和其余文件（只读）----
+
+SKIP_DIRS = {"__pycache__", "node_modules", ".git", ".venv", "venv"}
+MAX_SKILL_FILES = 500
+MAX_SKILL_FILE_BYTES = 256 * 1024
+
+
+def skill_root(config: Config, name: str) -> Path | None:
+    """启用了的 skill 的真实目录（~/.claude/skills/<名字> 多半是软链接）。"""
+    if not name or name not in config.skills:
+        return None
+    root = (config.skills_dir / name).resolve()
+    return root if root.is_dir() else None
+
+
+def list_skill_files(root: Path) -> list[dict[str, Any]]:
+    """skill 目录下的文件：SKILL.md 在最前，其余按路径排。点开头的文件和目录不列。"""
+    files: list[dict[str, Any]] = []
+    for path in sorted(root.rglob("*")):
+        rel = path.relative_to(root)
+        if any(part.startswith(".") or part in SKIP_DIRS for part in rel.parts):
+            continue
+        if path.is_file():
+            files.append({"path": rel.as_posix(), "size": path.stat().st_size})
+            if len(files) >= MAX_SKILL_FILES:
+                break
+    files.sort(key=lambda f: (f["path"] != "SKILL.md", f["path"].count("/"), f["path"]))
+    return files
+
+
+def read_skill_file(root: Path, rel_path: str) -> str | None:
+    """读一个文本文件；越界、隐藏、太大或不是文本返回 None。"""
+    rel = Path(rel_path)
+    if rel.is_absolute() or any(part.startswith(".") or part in SKIP_DIRS for part in rel.parts):
+        return None
+    path = (root / rel).resolve()
+    if not path.is_file() or not path.is_relative_to(root) or path.stat().st_size > MAX_SKILL_FILE_BYTES:
+        return None
+    try:
+        return path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None

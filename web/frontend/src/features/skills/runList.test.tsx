@@ -40,7 +40,7 @@ describe('RunList delete', () => {
     render(onDelete);
     const [idle] = deleteButtons();
     await act(async () => { idle.click(); });
-    expect(document.body.textContent).toContain('服务器上会保留存档');
+    expect(document.body.textContent).toContain('删除这个对话？');
     const confirm = Array.from(document.querySelectorAll('button')).find(b => b.textContent === '删除')!;
     await act(async () => { confirm.click(); });
     expect(onDelete).toHaveBeenCalledWith('20261028-000000-aaaaaa');
@@ -60,7 +60,7 @@ describe('RunList delete', () => {
     const onDelete = vi.fn(async () => undefined);
     render(onDelete);
     await open();
-    expect(document.body.textContent).toContain('服务器上会保留存档');
+    expect(document.body.textContent).toContain('删除这个对话？');
     expect(onDelete).not.toHaveBeenCalled();
   });
 
@@ -70,7 +70,7 @@ describe('RunList delete', () => {
     await open();
     await act(async () => { button('取消').click(); });
     expect(onDelete).not.toHaveBeenCalled();
-    expect(document.body.textContent).not.toContain('服务器上会保留存档');
+    expect(document.body.textContent).not.toContain('删除这个对话？');
   });
 
   it('keeps the dialog open and shows the error when deleting fails', async () => {
@@ -79,6 +79,6 @@ describe('RunList delete', () => {
     await open();
     await act(async () => { button('删除').click(); });
     expect(toast.error).toHaveBeenCalledWith('服务器拒绝');
-    expect(document.body.textContent).toContain('服务器上会保留存档');
+    expect(document.body.textContent).toContain('删除这个对话？');
   });
 });

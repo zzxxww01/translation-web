@@ -1,5 +1,5 @@
 import { apiClient, ApiErrorWrapper } from '../../shared/api/client';
-import type { Agent, Answers, ModelCatalog, RunFile, RunMeta, RuntimeUpdateSnapshot } from './types';
+import type { Agent, Answers, ModelCatalog, RunFile, RunMeta, RuntimeUpdateSnapshot, SkillFiles } from './types';
 import type { Harness } from './harness';
 
 export const SKILLS_BASE = '/api/skills';
@@ -10,6 +10,9 @@ export const skillsApi = {
   logout: () => apiClient.post('/skills/logout'),
   // 旧版服务端只给 name/description/available，用 normalizeCatalog 补齐
   catalog: () => apiClient.get<Partial<Agent>[]>('/skills/catalog'),
+  skillFiles: (name: string) => apiClient.get<SkillFiles>(`/skills/catalog/${encodeURIComponent(name)}/files`, { retry: false }),
+  skillFile: (name: string, path: string) => apiClient.get<{ path: string; content: string }>(
+    `/skills/catalog/${encodeURIComponent(name)}/files/${path.split('/').map(encodeURIComponent).join('/')}`, { retry: false }),
   models: (harness: Harness, refresh = false) => apiClient.get<ModelCatalog>(`/skills/models/${harness}`, {
     retry: false, ...(refresh ? { params: { refresh: true } } : {}),
   }),
@@ -27,6 +30,11 @@ export const skillsApi = {
   interrupt: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/interrupt`, undefined, { retry: false }),
   stop: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/stop`, undefined, { retry: false, timeout: 90_000 }),
   remove: (runId: string) => apiClient.delete<{ ok: boolean }>(`/skills/runs/${runId}`),
+  editHeld: (runId: string, hid: string, text: string) =>
+    apiClient.put<RunMeta>(`/skills/runs/${runId}/held/${hid}`, { text }, { retry: false }),
+  deleteHeld: (runId: string, hid: string) => apiClient.delete<RunMeta>(`/skills/runs/${runId}/held/${hid}`),
+  sendHeld: (runId: string, hid: string) =>
+    apiClient.post<RunMeta>(`/skills/runs/${runId}/held/${hid}/send`, undefined, { retry: false }),
 };
 
 export function fileUrl(runId: string, path: string): string {
@@ -90,11 +98,12 @@ export function startRun(
 
 export function sendMessage(
   runId: string,
-  input: { message: string; files: File[] },
+  input: { message: string; files: File[]; /** queue：agent 在干活时先挂起，这一轮结束再发 */ mode?: 'now' | 'queue' },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
   form.append('message', input.message);
+  if (input.mode) form.append('mode', input.mode);
   input.files.forEach(file => form.append('files', file));
   return postMultipart<RunMeta>(`/runs/${runId}/messages`, form, onProgress);
 }

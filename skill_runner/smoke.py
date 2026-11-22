@@ -43,7 +43,7 @@ async def run_smoke(config: Config) -> bool:
             print(f"[{event['seq']:>3}] {kind:<11} {str(detail)[:100]}")
             if kind == "question":
                 answered = {q["question"]: q["options"][0]["label"] for q in event["questions"]}
-                runner.answer(meta.id, event["qid"], answered)
+                await runner.answer(meta.id, event["qid"], answered)
             if kind == "status" and event["status"] in {"idle", "error"}:
                 break
     finally:

@@ -5,14 +5,13 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-/** 删除对话的确认框。服务器上是假删除（目录挪进存档），所以文案不说「无法恢复」。 */
+/** 删除对话的确认框：只问删不删。服务器上是假删除（目录挪进存档），找回见 skill_runner/README.md。 */
 export function DeleteRunDialog({ onConfirm, children }: {
   onConfirm: () => Promise<void>;
   /** 触发按钮，会被包进 AlertDialogTrigger asChild */
@@ -36,10 +35,9 @@ export function DeleteRunDialog({ onConfirm, children }: {
   return (
     <AlertDialog open={open} onOpenChange={next => { if (!busy) setOpen(next); }}>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent aria-describedby={undefined}>
         <AlertDialogHeader>
           <AlertDialogTitle>删除这个对话？</AlertDialogTitle>
-          <AlertDialogDescription>从列表里删掉。服务器上会保留存档，需要时可以找回。</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={busy}>取消</AlertDialogCancel>

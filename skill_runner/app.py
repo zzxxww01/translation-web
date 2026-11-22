@@ -7,11 +7,12 @@ import json
 import logging
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from . import agents, auth
 from .config import BILLING_OVERRIDE_ENV, Config
@@ -34,6 +35,10 @@ class AnswerBody(BaseModel):
     qid: str
     answers: dict[str, Any] | None = None
     response: str | None = None
+
+
+class HeldBody(BaseModel):
+    text: str = Field(max_length=100_000)
 
 
 def _strip_billing_overrides() -> None:
@@ -75,6 +80,7 @@ def create_app(
         if recovered:
             logger.warning("标记了 %d 个因重启中断的运行", recovered)
         runner.resume_auto_replies()
+        runner.resume_queue()
         if not config.password:
             logger.error("未设置 SKILL_RUNNER_PASSWORD，所有登录都会被拒绝")
         yield
@@ -149,6 +155,28 @@ def create_app(
     @api.get("/catalog")
     async def catalog():
         return agents.build_catalog(config)
+
+    def _skill_root(name: str):
+        root = agents.skill_root(config, name)
+        if root is None:
+            raise HTTPException(status_code=404, detail="没有这个 skill")
+        return root
+
+    @api.get("/catalog/{name}/files")
+    async def skill_files(name: str):
+        root = _skill_root(name)
+        files = await asyncio.to_thread(agents.list_skill_files, root)
+        home = str(Path.home())
+        shown = str(root)
+        return {"root": "~" + shown[len(home):] if shown.startswith(home + "/") else shown, "files": files}
+
+    @api.get("/catalog/{name}/files/{rel_path:path}")
+    async def skill_file(name: str, rel_path: str):
+        root = _skill_root(name)
+        text = await asyncio.to_thread(agents.read_skill_file, root, rel_path)
+        if text is None:
+            raise HTTPException(status_code=404, detail="文件不存在，或不是能显示的文本文件")
+        return {"path": rel_path, "content": text}
 
     @api.get("/runs")
     async def list_runs(source: str = ""):
@@ -232,16 +260,30 @@ def create_app(
     async def post_message(
         run_id: str,
         message: str = Form(""),
+        # queue：agent 在干活时先挂起，这一轮结束再发；now：立刻发（插话）
+        mode: str = Form("now", pattern="^(now|queue)$"),
         files: list[UploadFile] = File(default=[]),
     ):
         runner.meta(run_id)  # 先确认存在，再写文件
         saved = await asyncio.to_thread(_save_uploads, run_id, files)
-        meta = await runner.send_message(run_id, message, saved)
+        meta = await runner.send_message(run_id, message, saved, mode=mode)
         return meta.to_dict()
+
+    @api.put("/runs/{run_id}/held/{hid}")
+    async def edit_held(run_id: str, hid: str, body: HeldBody):
+        return runner.edit_held(run_id, hid, body.text).to_dict()
+
+    @api.delete("/runs/{run_id}/held/{hid}")
+    async def delete_held(run_id: str, hid: str):
+        return runner.delete_held(run_id, hid).to_dict()
+
+    @api.post("/runs/{run_id}/held/{hid}/send")
+    async def send_held(run_id: str, hid: str):
+        return (await runner.send_held(run_id, hid)).to_dict()
 
     @api.post("/runs/{run_id}/answer")
     async def answer(run_id: str, body: AnswerBody):
-        return runner.answer(run_id, body.qid, body.answers, body.response).to_dict()
+        return (await runner.answer(run_id, body.qid, body.answers, body.response)).to_dict()
 
     @api.post("/runs/{run_id}/interrupt")
     async def interrupt(run_id: str):

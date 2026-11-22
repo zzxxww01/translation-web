@@ -91,7 +91,7 @@ export function useClaudeRun(runId: string | null) {
     refetchInterval: query => {
       const run = query.state.data;
       // 在等确认时也要轮询：超时后会自动继续
-      return run && (run.status === 'running' || run.status === 'waiting' || run.awaiting_reply) ? 5_000 : false;
+      return run && (run.status === 'running' || run.status === 'waiting' || run.status === 'queued' || run.awaiting_reply) ? 5_000 : false;
     },
     retry: false,
   });

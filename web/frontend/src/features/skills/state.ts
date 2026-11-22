@@ -1,4 +1,4 @@
-import type { Answers, Question, RunStatus, SkillEvent, TodoItem } from './types';
+import type { Answers, HeldMessage, Question, RunStatus, SkillEvent, TodoItem } from './types';
 
 export interface ToolCall {
   id: string;
@@ -25,13 +25,16 @@ export interface RunView {
   awaiting: boolean;
   error: string | null;
   pendingQids: string[];
+  /** 挂起待发的消息；null = 事件流里还没出现过（旧对话），用 meta 里的 */
+  held: HeldMessage[] | null;
   lastSeq: number;
 }
 
-export const EMPTY_VIEW: RunView = { items: [], todos: [], status: null, awaiting: false, error: null, pendingQids: [], lastSeq: 0 };
+export const EMPTY_VIEW: RunView = { items: [], todos: [], status: null, awaiting: false, error: null, pendingQids: [], held: null, lastSeq: 0 };
 
 // Agent 在等你确认时回复末尾带的标记（见 skill_runner/runner.py 的 AWAIT_MARK）；页面上用状态表示，不显示这行字
 const AWAIT_MARK = /\n?[ \t]*【等待确认】[ \t]*$/;
+const AUTO_REPLY_NOTICE = /内没有回复，会自动按推荐方案继续$/;
 
 /** 把事件流折叠成页面要画的东西。纯函数，每次都从头算，事件量在几千以内足够快。 */
 export function foldEvents(events: SkillEvent[]): RunView {
@@ -40,6 +43,7 @@ export function foldEvents(events: SkillEvent[]): RunView {
   const questions = new Map<string, Extract<ChatItem, { kind: 'question' }>>();
   const pending = new Set<string>();
   let todos: TodoItem[] = [];
+  let held: HeldMessage[] | null = null;
   let status: RunStatus | null = null;
   let awaiting = false;
   let error: string | null = null;
@@ -89,20 +93,25 @@ export function foldEvents(events: SkillEvent[]): RunView {
       case 'todos':
         todos = event.items;
         break;
+      case 'held':
+        held = event.items;
+        break;
       case 'status':
         status = event.status;
         awaiting = Boolean(event.awaiting);
         error = event.error;
-        if (event.status !== 'waiting') {
-          // 中断、出错、重启后，没答的提问都已失效
-          if (event.status !== 'running') pending.clear();
+        // 中断、出错后，没答的提问都已失效。例外：提问挂太久时服务端关掉了进程（idle + awaiting），
+        // 问题仍可回答，回答会作为新消息续接
+        if (event.status !== 'waiting' && event.status !== 'running' && !(event.status === 'idle' && event.awaiting)) {
+          pending.clear();
         }
         break;
       case 'result':
         items.push({ kind: 'turn', key, durationMs: event.duration_ms, isError: event.is_error, errors: event.errors });
         break;
       case 'notice':
-        items.push({ kind: 'notice', key, level: event.level, text: event.text });
+        // 「N 分钟内没有回复，会自动按推荐方案继续」：输入框上方那行已经写了几点自动继续，不再占一行
+        if (!AUTO_REPLY_NOTICE.test(event.text)) items.push({ kind: 'notice', key, level: event.level, text: event.text });
         break;
       case 'error':
         items.push({ kind: 'notice', key, level: 'error', text: event.text });
@@ -110,7 +119,7 @@ export function foldEvents(events: SkillEvent[]): RunView {
     }
   }
 
-  return { items, todos, status, awaiting, error, pendingQids: [...pending], lastSeq };
+  return { items, todos, status, awaiting, error, pendingQids: [...pending], held, lastSeq };
 }
 
 /** 合并新事件：按 seq 去重、保序（断线重连可能重放一段）。 */
@@ -120,8 +129,8 @@ export function mergeEvents(current: SkillEvent[], incoming: SkillEvent[]): Skil
   return fresh.length ? [...current, ...fresh] : current;
 }
 
-/** 页面上只说四种状态：进行中、等你确认（提问挂着，或说完在等你确认）、完成、已中断 */
-export type DisplayStatus = 'running' | 'waiting' | 'done' | 'error';
+/** 页面上只说五种状态：排队中、进行中、等你确认（提问挂着，或说完在等你确认）、完成、已中断 */
+export type DisplayStatus = 'queued' | 'running' | 'waiting' | 'done' | 'error';
 
 export function displayStatus(status: RunStatus | null, awaiting?: boolean): DisplayStatus | null {
   if (!status) return null;
@@ -130,6 +139,7 @@ export function displayStatus(status: RunStatus | null, awaiting?: boolean): Dis
 }
 
 export const STATUS_LABEL: Record<DisplayStatus, string> = {
+  queued: '排队中',
   running: '进行中',
   waiting: '等你确认',
   done: '完成',

@@ -10,6 +10,8 @@ export const skillKeys = {
   catalog: ['skills', 'catalog'] as const,
   runs: ['skills', 'runs'] as const,
   files: (runId: string) => ['skills', 'files', runId] as const,
+  skillFiles: (name: string) => ['skills', 'skill-files', name] as const,
+  skillFile: (name: string, path: string) => ['skills', 'skill-file', name, path] as const,
 };
 
 export function isUnauthorized(error: unknown): boolean {
@@ -24,13 +26,27 @@ export function useCatalog(enabled: boolean) {
   return useQuery({ queryKey: skillKeys.catalog, queryFn: skillsApi.catalog, enabled, staleTime: 5 * 60_000 });
 }
 
+export function useSkillFiles(name: string) {
+  return useQuery({ queryKey: skillKeys.skillFiles(name), queryFn: () => skillsApi.skillFiles(name), enabled: Boolean(name), staleTime: 60_000 });
+}
+
+export function useSkillFile(name: string, path: string | null) {
+  return useQuery({
+    queryKey: skillKeys.skillFile(name, path ?? ''),
+    queryFn: () => skillsApi.skillFile(name, path ?? ''),
+    enabled: Boolean(name && path),
+    staleTime: 60_000,
+    retry: false,
+  });
+}
+
 export function useRuns(enabled: boolean) {
   // 列表上的状态靠轮询更新；当前打开的运行另有实时事件流
   return useQuery({ queryKey: skillKeys.runs, queryFn: skillsApi.runs, enabled, refetchInterval: 10_000 });
 }
 
 export function useRunFiles(runId: string, status: RunStatus | null) {
-  const busy = status === 'running' || status === 'waiting';
+  const busy = status === 'running' || status === 'waiting' || status === 'queued';
   return useQuery({
     queryKey: skillKeys.files(runId),
     queryFn: () => skillsApi.files(runId),

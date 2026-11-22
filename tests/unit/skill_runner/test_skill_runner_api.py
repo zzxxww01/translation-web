@@ -335,3 +335,24 @@ def test_slack_source_binds_one_run_per_thread_and_queues_slack_agents(setup):
     assert client.post(f"{PREFIX}/runs", data={"message": "hello"}).status_code == 200
     bad = client.post(f"{PREFIX}/runs", data={"message": "x", "source": "slack:../../etc"})
     assert bad.status_code == 400
+
+
+def test_skill_files_are_listed_and_readable_but_not_hidden_or_outside(setup, tmp_path):
+    client, _, _ = setup
+    root = tmp_path / "skills" / "four-step-translate"
+    (root / "scripts").mkdir(parents=True)
+    (root / "SKILL.md").write_text("---\nname: four-step-translate\n---\n# 四步翻译", encoding="utf-8")
+    (root / "scripts" / "qa.py").write_text("print('qa')", encoding="utf-8")
+    (root / ".env").write_text("SECRET=1", encoding="utf-8")
+    (root / "logo.bin").write_bytes(b"\xff\xfe\x00")
+    (tmp_path / "outside.txt").write_text("nope", encoding="utf-8")
+    assert client.get(f"{PREFIX}/catalog/four-step-translate/files").status_code == 401
+    login(client)
+    listing = client.get(f"{PREFIX}/catalog/four-step-translate/files").json()
+    assert listing["root"].endswith("four-step-translate")
+    assert [f["path"] for f in listing["files"]] == ["SKILL.md", "logo.bin", "scripts/qa.py"]
+    body = client.get(f"{PREFIX}/catalog/four-step-translate/files/SKILL.md").json()
+    assert "四步翻译" in body["content"]
+    for bad in (".env", "logo.bin", "../../outside.txt", "%2e%2e/%2e%2e/outside.txt"):
+        assert client.get(f"{PREFIX}/catalog/four-step-translate/files/{bad}").status_code == 404, bad
+    assert client.get(f"{PREFIX}/catalog/evil/files").status_code == 404
