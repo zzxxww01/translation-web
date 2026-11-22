@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 from . import agents, auth
 from .config import BILLING_OVERRIDE_ENV, Config
 from .models import ModelCatalog
+from .native import Natives
 from .runtime_updates import RuntimeUpdates
 from .runner import Runner, RunnerError, SessionFactory, make_title
 from .store import RunStore, UploadTooLarge
@@ -68,7 +69,7 @@ def create_app(
             if spec.harness not in factories:
                 raise RunnerError(f"不支持的 harness：{spec.harness}")
             return await factories[spec.harness](spec)
-    runner = Runner(config, store, session_factory)
+    runner = Runner(config, store, session_factory, natives=Natives(config))
     model_catalog = ModelCatalog(config)
     runtime_updates = RuntimeUpdates(config, runner)
     limiter = auth.LoginLimiter()

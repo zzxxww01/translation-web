@@ -222,10 +222,12 @@ def make_title(message: str, attachments: list[str], title: str = "") -> str:
 
 
 class Runner:
-    def __init__(self, config: Config, store: RunStore, session_factory: SessionFactory):
+    def __init__(self, config: Config, store: RunStore, session_factory: SessionFactory, natives: Any = None):
         self.config = config
         self.store = store
         self.session_factory = session_factory
+        # native.Natives：/status 里各 harness 的原生信息、agy 自己回答的斜杠指令；不传（测试）就只有页面信息
+        self.natives = natives
         self._runs: dict[str, _Run] = {}
         self._runtime_maintenance = False
         self._runtime_users = 0
@@ -384,7 +386,7 @@ class Runner:
 
     async def begin(self, run_id: str, message: str, attachments: list[str]) -> RunMeta:
         run = self._get(run_id)
-        if self._status_command(run, message, attachments):
+        if await self._page_command(run, message, attachments):
             # 新对话第一句就是 /status：只回状态卡，不启动 agent；下一条消息才是真正的开头（仍走这里，带 skill 提示）
             return run.meta
         run.meta.begun = True
@@ -397,7 +399,7 @@ class Runner:
         run = self._get(run_id)
         if not message.strip() and not attachments:
             raise RunnerError("消息不能为空")
-        if self._status_command(run, message, attachments):
+        if await self._page_command(run, message, attachments):
             return run.meta
         if not run.meta.begun:
             # 开头只发过 /status：这条才是第一条消息，标题也按它重起
@@ -415,13 +417,29 @@ class Runner:
             return run.meta
         return await self._send_now(run, message, attachments)
 
-    def _status_command(self, run: _Run, message: str, attachments: list[str]) -> bool:
-        """页面自己的命令（/status）：直接回状态卡，不发给模型、不花额度，什么状态下都能用。处理了返回 True。"""
-        if attachments or message.strip().lower() not in STATUS_COMMANDS:
+    async def _page_command(self, run: _Run, message: str, attachments: list[str]) -> bool:
+        """不进对话的命令，不发给模型、不花额度，什么状态下都能用。处理了返回 True。
+        /status：上半是 harness 原生的版本、账号、套餐用量，下半是页面上的状态；
+        agy 的 /usage、/credits 等：CLI 自己回答，但不能在对话进程里跑，单独跑一次。"""
+        if attachments:
             return False
-        self._emit(run, {"type": "user", "text": message.strip(), "files": []})
-        self._emit(run, {"type": "report", "title": "当前状态", "lines": self.status_lines(run)})
-        return True
+        text = message.strip()
+        harness = run.meta.harness
+        if text.lower() in STATUS_COMMANDS:
+            self._emit(run, {"type": "user", "text": text, "files": []})
+            native = await self.natives.status_lines(harness) if self.natives else []
+            self._emit(run, {"type": "report", "title": f"当前状态 · {harness_label(harness)}",
+                             "lines": [*native, *self.status_lines(run)]})
+            return True
+        if self.natives and self.natives.is_local(harness, text):
+            self._emit(run, {"type": "user", "text": text, "files": []})
+            try:
+                lines = await self.natives.agy_local(self.store.run_dir(run.meta.id), text)
+            except Exception as exc:  # noqa: BLE001
+                lines = [f"没跑成：{exc}"]
+            self._emit(run, {"type": "report", "title": f"{harness_label(harness)} {text.split()[0]}", "lines": lines or ["（没有输出）"]})
+            return True
+        return False
 
     def status_lines(self, run: _Run) -> list[str]:
         """/status 的内容：这个对话在哪个状态、用什么跑、服务器上名额和内存够不够。"""
@@ -721,9 +739,19 @@ class Runner:
                 run.meta.session_id = session_id
                 self.store.save_meta(run.meta)
             return
+        if kind == "limits":
+            # harness 推送的套餐用量：只记下来给 /status 用，页面上不显示
+            if self.natives:
+                self.natives.observe(run.meta.harness, event)
+            return
         if kind == "result":
             if event.get("session_id") and event["session_id"] != run.meta.session_id:
                 run.meta.session_id = event["session_id"]
+            output = str(event.pop("text", "") or "")
+            if output.strip() and not run.last_text and not event.get("is_error"):
+                # /usage、/context 这类 CLI 自己回答的指令：输出只在结束消息里，补成一条回复显示出来
+                run.last_text = output
+                self._emit(run, {"type": "text", "text": output, "parent": None})
             self._emit(run, event)
             if not run.pending:
                 run.meta.awaiting_reply = not event.get("is_error") and awaits_reply(run.last_text)

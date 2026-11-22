@@ -332,13 +332,17 @@ def map_message(message: Any) -> list[dict[str, Any]]:
             "duration_ms": message.duration_ms,
             "num_turns": message.num_turns,
             "errors": message.errors or [],
+            # /usage、/context 这类 CLI 自己回答的指令只有这里有输出；runner 在这一轮没有别的文字时补显示
+            "text": message.result or "",
         }]
     if isinstance(message, RateLimitEvent):
         info = message.rate_limit_info
-        if info.status == "allowed":
-            return []
-        level = "error" if info.status == "rejected" else "warn"
-        return [{"type": "notice", "level": level, "text": _rate_limit_text(info)}]
+        # 每一轮都推送：5 小时 / 7 天各用了多少，记下来给 /status（runner 不往页面推）
+        events: list[dict[str, Any]] = [{"type": "limits", "windows": (info.raw or {}).get("unifiedWindows") or {}}]
+        if info.status != "allowed":
+            level = "error" if info.status == "rejected" else "warn"
+            events.append({"type": "notice", "level": level, "text": _rate_limit_text(info)})
+        return events
     if isinstance(message, SystemMessage):
         if message.subtype == "init":
             return [{

@@ -142,19 +142,25 @@ def test_result_init_and_rate_limit_events():
     result = ResultMessage(subtype="success", duration_ms=10, duration_api_ms=5, is_error=False, num_turns=3, session_id="s1")
     assert map_message(result) == [{
         "type": "result", "session_id": "s1", "is_error": False, "subtype": "success",
-        "duration_ms": 10, "num_turns": 3, "errors": [],
+        "duration_ms": 10, "num_turns": 3, "errors": [], "text": "",
     }]
+    # /usage 这类本地指令的输出只在结束消息里
+    usage = ResultMessage(subtype="success", duration_ms=1, duration_api_ms=0, is_error=False, num_turns=0,
+                          session_id="s1", result="You are currently using your subscription")
+    assert map_message(usage)[0]["text"] == "You are currently using your subscription"
     init = SystemMessage(subtype="init", data={"session_id": "s1", "model": "claude-x"})
     assert map_message(init) == [{"type": "session", "session_id": "s1", "model": "claude-x"}]
     assert map_message(SystemMessage(subtype="task_started", data={})) == []
-    ok = RateLimitEvent(rate_limit_info=RateLimitInfo(status="allowed"), uuid="u", session_id="s")
-    assert map_message(ok) == []
+    windows = {"five_hour": {"utilization": 0.28, "resetsAt": 1, "status": "allowed"}}
+    ok = RateLimitEvent(rate_limit_info=RateLimitInfo(status="allowed", raw={"unifiedWindows": windows}), uuid="u", session_id="s")
+    assert map_message(ok) == [{"type": "limits", "windows": windows}]
     warn = RateLimitEvent(
         rate_limit_info=RateLimitInfo(status="allowed_warning", rate_limit_type="five_hour", utilization=0.85),
         uuid="u",
         session_id="s",
     )
-    [notice] = map_message(warn)
+    [limits, notice] = map_message(warn)
+    assert limits == {"type": "limits", "windows": {}}
     assert notice["level"] == "warn" and "5 小时额度" in notice["text"] and "85%" in notice["text"]
 
 
