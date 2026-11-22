@@ -158,7 +158,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | --- | --- | --- |
 | GET | `?q=&source=` | 翻译记录（手动 + Slack，按最近修改；`q` 搜标题、原文、译文） |
 | POST | `` | 帖子翻译页第一次出译文时建稿（`m_…`） |
-| GET/PUT/DELETE | `/{id}` | 读 / 存（带 `rev`，对不上返回 409）/ 删 |
+| GET/PUT | `/{id}` | 读 / 存（带 `rev`，对不上返回 409）；不提供删除（2026-11-22 用户要求） |
 | GET | `/slack/{频道}/{thread_ts}` | 这个 thread 的翻译稿（没有为 null） |
 | POST | `/slack/{频道}/{thread_ts}/run` | `{"instruction"}` 提取 → 翻译 → 标题 |
 | GET | `/{id}/images.zip` | 配图按顺序打包 |
