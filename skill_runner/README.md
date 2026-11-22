@@ -119,8 +119,9 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
   系统可用内存低于 `SKILL_RUNNER_MIN_FREE_MB`（默认 350）时也排队。一个都没在跑时总能起一个。服务重启后接着排。
 - **提问挂太久就脱离进程**：AskUserQuestion 超过 `SKILL_RUNNER_QUESTION_DETACH_S`（默认 300 秒）没人答，问题存进
   `meta.detached_questions`、关掉进程，页面上照样能答；回答作为新消息续接。服务重启时挂着的提问也这样保留。
-- **挂起发送**：agent 干活时，输入框默认「排队发送」（回车）：消息存在 `meta.held`，这一轮正常结束后按顺序一条条发；
-  挂起的消息在对话末尾可以编辑、删除、立即发送。「立即插话」= 原来的行为，马上发给 agent。点了停止后挂起的消息不自动发。
+- **挂起发送**：agent 干活时，输入框发的话（回车或「发送」）：消息存在 `meta.held`，这一轮正常结束后按顺序一条条发；
+  挂起的消息在对话末尾可以编辑、删除、立即发送。只有一个「发送」按钮；要马上发，点挂起消息上的「立即发送」（运行中就是插话）。点了停止后挂起的消息不自动发。
+- **`/status`（或 `/状态`）**：页面自己的命令，skill-runner 直接回一张状态卡（状态、模型、会话 ID、进程、名额、排队、挂起消息、自动继续、可用内存），不发给模型、不花额度。
   接口：`POST /runs/{id}/messages` 带 `mode=queue|now`（默认 now），`PUT|DELETE /runs/{id}/held/{hid}`，`POST /runs/{id}/held/{hid}/send`。
 - **Agent 列表**：`GET /catalog/{skill}/files` 列出 skill 目录里的文件、`GET /catalog/{skill}/files/{path}` 读文本（只读，
   隐藏文件、超过 256 KB 的和二进制文件不给）。页面「全部 Agent」点进去能看 SKILL.md 和脚本。

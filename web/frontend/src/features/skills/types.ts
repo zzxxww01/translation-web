@@ -120,6 +120,8 @@ export type SkillEvent = Base &
     | { type: 'answer'; qid: string; answers?: Answers; response?: string }
     | { type: 'todos'; items: TodoItem[] }
     | { type: 'held'; items: HeldMessage[] }
+    /** 页面命令（/status）的回答，服务端直接给，不经过模型 */
+    | { type: 'report'; title: string; lines: string[] }
     | { type: 'status'; status: RunStatus; error: string | null; awaiting?: boolean }
     | { type: 'result'; is_error: boolean; subtype: string; duration_ms: number; num_turns: number; errors: string[] }
     | { type: 'notice'; level: 'info' | 'warn' | 'error'; text: string }

@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
-import { Send, Square, Zap } from 'lucide-react';
+import { Send, Square } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
 import { sendMessage, skillsApi } from '../api';
 import type { Agent, RunStatus } from '../types';
 import { droppedFiles, isSendKey, pastedFiles, SEND_HINT } from '../input';
@@ -21,9 +20,8 @@ interface ComposerProps {
 const MAX_HEIGHT = 200;
 
 /**
- * 对话底部的输入框。agent 在干活时有两种发法：
- * - 排队发送（默认、回车）：先挂起，这一轮结束后自动发；挂起的消息在对话末尾可以改、删、立刻发；
- * - 立即插话：马上发给 agent。
+ * 对话底部的输入框。agent 在干活时发的话先挂起，这一轮结束后自动发；
+ * 挂起的消息在对话末尾可以改、删，要马上发就点它上面的「立即发送」。
  */
 export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb, notice }: ComposerProps) {
   const [message, setMessage] = useState('');
@@ -74,7 +72,7 @@ export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb
   const placeholder = hasPendingQuestion
     ? '也可以直接在这里写字回答上面的问题'
     : holdable
-      ? `${agent.title}在干活，发的话会等这一轮结束再发`
+      ? `${agent.title}在干活，发的话等这一轮结束再发；输入 /status 看状态`
       : status === 'error'
         ? '发一条消息（比如「继续」）从断点接着做'
         : `回复${agent.title}，或者交代下一步`;
@@ -127,25 +125,13 @@ export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb
                   <Square /> {stopping ? '停止中…' : queued ? '取消排队' : '停止'}
                 </Button>
               )}
-              {holdable && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => void send('now')}
-                  disabled={!canSend}
-                  title="不等这一轮结束，马上发给它"
-                >
-                  <Zap /> 立即插话
-                </Button>
-              )}
               <Button
                 size="sm"
                 onClick={() => void send(holdable ? 'queue' : 'now')}
                 disabled={!canSend}
-                title={holdable ? '这一轮结束后自动发（Enter）' : SEND_HINT || '发送'}
-                className={cn(holdable && 'min-w-[5.5rem]')}
+                title={holdable ? '这一轮结束后自动发；要马上发，点待发消息上的「立即发送」' : SEND_HINT || '发送'}
               >
-                <Send /> {sending ?? (holdable ? '排队发送' : '发送')}
+                <Send /> {sending ?? '发送'}
               </Button>
             </div>
           </div>

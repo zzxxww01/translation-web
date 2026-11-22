@@ -10,7 +10,7 @@ import { harnessLabel } from '../harness';
 import { CONTINUE_TEXT, displayStatus, foldEvents, runTitle } from '../state';
 import type { Agent, RunMeta } from '../types';
 import { AgentAvatar } from './AgentIcon';
-import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
+import { AssistantText, NoticeLine, ReportCard, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
 import { HeldMessages } from './HeldMessages';
 import { DeleteRunDialog } from './DeleteRunDialog';
@@ -175,6 +175,8 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
                     );
                   case 'notice':
                     return <NoticeLine key={item.key} level={item.level} text={item.text} />;
+                  case 'report':
+                    return <ReportCard key={item.key} title={item.title} lines={item.lines} />;
                   case 'turn':
                     return <TurnDivider key={item.key} durationMs={item.durationMs} isError={item.isError} errors={item.errors} />;
                 }

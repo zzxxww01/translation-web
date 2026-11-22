@@ -240,3 +240,25 @@ async def test_queue_mode_sends_immediately_when_idle_and_not_after_interrupt(tm
     await settle(10)
     assert session.sent[-1] == "接着做"
     assert [h["text"] for h in runner.meta(run_id).held] == ["等会儿再发"]
+
+
+async def test_status_command_is_answered_by_the_runner_not_the_model(tmp_path, factory):
+    runner = make_runner(tmp_path, factory, max_active=1)
+    run_id = await start(runner)
+    session = factory.last
+    session.push({"type": "session", "session_id": "sess-s", "model": "claude-opus-5-5"})
+    await settle()
+    second = await start(runner, "第二篇")
+    await runner.send_message(run_id, "补一句", [], mode="queue")
+
+    await runner.send_message(run_id, " /status ", [])
+    assert session.sent == ["/four-step-translate 翻译这篇"]  # 没发给模型
+    report = runner.store.read_events(run_id)[-1]
+    assert report["type"] == "report"
+    text = "\n".join(report["lines"])
+    assert "状态：进行中" in text and "sess-s" in text and "claude-opus-5-5" in text
+    assert "名额：已用 1/1" in text and "挂起的消息：1 条" in text
+
+    await runner.send_message(second, "/状态", [])
+    text = "\n".join(runner.store.read_events(second)[-1]["lines"])
+    assert "排队：第 1 位" in text and "进程：还没启动" in text

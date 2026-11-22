@@ -15,6 +15,7 @@ export type ChatItem =
   | { kind: 'tools'; key: string; tools: ToolCall[] }
   | { kind: 'question'; key: string; qid: string; questions: Question[]; answer?: { answers?: Answers; response?: string } }
   | { kind: 'notice'; key: string; level: 'info' | 'warn' | 'error'; text: string }
+  | { kind: 'report'; key: string; title: string; lines: string[] }
   | { kind: 'turn'; key: string; durationMs: number; isError: boolean; errors: string[] };
 
 export interface RunView {
@@ -95,6 +96,9 @@ export function foldEvents(events: SkillEvent[]): RunView {
         break;
       case 'held':
         held = event.items;
+        break;
+      case 'report':
+        items.push({ kind: 'report', key, title: event.title, lines: event.lines });
         break;
       case 'status':
         status = event.status;
