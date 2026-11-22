@@ -45,12 +45,19 @@ QUEUED = "queued"
 STATUS_COMMANDS = {"/status", "/状态"}
 
 AWAIT_MARK = "【等待确认】"
+# 只认回复末尾的标记（和页面 state.ts 一致）：正文里提到这几个字不算在等确认
+_AWAIT_AT_END = re.compile(re.escape(AWAIT_MARK) + r"\s*$")
 AUTO_REPLY_LIMIT = 3
 DETACH_MESSAGE = "用户暂时没回答，问题已保留在页面上；回答会作为下一条消息发来。请就此结束这一轮，先不要继续做。"
 AUTO_REPLY_TEXT = (
     "（自动确认）{wait}没有收到回复。请按你推荐的方案确认（比如术语表全部采用建议译法），"
     "接下来不要再停下来等确认，直接完成剩下的全部步骤。"
 )
+
+
+def awaits_reply(text: str) -> bool:
+    """这一轮是不是停下来等用户确认：回复以【等待确认】结尾。"""
+    return bool(_AWAIT_AT_END.search(text or ""))
 
 
 def mem_available_mb() -> int | None:
@@ -721,7 +728,7 @@ class Runner:
                 run.meta.session_id = event["session_id"]
             self._emit(run, event)
             if not run.pending:
-                run.meta.awaiting_reply = not event.get("is_error") and AWAIT_MARK in run.last_text
+                run.meta.awaiting_reply = not event.get("is_error") and awaits_reply(run.last_text)
                 self._set_status(run, "idle")
                 self.store.save_meta(run.meta)
                 self._schedule_idle(run)
