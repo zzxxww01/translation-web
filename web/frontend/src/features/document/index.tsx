@@ -1,6 +1,7 @@
 import type { LongformCostOptions } from "./api";
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
+import { Navigate } from 'react-router-dom';
 import type { TermReviewDecision } from '../confirmation/types';
 import { useDocumentStore } from '@/shared/stores';
 import { TranslationMethod } from '@/shared/constants';
@@ -33,12 +34,10 @@ import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
 import { SectionView } from './components/SectionView';
-import { WelcomeScreen } from './components/WelcomeScreen';
 import {
   useDocumentViewState,
   useFullTranslate,
   useProject,
-  useProjects,
   useSection,
   useTermConflictDialog,
   useTermReviewFlow,
@@ -100,7 +99,6 @@ export function DocumentFeature() {
     setView,
     updateRouteParams,
   } = useDocumentViewState({ sections });
-  const { data: projects = [] } = useProjects();
   const {
     data: projectData,
     isLoading: projectLoading,
@@ -432,14 +430,8 @@ export function DocumentFeature() {
 
   const renderMainContent = () => {
     if (!activeProjectId) {
-      return (
-        <WelcomeScreen
-          projects={projects}
-          lastProjectId={activeProjectId}
-          onSelectProject={handleSelectProject}
-          onNewProject={() => setIsNewProjectModalOpen(true)}
-        />
-      );
+      // 项目列表和新建都在「文章」页（已导入 / 导入文件），这里不再放一份仪表盘
+      return <Navigate to="/articles" replace />;
     }
 
     if (projectLoading && !activeProject) {

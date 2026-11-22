@@ -9,8 +9,8 @@ import { type FC } from 'react';
 import type { Paragraph } from '../../../shared/types';
 import { cn } from '../../../shared/utils';
 import {
-  PARAGRAPH_STATUS_ICONS,
   PARAGRAPH_STATUS_CLASSES,
+  PARAGRAPH_STATUS_LABELS,
   ParagraphStatus,
 } from '../../../shared/constants';
 
@@ -62,40 +62,29 @@ export const ParagraphItem: FC<ParagraphItemProps> = ({
     <div
       onClick={onClick}
       className={cn(
-        'group cursor-pointer rounded-lg border p-5 transition-all',
+        'group cursor-pointer rounded-xl border px-5 py-4 transition-colors',
         isActive
-          ? 'border-primary-500 bg-primary-50 shadow-md'
-          : 'border-border-subtle bg-bg-card hover:border-primary-300 hover:shadow-sm',
-        // 已确认的段落有绿色边框标识
-        isConfirmed && !isActive && 'border-l-4 border-l-green-500'
+          ? 'border-primary-300 bg-paper-hover'
+          : 'border-border-subtle bg-white hover:border-primary-200 hover:bg-paper-hover/60'
       )}
     >
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="text-sm text-text-muted">#{paragraph.index}</span>
-            <span className={cn('text-sm', PARAGRAPH_STATUS_CLASSES[status])}>
-              {PARAGRAPH_STATUS_ICONS[status]}
-            </span>
-            {/* 已确认标识 */}
-            {isConfirmed && (
-              <span className="flex items-center gap-1.5 rounded-full bg-green-100 px-2.5 py-1 text-sm font-medium text-green-700">
-                <Check className="h-4 w-4" />
-                已确认
-              </span>
-            )}
-          </div>
+      {/* 段号和状态：一行小字，状态只写一次（点 + 文字），不再叠彩色边框和徽章 */}
+      <div className="mb-2 flex items-center gap-2 text-xs text-text-muted">
+        <span className="tabular-nums">#{paragraph.index}</span>
+        <span className={cn('inline-flex items-center gap-1', PARAGRAPH_STATUS_CLASSES[status])}>
+          {isConfirmed ? <Check className="h-3.5 w-3.5" /> : <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-current" />}
+          {PARAGRAPH_STATUS_LABELS[status]}
+        </span>
+      </div>
 
-          {/* 原文 */}
-          <div className="mb-2 text-base leading-relaxed text-text-primary">
-            {renderSource()}
-          </div>
+      {/* 原文：英文衬线体，浅一级 */}
+      <div className="mb-2 font-[family-name:var(--font-source)] text-[14.5px] leading-[1.75] text-text-secondary">
+        {renderSource()}
+      </div>
 
-          {/* 译文 */}
-          <div className="text-base leading-relaxed text-text-secondary">
-            {paragraph.translation ?? <span className="text-text-muted">点击翻译...</span>}
-          </div>
-        </div>
+      {/* 译文：中文宋体 */}
+      <div className="font-[family-name:var(--font-display)] text-[15.5px] leading-[1.9] text-text-primary">
+        {paragraph.translation ?? <span className="font-[family-name:var(--font-body)] text-sm text-text-disabled">还没翻译，点开在右边翻</span>}
       </div>
     </div>
   );

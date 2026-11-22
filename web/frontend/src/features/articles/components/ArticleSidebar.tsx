@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Loader2, RefreshCw, Search } from 'lucide-react';
+import { FilePlus2, Loader2, RefreshCw, Search } from 'lucide-react';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { cn } from '@/lib/utils';
 import { substackApi, type ArticleFilter, type SubstackArticle } from '@/features/substack/api';
+import { NewProjectModal } from '@/features/document/components/NewProjectModal';
 import { useLibrary, useProjects } from '../hooks';
 import { articleStatus, type StatusTone } from '../lib/tracks';
 
@@ -47,6 +48,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
   const library = useLibrary(filter, search);
   const projects = useProjects(filter === 'imported');
   const [syncing, setSyncing] = useState(false);
+  const [importOpen, setImportOpen] = useState(false);
   const sentinel = useRef<HTMLLIElement>(null);
   // 选中的那篇（比如从工作台返回）第一次出现在列表里时滚到看得见的地方；之后你自己滚就不再管
   const revealed = useRef<string | null>(null);
@@ -95,22 +97,26 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
       <div className="space-y-2 border-b border-border-subtle px-3 pb-3 pt-4">
         <div className="flex items-center gap-2">
           <h2 className="flex-1 text-sm font-medium text-text-secondary">文章 <span className="text-text-muted">{total || ''}</span></h2>
-          <button type="button" onClick={sync} disabled={syncing} title="去 Substack 看有没有新文章" className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary disabled:opacity-50">
+          <button type="button" onClick={() => setImportOpen(true)} title="导入文章：粘贴链接或上传 HTML / Markdown" aria-label="导入文章"
+            className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-xs text-text-secondary hover:bg-ink-wash hover:text-text-primary">
+            <FilePlus2 className="h-3.5 w-3.5" /> 导入
+          </button>
+          <button type="button" onClick={sync} disabled={syncing} title="去 Substack 看有没有新文章" aria-label="同步文章库" className="inline-flex h-7 w-7 items-center justify-center rounded-md text-text-muted hover:bg-ink-wash hover:text-text-primary disabled:opacity-50">
             <RefreshCw className={cn('h-3.5 w-3.5', syncing && 'animate-spin')} />
           </button>
         </div>
-        <label className="flex items-center gap-2 rounded-md border border-border-subtle bg-white px-2.5 py-1.5 focus-within:border-primary-300">
+        <label className="flex h-9 items-center gap-2 rounded-lg border border-border bg-white px-3 focus-within:border-primary-400 focus-within:ring-[3px] focus-within:ring-primary-500/12">
           <Search className="h-3.5 w-3.5 text-text-muted" />
           <input value={input} onChange={event => setInput(event.target.value)} placeholder="搜索标题" aria-label="搜索文章" className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-text-disabled" />
         </label>
-        <div className="flex gap-1" role="group" aria-label="筛选文章">
+        <div className="flex gap-0.5 rounded-full bg-bg-inset p-[3px]" role="group" aria-label="筛选文章">
           {FILTERS.map(item => (
             <button
               key={item.id}
               type="button"
               aria-pressed={filter === item.id}
               onClick={() => setFilter(item.id)}
-              className={cn('rounded-md px-2 py-1 text-xs transition-colors', filter === item.id ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-muted hover:bg-bg-hover hover:text-text-primary')}
+              className={cn('flex-1 rounded-full px-2 py-1 text-xs transition-colors', filter === item.id ? 'bg-white font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}
             >
               {item.label}
               {counts?.[item.id] !== undefined && <span className="ml-1 tabular-nums opacity-70">{counts[item.id]}</span>}
@@ -143,7 +149,8 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                   {article.is_paid && <span className="rounded bg-bg-tertiary px-1">付费</span>}
                   {status && <span className={cn('ml-auto', TONE[status.tone].text)}>{status.text}</span>}
                 </span>
-                {status && (
+                {/* 进度条只在翻到一半时显示；翻完的只留右边那行「已翻译」，不再每篇底下一条绿线 */}
+                {status && status.percent > 0 && status.percent < 100 && (
                   <span className="mt-1.5 block h-0.5 overflow-hidden rounded-full bg-bg-tertiary" aria-hidden>
                     <span className={cn('block h-full rounded-full', TONE[status.tone].bar)} style={{ width: `${status.percent}%` }} />
                   </span>
@@ -175,6 +182,11 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
           </>
         )}
       </ul>
+      <NewProjectModal isOpen={importOpen} onClose={() => setImportOpen(false)} onProjectCreated={id => {
+        setImportOpen(false);
+        void queryClient.invalidateQueries({ queryKey: ['articles'] });
+        onSelectProject(id);
+      }} />
     </div>
   );
 }

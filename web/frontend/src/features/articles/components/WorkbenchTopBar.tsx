@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
 import {
-  ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Images, Maximize2, Menu,
-  MessageCircle, MessageSquare, MoreHorizontal, Newspaper, PanelLeft, Sparkles, Wrench, type LucideIcon,
+  ArrowLeft, Check, ChevronDown, Download, ExternalLink, FileDiff, Flag, History, Images, Maximize2, Menu,
+  MoreHorizontal, PanelLeft, type LucideIcon,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { NAV_ITEMS } from '@/components/layout/navItems';
 import { cn } from '@/lib/utils';
 import { GlobalTaskIndicator } from '@/components/layout/GlobalTaskIndicator';
 import {
@@ -28,16 +29,6 @@ export interface ReadingProgress {
 const MENU = 'wb-pop rounded-xl border-0 bg-bg-secondary p-1.5 shadow-pop';
 const MENU_ITEM = 'rounded-lg px-2.5 py-2 text-[13px] text-text-secondary focus:bg-bg-hover focus:text-text-primary [&>svg]:text-text-muted';
 const MENU_LABEL = 'px-2.5 pb-1 pt-1.5 text-[11px] font-normal tracking-[0.12em] text-text-muted';
-
-// 和 AppLayout 顶部导航同一组功能：工作台里顶部导航收进左上角这个菜单（设计文档 6.1，方案 A）
-const FEATURES: { path: string; label: string; icon: LucideIcon }[] = [
-  { path: '/articles', label: '文章', icon: Newspaper },
-  { path: '/post', label: '帖子翻译', icon: MessageSquare },
-  { path: '/wechat', label: '微信排版', icon: FileText },
-  { path: '/slack', label: 'Slack', icon: MessageCircle },
-  { path: '/tools', label: '工具箱', icon: Wrench },
-  { path: '/skills', label: 'Agent', icon: Sparkles },
-];
 
 /**
  * 工作台的顶栏，也是整页唯一的一条顶栏（方案 A）：左边「← 文章列表」、快速切换文章、功能菜单，再是标题和英文原标题，
@@ -95,15 +86,14 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
           <IconAction label="功能导航"><Menu aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" sideOffset={6} className={cn(MENU, 'w-52')}>
-          {FEATURES.map(item => (
+          {/* 和顶部导航同一组功能（components/layout/navItems.ts）；术语库带上 from，进去后能一键回来 */}
+          {NAV_ITEMS.map(item => (
             <DropdownMenuItem key={item.path} className={cn(MENU_ITEM, item.path === '/articles' && 'font-medium text-primary-700 [&>svg]:text-primary-500')} asChild>
-              <Link to={item.path}><item.icon strokeWidth={STROKE} /> {item.label}</Link>
+              <Link to={item.path === '/glossary' ? `/glossary?from=${encodeURIComponent(location.pathname + location.search)}` : item.path}>
+                <item.icon strokeWidth={STROKE} /> {item.label}
+              </Link>
             </DropdownMenuItem>
           ))}
-          <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
-          <DropdownMenuItem className={MENU_ITEM} asChild>
-            <Link to={`/glossary?from=${encodeURIComponent(location.pathname + location.search)}`}><BookOpen strokeWidth={STROKE} /> 术语库</Link>
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {!compact && <span aria-hidden className="mx-0.5 h-4 w-px shrink-0 bg-border-subtle" />}

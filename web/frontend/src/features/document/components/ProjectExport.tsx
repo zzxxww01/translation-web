@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useExportProject, useProject } from '../hooks';
+import { confirmAction } from '@/shared/ui/confirm';
 
 /** Mount with key={projectId}: a QA exception must never survive a project switch. */
 export function ProjectExport({ projectId }: { projectId: string }) {
@@ -20,11 +21,13 @@ export function ProjectExport({ projectId }: { projectId: string }) {
     && mutation.variables?.projectId === projectId
     && mutation.variables?.format === format;
 
-  const exportOnce = (allowQaOverride = false) => {
+  const exportOnce = async (allowQaOverride = false) => {
     if (mutation.isPending) return;
-    if (allowQaOverride && (!qaBlocked || !window.confirm(
-      `${mutation.error?.message ?? ''}\n仍然导出（忽略本次QA）？下载的可能是含英文原文的未完成稿，不代表翻译完成。仅跳过本次 QA，不会关闭后续检查。`
-    ))) return;
+    if (allowQaOverride && (!qaBlocked || !await confirmAction({
+      title: '仍然导出（忽略本次 QA）？',
+      description: `${mutation.error?.message ?? ''}\n\n下载的可能是含英文原文的未完成稿，不代表翻译完成。仅跳过本次 QA，不会关闭后续检查。`,
+      confirmLabel: '仍然导出',
+    }))) return;
     mutation.mutate({ projectId, format, allowQaOverride });
   };
 
@@ -48,7 +51,7 @@ export function ProjectExport({ projectId }: { projectId: string }) {
               <SelectItem value="en">英文 Markdown</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" onClick={() => exportOnce()}
+          <Button variant="outline" size="sm" onClick={() => void exportOnce()}
             disabled={mutation.isPending} leftIcon={<Download className="h-4 w-4" />}>
             {mutation.isPending ? '导出中...' : '导出'}
           </Button>
@@ -78,7 +81,7 @@ export function ProjectExport({ projectId }: { projectId: string }) {
             <p className="break-words">{mutation.error.message}</p>
             <p>建议先补全翻译并查看质量报告；下载草稿不代表翻译完成，忽略仅对本次导出生效。</p>
             <Button variant="outline" size="sm" className="w-full" disabled={mutation.isPending}
-              onClick={() => exportOnce(true)}>
+              onClick={() => void exportOnce(true)}>
               仍然导出（忽略本次QA）
             </Button>
           </div>

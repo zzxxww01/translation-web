@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Loader2, Send, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { POST_CONTENT_MAX_LENGTH } from '../types';
+import { PANE, PANE_FOOTER, PANE_HEADER, PANE_TEXTAREA } from '@/shared/ui/pane';
 
 interface SourceInputProps {
   value: string;
@@ -36,39 +37,61 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
     onChange(next);
   };
 
+  const count = (
+    <span className="text-xs tabular-nums text-text-muted">
+      {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()}
+    </span>
+  );
+  const actions = (
+    <>
+      <Button type="button" variant="ghost" size="sm" onClick={onClear} disabled={isLoading || !canClear}>
+        <Trash2 /> 清空
+      </Button>
+      <Button
+        type="button"
+        onClick={onTranslate}
+        disabled={!value.trim() || isLoading}
+        size="sm"
+        className="h-9 min-w-24 px-4"
+        title="翻译 (Ctrl+Enter)"
+        aria-label={isTranslating ? '正在翻译帖子' : '翻译帖子'}
+      >
+        {isTranslating ? <Loader2 className="animate-spin" /> : <Send />}
+        <span>{isTranslating ? '翻译中' : '翻译'}</span>
+      </Button>
+    </>
+  );
+  const textarea = (extra: string) => (
+    <Textarea
+      id="postSourceInput"
+      value={value}
+      onChange={(e) => handleChange(e.target.value)}
+      aria-label="帖子原文"
+      placeholder="把英文帖子粘贴到这里…"
+      className={className ?? extra}
+    />
+  );
+
+  // 分栏里（Slack）：栏头已经有标题，保持原来的轻量排法
+  if (hideTitle) {
+    return (
+      <div className="flex min-w-0 flex-col">
+        <div className="mb-3 flex justify-end">{count}</div>
+        {textarea('min-h-[42svh] resize-y')}
+        <div className="mt-4 flex items-center justify-between gap-3">{actions}</div>
+      </div>
+    );
+  }
+
+  // 帖子翻译页：一张纸，上面栏名和字数，下面一条操作栏；和译文那张等高
   return (
-    <div className="flex min-w-0 flex-col">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold">{hideTitle ? '' : '原文'}</h3>
-        <span className="text-xs text-muted-foreground">
-          {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符
-        </span>
-      </div>
-      <Textarea
-        id="postSourceInput"
-        value={value}
-        onChange={(e) => handleChange(e.target.value)}
-        aria-label="帖子原文"
-        placeholder="原文..."
-        className={className ?? "min-h-[42svh] resize-y sm:min-h-[320px] lg:min-h-[560px] lg:max-h-[calc(100svh-240px)]"}
-      />
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <Button type="button" variant="outline" size="sm" className="h-10 px-4 sm:h-9" onClick={onClear} disabled={isLoading || !canClear}>
-          <Trash2 className="h-4 w-4" /> 清空
-        </Button>
-        <Button
-          type="button"
-          onClick={onTranslate}
-          disabled={!value.trim() || isLoading}
-          size="sm"
-          className="h-11 min-w-28 px-5 sm:h-10"
-          title="翻译 (Ctrl+Enter)"
-          aria-label={isTranslating ? '正在翻译帖子' : '翻译帖子'}
-        >
-          {isTranslating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-          <span>{isTranslating ? '翻译中' : '翻译'}</span>
-        </Button>
-      </div>
-    </div>
+    <section className={PANE}>
+      <header className={PANE_HEADER}>
+        <h3 className="text-[13px] font-semibold text-text-secondary">原文</h3>
+        {count}
+      </header>
+      {textarea(PANE_TEXTAREA)}
+      <footer className={PANE_FOOTER}>{actions}</footer>
+    </section>
   );
 }

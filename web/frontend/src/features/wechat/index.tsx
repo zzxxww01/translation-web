@@ -11,6 +11,7 @@ import {
   WandSparkles,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { Segmented } from '@/components/ui/segmented';
 import { Button } from '@/components/ui/Button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
@@ -155,6 +156,17 @@ export function WechatFeature() {
   }, [imageMode, markdown, selectedTheme]);
 
 
+  // 「保留原链接」时边写边预览：停手 0.8 秒自动转换。上传图床 / 转 Base64 有副作用，仍然手动点「转换」
+  const autoPreview = imageMode === 'keep';
+  const { mutate: formatMutate } = formatWechat;
+  useEffect(() => {
+    if (!autoPreview || !markdown.trim()) return;
+    const timeoutId = window.setTimeout(() => {
+      formatMutate({ markdown, theme: selectedTheme, upload_images: false, image_to_base64: false });
+    }, 800);
+    return () => window.clearTimeout(timeoutId);
+  }, [autoPreview, formatMutate, markdown, selectedTheme]);
+
   const handleConvert = () => {
     if (!markdown.trim()) {
       toast.error('请输入 Markdown 内容');
@@ -199,45 +211,48 @@ export function WechatFeature() {
       <h1 className="sr-only">微信公众号排版</h1>
       {/* 页面操作放进全站顶栏，不再另占一行（2026-11-22） */}
       <PageActions>
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="sm"
           onClick={() => setSettingsOpen(true)}
-          className="inline-flex h-8 min-w-0 items-center gap-1.5 rounded-md px-2 text-xs text-text-secondary hover:bg-bg-hover"
+          className="h-9 min-w-0 text-xs"
           aria-label="打开排版设置"
           title="排版设置"
         >
-          <Settings2 className="h-4 w-4 shrink-0" />
-          <span className="truncate">样式：{selectedThemeName} · {imageModeName}</span>
-        </button>
+          <Settings2 className="shrink-0" />
+          <span className="hidden truncate sm:inline">{selectedThemeName} · {imageModeName}</span>
+        </Button>
+        <div className="hidden items-center gap-2 lg:flex">
+          {autoPreview ? (
+            <span className="text-xs text-text-muted" aria-live="polite">
+              {formatWechat.isPending ? '正在更新预览…' : html ? '预览已是最新' : '边写边预览'}
+            </span>
+          ) : (
+            <Button type="button" variant="outline" size="sm" className="h-9" onClick={handleConvert}
+              disabled={formatWechat.isPending || !markdown.trim()}>
+              {formatWechat.isPending ? <Loader2 className="animate-spin" /> : <WandSparkles />}
+              {formatWechat.isPending ? '转换中' : '转换'}
+            </Button>
+          )}
+          <Button type="button" size="sm" className="h-9" onClick={() => void handleCopy()} disabled={!html || formatWechat.isPending}>
+            <Clipboard />
+            复制到公众号
+          </Button>
+        </div>
       </PageActions>
 
-      <div className="flex shrink-0 border-b p-2 lg:hidden" role="tablist" aria-label="排版工作区">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={workspaceView === 'editor'}
-          onClick={() => setWorkspaceView('editor')}
-          className={cn(
-            'flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm font-medium',
-            workspaceView === 'editor' ? 'bg-primary-50 text-primary-700' : 'text-text-muted'
-          )}
-        >
-          <FileText className="h-4 w-4" />
-          编辑
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={workspaceView === 'preview'}
-          onClick={() => setWorkspaceView('preview')}
-          className={cn(
-            'flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm font-medium',
-            workspaceView === 'preview' ? 'bg-primary-50 text-primary-700' : 'text-text-muted'
-          )}
-        >
-          <Eye className="h-4 w-4" />
-          预览
-        </button>
+      <div className="flex shrink-0 justify-center border-b border-border-subtle px-3 py-2 lg:hidden">
+        <Segmented
+          label="排版工作区"
+          value={workspaceView}
+          onChange={setWorkspaceView}
+          className="w-full max-w-xs [&>button]:flex-1 [&>button]:justify-center"
+          options={[
+            { value: 'editor', label: <><FileText />编辑</> },
+            { value: 'preview', label: <><Eye />预览</> },
+          ]}
+        />
       </div>
 
       <main className="grid min-h-0 flex-1 lg:grid-cols-2">
@@ -279,7 +294,11 @@ export function WechatFeature() {
                 <Image className="h-5 w-5" aria-hidden="true" />
               </span>
               <p className="text-lg text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>公众号预览</p>
-              <p className="max-w-xs text-sm text-text-muted">左侧写好 Markdown，点「转换」后在这里看到排版效果，再一键复制到微信编辑器。</p>
+              <p className="max-w-xs text-sm text-text-muted">
+                {autoPreview
+                  ? '左边写 Markdown，这里会自动显示公众号里的样子；满意了点「复制到公众号」。'
+                  : '左边写好 Markdown，点「转换」后在这里看到排版效果，再复制到公众号编辑器。'}
+              </p>
             </div>
           )}
         </section>
@@ -300,12 +319,14 @@ export function WechatFeature() {
         </div>
       )}
 
-      <footer className="sticky bottom-0 z-10 flex shrink-0 items-center gap-2 border-t bg-background/95 px-4 py-3 backdrop-blur sm:justify-end sm:px-6">
+      {/* 手机上操作按钮放在底部，拇指够得着；桌面在顶栏右侧 */}
+      <footer className="sticky bottom-0 z-10 flex shrink-0 items-center gap-2 border-t border-border-subtle bg-bg-primary/95 px-4 py-3 backdrop-blur lg:hidden">
         <Button
           type="button"
           onClick={handleConvert}
           disabled={formatWechat.isPending || !markdown.trim()}
-          className="flex-1 sm:flex-none"
+          variant="outline"
+          className="flex-1"
         >
           {formatWechat.isPending ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -318,11 +339,10 @@ export function WechatFeature() {
           type="button"
           onClick={() => void handleCopy()}
           disabled={!html || formatWechat.isPending}
-          variant="outline"
-          className="flex-1 sm:flex-none"
+          className="flex-1"
         >
           <Clipboard className="h-4 w-4" />
-          复制
+          复制到公众号
         </Button>
       </footer>
 
@@ -337,7 +357,7 @@ export function WechatFeature() {
               <select
                 value={selectedTheme}
                 onChange={event => setSelectedTheme(event.target.value)}
-                className="h-10 w-full rounded-md border bg-background px-3 text-foreground"
+                className="h-10 w-full rounded-lg border border-border bg-white px-3 text-text-primary"
                 disabled={themesFailed}
               >
                 {themes.map(theme => (

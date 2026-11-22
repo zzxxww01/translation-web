@@ -20,13 +20,8 @@ export function GlossaryFeature() {
       projectId={projectId}
       projectTitle={projectTitle}
       defaultScope={defaultScope}
-      onBack={() => {
-        if (from) {
-          navigate(from);
-          return;
-        }
-        navigate(-1);
-      }}
+      // 术语库现在在主导航里；只有从某个项目点进来（带 from）时才显示「返回」
+      onBack={from ? () => navigate(from) : undefined}
     />
   );
 }

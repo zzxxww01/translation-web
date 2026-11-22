@@ -8,6 +8,7 @@ import { copyToClipboard } from '@/shared/utils';
 import { TranslationVersionType } from '@/shared/constants';
 import type { TranslationVersion } from '@/shared/types';
 import { POST_CONTENT_MAX_LENGTH } from '../types';
+import { PANE, PANE_FOOTER, PANE_HEADER, PANE_TEXTAREA } from '@/shared/ui/pane';
 
 interface TranslationOutputProps {
   versions: TranslationVersion[];
@@ -66,76 +67,98 @@ export function TranslationOutput({
     }
   };
 
-  return (
-    <div className="flex min-w-0 flex-1 flex-col">
-      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex min-w-0 flex-wrap items-center gap-3">
-          {!hideTitle && <h3 className="text-sm font-semibold">译文</h3>}
-          {versions.length > 0 && (
-            <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
-              <SelectTrigger className="h-9 w-full min-w-0 sm:w-48" aria-label="选择译文版本">
-                <SelectValue placeholder="选择版本" />
-              </SelectTrigger>
-              <SelectContent>
-                {versions.map(v => {
-                  const typeLabel = v.type === TranslationVersionType.TRANSLATION ? '翻译' :
-                    v.type === TranslationVersionType.OPTIMIZATION ? '优化' : '编辑';
-                  const instruction = v.instruction?.trim() ?? '';
-                  const preview = instruction
-                    ? ` - ${instruction.length > 12 ? `${instruction.slice(0, 12)}…` : instruction}`
-                    : '';
-                  const staleMark = isStaleVersion(v, originalText) ? ' · 旧底稿' : '';
-                  return (
-                    <SelectItem key={v.id} value={v.id}>
-                      v{v.versionNumber} ({typeLabel}){preview}{staleMark}
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
-          )}
-        </div>
-        <div className="flex items-center justify-between gap-2 sm:justify-end">
-          {isEdited && <Badge variant="warning">已编辑</Badge>}
-          {isBasedOnOlderSource && <Badge variant="outline">原文已更新</Badge>}
-          <span className="text-xs text-muted-foreground">
-            {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符
-          </span>
-        </div>
-      </div>
-
-      <Textarea
-        id="translationEditor"
-        value={currentContent}
-        onChange={(e) => handleChange(e.target.value)}
-        onKeyDown={(e) => {
-          // Escape 只在译文编辑框内生效：挂到 window 上会与 Radix 弹层/下拉的
-          // Escape 关闭逻辑抢同一次事件，导致确认框关不掉、语义被替换
-          if (e.key === 'Escape' && !e.repeat && isEdited) {
-            e.preventDefault();
-            onDiscardEdit();
-          }
-        }}
-        aria-label="帖子译文"
-        placeholder="译文..."
-        className="min-h-[34svh] sm:min-h-[280px] lg:min-h-[280px]"
-      />
-
-      <div className="mt-3 flex flex-wrap justify-end gap-2">
-        {extraActions}
-        <Button type="button" variant="outline" size="sm" className="h-10 min-w-28 sm:h-9" onClick={handleCopy} disabled={!currentContent} title="复制译文">
-          <Copy className="h-4 w-4" />
-          复制译文
-        </Button>
-        {isEdited && (
-          <>
-            <Button type="button" variant="outline" size="sm" onClick={onDiscardEdit}>放弃</Button>
-            <Button type="button" size="sm" onClick={onSaveEdit} disabled={!editedContent.trim()}>
-              <Sparkles className="h-4 w-4" /> 保存版本
-            </Button>
-          </>
-        )}
-      </div>
+  const versionPicker = versions.length > 0 && (
+    <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
+      <SelectTrigger className={hideTitle ? 'h-9 w-full min-w-0 sm:w-48' : 'h-7 w-auto min-w-0 max-w-52 rounded-full border-transparent bg-bg-inset px-3 text-xs hover:border-transparent'} aria-label="选择译文版本">
+        <SelectValue placeholder="选择版本" />
+      </SelectTrigger>
+      <SelectContent>
+        {versions.map(v => {
+          const typeLabel = v.type === TranslationVersionType.TRANSLATION ? '翻译' :
+            v.type === TranslationVersionType.OPTIMIZATION ? '优化' : '编辑';
+          const instruction = v.instruction?.trim() ?? '';
+          const preview = instruction
+            ? ` - ${instruction.length > 12 ? `${instruction.slice(0, 12)}…` : instruction}`
+            : '';
+          const staleMark = isStaleVersion(v, originalText) ? ' · 旧底稿' : '';
+          return (
+            <SelectItem key={v.id} value={v.id}>
+              v{v.versionNumber} ({typeLabel}){preview}{staleMark}
+            </SelectItem>
+          );
+        })}
+      </SelectContent>
+    </Select>
+  );
+  const status = (
+    <div className="flex shrink-0 items-center gap-2">
+      {isEdited && <Badge variant="warning">已编辑</Badge>}
+      {isBasedOnOlderSource && <Badge variant="outline">原文已更新</Badge>}
+      <span className="text-xs tabular-nums text-text-muted">
+        {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()}
+      </span>
     </div>
+  );
+  const textarea = (className: string) => (
+    <Textarea
+      id="translationEditor"
+      value={currentContent}
+      onChange={(e) => handleChange(e.target.value)}
+      onKeyDown={(e) => {
+        // Escape 只在译文编辑框内生效：挂到 window 上会与 Radix 弹层/下拉的
+        // Escape 关闭逻辑抢同一次事件，导致确认框关不掉、语义被替换
+        if (e.key === 'Escape' && !e.repeat && isEdited) {
+          e.preventDefault();
+          onDiscardEdit();
+        }
+      }}
+      aria-label="帖子译文"
+      placeholder={hideTitle ? '译文...' : '译文会出现在这里，可以直接改；改完点「保存版本」'}
+      className={className}
+    />
+  );
+  const actions = (
+    <>
+      {extraActions}
+      {isEdited && (
+        <>
+          <Button type="button" variant="ghost" size="sm" onClick={onDiscardEdit}>放弃修改</Button>
+          <Button type="button" variant="outline" size="sm" onClick={onSaveEdit} disabled={!editedContent.trim()}>
+            <Sparkles /> 保存版本
+          </Button>
+        </>
+      )}
+      <Button type="button" variant={hideTitle ? 'outline' : 'default'} size="sm" className={hideTitle ? 'h-10 min-w-28 sm:h-9' : 'h-9 min-w-24 px-4'} onClick={handleCopy} disabled={!currentContent} title="复制译文">
+        <Copy />
+        复制译文
+      </Button>
+    </>
+  );
+
+  if (hideTitle) {
+    return (
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">{versionPicker}</div>
+          {status}
+        </div>
+        {textarea('min-h-[34svh] sm:min-h-[280px]')}
+        <div className="mt-3 flex flex-wrap justify-end gap-2">{actions}</div>
+      </div>
+    );
+  }
+
+  return (
+    <section className={PANE}>
+      <header className={PANE_HEADER}>
+        <div className="flex min-w-0 items-center gap-2">
+          <h3 className="shrink-0 text-[13px] font-semibold text-text-secondary">译文</h3>
+          {versionPicker}
+        </div>
+        {status}
+      </header>
+      {textarea(PANE_TEXTAREA)}
+      <footer className={`${PANE_FOOTER} justify-end`}>{actions}</footer>
+    </section>
   );
 }

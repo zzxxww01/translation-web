@@ -14,7 +14,7 @@ const tabs = [
   { id: 'email', label: '邮件回复', icon: <Mail className="h-4 w-4" /> },
   { id: 'tasks', label: '任务管理', icon: <CheckSquare className="h-4 w-4" /> },
   // 原来在 Slack 页里的「回复工作台」，2026-11-22 搬到这里
-  { id: 'slack-reply', label: '旧版工作台', icon: <MessagesSquare className="h-4 w-4" /> },
+  { id: 'slack-reply', label: 'Slack 回复（旧版）', icon: <MessagesSquare className="h-4 w-4" /> },
 ] as const;
 
 export function ToolsFeature() {
@@ -22,18 +22,14 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      <div className="mx-auto w-full min-w-0 max-w-4xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+      <div className="mx-auto w-full min-w-0 max-w-5xl px-4 pb-12 pt-5 sm:px-8">
         <PageHeader className="mb-5" title="工具箱" />
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
-          <div className="-mx-4 mb-5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-6 sm:px-0">
-            <TabsList className="h-auto w-max min-w-full justify-start p-1 sm:min-w-0">
+          <div className="mb-5">
+            <TabsList>
               {tabs.map(tab => (
-                <TabsTrigger
-                  key={tab.id}
-                  value={tab.id}
-                  className="h-8 shrink-0 gap-2"
-                >
+                <TabsTrigger key={tab.id} value={tab.id}>
                   {tab.icon}
                   {tab.label}
                 </TabsTrigger>

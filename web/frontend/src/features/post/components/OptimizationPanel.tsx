@@ -68,11 +68,14 @@ export function OptimizationPanel({
 
   return (
     <>
-      <div className="card-glass p-5">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Wand2 className="h-4 w-4 text-primary-500" />
-            <h4 className="text-sm font-semibold text-text-primary">优化指令</h4>
+      <div className="rounded-xl border border-border-subtle bg-white p-4">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <h4 className="flex items-center gap-2 text-[13px] font-semibold text-text-secondary">
+              <Wand2 className="h-4 w-4 text-primary-500" />
+              优化译文
+            </h4>
+            {!hasVersions && <span className="text-xs text-text-muted">先翻译出译文才能优化</span>}
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -84,9 +87,9 @@ export function OptimizationPanel({
                 type="button"
                 onClick={() => handleQuick(inst.id)}
                 disabled={disabled}
-                className="min-h-10 rounded-full px-3.5 text-sm sm:min-h-8 sm:text-xs"
+                className="min-h-9 rounded-full px-3 text-[13px] sm:min-h-8 sm:text-xs"
               >
-                {inst.icon && <inst.icon className="text-primary-400" />}
+                {inst.icon && <inst.icon className="text-text-muted" />}
                 {inst.label}
               </Button>
             ))}
@@ -96,16 +99,16 @@ export function OptimizationPanel({
               type="button"
               onClick={() => setShowMore(true)}
               disabled={disabled}
-              className="min-h-10 rounded-full border-dashed px-3.5 text-sm sm:min-h-8 sm:text-xs"
+              className="min-h-9 rounded-full px-3 text-[13px] sm:min-h-8 sm:text-xs"
             >
-              更多...
+              更多…
             </Button>
           </div>
 
           <div className="flex items-center gap-2">
             <Input
               id="customInstructionInput"
-              placeholder="优化要求..."
+              placeholder="或者直接写要求，比如：语气更口语一点"
               value={customInstruction}
               onChange={(e) => onCustomInstructionChange(e.target.value)}
               onKeyDown={(e) => {
@@ -117,7 +120,7 @@ export function OptimizationPanel({
               maxLength={OPTIMIZATION_INSTRUCTION_MAX_LENGTH}
               aria-label="自定义优化要求"
               disabled={isLoading}
-              className="h-10 min-w-0 flex-1"
+              className="h-9 min-w-0 flex-1"
             />
             <Button
               size="sm"
@@ -125,7 +128,7 @@ export function OptimizationPanel({
               onClick={() => void handleSendCustom()}
               disabled={!hasVersions || !customInstruction.trim() || isLoading}
               title="发送指令 (Ctrl+K)"
-              className="h-10 w-10 shrink-0 p-0"
+              className="h-9 w-9 shrink-0 p-0"
               aria-label={isOptimizing ? '正在优化译文' : '发送优化要求'}
             >
               {isOptimizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}

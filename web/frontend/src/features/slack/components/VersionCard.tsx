@@ -151,14 +151,14 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
 
       {isEditing ? (
         <div className="space-y-2">
-          <div className="text-xs mb-1" style={{ color: 'var(--color-muted)' }}>中文内容</div>
+          <div className="text-xs mb-1" style={{ color: 'var(--slack-muted, var(--color-text-muted))' }}>中文内容</div>
           <textarea
             value={editedChinese}
             onChange={(e) => setEditedChinese(e.target.value)}
             className="editorial-textarea w-full min-h-[60px] p-2 text-sm border rounded resize-none leading-relaxed"
             style={{
               fontFamily: 'var(--font-chinese)',
-              borderColor: 'var(--color-border)'
+              borderColor: 'var(--slack-border, var(--color-border))'
             }}
             autoFocus
             placeholder="输入中文内容..."
@@ -168,7 +168,7 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
         <>
           {version.chinese && (
             <div className="text-xs mb-2 opacity-60" style={{
-              color: 'var(--color-muted)',
+              color: 'var(--slack-muted, var(--color-text-muted))',
               fontFamily: 'var(--font-chinese)'
             }}>
               {version.chinese}

@@ -43,7 +43,7 @@ export function ReplyWorkspace({
           className="editorial-textarea min-h-[150px] resize-y text-sm w-full"
           style={{
             fontFamily: 'var(--font-body)',
-            borderColor: 'var(--color-border)'
+            borderColor: 'var(--slack-border, var(--color-border))'
           }}
           disabled={isGenerating}
         />

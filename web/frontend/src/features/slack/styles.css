@@ -1,14 +1,15 @@
 /* Editorial Theme for Slack Feature */
 
 .slack-editorial-theme {
-  /* 字体沿用全站（宋体标题 + 无衬线正文），这里只把局部变量对齐到 momo 梅子色板。
-     注意 --color-border 在 Tailwind v4 里也驱动 border-border，必须和全站同值。 */
-  --color-primary: #2b2730;
-  --color-secondary: #f7f2f3;
-  --color-accent: #a33d70;
-  --color-muted: #7a6e77;
-  --color-border: #e0d3d9;
-  --color-surface: #ffffff;
+  /* 字体沿用全站（宋体标题 + 无衬线正文），这里只放 Slack 页自己的局部变量。
+     不能叫 --color-*：Tailwind v4 的 bg-primary / bg-muted / border-border 都读这些名字，
+     以前在这里改成墨色，Slack 页里所有 bg-primary 按钮就变成了黑色。 */
+  --slack-primary: #2b2730;
+  --slack-secondary: #f7f2f3;
+  --slack-accent: #a33d70;
+  --slack-muted: #7a6e77;
+  --slack-border: #e0d3d9;
+  --slack-surface: #ffffff;
 
   /* Spacing */
   --spacing-card: 28px;
@@ -61,7 +62,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--slack-accent, var(--color-primary-500));
   transition: width var(--transition-fast);
 }
 
@@ -89,14 +90,14 @@
 .editorial-input:focus,
 .editorial-textarea:focus {
   outline: none;
-  border-color: var(--color-accent);
+  border-color: var(--slack-accent, var(--color-primary-500));
   box-shadow: 0 0 0 3px rgba(163, 61, 112, 0.12);
 }
 
 /* Version Card Styles */
 .version-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--slack-surface, #ffffff);
+  border: 1px solid var(--slack-border, var(--color-border));
   border-radius: 14px;
   padding: var(--spacing-card);
   box-shadow: 0 2px 8px rgba(67, 26, 48, 0.05);
@@ -104,7 +105,7 @@
 }
 
 .version-card.editing {
-  border-color: var(--color-accent);
+  border-color: var(--slack-accent, var(--color-primary-500));
   box-shadow: 0 0 0 3px rgba(163, 61, 112, 0.1);
 }
 
@@ -118,7 +119,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--slack-accent, var(--color-primary-500));
   border: 1px solid #ebc5d6;
   background: #fbf2f6;
   padding: 3px 10px;
@@ -135,8 +136,8 @@
 }
 
 .bubble-me {
-  background: var(--color-primary);
-  color: var(--color-surface);
+  background: var(--slack-primary, var(--color-text-primary));
+  color: var(--slack-surface, #ffffff);
   border-radius: 16px 16px 4px 16px;
   max-width: 70%;
   align-self: flex-end;
@@ -145,7 +146,7 @@
 
 /* Background Texture */
 .workspace-container {
-  background: var(--color-secondary);
+  background: var(--slack-secondary, var(--color-bg-tertiary));
   position: relative;
 }
 

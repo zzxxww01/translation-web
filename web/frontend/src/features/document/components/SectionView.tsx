@@ -51,9 +51,9 @@ export function SectionView({
       {/* 章节标题 */}
       <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row">
         <div className="min-w-0">
-          <h2 className="text-xl font-bold">{currentSection.title}</h2>
+          <h2 className="text-xl leading-snug text-text-primary">{currentSection.title}</h2>
           {currentSection.title_translation && (
-            <p className="text-text-muted">{currentSection.title_translation}</p>
+            <p className="mt-1 font-[family-name:var(--font-display)] text-text-muted">{currentSection.title_translation}</p>
           )}
         </div>
         {onEnterImmersive && (

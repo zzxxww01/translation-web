@@ -4,6 +4,7 @@ import { FileText, Hash, Loader2, Plus, Search, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { draftsApi, useDraftList, type DraftSummary } from '../drafts';
+import { confirmAction } from '@/shared/ui/confirm';
 
 function when(ts: number): string {
   const d = new Date(ts * 1000);
@@ -33,7 +34,7 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
   const queryClient = useQueryClient();
 
   const remove = async (item: DraftSummary) => {
-    if (!window.confirm(`删除「${item.title || '这篇翻译'}」？删除后找不回来。`)) return;
+    if (!await confirmAction({ title: `删除「${item.title || '这篇翻译'}」？`, description: '删除后找不回来。', confirmLabel: '删除', destructive: true })) return;
     await draftsApi.remove(item.id);
     void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
     toast.success('已删除');

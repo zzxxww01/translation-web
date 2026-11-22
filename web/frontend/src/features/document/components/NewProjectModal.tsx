@@ -1,6 +1,6 @@
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { FileText, Link2, Sparkles, Upload } from 'lucide-react';
+import { FileText, Link2, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button-extended';
 import { Input } from '@/components/ui/input';
@@ -388,7 +388,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
                   onClick={() => fileInputRef.current?.click()}
                   className={`
                     relative flex cursor-pointer flex-col items-center justify-center
-                    rounded-lg border-2 border-dashed p-8 transition-all
+                    rounded-xl border border-dashed p-6 transition-colors
                     ${
                       dropActive
                         ? 'border-primary bg-primary/5'
@@ -407,7 +407,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
 
                   {file ? (
                     <>
-                      <FileText className="mb-3 h-12 w-12 text-success" />
+                      <FileText className="mb-2 h-8 w-8 text-success" />
                       <p className="font-medium text-text-primary">{file.name}</p>
                       <p className="text-sm text-text-muted">{(file.size / 1024).toFixed(1)} KB</p>
                       <button
@@ -427,7 +427,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
                     </>
                   ) : (
                     <>
-                      <Upload className="mb-3 h-12 w-12 text-text-muted" />
+                      <Upload className="mb-2 h-7 w-7 text-text-muted" />
                       <p className="font-medium text-text-primary">
                         {dropActive ? '释放文件' : '点击或拖拽 HTML/Markdown 文件到此处'}
                       </p>
@@ -446,7 +446,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
                     onClick={() => assetsInputRef.current?.click()}
                     className={`
                       relative flex cursor-pointer flex-col items-center justify-center
-                      rounded-lg border-2 border-dashed p-6 transition-all
+                      rounded-xl border border-dashed p-5 transition-colors
                       ${
                         assets.length > 0
                           ? 'border-success bg-success/5'
@@ -497,16 +497,12 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
                 <p className="text-sm text-text-muted">Markdown 文件无需选择 *_files 资源目录。</p>
               )}
 
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-border" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="bg-bg-primary px-2 text-text-muted">或者使用路径</span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
+              {/* 服务器本地路径是维护用的入口，平时用不上：收起来 */}
+              <details className="group" open={Boolean(path)}>
+                <summary className="cursor-pointer select-none text-xs text-text-muted hover:text-text-secondary">
+                  用服务器上的文件路径（高级）
+                </summary>
+              <div className="mt-2 space-y-2">
                 <Label htmlFor="project-path">HTML/Markdown 文件路径</Label>
                 <Input
                   id="project-path"
@@ -520,6 +516,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
                   disabled={!!file}
                 />
               </div>
+              </details>
             </>
           )}
 
@@ -533,7 +530,6 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
               取消
             </Button>
             <Button type="submit" variant="default" isLoading={isBusy}>
-              <Sparkles className="h-4 w-4" />
               {usingUrl ? (isImporting ? '正在下载并导入…' : '导入文章') : '创建项目'}
             </Button>
           </div>

@@ -23,7 +23,21 @@ test('post workspace keeps actions inside a mobile viewport', async ({ page }) =
 
 test('document workspace exposes its mobile navigation sheet', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
+  // 长文编辑器没有自己的首页了：/document 回到「文章」列表，编辑器只按项目打开
   await page.goto('/document');
+  await expect(page).toHaveURL(/\/articles$/);
+
+  const project = {
+    id: 'mobile-doc', title: 'Mobile doc', status: 'created', created_at: '2026-08-09T00:00:00', sections: [],
+    progress: { total: 0, total_sections: 0, total_paragraphs: 0, approved: 0, percent: 0 },
+  };
+  await page.route('**/api/projects/mobile-doc', route =>
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify(project) })
+  );
+  await page.route('**/api/projects', route =>
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify([project]) })
+  );
+  await page.goto('/document/mobile-doc');
 
   const navigationButton = page.getByRole('button', {
     name: '打开文档导航',
