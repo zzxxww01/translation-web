@@ -41,6 +41,8 @@ logger = logging.getLogger(__name__)
 
 ACTIVE_STATUSES = {"running", "waiting"}
 QUEUED = "queued"
+# 页面自己处理的命令（不发给模型）
+STATUS_COMMANDS = {"/status", "/状态"}
 
 AWAIT_MARK = "【等待确认】"
 AUTO_REPLY_LIMIT = 3
@@ -385,6 +387,11 @@ class Runner:
         run = self._get(run_id)
         if not message.strip() and not attachments:
             raise RunnerError("消息不能为空")
+        if not attachments and message.strip().lower() in STATUS_COMMANDS:
+            # 页面自己的命令：不发给模型、不花额度，什么状态下都能用
+            self._emit(run, {"type": "user", "text": message.strip(), "files": []})
+            self._emit(run, {"type": "report", "title": "当前状态", "lines": self.status_lines(run)})
+            return run.meta
         if run.pending and not attachments:
             # 有提问挂着时，输入框里的话就是对提问的自由回答
             qid = next(iter(run.pending))
@@ -395,6 +402,49 @@ class Runner:
             self._hold(run, message, attachments)
             return run.meta
         return await self._send_now(run, message, attachments)
+
+    def status_lines(self, run: _Run) -> list[str]:
+        """/status 的内容：这个对话在哪个状态、用什么跑、服务器上名额和内存够不够。"""
+        meta = run.meta
+        label = {"running": "进行中", "waiting": "等你回答提问", "idle": "空闲", "error": "已中断", QUEUED: "排队中"}
+        status = label.get(meta.status, meta.status)
+        if meta.status == "idle" and (meta.awaiting_reply or meta.detached_questions):
+            status = "等你确认"
+        model = meta.actual_model or meta.model or "默认模型"
+        if meta.model and meta.actual_model and meta.model != meta.actual_model:
+            model = f"{meta.actual_model}（选的是 {meta.model}）"
+        if run.session is not None:
+            process = "在运行"
+        elif meta.session_id:
+            process = "已关闭（下次发消息按会话 ID 续接）"
+        else:
+            process = "还没启动"
+        lines = [
+            f"状态：{status}" + (f"（{meta.error}）" if meta.status == "error" and meta.error else ""),
+            f"Agent：{meta.skill or '通用 Agent'} · {harness_label(meta.harness)} · {model}",
+            f"会话 ID：{meta.session_id or '还没有'}",
+            f"进程：{process}",
+            f"名额：已用 {self.slots_used()}/{self.config.max_active}（这个对话占 {self._weight(run)} 个）",
+        ]
+        position = self.queue_position(meta.id)
+        if position is not None:
+            waiting = sum(1 for r in self._runs.values() if r.meta.status == QUEUED)
+            lines.append(f"排队：第 {position} 位，共 {waiting} 个在排")
+        if meta.held:
+            lines.append(f"挂起的消息：{len(meta.held)} 条，这一轮结束后按顺序发")
+        if meta.detached_questions:
+            lines.append(f"没答的提问：{len(meta.detached_questions)} 个（进程已关，回答后续接）")
+        if meta.auto_reply_s > 0:
+            auto = f"自动继续：{wait_text(meta.auto_reply_s)}没回复就按建议继续，已用 {meta.auto_replies}/{AUTO_REPLY_LIMIT} 次"
+            if meta.auto_reply_at:
+                auto += "，下一次 " + time.strftime("%H:%M", time.localtime(meta.auto_reply_at))
+            lines.append(auto)
+        else:
+            lines.append("自动继续：关闭")
+        free = mem_available_mb()
+        if free is not None:
+            lines.append(f"服务器可用内存：{free} MB（低于 {self.config.min_free_mb} MB 新对话排队）")
+        return lines
 
     def _working(self, run: _Run) -> bool:
         return run.meta.status in ACTIVE_STATUSES or run.meta.status == QUEUED or self._session_busy(run)

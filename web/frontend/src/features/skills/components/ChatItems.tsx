@@ -120,6 +120,22 @@ export function ToolGroup({ tools, active }: { tools: ToolCall[]; active: boolea
   );
 }
 
+/** /status 这类页面命令的回答：服务端给的，不是模型说的，用卡片和对话区分开 */
+export function ReportCard({ title, lines }: { title: string; lines: string[] }) {
+  return (
+    <div className="rounded-lg border border-border-subtle bg-bg-secondary px-3.5 py-2.5 text-xs">
+      <div className="mb-1 flex items-center gap-1.5 font-medium text-text-secondary">
+        <Info className="h-3.5 w-3.5" /> {title}
+      </div>
+      <ul className="space-y-0.5 text-text-primary">
+        {lines.map(line => (
+          <li key={line} className="break-words">{line}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 const NOTICE_STYLE = {
   info: { icon: Info, className: 'text-text-muted' },
   warn: { icon: AlertTriangle, className: 'text-amber-700' },

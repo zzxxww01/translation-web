@@ -29,10 +29,12 @@ describe('foldEvents', () => {
       { ...base, seq: 2, type: 'notice', level: 'info', text: '10 分钟内没有回复，会自动按推荐方案继续' },
       { ...base, seq: 3, type: 'status', status: 'idle', error: null, awaiting: true },
       { ...base, seq: 4, type: 'held', items: [{ id: 'h1', text: '补一句', files: [], created_at: 0 }] },
+      { ...base, seq: 5, type: 'report', title: '当前状态', lines: ['状态：空闲'] },
     ];
     const view = foldEvents(events);
     expect(view.pendingQids).toEqual(['q1']);
     expect(view.items.some(item => item.kind === 'notice')).toBe(false);
     expect(view.held?.map(item => item.text)).toEqual(['补一句']);
+    expect(view.items.at(-1)).toMatchObject({ kind: 'report', lines: ['状态：空闲'] });
   });
 });
