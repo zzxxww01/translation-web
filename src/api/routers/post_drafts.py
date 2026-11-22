@@ -157,26 +157,30 @@ def _empty_state() -> Dict[str, Any]:
     }
 
 
-def _add_version(state: Dict[str, Any], content: str, model_used: Optional[str], instruction: Optional[str]) -> str:
-    """和前端 postStore.addVersion 同构：追加一版并设为当前。"""
+def _add_version(state: Dict[str, Any], content: str, model_used: Optional[str], instruction: Optional[str], *,
+                 optimized_from: Optional[Dict[str, Any]] = None) -> str:
+    """和前端 postStore.addVersion 同构：追加一版并设为当前。optimized_from：在这一版上优化出来的。"""
     version_id = f"v-{uuid.uuid4()}"
-    number = max([v.get("versionNumber", 0) for v in state["versions"]] + [0]) + 1
+    number = max([v.get("versionNumber") or 0 for v in state["versions"]] + [len(state["versions"])]) + 1
     for v in state["versions"]:
         v["isCurrent"] = False
+    base = optimized_from or {}
     state["versions"].append({
         "id": version_id,
         "versionNumber": number,
         "content": content,
-        "type": "translation",
+        "type": "optimization" if optimized_from else "translation",
         **({"instruction": instruction} if instruction else {}),
-        "sourceRevision": state["sourceRevision"],
-        "sourceText": state["originalText"],
+        "sourceRevision": base.get("sourceRevision", state.get("sourceRevision", 0)),
+        "sourceText": base.get("sourceText") or state["originalText"],
+        **({"parentVersionId": base["id"]} if optimized_from else {}),
         "isCurrent": True,
         "createdAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     })
     state["currentVersionId"] = version_id
+    name = "优化版本" if optimized_from else ("重新提取后翻译" if number > 1 else "初始翻译")
     state.setdefault("versionMetadata", {})[version_id] = {
-        "name": f"{'重新提取后翻译' if number > 1 else '初始翻译'} v{number}",
+        "name": f"{name} v{number}",
         "pinned": False,
         "modelUsed": model_used,
     }

@@ -6,6 +6,7 @@ Centralized configuration loaded from environment variables and `.env`.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Optional
 
 from pydantic import Field
@@ -93,6 +94,11 @@ class Settings(BaseSettings):
     automation_slack_group_ids: str = ""
     # 交付给 Muse 的译文链接前缀
     automation_public_url: str = "https://momo.beauty"
+    # Muse 用 Claude / Codex / agy 翻文章（services/agent_translate.py）：后端直接调 Claude 页（skill-runner），
+    # 读它的 env 文件里的口令签 cookie
+    skill_runner_url: str = "http://127.0.0.1:18090/api/skills"
+    skill_runner_env_file: str = str(Path.home() / ".config" / "skill-runner" / "env")
+    automation_agent_runs_file: str = "data/automation_agent_runs.json"
 
     # Translation
     default_context_window: int = 5

@@ -57,14 +57,18 @@ from .routers import (
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     # Slack 页的本地副本：服务一起来就开始后台同步（只拉新的）；没配凭证或在跑测试就不起
-    auto_task = None
+    auto_task = agent_task = None
     if not os.environ.get("PYTEST_CURRENT_TEST") and Path(settings.slack_credentials_file).is_file():
         slack_inbox.get_slack_inbox()
         # 有人在 thread 里直接 @我 时自动把那个帖子翻好（设置里可关）
         auto_task = asyncio.create_task(post_drafts.auto_translate_loop())
+    if not os.environ.get("PYTEST_CURRENT_TEST"):
+        # Muse 交给 Claude / Codex / agy 翻的文章：翻完自动导回成译本（重启后接着看没导完的）
+        agent_task = asyncio.create_task(automation.agent_translate_loop())
     yield
-    if auto_task:
-        auto_task.cancel()
+    for task in (auto_task, agent_task):
+        if task:
+            task.cancel()
 
 
 app = FastAPI(

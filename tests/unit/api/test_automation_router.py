@@ -542,3 +542,281 @@ async def test_slack_reply_picks_mode_and_passes_history(env):
 
     forced = await automation.slack_reply(_request(), automation.SlackReplyRequest(text="我明天看", mode="incoming"))
     assert forced["mode"] == "incoming"
+
+
+# ---------------------------------------------------------------- optimize-draft
+
+
+def _fake_optimize(env):
+    calls = []
+
+    async def wrapped(*, request, body):
+        calls.append(body)
+        return SimpleNamespace(optimized_translation=f"优化后：{body.current_translation}", model_used="m-opt")
+
+    env.monkeypatch.setattr(automation, "optimize_post_translation", SimpleNamespace(__wrapped__=wrapped))
+    return calls
+
+
+@pytest.mark.asyncio
+async def test_optimize_draft_quick_option_adds_current_version(drafts_env):
+    calls = _fake_optimize(drafts_env)
+    result = await automation.optimize_draft(_request(), DRAFT_ID, automation.OptimizeDraftRequest(option="idiomatic"))
+    assert result["translation"] == "优化后：AI 机柜来了" and result["versions"] == 3
+    (body,) = calls
+    assert body.option_id == "idiomatic" and body.instruction is None
+    assert body.original_text == "AI racks are here" and body.conversation_history == []
+    state = drafts_env.store.get(DRAFT_ID)["state"]
+    new = state["versions"][-1]
+    assert state["currentVersionId"] == new["id"] and new["type"] == "optimization" and new["parentVersionId"] == "v2"
+    assert new["instruction"].startswith("[") and state["versionMetadata"][new["id"]]["name"] == "优化版本 v3"
+
+    # 再优化一次：上一次的要求作为历史带上，「更多…」的项按指令原文发
+    await automation.optimize_draft(_request(), DRAFT_ID, automation.OptimizeDraftRequest(option="shorten"))
+    assert calls[1].option_id is None and calls[1].instruction.startswith("请精简译文")
+    assert calls[1].conversation_history == [{"role": "user", "content": new["instruction"]}]
+    await automation.optimize_draft(_request(), DRAFT_ID, automation.OptimizeDraftRequest(instruction="第二段别用赋能"))
+    assert calls[2].instruction == "第二段别用赋能" and len(calls[2].conversation_history) == 2
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("payload,code", [({}, "BAD_ARGUMENT"), ({"option": "nope"}, "BAD_ARGUMENT"),
+                                          ({"option": "readable", "instruction": "x"}, "BAD_ARGUMENT")])
+async def test_optimize_draft_rejects_bad_choice(drafts_env, payload, code):
+    calls = _fake_optimize(drafts_env)
+    with pytest.raises(APIException) as exc:
+        await automation.optimize_draft(_request(), DRAFT_ID, automation.OptimizeDraftRequest(**payload))
+    assert exc.value.error_code == code and calls == []
+
+
+@pytest.mark.asyncio
+async def test_optimize_draft_needs_a_translation(drafts_env):
+    calls = _fake_optimize(drafts_env)
+    with pytest.raises(APIException) as exc:
+        await automation.optimize_draft(_request(), "m_0123456789ab", automation.OptimizeDraftRequest(option="readable"))
+    assert exc.value.error_code == "NO_TRANSLATION" and calls == []
+    with pytest.raises(APIException) as exc:
+        await automation.optimize_draft(_request(), "m_000000000000", automation.OptimizeDraftRequest(option="readable"))
+    assert exc.value.status_code == 404
+
+
+# ---------------------------------------------------------------- dms
+
+
+class DmInbox:
+    def __init__(self):
+        self.history = [{"role": "them", "content": "Hi"}, {"role": "me", "content": "Hello"},
+                        {"role": "them", "content": "Can you send the deck by Friday?"}]
+        self.latest_ts = "1763424000.000300"
+
+    def agent_context(self, channel_id, thread_ts=None):
+        return {"history": list(self.history), "latest_ts": self.latest_ts}
+
+    def todo_material(self):
+        return [{"kind": "dm", "channel_id": "D0123456789",
+                 "messages": [{"from": "Sarah", "time": "10:00", "text": "Can you send the deck by Friday?"}]}]
+
+
+@pytest.fixture
+def dm_env(env, tmp_path):
+    env.monkeypatch.setattr(automation.settings, "slack_cache_dir", str(tmp_path / "slack_cache"))
+    env.inbox = DmInbox()
+    env.monkeypatch.setattr(automation, "get_slack_inbox", lambda: env.inbox)
+    dm = {"kind": "dm", "action": "reply", "task": "Sarah 问你周五前能不能发 PPT", "title": "Sarah", "channel_name": "Sarah",
+          "from": ["Sarah"], "count": 1, "channel_id": "D0123456789", "thread_ts": None,
+          "latest_ts": "1763424000.000300", "conversation_kind": "dm", "mark": {}, "draft": None}
+    mention = {**dm, "kind": "mention", "channel_id": "C0123456789", "thread_ts": "1763424000.000100"}
+
+    async def fake_todos():
+        return {"items": [dm, mention], "fyi": []}
+
+    env.monkeypatch.setattr(automation, "build_todos", fake_todos)
+    env.calls = []
+
+    async def process(*, request, body):
+        env.calls.append(body)
+        return SimpleNamespace(translation="她问你周五前能不能发 PPT", suggested_replies=[
+            SimpleNamespace(version=v, english=f"Sure {v}", chinese=f"好 {v}") for v in "ABC"])
+
+    env.monkeypatch.setattr(automation, "process_slack_message", SimpleNamespace(__wrapped__=process))
+    return env
+
+
+@pytest.mark.asyncio
+async def test_dms_gives_original_meaning_and_replies_once(dm_env):
+    result = await automation.dms(_request())
+    (item,) = result["items"]  # mention 不算私信
+    assert item["conversation_id"] == "D0123456789" and item["task"].startswith("Sarah")
+    assert item["messages"][0]["text"] == "Can you send the deck by Friday?"
+    assert item["translation"] == "她问你周五前能不能发 PPT"
+    assert [(r["version"], r["english"], r["style"]) for r in item["replies"]] == [
+        ("A", "Sure A", "简洁"), ("B", "Sure B", "标准"), ("C", "Sure C", "正式")]
+    (body,) = dm_env.calls
+    assert body.message == "Can you send the deck by Friday?" and [m.content for m in body.conversation_history] == ["Hi", "Hello"]
+
+    # 网页私信回复面板能看到同一组
+    from src.api.routers.slack_inbox import get_reply_state
+    state = (await get_reply_state("D0123456789"))["state"]
+    assert state["current"] == 0 and state["groups"][0]["based_on_ts"] == "1763424000.000300"
+
+    # 没有新消息：直接用存着的，不再调模型；对方又发了一条才重新生成
+    await automation.dms(_request())
+    assert len(dm_env.calls) == 1
+    dm_env.inbox.history.append({"role": "them", "content": "Also loop in Tom"})
+    dm_env.inbox.latest_ts = "1763424000.000400"
+    await automation.dms(_request())
+    assert len(dm_env.calls) == 2 and dm_env.calls[1].message.endswith("Also loop in Tom")
+
+
+@pytest.mark.asyncio
+async def test_dms_after_my_reply_has_no_suggestions(dm_env):
+    dm_env.inbox.history.append({"role": "me", "content": "Sure"})
+    (item,) = (await automation.dms(_request()))["items"]
+    assert item["replies"] == [] and dm_env.calls == []
+
+
+@pytest.mark.asyncio
+async def test_dms_caps_new_generations_per_call(dm_env):
+    dm_env.monkeypatch.setattr(automation, "MAX_DM_REPLIES_PER_CALL", 0)
+    (item,) = (await automation.dms(_request()))["items"]
+    assert item["replies"] == [] and "下次" in item["note"] and dm_env.calls == []
+
+
+# ---------------------------------------------------------------- Agent 翻译（Claude / Codex / agy）
+
+EN_MD = """# New Post
+
+First paragraph of the article body with enough words to be kept.
+
+Another paragraph in the article with enough words as well.
+"""
+ZH_MD = """# 新文章
+
+文章正文的第一段，字数足够保留。
+
+文章里的另一段，字数也够。
+"""
+
+
+class FakeSkillRunner:
+    def __init__(self):
+        self.started = []
+        self.runs = {}
+        self.outputs = {"output/x/zh.md": ZH_MD, "output/x/en.md": EN_MD}
+
+    def start(self, *, html, filename, harness, title):
+        run_id = f"run-{harness}"
+        self.started.append((harness, filename, title, html[:6]))
+        self.runs[run_id] = {"id": run_id, "status": "running", "harness": harness, "model": "m1"}
+        return self.runs[run_id]
+
+    def run(self, run_id):
+        from src.services.agent_translate import AgentRunError
+        if run_id not in self.runs:
+            raise AgentRunError("gone", 404)
+        return self.runs[run_id]
+
+    def files(self, run_id):
+        return [{"path": p, "mtime": 1} for p in self.outputs]
+
+    def read(self, run_id, path):
+        return self.outputs[path]
+
+    def me(self):
+        return {"ok": True}
+
+
+@pytest.fixture
+def agent_env(env, tmp_path):
+    from src.services.agent_translate import AgentRunStore
+    env.runner = FakeSkillRunner()
+    env.store = AgentRunStore(tmp_path / "agent_runs.json")
+    env.monkeypatch.setattr(automation, "get_skill_runner", lambda: env.runner)
+    env.monkeypatch.setattr(automation, "get_agent_store", lambda: env.store)
+    env.workflow = _fake_workflow(env)
+    env.monkeypatch.setattr(automation, "get_translation_status_service", lambda: FakeStatusService({"status": "idle"}))
+    return env
+
+
+@pytest.mark.asyncio
+async def test_translate_article_with_web_and_agents(agent_env):
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["web", "codex", "antigravity"]))
+    assert result["status"] == "started"
+    assert result["engines"]["web"]["status"] == "started" and len(agent_env.workflow) == 1
+    assert result["engines"]["codex"] == {"status": "started", "run_id": "run-codex"}
+    harness, filename, title, html = agent_env.runner.started[0]
+    assert harness == "codex" and filename == f"{result['project_id']}.html" and title == "精翻：New Post"
+    assert html.startswith(b"<html")
+    assert agent_env.pm.get(result["project_id"]).claude_run_id == "run-antigravity"  # 网页工作台也能看到
+
+    # 再调一次：在跑的不重复起
+    again = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["codex"]))
+    assert again["status"] == "already_exists" and len(agent_env.runner.started) == 2
+
+    # 还在跑：轮询什么都不做
+    assert await automation.poll_agent_runs() == 0
+    status = await automation.project_status(result["project_id"])
+    assert status["engines"]["codex"]["status"] == "running"
+
+    # codex 翻完：自动导回成译本；agy 出错
+    agent_env.runner.runs["run-codex"]["status"] = "idle"
+    agent_env.runner.runs["run-antigravity"]["status"] = "error"
+    assert await automation.poll_agent_runs() == 1
+    engines = (await automation.project_status(result["project_id"]))["engines"]
+    assert engines["codex"]["status"] == "done" and engines["codex"]["variant_id"].endswith("--codex")
+    assert engines["antigravity"]["status"] == "failed" and "claude" not in engines
+    full = await automation.project_status(result["project_id"], with_markdown=True, engine="codex")
+    assert "文章正文的第一段" in full["markdown"]
+
+    # 翻完了再要 codex：直接给已有的
+    done = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["codex"]))
+    assert done["engines"]["codex"]["translation_status"] == "translated"
+
+
+@pytest.mark.asyncio
+async def test_agent_run_without_outputs_or_deleted_fails(agent_env):
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["claude", "codex"]))
+    agent_env.runner.outputs = {}
+    agent_env.runner.runs["run-claude"]["status"] = "idle"
+    del agent_env.runner.runs["run-codex"]
+    assert await automation.poll_agent_runs() == 0
+    engines = (await automation.project_status(result["project_id"]))["engines"]
+    assert "zh.md" in engines["claude"]["error"] and "不见了" in engines["codex"]["error"]
+
+
+@pytest.mark.asyncio
+async def test_agent_waiting_for_terms_is_not_imported(agent_env):
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["claude"]))
+    agent_env.runner.runs["run-claude"].update(status="idle", awaiting_reply=True)
+    assert await automation.poll_agent_runs() == 0
+    assert (await automation.project_status(result["project_id"]))["engines"]["claude"]["status"] == "running"
+
+
+@pytest.mark.asyncio
+async def test_translate_article_rejects_unknown_engine(agent_env):
+    with pytest.raises(APIException):
+        await automation.translate_article(_request(), automation.TranslateArticleRequest(
+            article="new-post", engines=["gpt"]))
+
+
+def test_skill_runner_secret_matches_skill_runner_config(tmp_path):
+    from skill_runner.config import Config
+    from src.services.agent_translate import read_skill_runner_secret
+    env_file = tmp_path / "env"
+    env_file.write_bytes(b"# comment\nOTHER=\xff\xfe\nSKILL_RUNNER_PASSWORD=p@ss word\n")
+    assert read_skill_runner_secret(env_file) == Config.from_env({"SKILL_RUNNER_PASSWORD": "p@ss word"}).session_secret
+    env_file.write_text('SKILL_RUNNER_PASSWORD="x"\nexport SKILL_RUNNER_SECRET=s3\n')
+    assert read_skill_runner_secret(env_file) == Config.from_env({"SKILL_RUNNER_SECRET": "s3"}).session_secret
+
+
+def test_find_outputs_pairs_latest_zh_with_same_dir_en():
+    from src.services.agent_translate import find_outputs
+    files = [{"path": "a/zh.md", "mtime": 1}, {"path": "a/en.md", "mtime": 1},
+             {"path": "b/zh.md", "mtime": 5}, {"path": "c/en.md", "mtime": 9}]
+    assert find_outputs(files) == {"zh": "a/zh.md", "en": "a/en.md"}
+    assert find_outputs([{"path": "zh.md", "mtime": 1}]) is None
