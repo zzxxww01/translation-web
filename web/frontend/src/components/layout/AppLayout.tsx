@@ -3,6 +3,7 @@ import { BookOpen, Menu } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
 import { NAV_ITEMS } from './navItems';
 import { useDocumentStore } from '@/shared/stores';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import {
   Sheet,
@@ -17,10 +18,10 @@ import { HeaderSlotContext } from './headerSlotContext';
 import { GlobalTaskIndicator } from './GlobalTaskIndicator';
 
 /**
- * 左上角的衬线字标「Echo」（2026-11-22 用户定名：译文是原文在中文里的回声）。
- * 不加色块，字标 + 细竖线接导航，像杂志刊头。标签页图标仍是「译」字（favicon.svg）。
+ * 左上角的衬线字标「Leaf」（2026-11-23 用户定名：书页的一张，翻页的「翻」）。
+ * 不加色块，导航居中（用户要求）。标签页图标仍是「译」字（favicon.svg）。
  */
-const BRAND_NAME = 'Echo';
+const BRAND_NAME = 'Leaf';
 
 function BrandMark() {
   return (
@@ -34,8 +35,8 @@ function BrandMark() {
   );
 }
 
-function BrandDivider() {
-  return <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />;
+function BrandDivider({ className }: { className?: string }) {
+  return <span aria-hidden="true" className={cn('h-4 w-px shrink-0 bg-border', className)} />;
 }
 
 export function AppLayout() {
@@ -81,8 +82,8 @@ export function AppLayout() {
       {/* Header */}
       {!isImmersiveMode && !isWorkbenchRoute && (
         <header className="sticky top-0 z-40 border-b border-border-subtle bg-bg-primary/90 backdrop-blur-md">
-          {/* 手机：菜单 + 标 + 当前页名 + 页面操作；桌面：标 │ 导航靠左，右侧放操作 */}
-          <div className="flex h-14 items-center gap-2 px-3 md:gap-4 md:px-6">
+          {/* 手机：菜单 + 标 │ 当前页名 + 页面操作；桌面：三列，导航居中 */}
+          <div className="flex h-14 items-center gap-2 px-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-3 md:px-6">
           {/* Logo + Mobile menu */}
           <div className="flex shrink-0 items-center gap-2 md:gap-4">
             {/* Mobile menu */}
@@ -116,7 +117,7 @@ export function AppLayout() {
             <Link to="/articles" aria-label="回到首页" className="flex items-center rounded-md px-1 py-1 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:-ml-1">
               <BrandMark />
             </Link>
-            <BrandDivider />
+            {currentPageLabel && <BrandDivider className="md:hidden" />}
             {currentPageLabel && (
               <span className="truncate text-sm font-medium text-text-primary md:hidden">
                 {currentPageLabel}
@@ -124,8 +125,8 @@ export function AppLayout() {
             )}
           </div>
 
-          {/* Desktop nav：第一项和竖线之间的距离由 tab 自己的 px-3 撑开，这里往回收一点 */}
-          <div className="hidden self-stretch md:-ml-2 md:flex">
+          {/* Desktop nav */}
+          <div className="hidden self-stretch md:flex">
             <FeatureNav />
           </div>
 
