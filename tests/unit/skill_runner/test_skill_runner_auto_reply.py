@@ -2,7 +2,9 @@
 
 import asyncio
 
-from skill_runner.runner import AUTO_REPLY_LIMIT, AWAIT_MARK, Runner, recommended_answer
+import pytest
+
+from skill_runner.runner import AUTO_REPLY_LIMIT, AWAIT_MARK, Runner, awaits_reply, recommended_answer
 from skill_runner.store import RunStore
 
 from skill_runner_fakes import settle
@@ -134,3 +136,23 @@ def test_recommended_answer_prefers_marked_option_then_first():
     assert recommended_answer(QUESTIONS[0]) == "确认 (Recommended)"
     assert recommended_answer({"options": [{"label": "A"}, {"label": "B"}], "multiSelect": True}) == ["A"]
     assert recommended_answer({"options": []}) == "按你的建议"
+
+
+@pytest.mark.parametrize("text, expected", [
+    (f"术语表如下……\n{AWAIT_MARK}", True),
+    (f"术语表如下……\n{AWAIT_MARK}  \n", True),
+    (f"术语表如下……{AWAIT_MARK}", True),
+    # 做完了，只是正文里提到这个标记（比如解释自动继续的规则）：不算在等
+    (f"上一轮最后写了「{AWAIT_MARK}」，所以自动继续了。\n\n全部做完了。", False),
+    ("全部做完了。", False),
+    ("", False),
+])
+def test_only_a_mark_at_the_end_means_waiting(text, expected):
+    assert awaits_reply(text) is expected
+
+
+async def test_finished_turn_that_mentions_the_mark_does_not_auto_continue(runner, store, factory):
+    run_id = await start(runner, auto_reply_s=0.05)
+    await end_turn(factory.last, f"之前那条结尾写了{AWAIT_MARK}，所以会自动继续。\n现在都做完了。")
+    meta = store.load_meta(run_id)
+    assert not meta.awaiting_reply and meta.auto_reply_at is None
