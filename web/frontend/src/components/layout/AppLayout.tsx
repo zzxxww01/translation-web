@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { BookOpen, Menu } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
+import { NAV_ITEMS } from './navItems';
 import { useDocumentStore } from '@/shared/stores';
 import { Button } from '@/components/ui/Button';
 import {
@@ -11,21 +12,30 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HeaderSlotContext } from './headerSlotContext';
 import { GlobalTaskIndicator } from './GlobalTaskIndicator';
 
-/** 左上角只放「译」字标志，不写产品名（2026-11-22 用户：不需要名字） */
+/**
+ * 左上角的衬线字标「Echo」（2026-11-22 用户定名：译文是原文在中文里的回声）。
+ * 不加色块，字标 + 细竖线接导航，像杂志刊头。标签页图标仍是「译」字（favicon.svg）。
+ */
+const BRAND_NAME = 'Echo';
+
 function BrandMark() {
   return (
     <span
       aria-hidden="true"
-      className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-500 text-[15px] leading-none text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
+      className="select-none text-xl font-semibold leading-none tracking-[0.01em] text-primary-600"
       style={{ fontFamily: 'var(--font-display)' }}
     >
-      译
+      {BRAND_NAME}
     </span>
   );
+}
+
+function BrandDivider() {
+  return <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />;
 }
 
 export function AppLayout() {
@@ -40,6 +50,13 @@ export function AppLayout() {
   // 文章工作台自己的顶栏就是整页顶栏，功能导航收在它左上角的菜单里（设计文档 6.1，方案 A）
   const isWorkbenchRoute = /^\/articles\/[^/]+/.test(location.pathname);
   const isGlossaryRoute = location.pathname.startsWith('/glossary');
+  // 手机上导航收进菜单，标志旁边写出当前在哪一页
+  const currentPageLabel = isGlossaryRoute
+    ? '术语库'
+    : NAV_ITEMS.find(item => location.pathname.startsWith(item.path))?.label;
+  useEffect(() => {
+    document.title = currentPageLabel ? `${currentPageLabel} · ${BRAND_NAME}` : BRAND_NAME;
+  }, [currentPageLabel]);
   const currentProjectId = useDocumentStore(state => state.currentProject?.id);
   const confirmationProjectId =
     location.pathname.match(/^\/confirmation\/([^/]+)/)?.[1] ??
@@ -64,10 +81,10 @@ export function AppLayout() {
       {/* Header */}
       {!isImmersiveMode && !isWorkbenchRoute && (
         <header className="sticky top-0 z-40 border-b border-border-subtle bg-bg-primary/90 backdrop-blur-md">
-          {/* 手机：菜单 + 标 + 页面操作（占满剩下的宽度）；桌面：三列，导航居中 */}
-          <div className="flex h-14 items-center gap-2 px-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-3 md:px-6">
+          {/* 手机：菜单 + 标 + 当前页名 + 页面操作；桌面：标 │ 导航靠左，右侧放操作 */}
+          <div className="flex h-14 items-center gap-2 px-3 md:gap-4 md:px-6">
           {/* Logo + Mobile menu */}
-          <div className="flex shrink-0 items-center gap-1.5 md:gap-3">
+          <div className="flex shrink-0 items-center gap-2 md:gap-4">
             {/* Mobile menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
@@ -82,8 +99,9 @@ export function AppLayout() {
               </SheetTrigger>
               <SheetContent side="left" className="w-72">
                 <SheetHeader>
-                  <SheetTitle className="flex items-center gap-2 text-base">
+                  <SheetTitle className="flex items-center gap-3 text-base">
                     <BrandMark />
+                    <BrandDivider />
                     功能
                   </SheetTitle>
                 </SheetHeader>
@@ -95,13 +113,19 @@ export function AppLayout() {
               </SheetContent>
             </Sheet>
 
-            <Link to="/articles" aria-label="回到首页" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <Link to="/articles" aria-label="回到首页" className="flex items-center rounded-md px-1 py-1 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:-ml-1">
               <BrandMark />
             </Link>
+            <BrandDivider />
+            {currentPageLabel && (
+              <span className="truncate text-sm font-medium text-text-primary md:hidden">
+                {currentPageLabel}
+              </span>
+            )}
           </div>
 
-          {/* Desktop nav */}
-          <div className="hidden self-stretch md:flex">
+          {/* Desktop nav：第一项和竖线之间的距离由 tab 自己的 px-3 撑开，这里往回收一点 */}
+          <div className="hidden self-stretch md:-ml-2 md:flex">
             <FeatureNav />
           </div>
 
