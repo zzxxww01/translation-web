@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import {
-  ArrowLeft, Check, ChevronDown, Download, ExternalLink, FileDiff, Flag, History, Images, Maximize2, Menu,
+  ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, Flag, History, Images, Maximize2, Menu,
   MoreHorizontal, PanelLeft, type LucideIcon,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -86,14 +86,17 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
           <IconAction label="功能导航"><Menu aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" sideOffset={6} className={cn(MENU, 'w-52')}>
-          {/* 和顶部导航同一组功能（components/layout/navItems.ts）；术语库带上 from，进去后能一键回来 */}
+          {/* 和顶部导航同一组功能（components/layout/navItems.ts） */}
           {NAV_ITEMS.map(item => (
             <DropdownMenuItem key={item.path} className={cn(MENU_ITEM, item.path === '/articles' && 'font-medium text-primary-700 [&>svg]:text-primary-500')} asChild>
-              <Link to={item.path === '/glossary' ? `/glossary?from=${encodeURIComponent(location.pathname + location.search)}` : item.path}>
-                <item.icon strokeWidth={STROKE} /> {item.label}
-              </Link>
+              <Link to={item.path}><item.icon strokeWidth={STROKE} /> {item.label}</Link>
             </DropdownMenuItem>
           ))}
+          {/* 术语库不在导航里，单独放最下面；带上 from，进去后能一键回来 */}
+          <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+          <DropdownMenuItem className={MENU_ITEM} asChild>
+            <Link to={`/glossary?from=${encodeURIComponent(location.pathname + location.search)}`}><BookOpen strokeWidth={STROKE} /> 术语库</Link>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {!compact && <span aria-hidden className="mx-0.5 h-4 w-px shrink-0 bg-border-subtle" />}

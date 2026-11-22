@@ -121,10 +121,12 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
   `meta.detached_questions`、关掉进程，页面上照样能答；回答作为新消息续接。服务重启时挂着的提问也这样保留。
 - **挂起发送**：agent 干活时，输入框发的话（回车或「发送」）：消息存在 `meta.held`，这一轮正常结束后按顺序一条条发；
   挂起的消息在对话末尾可以编辑、删除、立即发送。只有一个「发送」按钮；要马上发，点挂起消息上的「立即发送」（运行中就是插话）。点了停止后挂起的消息不自动发。
-- **`/status`（或 `/状态`）**：skill-runner 直接回一张状态卡，不发给模型、不花额度。上半是 harness 原生信息（`native.py`）：
-  Claude Code 版本和套餐用量（5 小时 / 7 天，取自每一轮推送的 rate_limit_event，存在 `<home>/claude-limits.json`）；
-  Codex 版本、登录账号、额度窗口和 credits（实时问 `codex app-server`）；Antigravity 版本和 `agy -p=/usage`。
-  下半是页面状态（状态、模型、会话 ID、进程、名额、排队、挂起消息、自动继续、可用内存）。
+- **`/status`（或 `/状态`）**：skill-runner 直接回一张状态卡，不发给模型、不花额度。只有 harness 自己的信息
+  （`native.py`，照各 CLI 交互界面里 /status 的字段排，不含服务器状态）：
+  Claude Code 非交互模式没有 /status，按交互界面拼：Version、Session ID、cwd、Login method / Organization / Email
+  （`claude auth status`）、Model，再加套餐用量（Current session / Current week，取自每一轮推送的 rate_limit_event，
+  存在 `<home>/claude-limits.json`）；Codex：Version、Model、Directory、Account、Session、额度窗口和 credits
+  （实时问 `codex app-server`）；Antigravity：Version、会话、目录、模型和 `agy -p=/usage`。
   新对话第一句就发也行：只回状态卡、不启动 agent，下一条消息才算开头（仍带 skill 提示，标题也按它起）。
 - **其他原生斜杠指令**：Claude 的 `/usage`、`/context`、`/compact` 等原样发给 CLI，输出只在结束消息里的也会显示出来；
   Antigravity 的 `/usage`（`/quota`）、`/credits`、`/help`、`/skills`、`/agents`、`/changelog` 不能在对话进程里跑，单独跑一次 `agy -p=…`；
