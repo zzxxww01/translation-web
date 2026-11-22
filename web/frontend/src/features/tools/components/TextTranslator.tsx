@@ -8,9 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowRightLeft, Copy, Languages, RotateCw, X } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
 
-// 工具箱里的两栏比帖子翻译更高：吃满一屏，不设 640px 上限。
-// 用 min-h 撑高：textarea 带 flex-1（flex-basis 0），单写 h 不生效
-const TALL_TEXTAREA = `${PANE_TEXTAREA} min-h-[45svh] lg:min-h-[max(480px,calc(100svh-280px))] lg:max-h-none`;
+// 工具箱的栏头比帖子翻译矮，两栏再高一点、吃满一屏
+const TALL_TEXTAREA = `${PANE_TEXTAREA} min-h-[45svh] lg:min-h-[max(480px,calc(100svh-280px))]`;
 
 export function TextTranslator() {
   const translateMutation = useTranslateText();

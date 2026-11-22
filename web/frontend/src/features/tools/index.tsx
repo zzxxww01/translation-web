@@ -19,8 +19,8 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      {/* 文本翻译左右两栏，和帖子翻译一样用宽版面；其他工具保持窄版面 */}
-      <div className={`mx-auto w-full min-w-0 px-4 pb-12 pt-5 sm:px-8 ${currentTool === 'translator' ? 'max-w-7xl' : 'max-w-5xl'}`}>
+      {/* 三个工具同一宽度（和帖子翻译一样），切标签时版面不跳 */}
+      <div className="mx-auto w-full min-w-0 max-w-7xl px-4 pb-12 pt-5 sm:px-8">
         <PageHeader className="mb-5" title="工具箱" />
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
