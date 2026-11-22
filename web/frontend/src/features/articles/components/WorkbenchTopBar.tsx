@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import {
-  BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Maximize2, Menu,
-  MessageCircle, MessageSquare, MoreHorizontal, Newspaper, Sparkles, Wrench, type LucideIcon,
+  ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Maximize2, Menu,
+  MessageCircle, MessageSquare, MoreHorizontal, Newspaper, PanelLeft, Sparkles, Wrench, type LucideIcon,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -40,16 +40,18 @@ const FEATURES: { path: string; label: string; icon: LucideIcon }[] = [
 ];
 
 /**
- * 工作台的顶栏，也是整页唯一的一条顶栏（方案 A）：左边功能菜单、品牌、「文章 ›」、标题和英文原标题，
+ * 工作台的顶栏，也是整页唯一的一条顶栏（方案 A）：左边「← 文章列表」、快速切换文章、功能菜单，再是标题和英文原标题，
  * 右边保存状态、阅读进度、导出主译本、沉浸模式、更多。
  * 导出：左半边直接下载主译本的 Markdown；▾ 里是主译本的其他去处（PDF、复制全文、公众号格式）和其余各版。
- * compact（手机）：只留功能菜单和标题，导出收进「⋯」。
+ * compact（手机）：返回只留箭头、不放快速切换，导出收进「⋯」。
  */
-export function WorkbenchTopBar({ title, original, onShowList, save, mark, onJump, onClearMark, markBusy,
+export function WorkbenchTopBar({ projectId, title, original, onShowList, save, mark, onJump, onClearMark, markBusy,
   onExportPrimary, primaryActions, exportItems, exportNotice = null, onImmersive, legacyHref, originalUrl, compact = false }: {
+  /** 回文章列表时带上，列表里选中这篇 */
+  projectId: string;
   title: string;
   original: string | null;
-  /** 「文章」打开文章列表抽屉；没有就跳回文章页 */
+  /** 列表图标：不离开工作台，从左边滑出文章列表 */
   onShowList?: () => void;
   save: ReactNode;
   /** null = 没有阅读标记 */
@@ -73,6 +75,18 @@ export function WorkbenchTopBar({ title, original, onShowList, save, mark, onJum
   const location = useLocation();
   return (
     <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border-subtle px-3 md:gap-2.5 md:pl-3 md:pr-4">
+      {/* 回文章列表：手机上也在，回去后列表里选中这篇 */}
+      <Link to="/articles" state={{ lastProject: projectId }} aria-label="返回文章列表" title="返回文章列表"
+        className={cn('inline-flex h-8 shrink-0 items-center gap-1 rounded-lg px-2 text-[13px] text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary', FOCUS_RING)}>
+        <ArrowLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+        {!compact && <span>文章列表</span>}
+      </Link>
+      {/* 手机上位置不够，返回按钮就够用 */}
+      {onShowList && !compact && (
+        <IconAction label="快速切换文章" title="不离开这里，换一篇看" onClick={onShowList}>
+          <PanelLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+        </IconAction>
+      )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <IconAction label="功能导航"><Menu aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
@@ -89,19 +103,7 @@ export function WorkbenchTopBar({ title, original, onShowList, save, mark, onJum
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      {!compact && (
-        <>
-          <Link to="/articles" aria-label="momo 翻译工作台首页"
-            className={cn('flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md bg-primary-500 text-[14px] leading-none text-white [font-family:var(--font-display)]', FOCUS_RING)}>
-            <span aria-hidden>译</span>
-          </Link>
-          {onShowList
-            ? <button type="button" onClick={onShowList} title="文章列表"
-                className={cn('shrink-0 rounded-md px-1 text-[13px] text-text-muted transition-colors hover:text-text-primary', FOCUS_RING)}>文章</button>
-            : <Link to="/articles" className={cn('shrink-0 rounded-md px-1 text-[13px] text-text-muted hover:text-text-primary', FOCUS_RING)}>文章</Link>}
-          <span aria-hidden className="-mx-1 shrink-0 text-[13px] text-text-disabled">›</span>
-        </>
-      )}
+      {!compact && <span aria-hidden className="mx-0.5 h-4 w-px shrink-0 bg-border-subtle" />}
       <h1 className="min-w-0 shrink truncate text-[15.5px] font-semibold leading-snug text-text-primary [font-family:var(--font-display)] md:text-[16px]"
         title={original ?? title}>{title}</h1>
       {original && !compact && (
@@ -113,9 +115,12 @@ export function WorkbenchTopBar({ title, original, onShowList, save, mark, onJum
       {mark && (
         <button type="button" onClick={onJump} disabled={markBusy} title={`回到上次读到的地方：${mark.text.slice(0, 60)}`}
           className={cn('inline-flex h-8 shrink-0 items-center gap-2 rounded-full bg-primary-50 px-3 text-[12.5px] font-medium text-primary-700 transition-colors hover:bg-primary-100 disabled:opacity-60', FOCUS_RING)}>
-          <span aria-hidden className="h-1 w-10 overflow-hidden rounded-full bg-primary-200">
-            <span className="block h-full rounded-full bg-primary-500" style={{ width: `${mark.percent}%` }} />
-          </span>
+          {/* 手机上省掉进度条，位置留给标题 */}
+          {!compact && (
+            <span aria-hidden className="h-1 w-10 overflow-hidden rounded-full bg-primary-200">
+              <span className="block h-full rounded-full bg-primary-500" style={{ width: `${mark.percent}%` }} />
+            </span>
+          )}
           读到 {mark.percent}%
         </button>
       )}
