@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ChatTurn } from './api';
+import { renameStorageKey } from '@/shared/storageKeys';
 
 interface ChatState {
   /** 当前打开的会话；会话本身存在服务器上 */
@@ -21,6 +22,9 @@ interface ChatState {
 
 export const DEFAULT_CHAT_MODEL = 'gpt-6.2-sol';
 
+const STORAGE_KEY = 'translation-tools-chat';
+renameStorageKey('momo-tools-chat', STORAGE_KEY);
+
 export const useChatStore = create<ChatState>()(
   persist(
     set => ({
@@ -35,6 +39,6 @@ export const useChatStore = create<ChatState>()(
       setDraft: draft => set({ draft }),
       clearLegacy: () => set({ messages: [] }),
     }),
-    { name: 'momo-tools-chat' }
+    { name: STORAGE_KEY }
   )
 );

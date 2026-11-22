@@ -10,7 +10,7 @@
 - **对话**：一次活就是和某个 Agent 的一次对话。不再出现「任务」「skill」「运行」「harness」这些词。
 
 Claude Code / Codex 降为次要选项「模型」（输入框右下角），每个 Agent 有默认值（翻译默认 Codex：Claude 不肯全文翻付费文章），
-改了按 Agent 记住（localStorage `momo.agent.model`）。
+改了按 Agent 记住（localStorage `translation.agent.model`）。
 
 ## 三块界面
 

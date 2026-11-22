@@ -1,6 +1,8 @@
 import type { Harness } from './harness';
+import { renameStorageKey } from '@/shared/storageKeys';
 
-const STORAGE_KEY = 'momo.agent.concrete-model';
+const STORAGE_KEY = 'translation.agent.concrete-model';
+renameStorageKey('momo.agent.concrete-model', STORAGE_KEY);
 
 export function loadModel(agent: string, harness: Harness): string {
   try {

@@ -110,7 +110,11 @@ def create_app(
             samesite="strict",
             path="/",
         )
+        response.delete_cookie(auth.PREVIOUS_COOKIE_NAME, path="/")
         response.delete_cookie(auth.LEGACY_COOKIE_NAME, path=auth.LEGACY_COOKIE_PATH)
+
+    def has_previous_session(request: Request) -> bool:
+        return auth.verify_token(config.session_secret, request.cookies.get(auth.PREVIOUS_COOKIE_NAME))
 
     def require_auth(request: Request, response: Response) -> None:
         token = request.cookies.get(auth.COOKIE_NAME)
@@ -118,8 +122,10 @@ def create_app(
             if auth.should_refresh(token):
                 set_session(response)
             return
-        if auth.verify_token(config.session_secret, request.cookies.get(auth.LEGACY_COOKIE_NAME)):
-            set_session(response)  # 旧 cookie 换成全站 cookie
+        if has_previous_session(request) or auth.verify_token(
+            config.session_secret, request.cookies.get(auth.LEGACY_COOKIE_NAME)
+        ):
+            set_session(response)  # 旧 cookie 换成现在的全站 cookie
             return
         raise HTTPException(status_code=401, detail="请先登录")
 
@@ -143,13 +149,20 @@ def create_app(
     @public.post("/logout")
     async def logout(response: Response):
         response.delete_cookie(auth.COOKIE_NAME, path="/")
+        response.delete_cookie(auth.PREVIOUS_COOKIE_NAME, path="/")
         response.delete_cookie(auth.LEGACY_COOKIE_NAME, path=auth.LEGACY_COOKIE_PATH)
         return {"ok": True}
 
     @public.get("/auth/check")
     async def auth_check(request: Request):
-        """nginx auth_request 用：翻译服务其余 /api 请求先问这里，204 放行、401 拒绝。只认全站 cookie。"""
-        if not auth.verify_token(config.session_secret, request.cookies.get(auth.COOKIE_NAME)):
+        """nginx auth_request 用：翻译服务其余 /api 请求先问这里，204 放行、401 拒绝。
+
+        只认挂在 / 下的全站 cookie（改名前的也认：auth_request 的 Set-Cookie 不会回到浏览器，换发要等下一次 /api/skills 请求）。
+        """
+        if not (
+            auth.verify_token(config.session_secret, request.cookies.get(auth.COOKIE_NAME))
+            or has_previous_session(request)
+        ):
             raise HTTPException(status_code=401, detail="请先登录")
         return Response(status_code=204)
 

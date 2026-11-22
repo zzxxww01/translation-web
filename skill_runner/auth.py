@@ -11,7 +11,9 @@ import hmac
 import time
 
 # 全站共用这一个登录（2026-11-21）：cookie 挂在 / 下，nginx 用 /api/skills/auth/check 给翻译服务其余 /api 把关。
-COOKIE_NAME = "momo_session"
+COOKIE_NAME = "translation_session"
+# 2026-11-23 改名前的全站 cookie（同样挂在 / 下）；仍然认，带着它来的请求顺手换发新 cookie
+PREVIOUS_COOKIE_NAME = "momo_session"
 # 旧 cookie 只挂在 /api/skills 下；仍然认，带着它来的请求顺手换发新 cookie，已登录的人不用重输口令
 LEGACY_COOKIE_NAME = "skill_runner_session"
 LEGACY_COOKIE_PATH = "/api/skills"

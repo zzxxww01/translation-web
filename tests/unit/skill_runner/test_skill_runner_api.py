@@ -72,6 +72,24 @@ def test_legacy_skills_cookie_is_upgraded_to_site_wide_cookie(tmp_path):
         assert client.get(f"{PREFIX}/auth/check").status_code == 204
 
 
+def test_previous_site_cookie_still_works_and_is_renamed(tmp_path):
+    from skill_runner import auth
+
+    config = make_config(tmp_path)
+    app = create_app(config, session_factory=FakeFactory())
+    with TestClient(app) as client:
+        client.cookies.set(auth.PREVIOUS_COOKIE_NAME, auth.issue_token(config.session_secret), path="/")
+        assert client.get(f"{PREFIX}/auth/check").status_code == 204  # 换发前翻译服务其余路径照常放行
+        upgraded = client.get(f"{PREFIX}/me")
+        assert upgraded.status_code == 200
+        set_cookies = upgraded.headers.get_list("set-cookie")
+        assert any(c.startswith(f"{COOKIE_NAME}=") and "Path=/;" in c for c in set_cookies)
+        assert any(c.startswith(f"{auth.PREVIOUS_COOKIE_NAME}=") and "Max-Age=0" in c for c in set_cookies)
+        client.cookies.clear()
+        client.cookies.set(auth.PREVIOUS_COOKIE_NAME, "123.forged", path="/")
+        assert client.get(f"{PREFIX}/auth/check").status_code == 401
+
+
 def test_stop_closes_run_without_deleting_history(setup):
     client, factory, _ = setup
     login(client)
