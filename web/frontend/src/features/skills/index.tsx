@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, LayoutList, LogOut, Settings } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
@@ -70,6 +71,14 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
     await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
     if (id === selectedIdRef.current) backToList();
   };
+  const pinRun = async (id: string, pinned: boolean) => {
+    try {
+      await skillsApi.pin(id, pinned);
+      await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+    } catch (error) {
+      toast.error(`${pinned ? '置顶' : '取消置顶'}没成功：${error instanceof Error ? error.message : error}`);
+    }
+  };
 
   const logout = async () => {
     await skillsApi.logout();
@@ -92,7 +101,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
           showDetail ? 'hidden' : 'flex'
         )}
       >
-        <RunList runs={(runs.data ?? []).filter(run => !run.source?.startsWith('slack:'))} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} />
+        <RunList runs={(runs.data ?? []).filter(run => !run.source?.startsWith('slack:'))} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} onPin={pinRun} />
         <div className="flex flex-wrap border-t border-border-subtle px-4 py-2">
           <Button variant={browsing || viewingAgent ? 'secondary' : 'ghost'} size="sm" onClick={openAgents}>
             <LayoutList /> 全部 Agent

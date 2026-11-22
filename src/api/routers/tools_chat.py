@@ -111,6 +111,10 @@ class RenameSessionRequest(BaseModel):
     title: str = Field(..., min_length=1, max_length=100)
 
 
+class PinSessionRequest(BaseModel):
+    pinned: bool
+
+
 class ReplyRequest(BaseModel):
     # 不传 = 用 task_defaults.chat（GPT-6.2 Sol）
     model: Optional[str] = Field(default=None, max_length=100)
@@ -169,6 +173,11 @@ async def get_session(session_id: str):
 @router.patch("/chat/sessions/{session_id}")
 async def rename_session(session_id: str, body: RenameSessionRequest):
     return await _store(get_chat_store().rename, session_id, body.title)
+
+
+@router.put("/chat/sessions/{session_id}/pin")
+async def pin_session(session_id: str, body: PinSessionRequest):
+    return await _store(get_chat_store().pin, session_id, body.pinned)
 
 
 @router.delete("/chat/sessions/{session_id}")

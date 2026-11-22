@@ -83,6 +83,23 @@ def test_stop_closes_run_without_deleting_history(setup):
     assert client.get(f"{PREFIX}/runs/{meta['id']}").status_code == 200
 
 
+def test_runs_are_listed_by_latest_activity_with_pinned_first(setup):
+    client, factory, runner = setup
+    login(client)
+    first = client.post(f"{PREFIX}/runs", data={"message": "先开的"}).json()
+    second = client.post(f"{PREFIX}/runs", data={"message": "后开的"}).json()
+    # 先开的那个后来又有动静：排到前面
+    runner._get(first["id"]).meta.updated_at = runner._get(second["id"]).meta.updated_at + 10
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs").json()] == [first["id"], second["id"]]
+
+    pinned = client.put(f"{PREFIX}/runs/{second['id']}/pin", json={"pinned": True}).json()
+    assert pinned["pinned_at"]
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs").json()] == [second["id"], first["id"]]
+    client.put(f"{PREFIX}/runs/{second['id']}/pin", json={"pinned": False})
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs").json()] == [first["id"], second["id"]]
+    assert client.put(f"{PREFIX}/runs/20200101-000000-aaaaaa/pin", json={"pinned": True}).status_code == 404
+
+
 def test_runtime_routes_check_versions_and_reject_updates_during_work(setup, monkeypatch):
     client, _, runner = setup
     login(client)

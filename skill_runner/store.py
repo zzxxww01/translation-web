@@ -55,6 +55,7 @@ class RunMeta:
     model: str | None = None  # 用户选择；None 沿用服务器默认
     actual_model: str | None = None  # 运行工具报告的型号，可能是别名解析后的值
     effort: str | None = None  # 页面上 /effort 设的推理强度；None 沿用 CLI 默认
+    pinned_at: float | None = None  # 置顶的时间；None = 没置顶
     # 等用户确认时多久没回复就自动按推荐方案继续（秒，0 = 一直等）
     auto_reply_s: int = 0
     # 上一轮结束时在等用户确认（回复末尾带了等待标记），用户或自动回复后清掉

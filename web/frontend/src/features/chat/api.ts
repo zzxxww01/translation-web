@@ -34,6 +34,8 @@ export interface ChatSessionSummary {
   title: string;
   count: number;
   updated_at: number;
+  /** 置顶的时间（epoch 秒）；没置顶为 null。列表里置顶的在前，各自按 updated_at 从新到旧 */
+  pinned_at?: number | null;
 }
 
 export interface ReplyOptions {
@@ -53,6 +55,7 @@ export const chatApi = {
   create: (messages: ChatTurn[] = []) => apiClient.post<ChatSession>('/tools/chat/sessions', { messages }),
   rename: (id: string, title: string) => apiClient.patch<ChatSession>(`/tools/chat/sessions/${id}`, { title }),
   remove: (id: string) => apiClient.delete<{ deleted: boolean }>(`/tools/chat/sessions/${id}`),
+  pin: (id: string, pinned: boolean) => apiClient.put<ChatSession>(`/tools/chat/sessions/${id}/pin`, { pinned }, { retry: false }),
   send: (id: string, content: string, options: ReplyOptions) =>
     apiClient.post<ChatSession>(`/tools/chat/sessions/${id}/messages`, { content, ...options }, { timeout: REPLY_TIMEOUT, retry: false }),
   /** 重新回答最后一个问题（出错后重试也用它） */
