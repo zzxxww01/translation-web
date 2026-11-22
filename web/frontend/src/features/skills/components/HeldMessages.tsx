@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Clock, Paperclip, Pencil, Send, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 import { skillsApi } from '../api';
 import type { HeldMessage } from '../types';
 
@@ -38,10 +39,19 @@ function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; 
   const save = async () => {
     if (await act(() => skillsApi.editHeld(runId, item.id, draft), '没改成')) setEditing(false);
   };
+  const cancel = () => {
+    setEditing(false);
+    setDraft(item.text);
+  };
+  const canSave = !busy && Boolean(draft.trim() || item.files.length);
 
   return (
     <div className="flex justify-end">
-      <div className="max-w-[85%] rounded-xl rounded-tr-sm border border-dashed border-primary-200 bg-white px-3.5 py-2 text-sm text-text-primary">
+      {/* 编辑时撑满到和对话气泡一样宽，输入框是一整条，不跟着字数缩成小方块 */}
+      <div className={cn(
+        'max-w-[85%] rounded-xl rounded-tr-sm border border-dashed border-primary-200 bg-white px-3.5 py-2 text-sm text-text-primary',
+        editing && 'w-full'
+      )}>
         <div className="mb-1 flex items-center gap-1.5 text-xs text-text-muted">
           <Clock className="h-3 w-3" /> {first ? '这一轮结束后发' : '排在后面'}
         </div>
@@ -49,9 +59,19 @@ function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; 
           <textarea
             value={draft}
             onChange={event => setDraft(event.target.value)}
-            rows={Math.min(8, Math.max(2, draft.split('\n').length))}
+            onKeyDown={event => {
+              if (event.key === 'Enter' && (event.metaKey || event.ctrlKey) && canSave) {
+                event.preventDefault();
+                void save();
+              } else if (event.key === 'Escape') {
+                event.preventDefault();
+                cancel();
+              }
+            }}
+            rows={Math.min(10, Math.max(3, draft.split('\n').length + 1))}
             autoFocus
-            className="w-full min-w-[16rem] resize-y rounded-md border border-border bg-white px-2 py-1.5 text-sm outline-none focus:border-primary-300"
+            onFocus={event => event.currentTarget.setSelectionRange(draft.length, draft.length)}
+            className="block w-full resize-y rounded-md border border-border bg-white px-3 py-2 text-sm leading-relaxed outline-none focus:border-primary-300 focus:ring-2 focus:ring-primary-100"
           />
         ) : (
           item.text && <p className="whitespace-pre-wrap break-words">{item.text}</p>
@@ -65,13 +85,14 @@ function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; 
             ))}
           </ul>
         )}
-        <div className="mt-1.5 flex justify-end gap-1">
+        <div className="mt-1.5 flex items-center justify-end gap-1">
           {editing ? (
             <>
-              <Button variant="ghost" size="sm" disabled={busy} onClick={() => { setEditing(false); setDraft(item.text); }}>
+              <span className="mr-auto hidden text-xs text-text-muted sm:inline">Ctrl/⌘ + Enter 保存，Esc 取消</span>
+              <Button variant="ghost" size="sm" disabled={busy} onClick={cancel}>
                 取消
               </Button>
-              <Button size="sm" disabled={busy || (!draft.trim() && !item.files.length)} onClick={() => void save()}>
+              <Button size="sm" disabled={!canSave} onClick={() => void save()}>
                 保存
               </Button>
             </>

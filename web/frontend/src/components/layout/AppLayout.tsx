@@ -82,17 +82,18 @@ export function AppLayout() {
       {/* Header */}
       {!isImmersiveMode && !isWorkbenchRoute && (
         <header className="sticky top-0 z-40 border-b border-border-subtle bg-bg-primary/90 backdrop-blur-md">
-          {/* 手机：菜单 + 标 │ 当前页名 + 页面操作；桌面：三列，导航居中 */}
-          <div className="flex h-14 items-center gap-2 px-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-3 md:px-6">
+          {/* 手机 / 平板：菜单 + 标 │ 当前页名 + 页面操作；桌面：三列，导航居中。
+              两侧列不小于自身内容：放得下时导航正居中，右侧操作多时导航往左让，不会叠在一起 */}
+          <div className="flex h-14 items-center gap-2 px-3 lg:grid lg:grid-cols-[minmax(max-content,1fr)_auto_minmax(max-content,1fr)] lg:gap-6 lg:px-6">
           {/* Logo + Mobile menu */}
-          <div className="flex shrink-0 items-center gap-2 md:gap-4">
+          <div className="flex shrink-0 items-center gap-2 lg:gap-4">
             {/* Mobile menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden"
+                  className="lg:hidden"
                   aria-label="打开功能导航"
                 >
                   <Menu className="h-5 w-5" />
@@ -114,19 +115,19 @@ export function AppLayout() {
               </SheetContent>
             </Sheet>
 
-            <Link to="/articles" aria-label="回到首页" className="flex items-center rounded-md px-1 py-1 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:-ml-1">
+            <Link to="/articles" aria-label="回到首页" className="flex items-center rounded-md px-1 py-1 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:-ml-1">
               <BrandMark />
             </Link>
-            {currentPageLabel && <BrandDivider className="md:hidden" />}
+            {currentPageLabel && <BrandDivider className="lg:hidden" />}
             {currentPageLabel && (
-              <span className="truncate text-sm font-medium text-text-primary md:hidden">
+              <span className="truncate text-sm font-medium text-text-primary lg:hidden">
                 {currentPageLabel}
               </span>
             )}
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden self-stretch md:flex">
+          <div className="hidden self-stretch lg:flex">
             <FeatureNav />
           </div>
 
@@ -137,13 +138,13 @@ export function AppLayout() {
             <Button
               variant={isGlossaryRoute ? 'secondary' : 'ghost'}
               size="sm"
-              className="h-9 shrink-0 px-2.5 lg:px-3"
+              className="h-9 shrink-0 px-2.5 xl:px-3"
               onClick={handleGlossaryClick}
               title="术语管理"
               aria-label="术语与规则管理"
             >
               <BookOpen className="h-4 w-4" />
-              <span className="hidden lg:inline">术语库</span>
+              <span className="hidden xl:inline">术语库</span>
             </Button>
           </div>
         </div>

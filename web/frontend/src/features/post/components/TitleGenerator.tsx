@@ -53,7 +53,7 @@ export function TitleGenerator({
   return (
     <div className="rounded-xl border border-border-subtle bg-white p-4">
       <div className="space-y-3">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex min-h-8 items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <h4 className="flex items-center gap-2 text-[13px] font-semibold text-text-secondary">
               <Sparkles className="h-4 w-4 text-primary-500" />
