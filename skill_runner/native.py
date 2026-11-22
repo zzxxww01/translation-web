@@ -1,7 +1,9 @@
-"""各 harness 的原生信息：/status 里的版本、账号、套餐用量，以及 CLI 自己回答的斜杠指令（不花额度）。
+"""各 harness 的原生信息：/status 卡片（照各 CLI 交互界面里 /status 的字段排），以及 CLI 自己回答的斜杠指令（不花额度）。
 
-- Claude Code：非交互模式没有 /status；套餐用量（5 小时 / 7 天）来自每一轮都会推送的 rate_limit_event，
-  这里把最近一次的存进 <home>/claude-limits.json，/status 时读出来。/usage、/context 等原样发给 CLI 即可。
+- Claude Code：非交互模式没有 /status（`claude -p /status` 只回「isn't available in this environment」），
+  所以按交互界面的字段自己拼：版本、会话、目录、`claude auth status` 的登录信息、模型，再加套餐用量。
+  用量（5 小时 / 7 天）来自每一轮都会推送的 rate_limit_event，这里把最近一次的存进 <home>/claude-limits.json。
+  /usage、/context 等原样发给 CLI 即可。
 - Codex：exec 模式没有斜杠指令；用 `codex app-server` 的 account/read、account/rateLimits/read 实时查。
 - Antigravity：/usage、/credits 等由 CLI 自己回答，但在 stream-json 对话进程里不能用，要单独跑一次 `agy -p=/usage`。
 
@@ -31,7 +33,10 @@ PROBE_TIMEOUT_S = 20.0
 # agy 自己回答的斜杠指令（`agy -p=/help` 列出的、不需要交互界面的那些）
 AGY_LOCAL_COMMANDS = {"/usage", "/quota", "/credits", "/help", "/skills", "/agents", "/changelog"}
 _ISO_TIME = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z")
-WINDOW_NAMES = {"five_hour": "5 小时", "seven_day": "7 天", "seven_day_opus": "7 天（Opus）", "seven_day_sonnet": "7 天（Sonnet）"}
+# Claude Code 交互界面 /status 用量页的叫法
+WINDOW_NAMES = {"five_hour": "Current session", "seven_day": "Current week (all models)",
+                "seven_day_opus": "Current week (Opus)", "seven_day_sonnet": "Current week (Sonnet)"}
+LOGIN_METHODS = {"claude.ai": "Claude {plan} Account", "console": "Anthropic Console Account", "apiKey": "API Key"}
 
 
 def _clock(ts: float | int | None) -> str:
@@ -43,19 +48,27 @@ def _clock(ts: float | int | None) -> str:
 
 
 def _window_line(name: str, used_percent: float | None, resets_at: float | int | None) -> str:
-    used = f"已用 {used_percent:.0f}%" if used_percent is not None else "用量未知"
-    reset = f"，{_clock(resets_at)} 重置" if resets_at else ""
-    return f"{name}额度：{used}{reset}"
+    used = f"{used_percent:.0f}% used" if used_percent is not None else "usage unknown"
+    reset = f" · resets {_clock(resets_at)}" if resets_at else ""
+    return f"{name}: {used}{reset}"
 
 
 def _window_name(minutes: int | None) -> str:
+    """Codex 交互界面 /status 的叫法：5h limit / Weekly limit。"""
     if not minutes:
-        return "额度窗口"
-    if minutes == 300:
-        return "5 小时"
+        return "Limit"
     if minutes == 10080:
-        return "每周"
-    return f"{minutes // 60} 小时" if minutes % 60 == 0 else f"{minutes} 分钟"
+        return "Weekly limit"
+    return f"{minutes // 60}h limit" if minutes % 60 == 0 else f"{minutes}m limit"
+
+
+def _session_lines(session: dict[str, Any]) -> list[str]:
+    """这个对话自己的部分：会话 ID、目录、模型（runner 传进来）。"""
+    return [
+        f"Session ID: {session.get('session_id') or '(not started yet)'}",
+        f"cwd: {session.get('cwd') or ''}",
+        f"Model: {session.get('model') or 'default'}",
+    ]
 
 
 async def _run(command: list[str], cwd: Path | None = None, timeout: float = PROBE_TIMEOUT_S) -> tuple[int, str, str]:
@@ -98,7 +111,7 @@ class Natives:
         try:
             data = json.loads(self.limits_file.read_text(encoding="utf-8"))
         except (OSError, ValueError):
-            return ["套餐用量：还没有数据（跑完一轮对话后才有）"]
+            return ["Usage: no data yet (appears after the first turn)"]
         lines = []
         for key, window in (data.get("windows") or {}).items():
             if not isinstance(window, dict):
@@ -107,8 +120,8 @@ class Natives:
             percent = utilization * 100 if isinstance(utilization, (int, float)) else None
             lines.append(_window_line(WINDOW_NAMES.get(key, key), percent, window.get("resetsAt")))
         if data.get("seen_at"):
-            lines.append(f"（用量取自 {_clock(data['seen_at'])} 最近一轮对话）")
-        return lines or ["套餐用量：还没有数据（跑完一轮对话后才有）"]
+            lines.append(f"(usage as of the last turn at {_clock(data['seen_at'])})")
+        return lines or ["Usage: no data yet (appears after the first turn)"]
 
     async def _version(self, harness: str, command: list[str]) -> str:
         if harness not in self._versions:
@@ -121,32 +134,56 @@ class Natives:
 
     # ---- /status ----
 
-    async def status_lines(self, harness: str) -> list[str]:
-        """/status 卡片上半部分：这个 harness 的版本、账号和套餐用量。读不到就写原因，不抛错。"""
+    async def status_lines(self, harness: str, session: dict[str, Any] | None = None) -> list[str]:
+        """/status 卡片：照这个 harness 交互界面里 /status 的字段排。session 是这个对话的
+        session_id / cwd / model。读不到就写原因，不抛错。"""
+        session = session or {}
         try:
             if harness == "codex":
-                return await self._codex_status()
+                return await self._codex_status(session)
             if harness == "antigravity":
-                return await self._agy_status()
-            return await self._claude_status()
-        except Exception as exc:  # noqa: BLE001 — 状态卡读不到原生信息也要能显示页面部分
+                return await self._agy_status(session)
+            return await self._claude_status(session)
+        except Exception as exc:  # noqa: BLE001 — 读不到也要回一张卡
             logger.exception("native status failed for %s", harness)
             return [f"原生信息读不到：{exc}"]
 
-    async def _claude_status(self) -> list[str]:
+    async def _claude_status(self, session: dict[str, Any]) -> list[str]:
         cli = claude_cli_path(self.config) or "claude"
         version = await self._version("claude", [cli])
-        return [f"Claude Code {version.replace(' (Claude Code)', '')}".strip(), *self._claude_limit_lines()]
+        lines = [f"Version: {version.replace(' (Claude Code)', '')}".rstrip(), *_session_lines(session)[:2]]
+        lines += await self._claude_account_lines(cli)
+        lines.append(_session_lines(session)[2])
+        return [*lines, *self._claude_limit_lines()]
 
-    async def _codex_status(self) -> list[str]:
+    async def _claude_account_lines(self, cli: str) -> list[str]:
+        """`claude auth status`（只读、不花额度）：登录方式、组织、邮箱。"""
+        try:
+            _, out, _ = await _run([cli, "auth", "status"], timeout=10)
+            auth = json.loads(out)
+        except (OSError, asyncio.TimeoutError, ValueError):
+            return ["Login method: (unknown)"]
+        if not auth.get("loggedIn"):
+            return ["Login method: not logged in"]
+        plan = str(auth.get("subscriptionType") or "").capitalize()
+        method = LOGIN_METHODS.get(auth.get("authMethod"), str(auth.get("authMethod") or ""))
+        lines = [f"Login method: {method.format(plan=plan).replace('  ', ' ')}"]
+        if auth.get("orgName"):
+            lines.append(f"Organization: {auth['orgName']}")
+        if auth.get("email"):
+            lines.append(f"Email: {auth['email']}")
+        return lines
+
+    async def _codex_status(self, session: dict[str, Any]) -> list[str]:
         result = await asyncio.wait_for(self._codex_query(), PROBE_TIMEOUT_S)
-        lines = [f"Codex {result.get('version') or ''}".strip()]
+        lines = [f"Version: {result.get('version') or ''}".rstrip(), _session_lines(session)[2],
+                 f"Directory: {session.get('cwd') or ''}"]
         account = result.get("account") or {}
         if account:
-            kind = {"chatgpt": "ChatGPT 账号", "apiKey": "API key"}.get(account.get("type"), account.get("type") or "")
+            who = account.get("email") or {"chatgpt": "ChatGPT", "apiKey": "API key"}.get(account.get("type"), account.get("type") or "")
             plan = account.get("planType")
-            email = f" {account['email']}" if account.get("email") else ""
-            lines.append(f"登录：{kind}{email}{f'（{plan}）' if plan else ''}")
+            lines.append(f"Account: {who}{f' (Plan: {str(plan).capitalize()})' if plan else ''}")
+        lines += [f"Session: {session.get('session_id') or '(not started yet)'}"]
         limits = result.get("rateLimits") or {}
         for key in ("primary", "secondary"):
             window = limits.get(key)
@@ -154,12 +191,12 @@ class Natives:
                 lines.append(_window_line(_window_name(window.get("windowDurationMins")), window.get("usedPercent"), window.get("resetsAt")))
         credits = limits.get("credits") or {}
         if credits.get("unlimited"):
-            lines.append("credits：不限")
+            lines.append("Credits: unlimited")
         elif credits.get("balance") is not None:
             try:
-                lines.append(f"credits 余额：{float(credits['balance']):.2f}")
+                lines.append(f"Credits: {float(credits['balance']):.2f}")
             except (TypeError, ValueError):
-                lines.append(f"credits 余额：{credits['balance']}")
+                lines.append(f"Credits: {credits['balance']}")
         return lines
 
     async def _codex_query(self) -> dict[str, Any]:
@@ -200,10 +237,10 @@ class Natives:
         version = agent.split("/", 1)[1].split(" ", 1)[0] if "/" in agent else ""
         return {"version": version, "account": account, "rateLimits": limits}
 
-    async def _agy_status(self) -> list[str]:
+    async def _agy_status(self, session: dict[str, Any]) -> list[str]:
         version = await self._version("antigravity", [str(Path(self.config.antigravity_bin).expanduser())])
         usage = await self.agy_local(None, "/usage")
-        return [f"Antigravity {version}".strip(), *(usage or [])]
+        return [f"Version: {version}".rstrip(), *_session_lines(session), *(usage or [])]
 
     # ---- harness 自己回答的斜杠指令 ----
 

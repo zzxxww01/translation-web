@@ -1,5 +1,5 @@
-import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { Link, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { BookOpen, Menu } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
 import { useDocumentStore } from '@/shared/stores';
 import { Button } from '@/components/ui/Button';
@@ -30,6 +30,7 @@ function BrandMark() {
 
 export function AppLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [slot, setSlot] = useState<HTMLDivElement | null>(null);
@@ -45,18 +46,17 @@ export function AppLayout() {
     location.pathname.match(/^\/document\/([^/]+)\/confirmation/)?.[1] ??
     null;
 
-  // 从长文编辑器进术语库时带上项目，术语库里能直接看这个项目的术语，并能一键回来
-  const glossaryTarget = (() => {
-    if (isGlossaryRoute) return undefined;
+  // 术语库是顶栏右侧的单独按钮，不占导航 tab；带上 from 能一键回来，从长文编辑器进去时带上项目
+  const handleGlossaryClick = () => {
+    if (isGlossaryRoute) return;
+    const params = new URLSearchParams({ from: `${location.pathname}${location.search}` });
     const routeProjectId = isDocumentRoute ? currentProjectId : confirmationProjectId;
-    if (!routeProjectId) return undefined;
-    const params = new URLSearchParams({
-      from: `${location.pathname}${location.search}`,
-      projectId: routeProjectId,
-      scope: 'project',
-    });
-    return `/glossary?${params.toString()}`;
-  })();
+    if (routeProjectId) {
+      params.set('projectId', routeProjectId);
+      params.set('scope', 'project');
+    }
+    navigate({ pathname: '/glossary', search: params.toString() });
+  };
 
   return (
     <HeaderSlotContext.Provider value={slot}>
@@ -91,7 +91,6 @@ export function AppLayout() {
                 <FeatureNav
                   orientation="vertical"
                   onNavigate={() => setMobileOpen(false)}
-                  glossaryTarget={glossaryTarget}
                 />
               </SheetContent>
             </Sheet>
@@ -103,13 +102,24 @@ export function AppLayout() {
 
           {/* Desktop nav */}
           <div className="hidden self-stretch md:flex">
-            <FeatureNav glossaryTarget={glossaryTarget} />
+            <FeatureNav />
           </div>
 
           {/* Right side：当前页面的操作（PageActions 放进来，页面不再另占一行标题栏）+ 全局按钮 */}
           <div className="flex min-w-0 flex-1 items-center justify-end gap-1">
             <div ref={setSlot} className="flex min-w-0 items-center justify-end gap-2" />
             <GlobalTaskIndicator />
+            <Button
+              variant={isGlossaryRoute ? 'secondary' : 'ghost'}
+              size="sm"
+              className="h-9 shrink-0 px-2.5 lg:px-3"
+              onClick={handleGlossaryClick}
+              title="术语管理"
+              aria-label="术语与规则管理"
+            >
+              <BookOpen className="h-4 w-4" />
+              <span className="hidden lg:inline">术语库</span>
+            </Button>
           </div>
         </div>
       </header>

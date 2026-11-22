@@ -9,11 +9,9 @@ const lastLocation = new Map<string, string>();
 interface FeatureNavProps {
   orientation?: 'horizontal' | 'vertical';
   onNavigate?: () => void;
-  /** 术语库链接带上当前项目（从长文编辑器点过去时） */
-  glossaryTarget?: string;
 }
 
-export function FeatureNav({ orientation = 'horizontal', onNavigate, glossaryTarget }: FeatureNavProps) {
+export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNavProps) {
   const isVertical = orientation === 'vertical';
   const { pathname, search } = useLocation();
   const current = navItems.find(item => item.remember && pathname === item.path);
@@ -22,7 +20,6 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate, glossaryTar
   }, [current, pathname, search]);
   // 当前所在的 tab 再点一次回到它的首页
   const target = (item: NavItem) => {
-    if (item.path === '/glossary' && glossaryTarget) return glossaryTarget;
     return item === current ? item.path : lastLocation.get(item.path) ?? item.path;
   };
 

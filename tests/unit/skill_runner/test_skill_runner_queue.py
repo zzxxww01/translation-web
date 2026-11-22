@@ -257,12 +257,12 @@ async def test_status_command_is_answered_by_the_runner_not_the_model(tmp_path, 
     report = runner.store.read_events(run_id)[-1]
     assert report["type"] == "report"
     text = "\n".join(report["lines"])
-    assert "状态：进行中" in text and "sess-s" in text and "claude-opus-5-5" in text
-    assert "名额：已用 1/1" in text and "挂起的消息：1 条" in text
+    assert "sess-s" in text and "claude-opus-5-5" in text
+    # 只有 harness 自己的信息，不再有服务器状态
+    assert "名额" not in text and "内存" not in text and "挂起" not in text
 
     await runner.send_message(second, "/状态", [])
-    text = "\n".join(runner.store.read_events(second)[-1]["lines"])
-    assert "排队：第 1 位" in text and "进程：还没启动" in text
+    assert runner.store.read_events(second)[-1]["type"] == "report"
 
 
 async def test_status_as_the_first_message_does_not_start_the_agent_and_keeps_the_skill_prompt(tmp_path, factory):
@@ -271,7 +271,6 @@ async def test_status_as_the_first_message_does_not_start_the_agent_and_keeps_th
     assert factory.sessions == []  # 没开进程、没发给模型
     events = runner.store.read_events(run_id)
     assert [e["type"] for e in events] == ["user", "report"]
-    assert "进程：还没启动" in "\n".join(events[-1]["lines"])
     assert runner.meta(run_id).begun is False
 
     # 下一条才是真正的开头：仍带 skill 派发提示
@@ -299,8 +298,9 @@ class FakeNatives:
     def observe(self, harness, event):
         self.observed.append((harness, event))
 
-    async def status_lines(self, harness):
-        return [f"{harness} 原生版本", "5 小时额度：已用 28%"]
+    async def status_lines(self, harness, session=None):
+        self.status_session = session
+        return [f"Version: {harness} 原生版本", "Current session: 28% used"]
 
     def is_local(self, harness, message):
         return harness == "antigravity" and message.strip().startswith("/usage")
@@ -310,15 +310,19 @@ class FakeNatives:
         return ["Gemini Models Weekly Limit Remaining 99%"]
 
 
-async def test_status_shows_the_harness_native_info_above_the_page_state(tmp_path, factory):
+async def test_status_shows_only_the_harness_native_card(tmp_path, factory):
     config = make_config(tmp_path)
-    runner = Runner(config, RunStore(config.runs_dir), factory, natives=FakeNatives())
+    natives = FakeNatives()
+    runner = Runner(config, RunStore(config.runs_dir), factory, natives=natives)
     run_id = await start(runner)
+    factory.last.push({"type": "session", "session_id": "sess-n", "model": "claude-opus-5-5"})
+    await settle()
     await runner.send_message(run_id, "/status", [])
     report = runner.store.read_events(run_id)[-1]
-    assert report["title"] == "当前状态 · Claude"
-    assert report["lines"][:2] == ["claude 原生版本", "5 小时额度：已用 28%"]
-    assert any(line.startswith("状态：") for line in report["lines"])
+    assert report["title"] == "/status · Claude"
+    assert report["lines"] == ["Version: claude 原生版本", "Current session: 28% used"]
+    assert natives.status_session == {"session_id": "sess-n", "cwd": str(runner.store.run_dir(run_id)),
+                                      "model": "claude-opus-5-5"}
 
 
 async def test_agy_local_commands_run_on_their_own_and_never_reach_the_model(tmp_path, factory):
