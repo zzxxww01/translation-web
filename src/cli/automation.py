@@ -152,16 +152,18 @@ def cmd_translate_article(args: argparse.Namespace) -> Dict[str, Any]:
     article = args.article.strip()
     if not (_SLUG_RE.match(article) or _ARTICLE_URL_RE.match(article)):
         raise CliError("文章要给 slug（如 nvidia-gb300）或 https 开头的 Substack 链接")
-    return _call(args.base_url, "POST", "/translate-article",
-                 body={"article": article, "target_lang": args.target_lang}, timeout=args.timeout or 240)
+    body = {"article": article, "target_lang": args.target_lang, "engines": list(dict.fromkeys(args.engine or ["web"]))}
+    return _call(args.base_url, "POST", "/translate-article", body=body, timeout=args.timeout or 240)
 
 
 def cmd_status(args: argparse.Namespace) -> Dict[str, Any]:
     if not _PROJECT_ID_RE.match(args.project_id):
         raise CliError("project_id 格式不对")
-    params = {"with_markdown": "true"} if args.with_markdown else None
+    params: Dict[str, Any] = {"with_markdown": "true"} if args.with_markdown else {}
+    if args.engine:
+        params["engine"] = args.engine
     return _call(args.base_url, "GET", f"/projects/{quote(args.project_id, safe='')}/status",
-                 params=params, timeout=args.timeout or 60)
+                 params=params or None, timeout=args.timeout or 60)
 
 
 def cmd_health(args: argparse.Namespace) -> Dict[str, Any]:
@@ -182,6 +184,10 @@ def cmd_slack_todos(args: argparse.Namespace) -> Dict[str, Any]:
     return _call(args.base_url, "GET", "/slack-todos", timeout=args.timeout or 180)
 
 
+def cmd_dms(args: argparse.Namespace) -> Dict[str, Any]:
+    return _call(args.base_url, "GET", "/dms", timeout=args.timeout or 360)
+
+
 def cmd_drafts(args: argparse.Namespace) -> Dict[str, Any]:
     params: Dict[str, Any] = {"status": args.status, "limit": args.limit}
     if args.source:
@@ -199,6 +205,20 @@ def cmd_draft(args: argparse.Namespace) -> Dict[str, Any]:
                  timeout=args.timeout or 180)
 
 
+OPTIMIZE_OPTIONS = ["coherence", "readable", "idiomatic", "professional",  # 网页的 4 个快捷项
+                    "shorten", "expand", "formal", "story", "qa", "social"]  # 网页「更多…」
+
+
+def cmd_optimize_draft(args: argparse.Namespace) -> Dict[str, Any]:
+    if not _DRAFT_ID_RE.match(args.draft_id):
+        raise CliError("draft_id 格式不对")
+    if bool(args.option) == bool(args.instruction and args.instruction.strip()):
+        raise CliError("--option 和 --instruction 二选一")
+    body = {"option": args.option, "instruction": args.instruction}
+    return _call(args.base_url, "POST", f"/drafts/{quote(args.draft_id, safe='')}/optimize", body=body,
+                 timeout=args.timeout or 240)
+
+
 def cmd_translate_slack_post(args: argparse.Namespace) -> Dict[str, Any]:
     if not _CONVERSATION_RE.match(args.conversation_id) or not _TS_RE.match(args.thread_ts):
         raise CliError("conversation_id 或 thread_ts 格式不对")
@@ -207,6 +227,7 @@ def cmd_translate_slack_post(args: argparse.Namespace) -> Dict[str, Any]:
     return _call(args.base_url, "POST", "/translate-slack-post", body=body, timeout=args.timeout or 360)
 
 
+ENGINES = ["web", "claude", "codex", "antigravity"]
 MAX_POST_CHARS, MAX_REPLY_CHARS, MAX_HISTORY = 10_000, 50_000, 100
 
 
@@ -262,9 +283,11 @@ COMMANDS = {
     "health": cmd_health,
     "translate-slack": cmd_translate_slack,
     "slack-todos": cmd_slack_todos,
+    "dms": cmd_dms,
     "drafts": cmd_drafts,
     "draft": cmd_draft,
     "translate-slack-post": cmd_translate_slack_post,
+    "optimize-draft": cmd_optimize_draft,
     "translate-post": cmd_translate_post,
     "slack-reply": cmd_slack_reply,
 }
@@ -281,13 +304,16 @@ def build_parser() -> _Parser:
     p = sub.add_parser("updates", help="查 since 之后的新文章和 @我（只读）")
     p.add_argument("--since", required=True, help="ISO 时间或 Unix 时间戳；用上次返回的 watermark")
 
-    p = sub.add_parser("translate-article", help="翻译一篇文章（会花模型费，须经 Felix 确认）")
+    p = sub.add_parser("translate-article", help="翻译一篇文章，可选网页版 / Claude / Codex / agy，可多选（会花钱，须经 Felix 确认）")
     p.add_argument("article", help="文章 slug 或 Substack 链接")
     p.add_argument("--target-lang", default="zh")
+    p.add_argument("--engine", action="append", choices=ENGINES,
+                   help="用什么翻，可写多次同时翻：web 网页版（默认）/ claude / codex / antigravity（agy）")
 
     p = sub.add_parser("status", help="查翻译任务状态与结果")
     p.add_argument("project_id")
     p.add_argument("--with-markdown", action="store_true", help="完成时把中文 Markdown 全文放进 JSON")
+    p.add_argument("--engine", choices=ENGINES, help="配合 --with-markdown：要哪一版的全文（默认网页上显示的那版）")
 
     sub.add_parser("health", help="自检")
 
@@ -298,6 +324,8 @@ def build_parser() -> _Parser:
     p.add_argument("--with-thread", action="store_true", help="翻译这条消息所在的整个 thread")
 
     sub.add_parser("slack-todos", help="我的待办：找我的私信和 @我（和网页一致；会调一次轻量模型，Slack 只读）")
+
+    sub.add_parser("dms", help="还没回的私信：英文原话、找我干什么、中文理解、3 版英文回复（新消息才调模型，同样的不重复花钱）")
 
     p = sub.add_parser("drafts", help="翻译记录列表，默认只列还没点「标记完成」的")
     p.add_argument("--status", choices=["draft", "done", "all"], default="draft")
@@ -315,6 +343,13 @@ def build_parser() -> _Parser:
     p.add_argument("thread_ts")
     p.add_argument("--instruction", help="AI 挑错了时说明要翻哪条，如「翻第二版文案」")
     p.add_argument("--no-images", action="store_true", help="配图不带图片数据")
+
+    p = sub.add_parser("optimize-draft", help="翻译稿快捷优化，存成新版本（和网页帖子翻译的优化按钮一样；会花模型费）")
+    p.add_argument("draft_id")
+    p.add_argument("--option", choices=OPTIMIZE_OPTIONS,
+                   help="coherence 更连贯 / readable 可读性 / idiomatic 地道 / professional 专业 / shorten 精简 / "
+                        "expand 展开说明 / formal 正式公文 / story 故事化 / qa 问答格式 / social 社交媒体")
+    p.add_argument("--instruction", help="自定义要求，如「第二段别用赋能」（和 --option 二选一）")
 
     p = sub.add_parser("translate-post", help="翻译一段帖子原文（网页「帖子翻译」同一条链路；会花模型费，须经 Felix 确认）")
     p.add_argument("text", nargs="?", help="原文；不给就从标准输入读")

@@ -13,21 +13,18 @@ import {
   type Instruction,
 } from '../types';
 
-import { EDITING_OPTIONS } from '@/shared/editingOptions';
+import { EDITING_OPTIONS, MORE_POST_OPTIONS } from '@/shared/editingOptions';
 
 const quickInstructions: Instruction[] = [
   ...EDITING_OPTIONS.map(option => ({ ...option, icon: option.id === 'coherence' ? Link2 : Sparkles })),
   { id: 'custom', label: '自定义', icon: AlignLeft, instruction: '' },
 ];
 
-const moreInstructions: Instruction[] = [
-  { id: 'shorten', label: '精简内容', icon: Scissors, instruction: '请精简译文内容，删除冗余表达，只保留核心信息和关键观点。' },
-  { id: 'expand', label: '展开说明', icon: BookOpenText, instruction: '请对译文中的关键点添加更多解释和背景信息，使内容更丰富。' },
-  { id: 'formal', label: '正式公文', icon: ScrollText, instruction: '请将译文重写为正式公文风格，使用规范、严谨的官方表达。' },
-  { id: 'story', label: '故事化', icon: FileText, instruction: '请用叙事方式重新组织译文内容，使其更具故事性和可读性。' },
-  { id: 'qa', label: 'Q&A格式', icon: HelpCircle, instruction: '请将译文转换为问答形式，先列出问题，然后给出答案。' },
-  { id: 'social', label: '社交媒体', icon: MessageCircle, instruction: '请将译文改写为适合社交媒体传播的风格，使用轻松活泼的表达，添加emoji。' },
-];
+// 「更多…」的指令和 Muse 的 optimize-draft 共用 config/post_more_options.json
+const MORE_ICONS: Record<string, Instruction['icon']> = {
+  shorten: Scissors, expand: BookOpenText, formal: ScrollText, story: FileText, qa: HelpCircle, social: MessageCircle,
+};
+const moreInstructions: Instruction[] = MORE_POST_OPTIONS.map(option => ({ ...option, icon: MORE_ICONS[option.id] ?? Sparkles }));
 
 interface OptimizationPanelProps {
   onOptimize: (options: { instruction?: string; optionId?: string }) => Promise<boolean>;

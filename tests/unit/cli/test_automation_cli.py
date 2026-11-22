@@ -87,8 +87,22 @@ def test_translate_article_posts_slug(std, monkeypatch):
     seen = _capture(monkeypatch, {"project_id": "p", "status": "started"})
     code, out = _run(std, ["translate-article", "nvidia-gb300", "--target-lang", "zh"])
     assert code == 0 and out["status"] == "started"
-    assert json.loads(seen[0].data) == {"article": "nvidia-gb300", "target_lang": "zh"}
+    assert json.loads(seen[0].data) == {"article": "nvidia-gb300", "target_lang": "zh", "engines": ["web"]}
     assert seen[0].get_method() == "POST"
+
+
+def test_translate_article_multiple_engines_and_status_engine(std, monkeypatch):
+    seen = _capture(monkeypatch, {"project_id": "p", "status": "started"})
+    _run(std, ["translate-article", "nvidia-gb300", "--engine", "web", "--engine", "codex", "--engine", "codex"])
+    assert json.loads(seen[0].data)["engines"] == ["web", "codex"]
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    _run(std, ["status", "p1", "--with-markdown", "--engine", "codex"])
+    assert seen[1].full_url.endswith("/projects/p1/status?with_markdown=true&engine=codex")
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    code, _ = _run(std, ["translate-article", "nvidia-gb300", "--engine", "gpt"])
+    assert code == 1 and len(seen) == 2
 
 
 @pytest.mark.parametrize("bad", ["../etc", "a b", "-x", ""])
@@ -346,3 +360,28 @@ def test_validation_error_keeps_field_reasons(std, monkeypatch):
     code, out = _run(std, ["translate-post", "Hello"])
     assert code == 3 and out["code"] == "HTTP_422"
     assert out["error"] == "Request validation failed：content: String should have at most 10000 characters"
+
+
+def test_optimize_draft_body_and_choices(std, monkeypatch):
+    seen = _capture(monkeypatch, {"draft_id": DRAFT_ID})
+    code, _ = _run(std, ["optimize-draft", DRAFT_ID, "--option", "idiomatic"])
+    assert code == 0 and seen[0].full_url.endswith(f"/internal/automation/drafts/{DRAFT_ID}/optimize")
+    assert json.loads(seen[0].data) == {"option": "idiomatic", "instruction": None}
+    for argv in (["optimize-draft", DRAFT_ID], ["optimize-draft", DRAFT_ID, "--option", "x"],
+                 ["optimize-draft", DRAFT_ID, "--option", "qa", "--instruction", "y"], ["optimize-draft", "bad", "--option", "qa"]):
+        std.out.buffer.seek(0)
+        std.out.buffer.truncate()
+        code, _ = _run(std, argv)
+        assert code == 1
+    assert len(seen) == 1
+
+
+def test_cli_and_backend_agree_on_optimize_options():
+    from src.api.routers import automation as router
+    assert cli.OPTIMIZE_OPTIONS == router.OPTIMIZE_OPTIONS
+
+
+def test_dms_calls_endpoint(std, monkeypatch):
+    seen = _capture(monkeypatch, {"items": []})
+    code, _ = _run(std, ["dms"])
+    assert code == 0 and seen[0].full_url.endswith("/internal/automation/dms")
