@@ -35,6 +35,14 @@ export function sectionsWithMissing(rows: WorkbenchRow[], text: (row: WorkbenchR
 
 export type StatusTone = 'muted' | 'busy' | 'wait' | 'done';
 
+/** 各状态的文字色和圆点 / 进度条色 */
+export const TONE: Record<StatusTone, { text: string; bar: string }> = {
+  muted: { text: 'text-text-muted', bar: 'bg-text-disabled' },
+  busy: { text: 'text-info', bar: 'bg-info' },
+  wait: { text: 'text-warning-text', bar: 'bg-warning' },
+  done: { text: 'text-success', bar: 'bg-success' },
+};
+
 /** 已导入文章的翻译进度（只看主译本，后端算好）；没导入时为 null。 */
 export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone; percent: number } | null {
   const percent = Math.round(progress);

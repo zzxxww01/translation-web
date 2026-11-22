@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Newspaper } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import type { SubstackArticle } from '@/features/substack/api';
+import { ArticleDesk } from './components/ArticleDesk';
 import { ArticlePreview } from './components/ArticlePreview';
 import { ArticleSidebar } from './components/ArticleSidebar';
 import { Workbench } from './components/Workbench';
@@ -28,16 +29,17 @@ export function ArticlesFeature() {
     setListOpen(false);
     navigate(`/articles/${id}`);
   };
+  const selectArticle = (item: SubstackArticle) => {
+    setSelected(item);
+    setListOpen(false);
+    if (projectId) navigate(`/articles?a=${encodeURIComponent(item.slug)}`);
+    else setSearchParams({ a: item.slug });
+  };
   const sidebar = (
     <ArticleSidebar
       selectedSlug={slug}
       selectedProjectId={projectId ?? lastProject}
-      onSelectArticle={item => {
-        setSelected(item);
-        setListOpen(false);
-        if (projectId) navigate(`/articles?a=${encodeURIComponent(item.slug)}`);
-        else setSearchParams({ a: item.slug });
-      }}
+      onSelectArticle={selectArticle}
       onSelectProject={openProject}
     />
   );
@@ -58,7 +60,7 @@ export function ArticlesFeature() {
 
   return (
     <div className="flex h-full min-h-0">
-      <aside className={`${article ? 'hidden md:flex' : 'flex'} w-full shrink-0 flex-col border-r border-border-subtle bg-bg-primary md:w-[340px]`}>
+      <aside className={`${article ? 'hidden md:flex' : 'flex'} w-full shrink-0 flex-col border-r border-border-subtle bg-bg-sidebar md:w-[340px]`}>
         {sidebar}
       </aside>
       <section className={`${article ? 'flex' : 'hidden md:flex'} min-w-0 flex-1 flex-col overflow-y-auto`}>
@@ -70,13 +72,7 @@ export function ArticlesFeature() {
             <ArticlePreview key={article.url} article={article} onImported={openProject} />
           </>
         ) : (
-          <div className="m-auto max-w-sm px-6 text-center text-text-muted">
-            <Newspaper className="mx-auto h-8 w-8 text-text-disabled" />
-            <p className="mt-3 text-sm leading-relaxed">
-              从左边选一篇文章开始。<br />
-              已导入的直接打开对照编辑；没导入的先看摘要，一键导入翻译。
-            </p>
-          </div>
+          <ArticleDesk onSelectArticle={selectArticle} onSelectProject={openProject} />
         )}
       </section>
     </div>

@@ -6,7 +6,8 @@ import { cn } from '@/lib/utils';
 import { substackApi, type ArticleFilter, type SubstackArticle } from '@/features/substack/api';
 import { NewProjectModal } from '@/features/document/components/NewProjectModal';
 import { useLibrary, useProjects } from '../hooks';
-import { articleStatus, type StatusTone } from '../lib/tracks';
+import { articleStatus, TONE } from '../lib/tracks';
+import { StatusTag } from './StatusTag';
 
 const FILTERS: { id: ArticleFilter; label: string }[] = [
   { id: 'all', label: '全部' },
@@ -14,12 +15,9 @@ const FILTERS: { id: ArticleFilter; label: string }[] = [
   { id: 'imported', label: '已导入' },
 ];
 
-const TONE: Record<StatusTone, { text: string; bar: string }> = {
-  muted: { text: 'text-text-muted', bar: 'bg-text-disabled' },
-  busy: { text: 'text-info', bar: 'bg-info' },
-  wait: { text: 'text-warning', bar: 'bg-warning' },
-  done: { text: 'text-success', bar: 'bg-success' },
-};
+// 列表项：选中时左边一条梅子色竖线 + 浅梅子底
+const ITEM = 'relative w-full rounded-md px-3 py-2.5 text-left transition-colors';
+const ITEM_SELECTED = 'bg-primary-50 before:absolute before:inset-y-2.5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary-500';
 
 const shortDate = new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' });
 
@@ -96,7 +94,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
     <div className="flex h-full min-h-0 flex-col">
       <div className="space-y-2 border-b border-border-subtle px-3 pb-3 pt-4">
         <div className="flex items-center gap-2">
-          <h2 className="flex-1 text-sm font-medium text-text-secondary">文章 <span className="text-text-muted">{total || ''}</span></h2>
+          <h2 className="flex-1 font-[family-name:var(--font-display)] text-base font-semibold text-text-primary">文章 <span className="ml-0.5 font-[family-name:var(--font-body)] text-xs font-normal tabular-nums text-text-muted">{total || ''}</span></h2>
           <button type="button" onClick={() => setImportOpen(true)} title="导入文章：粘贴链接或上传 HTML / Markdown" aria-label="导入文章"
             className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-xs text-text-secondary hover:bg-ink-wash hover:text-text-primary">
             <FilePlus2 className="h-3.5 w-3.5" /> 导入
@@ -140,14 +138,14 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                 type="button"
                 ref={selected ? reveal(article.url) : undefined}
                 onClick={() => (article.project_id ? onSelectProject(article.project_id) : onSelectArticle(article))}
-                className={cn('w-full rounded-md px-3 py-2.5 text-left transition-colors', selected ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+                className={cn(ITEM, selected ? ITEM_SELECTED : 'hover:bg-bg-hover')}
               >
-                <span className="line-clamp-2 text-sm leading-snug text-text-primary">{article.zh_title || article.title}</span>
-                {article.zh_title && <span className="mt-0.5 block truncate text-xs text-text-muted">{article.title}</span>}
-                <span className="mt-1 flex items-center gap-2 text-[11px] text-text-muted">
-                  <span>{Number.isFinite(Date.parse(article.post_date)) ? shortDate.format(Date.parse(article.post_date)) : ''}</span>
-                  {article.is_paid && <span className="rounded bg-bg-tertiary px-1">付费</span>}
-                  {status && <span className={cn('ml-auto', TONE[status.tone].text)}>{status.text}</span>}
+                <span className="line-clamp-2 font-[family-name:var(--font-display)] text-[15px] font-semibold leading-snug text-text-primary">{article.zh_title || article.title}</span>
+                {article.zh_title && <span className="mt-0.5 block truncate font-[family-name:var(--font-source)] text-[13px] italic text-text-muted">{article.title}</span>}
+                <span className="mt-1.5 flex items-center gap-2 text-[11px] text-text-muted">
+                  <span className="tabular-nums">{Number.isFinite(Date.parse(article.post_date)) ? shortDate.format(Date.parse(article.post_date)) : ''}</span>
+                  {article.is_paid && <span className="rounded border border-border px-1 leading-4">付费</span>}
+                  {status && <StatusTag status={status} />}
                 </span>
                 {/* 进度条只在翻到一半时显示；翻完的只留右边那行「已翻译」，不再每篇底下一条绿线 */}
                 {status && status.percent > 0 && status.percent < 100 && (
@@ -172,9 +170,9 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                   type="button"
                   ref={project.id === selectedProjectId ? reveal(project.id) : undefined}
                   onClick={() => onSelectProject(project.id)}
-                  className={cn('w-full rounded-md px-3 py-2 text-left text-sm transition-colors', project.id === selectedProjectId ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+                  className={cn(ITEM, project.id === selectedProjectId ? ITEM_SELECTED : 'hover:bg-bg-hover')}
                 >
-                  <span className="line-clamp-2 leading-snug text-text-primary">{project.title}</span>
+                  <span className="line-clamp-2 font-[family-name:var(--font-display)] text-[15px] font-semibold leading-snug text-text-primary">{project.title}</span>
                   <span className="mt-0.5 block text-[11px] text-text-muted">已译 {Math.round(project.progress?.percent ?? 0)}%</span>
                 </button>
               </li>
