@@ -84,3 +84,53 @@ class OpenAIOfficialProvider(VectorEngineProvider):
                 duration_seconds=time.monotonic() - started, success=success,
                 input_chars=len(prompt), output_chars=len(content or ""), error_type=error_type,
                 **openai_usage(usage).as_metrics())
+
+    @generation_budget
+    def generate_with_web_search(self, prompt, model=None, timeout=None, **kwargs):
+        """Chatbot 联网回答：Responses API 的 web_search 工具，搜不搜由模型自己决定。
+        返回 {"text", "sources": [{"title", "url"}]}；出错规则和 generate 一样。"""
+        model_name = model or self.default_model
+        started = time.monotonic()
+        usage = None
+        success = False
+        error_type = None
+        content = ""
+        try:
+            with transport_slot():
+                response = self.client.with_options(timeout=remaining_timeout(timeout or self.timeout),
+                                                    max_retries=0).responses.create(
+                    model=model_name, input=prompt, tools=[{"type": "web_search"}],
+                    max_output_tokens=positive_token_limit(kwargs.get("max_tokens", self.max_tokens)), store=False)
+            usage = response.usage
+            if response.model != model_name:
+                raise LLMConfigurationError("Official OpenAI returned an unexpected model identity")
+            content = response.output_text
+            if not isinstance(content, str) or not content.strip():
+                raise LLMUpstreamUnavailableError("Official OpenAI returned empty content")
+            sources, seen = [], set()
+            for item in response.output or []:
+                for part in getattr(item, "content", None) or []:
+                    for note in getattr(part, "annotations", None) or []:
+                        url = getattr(note, "url", None)
+                        if getattr(note, "type", "") == "url_citation" and url and url not in seen:
+                            seen.add(url)
+                            sources.append({"title": getattr(note, "title", "") or url, "url": url})
+            success = True
+            logger.info("[OpenAI official] web search model=%s response_id=%s sources=%d",
+                        response.model, response.id, len(sources))
+            return {"text": content, "sources": sources}
+        except Exception as exc:
+            error_type = type(exc).__name__
+            normalized = normalize_llm_transport_error(exc, provider_name="OpenAI official")
+            if isinstance(exc, APIStatusError) and 400 <= exc.status_code < 500 and exc.status_code not in (408, 409, 429):
+                raise LLMConfigurationError(f"Official OpenAI rejected request (HTTP {exc.status_code})") from None
+            if normalized is not None:
+                raise type(normalized.error)("Official OpenAI transport failed") from None
+            if isinstance(exc, LLMError):
+                raise
+            raise LLMUpstreamUnavailableError("Official OpenAI request failed") from None
+        finally:
+            llm_usage_metrics.record_call(provider="openai", model=model_name,
+                duration_seconds=time.monotonic() - started, success=success,
+                input_chars=len(prompt), output_chars=len(content or ""), error_type=error_type,
+                **openai_usage(usage).as_metrics())

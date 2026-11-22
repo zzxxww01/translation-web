@@ -994,6 +994,66 @@ class GeminiProvider(LLMProvider):
                     bounded_sleep(delay)
         raise RuntimeError("Gemini generation has no usable attempts")
 
+    @generation_budget
+    def generate_with_web_search(self, prompt: str, model: Optional[str] = None,
+                                 timeout: Optional[int] = None, **_kwargs) -> Dict[str, Any]:
+        """Chatbot 联网回答：带 Google 搜索工具，搜不搜由模型自己决定。
+        返回 {"text", "sources": [{"title", "url"}]}；主 Key 不行换备用 Key，不换模型。"""
+        if self._use_rest_transport():
+            raise LLMConfigurationError("Gemini web search needs the SDK transport")
+        model_name = self.resolve_model_name(model) if model else self.model_name
+        attempts = [a for a in self._build_attempt_plan(model_name) if not a.uses_backup_model]
+        effective_timeout = timeout if timeout is not None else self.request_timeout
+        last_error: Optional[Exception] = None
+        for attempt in attempts:
+            check_active()
+            started = time.monotonic()
+            client = self._get_client(attempt.api_key)
+
+            def _call():
+                with transport_slot():
+                    budget = remaining_timeout(effective_timeout)
+                    config = {
+                        "tools": [{"google_search": {}}],
+                        "max_output_tokens": self._resolve_max_output_tokens(),
+                        "http_options": {"retry_options": {"attempts": 1}},
+                    }
+                    if budget is not None:
+                        config["http_options"]["timeout"] = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+                    proxy_scope = nullcontext() if getattr(self, "network_policy", None) is not None else self._temporary_proxy_env()
+                    with proxy_scope:
+                        return client.models.generate_content(model=attempt.model_name, contents=prompt, config=config)
+
+            try:
+                resp = self._generate_with_timeout_fn(_call, remaining_timeout(effective_timeout))
+                text = (resp.text or "").strip()
+                if not text:
+                    raise LLMUpstreamUnavailableError("Gemini returned no text")
+                sources: List[Dict[str, str]] = []
+                candidates = getattr(resp, "candidates", None) or []
+                metadata = getattr(candidates[0], "grounding_metadata", None) if candidates else None
+                for chunk in getattr(metadata, "grounding_chunks", None) or []:
+                    web = getattr(chunk, "web", None)
+                    if web is not None and getattr(web, "uri", None):
+                        sources.append({"title": getattr(web, "title", "") or web.uri, "url": web.uri})
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=True,
+                    input_chars=len(prompt), output_chars=len(text), attempts=1,
+                    **gemini_usage(getattr(resp, "usage_metadata", None)).as_metrics())
+                return {"text": text, "sources": sources}
+            except Exception as exc:
+                error = self._normalize_generation_exception(exc, timeout=effective_timeout)
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=False,
+                    input_chars=len(prompt), attempts=1, error_type=type(error).__name__)
+                if isinstance(error, (LLMDeadlineExceededError, LLMRequestCancelledError, LLMConfigurationError)):
+                    raise error
+                last_error = error
+                error_text = self._error_to_text(error)
+                if not (self._is_retryable_error(error_text) or self._is_auth_error(error_text)):
+                    raise error
+        raise last_error or RuntimeError("Gemini web search has no usable attempts")
+
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None) -> str:
         """
         缈昏瘧鏂囨湰

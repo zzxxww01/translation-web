@@ -85,6 +85,7 @@ class Settings(BaseSettings):
     slack_cache_dir: str = "data/slack_cache"
     # 翻译稿（帖子翻译页和 Slack 翻译模式共用的「翻译记录」）
     post_drafts_dir: str = "data/post_drafts"
+    chat_sessions_dir: str = "data/chat_sessions"
     slack_dm_recent_days: int = 30
 
     # Muse 自动化（routers/automation.py）：我所在的 Slack 用户组 ID，逗号分隔（S 开头）。
