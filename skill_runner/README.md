@@ -60,7 +60,6 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
 | 清理空间 | 页面上删除只是把运行挪到 `~/skill-runner/deleted/`，仍占磁盘；要真正腾空间，先核对 `deleted/deleted.jsonl`，再手动删 `~/skill-runner/deleted/` 下的旧目录 |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
-| Slack 页的两个 agent | skill 源文件在 `skill_runner/skills/`（`slack-post-translate`、`slack-dm-reply`），`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，`git pull` 即更新；run 带 `source=slack:…`，见 `docs/Slack收件箱.md` |
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `general`、`translate`、`subtitle`、`podcast`、`dev`（旧名 `chat`、`article`、`video` 仍可用，见前端 `AgentIcon.tsx`） |
 
@@ -111,7 +110,23 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 - 更新程序不会修改登录凭证、运行记录或 Python SDK 包。SDK 升级继续按上面的部署流程操作。
 - Gemini（agy CLI）版本与官方原生 manifest 比较；它使用官方 CLI 自带的自动更新，此处仅显示版本状态，不通过 npm 安装同名第三方包。
 
-## 等确认超时自动继续
+## 并发、排队与会话（2026-11-22）
+
+- **名额按活着的进程算**：同时最多 `SKILL_RUNNER_MAX_ACTIVE`（默认 3）个 Claude / Codex / Gemini 进程，
+  字幕、播客（`config.heavy_skills`）一个算 2 个。一个 Claude 进程实测约 250–400 MB，服务的 `MemoryMax=1300M`。
+- **不常驻**：一轮结束 `SKILL_RUNNER_IDLE_TIMEOUT_S`（默认 5 秒）后就关进程；下次发消息按会话 ID 续接，上下文不丢。
+- **满了就排队**：不再返回 429。新对话、新消息进 `queued` 状态（消息存在 `meta.queued_prompt`），有空位按先来后到自动开始；
+  系统可用内存低于 `SKILL_RUNNER_MIN_FREE_MB`（默认 350）时也排队。一个都没在跑时总能起一个。服务重启后接着排。
+- **提问挂太久就脱离进程**：AskUserQuestion 超过 `SKILL_RUNNER_QUESTION_DETACH_S`（默认 300 秒）没人答，问题存进
+  `meta.detached_questions`、关掉进程，页面上照样能答；回答作为新消息续接。服务重启时挂着的提问也这样保留。
+- **挂起发送**：agent 干活时，输入框默认「排队发送」（回车）：消息存在 `meta.held`，这一轮正常结束后按顺序一条条发；
+  挂起的消息在对话末尾可以编辑、删除、立即发送。「立即插话」= 原来的行为，马上发给 agent。点了停止后挂起的消息不自动发。
+  接口：`POST /runs/{id}/messages` 带 `mode=queue|now`（默认 now），`PUT|DELETE /runs/{id}/held/{hid}`，`POST /runs/{id}/held/{hid}/send`。
+- **Agent 列表**：`GET /catalog/{skill}/files` 列出 skill 目录里的文件、`GET /catalog/{skill}/files/{path}` 读文本（只读，
+  隐藏文件、超过 256 KB 的和二进制文件不给）。页面「全部 Agent」点进去能看 SKILL.md 和脚本。
+- **图片**：输入框可以粘贴截图、拖文件、选图片；图片附件在提示词里标「（图片，请打开看内容）」，对话里显示缩略图。
+
+
 
 系统提示词要求：一轮结束时如果在等用户确认，回复最后单独一行写 `【等待确认】`（`runner.AWAIT_MARK`）。
 带这个标记结束的一轮记为 `awaiting_reply=True`（是在等你，不是做完了）；文章工作台据此不去导入译文，而是提示去确认。

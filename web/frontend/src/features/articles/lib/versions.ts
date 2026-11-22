@@ -70,7 +70,7 @@ export function variantHarness(variant: WorkbenchVariant): Harness | null {
 const runHarness = (run: RunMeta): Harness => run.harness ?? 'claude';
 const isWaiting = (run: RunMeta) => run.status === 'waiting' || Boolean(run.status === 'idle' && run.awaiting_reply);
 /** 正在跑或在等你确认 */
-export const runActive = (run?: RunMeta) => Boolean(run && (run.status === 'running' || isWaiting(run)));
+export const runActive = (run?: RunMeta) => Boolean(run && (run.status === 'running' || run.status === 'queued' || isWaiting(run)));
 
 type TrackState = Pick<VersionView, 'tone' | 'line' | 'actions' | 'translate'>;
 
@@ -127,6 +127,10 @@ function agentVersion(input: VersionsInput, harness: Harness, variant: Workbench
     if (isWaiting(own)) {
       const at = own.auto_reply_at ? `${clock.format(own.auto_reply_at * 1000)} 前不回复就按它的建议继续` : null;
       return { ...base, model, tone: 'wait', line: withModel('等你确认', at, variant ? '翻完前只读' : null), actions: [{ kind: 'open-run', label: '去确认' }], readOnly: Boolean(variant) };
+    }
+    if (own.status === 'queued') {
+      return { ...base, model, tone: 'busy', line: withModel('排队中', variant ? '翻完前只读' : null),
+        actions: [{ kind: 'open-run', label: '看对话' }], readOnly: Boolean(variant) };
     }
     if (own.status === 'running') {
       return { ...base, model, tone: 'busy', line: withModel(variant ? '重翻中' : '翻译中', runModel, variant ? '翻完前只读' : null),

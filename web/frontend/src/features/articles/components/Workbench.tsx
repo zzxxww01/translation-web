@@ -181,7 +181,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   }, [run, data.variants, importRun]);
 
   // 同一个任务又开始干活（继续对话）：上一次的导入结果作废，空闲后重新导入
-  const runWorking = Boolean(run && (run.status === 'running' || run.status === 'waiting' || run.awaiting_reply));
+  const runWorking = Boolean(run && (run.status === 'running' || run.status === 'waiting' || run.status === 'queued' || run.awaiting_reply));
   const workingId = runWorking ? run?.id : undefined;
   useEffect(() => {
     if (!workingId) return;

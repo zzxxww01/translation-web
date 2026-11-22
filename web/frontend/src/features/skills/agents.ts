@@ -39,3 +39,7 @@ export function normalizeCatalog(raw: Partial<Agent>[] | undefined): Agent[] {
 export function findAgent(catalog: Agent[], skill: string): Agent {
   return catalog.find(agent => agent.name === skill) ?? fill({ name: skill });
 }
+
+/** URL 里通用 Agent 的名字（它的 skill 名是空串） */
+export const GENERAL_KEY = 'general';
+export const agentKey = (agent: Agent) => agent.name || GENERAL_KEY;

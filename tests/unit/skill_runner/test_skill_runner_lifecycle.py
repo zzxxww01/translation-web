@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from skill_runner.runner import Busy, Conflict, NotFound, Runner, SessionFailed, build_prompt, make_title
+from skill_runner.runner import Conflict, NotFound, Runner, SessionFailed, build_prompt, make_title
 from skill_runner.store import RunStore
 
 from skill_runner_fakes import make_config, settle
@@ -64,14 +64,14 @@ async def test_question_waits_for_answer_and_returns_answers(runner, store, fact
     assert question == {**question, "type": "question", "qid": "tu-1", "questions": questions}
 
     with pytest.raises(Conflict):
-        runner.answer(run_id, "other", {"术语表可以吗？": "确认"})
-    runner.answer(run_id, "tu-1", {"术语表可以吗？": "确认"})
+        await runner.answer(run_id, "other", {"术语表可以吗？": "确认"})
+    await runner.answer(run_id, "tu-1", {"术语表可以吗？": "确认"})
     outcome = await asked
     assert outcome.allow
     assert outcome.updated_input == {"questions": questions, "answers": {"术语表可以吗？": "确认"}}
     assert runner.meta(run_id).status == "running"
     with pytest.raises(Conflict):
-        runner.answer(run_id, "tu-1", {"术语表可以吗？": "确认"})
+        await runner.answer(run_id, "tu-1", {"术语表可以吗？": "确认"})
 
 
 async def test_composer_text_answers_pending_question_as_free_text(runner, store, factory):
@@ -173,23 +173,6 @@ async def test_open_failure_records_message_and_error(runner, store, factory):
         await runner.begin(meta.id, "翻译", [])
     assert runner.meta(meta.id).status == "error"
     assert kinds(store, meta.id) == ["user", "error", "status"]
-
-
-async def test_concurrency_limit_counts_running_and_waiting(tmp_path, factory):
-    config = make_config(tmp_path, max_active=1)
-    store = RunStore(config.runs_dir)
-    runner = Runner(config, store, factory)
-    first = await start(runner)
-    with pytest.raises(Busy):
-        runner.create("four-step-translate", "second")
-    factory.last.push({"type": "result", "session_id": "s"})
-    await settle()
-    second = await start(runner)
-    # 第一个已经空闲，它想继续时第二个正占着名额
-    factory.sessions[0].push({"type": "text", "text": "x"})
-    await settle()
-    assert runner.meta(first).status == "running"
-    assert runner.meta(second).status == "running"
 
 
 async def test_unknown_skill_is_rejected(runner):
@@ -302,3 +285,9 @@ async def test_shutdown_closes_sessions(runner, factory):
     await start(runner)
     await runner.shutdown()
     assert factory.last.closed
+
+
+def test_prompt_marks_image_attachments():
+    assert build_prompt(None, "看图", ["input/a.png", "input/b.pdf"]) == (
+        "看图\n\n附件（已保存在当前运行目录）：\n- input/a.png（图片，请打开看内容）\n- input/b.pdf"
+    )

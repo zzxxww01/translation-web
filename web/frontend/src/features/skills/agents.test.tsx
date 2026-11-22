@@ -84,7 +84,7 @@ describe('NewRunForm', () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={client}>
-          <NewRunForm catalog={normalizeCatalog(SERVER)} maxUploadMb={95} onStarted={() => {}} />
+          <NewRunForm catalog={normalizeCatalog(SERVER)} maxUploadMb={95} onStarted={() => {}} onBrowse={() => {}} />
         </QueryClientProvider>
       );
     });

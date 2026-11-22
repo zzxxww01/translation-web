@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { Send, Square } from 'lucide-react';
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { Send, Square, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
-import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import { sendMessage, skillsApi } from '../api';
 import type { Agent, RunStatus } from '../types';
+import { droppedFiles, isSendKey, pastedFiles, SEND_HINT } from '../input';
 import { AttachmentPicker } from './AttachmentChips';
 
 interface ComposerProps {
@@ -13,22 +14,43 @@ interface ComposerProps {
   status: RunStatus | null;
   hasPendingQuestion: boolean;
   maxUploadMb: number;
+  /** 输入框上方的一行提示（比如「在等你确认」），不另占一整条横幅 */
+  notice?: ReactNode;
 }
 
-export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb }: ComposerProps) {
+const MAX_HEIGHT = 200;
+
+/**
+ * 对话底部的输入框。agent 在干活时有两种发法：
+ * - 排队发送（默认、回车）：先挂起，这一轮结束后自动发；挂起的消息在对话末尾可以改、删、立刻发；
+ * - 立即插话：马上发给 agent。
+ */
+export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb, notice }: ComposerProps) {
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState<number | null>(null);
   const [stopping, setStopping] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const active = status === 'running' || status === 'waiting';
+  const queued = status === 'queued';
+  // 有提问挂着时输入的话是回答，直接发
+  const holdable = (active || queued) && !hasPendingQuestion;
   const tooLarge = files.find(file => file.size > maxUploadMb * 1024 * 1024);
   const canSend = (message.trim() || files.length > 0) && !tooLarge && progress === null;
 
-  const send = async () => {
+  // 输入框随内容长高，最多 MAX_HEIGHT，再多就滚动
+  useLayoutEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.min(el.scrollHeight, MAX_HEIGHT)}px`;
+  }, [message]);
+
+  const send = async (mode: 'queue' | 'now') => {
     if (!canSend) return;
     setProgress(files.length ? 0 : 100);
     try {
-      await sendMessage(runId, { message, files }, setProgress);
+      await sendMessage(runId, { message, files, mode }, setProgress);
       setMessage('');
       setFiles([]);
     } catch (error) {
@@ -51,38 +73,81 @@ export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb
 
   const placeholder = hasPendingQuestion
     ? '也可以直接在这里写字回答上面的问题'
-    : active
-      ? `${agent.title}在干活，也可以随时补充说明`
+    : holdable
+      ? `${agent.title}在干活，发的话会等这一轮结束再发`
       : status === 'error'
         ? '发一条消息（比如「继续」）从断点接着做'
         : `回复${agent.title}，或者交代下一步`;
+  const sending = progress === null ? null : progress < 100 ? `上传 ${progress}%` : '发送中…';
 
   return (
-    <div className="border-t border-border-subtle bg-white px-4 py-3">
-      <div className="mx-auto max-w-3xl">
-        <Textarea
-          rows={2}
-          value={message}
-          onChange={event => setMessage(event.target.value)}
-          onKeyDown={event => {
-            if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) void send();
-          }}
-          placeholder={placeholder}
-          aria-label="回复"
-          className="min-h-[3.5rem] resize-y"
-        />
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-          <AttachmentPicker files={files} onChange={setFiles} disabled={progress !== null} compact />
-          <div className="flex items-center gap-2">
-            {tooLarge && <span className="text-xs text-error">{tooLarge.name} 超过 {maxUploadMb} MB</span>}
-            {active && (
-              <Button variant="outline" size="sm" onClick={stop} disabled={stopping} title="让它停下来，之后发消息可以接着做">
-                <Square /> {stopping ? '停止中…' : '停止'}
+    <div className="shrink-0 border-t border-border-subtle bg-white px-3 py-2 sm:px-4">
+      <div
+        className="mx-auto max-w-4xl"
+        onDragOver={event => event.preventDefault()}
+        onDrop={event => {
+          const dropped = droppedFiles(event);
+          if (dropped.length && progress === null) setFiles(current => [...current, ...dropped]);
+        }}
+      >
+        {notice && <div className="mb-1.5 text-xs">{notice}</div>}
+        <div className="rounded-xl border border-border bg-white transition-colors focus-within:border-primary-300">
+          <textarea
+            ref={textareaRef}
+            rows={1}
+            value={message}
+            onChange={event => setMessage(event.target.value)}
+            onKeyDown={event => {
+              if (!isSendKey(event)) return;
+              event.preventDefault();
+              void send(holdable ? 'queue' : 'now');
+            }}
+            onPaste={event => {
+              const pasted = pastedFiles(event);
+              if (pasted.length && progress === null) setFiles(current => [...current, ...pasted]);
+            }}
+            placeholder={placeholder}
+            aria-label="回复"
+            className="block w-full resize-none bg-transparent px-3 pt-2.5 text-sm leading-relaxed text-text-primary outline-none placeholder:text-text-muted"
+            style={{ maxHeight: MAX_HEIGHT }}
+          />
+          <div className="flex flex-wrap items-center justify-between gap-2 px-1.5 pb-1.5">
+            <AttachmentPicker files={files} onChange={setFiles} disabled={progress !== null} compact />
+            <div className="ml-auto flex items-center gap-1.5">
+              {tooLarge && <span className="text-xs text-error">{tooLarge.name} 超过 {maxUploadMb} MB</span>}
+              {SEND_HINT && !holdable && <span className="hidden text-xs text-text-muted md:inline">{SEND_HINT}</span>}
+              {(active || queued) && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={stop}
+                  disabled={stopping}
+                  title={queued ? '不排了，消息留在记录里' : '让它停下来，之后发消息可以接着做'}
+                >
+                  <Square /> {stopping ? '停止中…' : queued ? '取消排队' : '停止'}
+                </Button>
+              )}
+              {holdable && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => void send('now')}
+                  disabled={!canSend}
+                  title="不等这一轮结束，马上发给它"
+                >
+                  <Zap /> 立即插话
+                </Button>
+              )}
+              <Button
+                size="sm"
+                onClick={() => void send(holdable ? 'queue' : 'now')}
+                disabled={!canSend}
+                title={holdable ? '这一轮结束后自动发（Enter）' : SEND_HINT || '发送'}
+                className={cn(holdable && 'min-w-[5.5rem]')}
+              >
+                <Send /> {sending ?? (holdable ? '排队发送' : '发送')}
               </Button>
-            )}
-            <Button size="sm" onClick={() => void send()} disabled={!canSend} title="Ctrl/⌘ + Enter">
-              <Send /> {progress === null ? '发送' : progress < 100 ? `上传 ${progress}%` : '发送中…'}
-            </Button>
+            </div>
           </div>
         </div>
       </div>

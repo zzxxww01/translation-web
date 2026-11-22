@@ -1,20 +1,34 @@
 import { memo, useMemo, useState } from 'react';
 import { AlertTriangle, CheckCircle2, ChevronRight, Info, Loader2, Paperclip, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { fileUrl } from '../api';
+import { isImage } from '../input';
 import { renderMarkdown } from '../markdown';
 import type { ToolCall } from '../state';
 import { formatDuration } from '../state';
 // .skill-md 的排版跟着用它的组件走：Slack 页、文章页也嵌了这些组件，不能只靠 Agent 页加载
 import '../styles.css';
 
-export function UserBubble({ text, files }: { text: string; files: string[] }) {
+export function UserBubble({ text, files, runId }: { text: string; files: string[]; runId?: string }) {
+  // 有 runId 时图片直接显示缩略图（点开看原图）；Slack、文章页嵌的气泡没有运行目录，只列文件名
+  const images = runId ? files.filter(isImage) : [];
+  const others = files.filter(file => !images.includes(file));
   return (
     <div className="flex justify-end">
       <div className="max-w-[85%] rounded-xl rounded-tr-sm bg-primary-50 px-4 py-2.5 text-sm text-text-primary">
         {text && <p className="whitespace-pre-wrap break-words">{text}</p>}
-        {files.length > 0 && (
-          <ul className={cn('space-y-0.5 text-xs text-text-secondary', text && 'mt-2')}>
-            {files.map(file => (
+        {images.length > 0 && runId && (
+          <div className={cn('flex flex-wrap gap-2', text && 'mt-2')}>
+            {images.map(file => (
+              <a key={file} href={fileUrl(runId, file)} target="_blank" rel="noreferrer" title={file}>
+                <img src={fileUrl(runId, file)} alt={file} loading="lazy" className="max-h-40 max-w-[12rem] rounded-md border border-border-subtle object-cover" />
+              </a>
+            ))}
+          </div>
+        )}
+        {others.length > 0 && (
+          <ul className={cn('space-y-0.5 text-xs text-text-secondary', (text || images.length > 0) && 'mt-2')}>
+            {others.map(file => (
               <li key={file} className="flex items-center gap-1.5">
                 <Paperclip className="h-3 w-3" /> {file}
               </li>

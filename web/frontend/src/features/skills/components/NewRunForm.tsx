@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, ChevronDown, LayoutList } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,6 +11,7 @@ import { HARNESSES, loadHarness, saveHarness, type Harness } from '../harness';
 import { loadModel, saveModel } from '../models';
 import type { Agent, RunMeta } from '../types';
 import { AgentAvatar } from './AgentIcon';
+import { droppedFiles, isSendKey, pastedFiles, SEND_HINT } from '../input';
 import { AttachmentPicker } from './AttachmentChips';
 import { ModelPicker } from './ModelPicker';
 
@@ -18,14 +19,29 @@ interface NewRunFormProps {
   /** 第一个是通用 Agent，其余是专职 Agent（见 normalizeCatalog） */
   catalog: Agent[];
   maxUploadMb: number;
+  /** 从 Agent 详情页点「和它对话」进来时预选的 Agent */
+  initialAgent?: string;
   onStarted: (run: RunMeta) => void;
+  /** 打开 Agent 列表 */
+  onBrowse: () => void;
 }
 
-/** 新对话：先选 Agent（卡片），再交代要做什么。模型和自动继续是次要选项，放在输入框下面。 */
-export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps) {
+/** 新对话：输入框上方下拉选 Agent（默认通用），交代要做什么。模型和自动继续是次要选项，放在输入框下面。 */
+export function NewRunForm({ catalog, maxUploadMb, initialAgent = '', onStarted, onBrowse }: NewRunFormProps) {
   const queryClient = useQueryClient();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [agentName, setAgentName] = useState('');
+  const [agentName, setAgentName] = useState(initialAgent);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const pickerRef = useRef<HTMLDivElement>(null);
+  // 点别处收起 Agent 列表
+  useEffect(() => {
+    if (!pickerOpen) return;
+    const close = (event: MouseEvent) => {
+      if (!pickerRef.current?.contains(event.target as Node)) setPickerOpen(false);
+    };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [pickerOpen]);
   const agent = catalog.find(item => item.name === agentName) ?? catalog[0];
   const [harness, setHarness] = useState<Harness>(() => loadHarness(agent.name, agent.harness));
   const [model, setModel] = useState(() => loadModel(agent.name, harness));
@@ -40,6 +56,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
 
   const pickAgent = (next: Agent) => {
     setAgentName(next.name);
+    setPickerOpen(false);
     const nextHarness = loadHarness(next.name, next.harness);
     setHarness(nextHarness);
     setModel(loadModel(next.name, nextHarness));
@@ -86,41 +103,75 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-8 sm:px-8 sm:py-12">
-      <h1 className="text-2xl text-text-primary [font-family:var(--font-display)]">找哪个 Agent 帮忙？</h1>
-      <p className="mt-1.5 text-sm text-text-muted">选一个 Agent，告诉它要做什么。它在服务器上干活，关掉页面也不会停。</p>
+      <h1 className="text-2xl text-text-primary [font-family:var(--font-display)]">要做什么？</h1>
+      <p className="mt-1.5 text-sm text-text-muted">交代给 Agent，它在服务器上干活，关掉页面也不会停。</p>
 
-      <div className="mt-6 grid gap-2 sm:grid-cols-2" role="radiogroup" aria-label="选 Agent">
-        {catalog.map(item => {
-          const selected = item.name === agent.name;
-          return (
+      <div
+        className="mt-6 rounded-xl border border-border bg-white shadow-sm transition-colors focus-within:border-primary-300"
+        onDragOver={event => event.preventDefault()}
+        onDrop={event => {
+          const dropped = droppedFiles(event);
+          if (dropped.length && !busy) setFiles(current => [...current, ...dropped]);
+        }}
+      >
+        <div className="flex items-center gap-2 px-3 pt-3 text-xs text-text-muted">
+          <span className="pl-1">交给 </span>
+          <div ref={pickerRef} className="relative">
             <button
-              key={item.name || 'general'}
               type="button"
-              role="radio"
-              aria-checked={selected}
-              disabled={!item.available || busy}
-              onClick={() => pickAgent(item)}
-              className={cn(
-                'flex items-start gap-3 rounded-xl border px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50',
-                selected ? 'border-primary-400 bg-white shadow-sm ring-1 ring-primary-200' : 'border-border-subtle bg-white/60 hover:border-primary-200 hover:bg-white'
-              )}
+              aria-label="选 Agent"
+              aria-expanded={pickerOpen}
+              disabled={busy}
+              onClick={() => setPickerOpen(open => !open)}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border-subtle bg-bg-secondary px-2 py-1 text-text-secondary transition-colors hover:border-primary-200 hover:text-text-primary"
             >
-              <AgentAvatar icon={item.icon} />
-              <span className="min-w-0">
-                <span className="block text-sm font-medium text-text-primary">{item.title}</span>
-                <span className="mt-0.5 block text-xs leading-relaxed text-text-muted">
-                  {item.available ? item.description : '服务器上还没装这个 Agent'}
-                </span>
-              </span>
+              <AgentAvatar icon={agent.icon} size="sm" className="h-5 w-5 rounded" />
+              <span className="font-medium">{agent.title}</span>
+              <ChevronDown className="h-3.5 w-3.5" />
             </button>
-          );
-        })}
-      </div>
-
-      <div className="mt-5 rounded-xl border border-border bg-white shadow-sm transition-colors focus-within:border-primary-300">
-        <div className="flex items-center gap-2 px-4 pt-3 text-xs text-text-muted">
-          <AgentAvatar icon={agent.icon} size="sm" className="h-5 w-5 rounded" />
-          交给 <span className="font-medium text-text-secondary">{agent.title}</span>
+            {/* 列表一直在 DOM 里，收起时隐藏：键盘和读屏都能找到 */}
+            <div
+              hidden={!pickerOpen}
+              className="absolute left-0 top-full z-20 mt-1 w-80 max-w-[85vw] rounded-lg border border-border-subtle bg-white p-1 shadow-lg"
+            >
+              <div role="radiogroup" aria-label="选 Agent" className="max-h-80 overflow-y-auto">
+                {catalog.map(item => {
+                  const selected = item.name === agent.name;
+                  return (
+                    <button
+                      key={item.name || 'general'}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      disabled={!item.available || busy}
+                      onClick={() => pickAgent(item)}
+                      className={cn(
+                        'flex w-full items-start gap-2.5 rounded-md px-2 py-2 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50',
+                        selected ? 'bg-primary-50' : 'enabled:hover:bg-bg-hover'
+                      )}
+                    >
+                      <span className="sr-only">{item.title}</span>
+                      <AgentAvatar icon={item.icon} size="sm" />
+                      <span className="min-w-0" aria-hidden>
+                        <span className="block text-sm text-text-primary">{item.title}</span>
+                        <span className="line-clamp-1 block text-xs text-text-muted">
+                          {item.available ? item.description : '服务器上还没装这个 Agent'}
+                        </span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={onBrowse}
+                className="mt-1 flex w-full items-center gap-2 border-t border-border-subtle px-2 pb-1 pt-2 text-left text-xs text-text-secondary hover:text-text-primary"
+              >
+                <LayoutList className="h-3.5 w-3.5" /> 查看全部 Agent 和它们的 skill
+              </button>
+            </div>
+          </div>
+          <span className="hidden min-w-0 truncate sm:inline">{agent.description}</span>
         </div>
         <Textarea
           ref={textareaRef}
@@ -128,7 +179,13 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
           value={message}
           onChange={event => setMessage(event.target.value)}
           onKeyDown={event => {
-            if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) void start();
+            if (!isSendKey(event)) return;
+            event.preventDefault();
+            void start();
+          }}
+          onPaste={event => {
+            const pasted = pastedFiles(event);
+            if (pasted.length && !busy) setFiles(current => [...current, ...pasted]);
           }}
           placeholder={agent.hint}
           aria-label="要做什么"
@@ -159,7 +216,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
                 ))}
               </div>
             </div>
-            <Button size="sm" onClick={() => void start()} disabled={!canStart} title="Ctrl/⌘ + Enter">
+            <Button size="sm" onClick={() => void start()} disabled={!canStart} title={SEND_HINT || '开始'}>
               <ArrowUp /> {progress === null ? '开始' : progress < 100 ? `上传 ${progress}%` : '开始中…'}
             </Button>
           </div>

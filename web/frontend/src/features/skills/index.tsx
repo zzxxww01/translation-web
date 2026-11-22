@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowLeft, LogOut, Settings } from 'lucide-react';
+import { ArrowLeft, LayoutList, LogOut, Settings } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { findAgent, normalizeCatalog } from './agents';
+import { agentKey, findAgent, GENERAL_KEY, normalizeCatalog } from './agents';
 import { skillsApi } from './api';
 import { isUnauthorized, skillKeys, useCatalog, useRuns, useSkillsAuth } from './hooks';
+import { AgentDetail, AgentList } from './components/AgentDirectory';
 import { LoginPanel } from './components/LoginPanel';
 import { NewRunForm } from './components/NewRunForm';
 import { RunList } from './components/RunList';
@@ -48,7 +49,11 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   }, [selectedId]);
   // 宽屏上没选对话就显示「新对话」；窄屏列表和内容二选一，所以新对话要单独的 URL 状态
   const creating = !selectedId && searchParams.get('new') === '1';
-  const showDetail = Boolean(selectedId) || creating;
+  // Agent 列表（?agents=1）和某个 Agent 的详情（?agent=<skill 名>，通用 Agent 是 general）
+  const browsing = !selectedId && !creating && searchParams.get('agents') === '1';
+  const agentParam = searchParams.get('agent');
+  const viewingAgent = !selectedId && !creating && agentParam !== null;
+  const showDetail = Boolean(selectedId) || creating || browsing || viewingAgent;
   const runs = useRuns(true);
   const catalogQuery = useCatalog(true);
   const catalog = normalizeCatalog(catalogQuery.data);
@@ -56,6 +61,9 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
 
   const select = (id: string) => setSearchParams({ run: id });
   const openNew = () => setSearchParams({ new: '1' });
+  const openAgents = () => setSearchParams({ agents: '1' });
+  const fromKey = (key: string | null) => (key === GENERAL_KEY ? '' : key ?? '');
+  const shownAgent = viewingAgent ? catalog.find(agent => agent.name === fromKey(agentParam)) ?? null : null;
   const backToList = () => setSearchParams({});
   const removeRun = async (id: string) => {
     await skillsApi.remove(id);
@@ -85,7 +93,10 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
         )}
       >
         <RunList runs={(runs.data ?? []).filter(run => !run.source?.startsWith('slack:'))} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} />
-        <div className="border-t border-border-subtle px-4 py-2">
+        <div className="flex flex-wrap border-t border-border-subtle px-4 py-2">
+          <Button variant={browsing || viewingAgent ? 'secondary' : 'ghost'} size="sm" onClick={openAgents}>
+            <LayoutList /> 全部 Agent
+          </Button>
           <Button variant="ghost" size="sm" onClick={() => setUpdatesOpen(true)}>
             <Settings /> 工具与更新
           </Button>
@@ -117,11 +128,28 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
             ) : (
               <div className="p-8 text-sm text-text-muted">这个对话不存在或已被删除。</div>
             )
+          ) : browsing ? (
+            <AgentList catalog={catalog} onOpen={agent => setSearchParams({ agent: agentKey(agent) })} />
+          ) : viewingAgent ? (
+            shownAgent ? (
+              <AgentDetail
+                agent={shownAgent}
+                onBack={openAgents}
+                onStart={agent => setSearchParams({ new: '1', agent: agentKey(agent) })}
+              />
+            ) : catalogQuery.isPending ? (
+              <Spinner />
+            ) : (
+              <div className="p-8 text-sm text-text-muted">没有这个 Agent。</div>
+            )
           ) : (
             <NewRunForm
+              key={agentParam ?? ''}
               catalog={catalog}
               maxUploadMb={maxUploadMb}
+              initialAgent={fromKey(searchParams.get('agent'))}
               onStarted={run => select(run.id)}
+              onBrowse={openAgents}
             />
           )}
         </div>

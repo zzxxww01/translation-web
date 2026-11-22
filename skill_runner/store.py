@@ -16,7 +16,7 @@ import re
 import secrets
 import stat
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, BinaryIO, Iterable
@@ -63,6 +63,13 @@ class RunMeta:
     auto_replies: int = 0
     # 谁替用户开的这个对话：空 = Claude 页；"slack:<会话>[:<thread_ts>]" = momo Slack 页给这个会话 / thread 配的 agent
     source: str = ""
+    # 排队：名额满了时这条消息先存着，有空位自动发出（服务重启后接着排）
+    queued_prompt: str | None = None
+    queued_at: float | None = None
+    # 提问挂太久时进程已关，问题存在这里（qid → questions），回答时作为新消息续接
+    detached_questions: dict[str, Any] = field(default_factory=dict)
+    # 挂起的消息：agent 干活时发的话先存着，这一轮正常结束后按顺序一条条发（{id, text, files, created_at}）
+    held: list[dict[str, Any]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

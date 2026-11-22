@@ -66,7 +66,7 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translat
 ### 旧版工作台
 原来 Slack 页里的「回复工作台」搬到「工具箱 → 旧版工作台」，功能不变。
 
-skill-runner 里的 `slack-post-translate`、`slack-dm-reply` 两个 skill 页面不再调用（文件还在）。
+skill-runner 里原来的 `slack-post-translate`、`slack-dm-reply` 两个 skill 已于 2026-11-22 删除。
 
 ## 接入方式
 

@@ -4,8 +4,13 @@
 
     running  一轮正在进行
     waiting  有提问等用户在页面上回答（AskUserQuestion 挂起在 can_use_tool 回调里）
-    idle     本轮结束，等用户发下一条消息；空闲久了会断开 Claude 进程，下次发消息时按会话 ID 续接
+    idle     本轮结束，等用户发下一条消息；几秒后就断开进程（不常驻），下次发消息时按会话 ID 续接
              （回复末尾带 AWAIT_MARK 时 awaiting_reply=True：是在等用户确认，不是做完了）
+    queued   名额满了（或内存不够），消息存在 meta.queued_prompt 里排队，有空位按先来后到自动发出
+
+名额按活着的进程算（会话没关就占着，正在启动的也算），重活（config.heavy_skills）算 2 个。
+提问挂着超过 question_detach_s 没人回答，就把问题存进 meta.detached_questions、关掉进程；
+之后的回答作为一条新消息续接会话。
 
 任务设了 auto_reply_s 时，等确认（提问挂着，或带等待标记的一轮结束）超过这么久没人回复，
 就自动按推荐方案继续：提问选推荐选项，其余发一条「按你的建议确认、继续」，每个任务最多自动 AUTO_REPLY_LIMIT 次。
@@ -35,13 +40,43 @@ from .store import RunMeta, RunStore
 logger = logging.getLogger(__name__)
 
 ACTIVE_STATUSES = {"running", "waiting"}
+QUEUED = "queued"
 
 AWAIT_MARK = "【等待确认】"
 AUTO_REPLY_LIMIT = 3
+DETACH_MESSAGE = "用户暂时没回答，问题已保留在页面上；回答会作为下一条消息发来。请就此结束这一轮，先不要继续做。"
 AUTO_REPLY_TEXT = (
     "（自动确认）{wait}没有收到回复。请按你推荐的方案确认（比如术语表全部采用建议译法），"
     "接下来不要再停下来等确认，直接完成剩下的全部步骤。"
 )
+
+
+def mem_available_mb() -> int | None:
+    """系统可用内存（MB），读不到返回 None（不按内存拦）。"""
+    try:
+        with open("/proc/meminfo", encoding="ascii") as fh:
+            for line in fh:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) // 1024
+    except (OSError, ValueError, IndexError):
+        return None
+    return None
+
+
+def answer_text(questions_by_qid: dict[str, Any], answers: dict[str, Any] | None, response: str | None) -> str:
+    """脱离进程的提问被回答时，作为新消息发给 agent 的话。"""
+    lines = ["（回答你之前的提问）"]
+    for questions in questions_by_qid.values():
+        for q in questions or []:
+            question = str(q.get("question", "")) if isinstance(q, dict) else ""
+            if answers and question in answers:
+                value = answers[question]
+                value = "、".join(map(str, value)) if isinstance(value, list) else str(value)
+                lines.append(f"- {question}：{value}")
+    if response:
+        lines.append(response.strip())
+    lines.append("请按这个回答接着做。")
+    return "\n".join(lines)
 
 
 def wait_text(seconds: float) -> str:
@@ -123,6 +158,11 @@ class _Run:
     pump: asyncio.Task | None = None
     idle_task: asyncio.Task | None = None
     auto_task: asyncio.Task | None = None
+    detach_task: asyncio.Task | None = None
+    # 正在起进程（还没赋给 session）：也占名额，避免同时起多个
+    opening: bool = False
+    # 用户点了停止：这一轮结束后挂起的消息不自动发
+    interrupted: bool = False
     # 这一轮最后一段文字（判断是不是以等待标记结尾）
     last_text: str = ""
     closing: bool = False
@@ -141,6 +181,14 @@ def harness_label(harness: str) -> str:
 SOURCE_RE = re.compile(r"^slack:[CDG][A-Z0-9]{6,20}(:\d{9,11}\.\d{1,6})?$")
 
 
+IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"}
+IMAGE_NOTE = "（图片，请打开看内容）"
+
+
+def is_image(path: str) -> bool:
+    return Path(path).suffix.lower() in IMAGE_SUFFIXES
+
+
 def build_prompt(
     skill: str | None, message: str, attachments: list[str], harness: str = "claude", skills_dir: Path | None = None
 ) -> str:
@@ -153,7 +201,7 @@ def build_prompt(
         # /<skill> 直接派发 skill，正文作为参数跟在后面
         text = f"/{skill} {text}".rstrip()
     if attachments:
-        listing = "\n".join(f"- {path}" for path in attachments)
+        listing = "\n".join(f"- {path}{IMAGE_NOTE if is_image(path) else ''}" for path in attachments)
         text += f"\n\n附件（已保存在当前运行目录）：\n{listing}"
     return text
 
@@ -174,6 +222,8 @@ class Runner:
         self._runs: dict[str, _Run] = {}
         self._runtime_maintenance = False
         self._runtime_users = 0
+        self._drain_lock = asyncio.Lock()
+        self._queue_tick: asyncio.Task | None = None
 
     @contextmanager
     def runtime_use(self):
@@ -190,7 +240,8 @@ class Runner:
         if self._runtime_maintenance:
             raise Conflict("已有更新正在进行")
         if (self._runtime_users
-                or any(meta.status in ACTIVE_STATUSES or meta.awaiting_reply for meta in self.list_runs())
+                or any(meta.status in ACTIVE_STATUSES or meta.status == QUEUED or meta.awaiting_reply
+                       for meta in self.list_runs())
                 or any(self._session_busy(run) for run in self._runs.values())):
             raise Conflict("还有对话正在运行或等待确认，请结束后再更新")
         self._runtime_maintenance = True
@@ -229,6 +280,26 @@ class Runner:
 
     def active_count(self) -> int:
         return sum(1 for run in self._runs.values() if run.meta.status in ACTIVE_STATUSES or self._session_busy(run))
+
+    def _weight(self, run: _Run) -> int:
+        return 2 if run.meta.skill in self.config.heavy_skills else 1
+
+    def slots_used(self) -> int:
+        """活着的进程占的名额：会话没关（含空闲那几秒）或正在启动都算。"""
+        return sum(self._weight(run) for run in self._runs.values() if run.session is not None or run.opening)
+
+    def _has_room(self, run: _Run) -> bool:
+        used = self.slots_used()
+        if used == 0:
+            return True  # 一个都没在跑时总能起一个（重活也行）
+        if used + self._weight(run) > self.config.max_active:
+            return False
+        free = mem_available_mb()
+        return free is None or free >= self.config.min_free_mb
+
+    def queue_position(self, run_id: str) -> int | None:
+        queued = sorted((r for r in self._runs.values() if r.meta.status == QUEUED), key=lambda r: r.meta.queued_at or 0)
+        return next((i + 1 for i, r in enumerate(queued) if r.meta.id == run_id), None)
 
     @staticmethod
     def _session_busy(run: _Run) -> bool:
@@ -296,8 +367,7 @@ class Runner:
             raise RunnerError(str(exc)) from exc
         if source and not SOURCE_RE.match(source):
             raise RunnerError("source 格式不对")
-        if self.active_count() >= self.config.max_active:
-            raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
+        # 名额满了不拒绝：begin 时进队列，有空位自动开始
         # 服务器内存小：Slack 页自动启动的 agent 一次只跑一个，其余在页面上排队
         if source.startswith("slack:") and self._slack_busy():
             raise Busy("已有一个 Slack AI 在处理，排队中")
@@ -310,7 +380,8 @@ class Runner:
         prompt = build_prompt(run.meta.skill, message, attachments, run.meta.harness, self.config.shared_skills_dir)
         return await self._deliver(run, message, attachments, prompt)
 
-    async def send_message(self, run_id: str, message: str, attachments: list[str]) -> RunMeta:
+    async def send_message(self, run_id: str, message: str, attachments: list[str], mode: str = "now") -> RunMeta:
+        """mode="queue"：agent 正在干活时先挂起，这一轮结束再发；"now"：立刻发（运行中就是插话）。"""
         run = self._get(run_id)
         if not message.strip() and not attachments:
             raise RunnerError("消息不能为空")
@@ -320,13 +391,83 @@ class Runner:
             self._emit(run, {"type": "user", "text": message, "files": []})
             self._resolve_question(run, qid, {"response": message})
             return run.meta
-        return await self._deliver(run, message, attachments, build_prompt(None, message, attachments))
+        if mode == "queue" and self._working(run):
+            self._hold(run, message, attachments)
+            return run.meta
+        return await self._send_now(run, message, attachments)
 
-    async def _deliver(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
+    def _working(self, run: _Run) -> bool:
+        return run.meta.status in ACTIVE_STATUSES or run.meta.status == QUEUED or self._session_busy(run)
+
+    async def _send_now(self, run: _Run, message: str, attachments: list[str]) -> RunMeta:
+        run.interrupted = False
+        prompt = build_prompt(None, message, attachments)
+        if run.meta.detached_questions:
+            # 进程已关的提问：这条消息就是回答，提问卡片随之收起
+            for qid in list(run.meta.detached_questions):
+                self._emit(run, {"type": "answer", "qid": qid, "response": message})
+            prompt = "（回答你之前的提问）\n" + prompt
+            run.meta.detached_questions = {}
+            self.store.save_meta(run.meta)
+        return await self._deliver(run, message, attachments, prompt)
+
+    # ---- 挂起的消息：等这一轮结束再发，期间可以改、删、立刻发 ----
+
+    def _emit_held(self, run: _Run) -> None:
+        self.store.save_meta(run.meta)
+        self._emit(run, {"type": "held", "items": list(run.meta.held)})
+
+    def _hold(self, run: _Run, message: str, attachments: list[str]) -> None:
+        run.meta.held.append({"id": uuid.uuid4().hex[:12], "text": message, "files": attachments, "created_at": time.time()})
+        self._emit_held(run)
+
+    def _find_held(self, run: _Run, hid: str) -> dict[str, Any]:
+        item = next((h for h in run.meta.held if h.get("id") == hid), None)
+        if item is None:
+            raise NotFound("这条待发消息已经发出或删掉了")
+        return item
+
+    def edit_held(self, run_id: str, hid: str, text: str) -> RunMeta:
+        run = self._get(run_id)
+        item = self._find_held(run, hid)
+        if not text.strip() and not item.get("files"):
+            raise RunnerError("消息不能为空")
+        item["text"] = text
+        self._emit_held(run)
+        return run.meta
+
+    def delete_held(self, run_id: str, hid: str) -> RunMeta:
+        run = self._get(run_id)
+        item = self._find_held(run, hid)
+        run.meta.held.remove(item)
+        self._emit_held(run)
+        return run.meta
+
+    async def send_held(self, run_id: str, hid: str) -> RunMeta:
+        """不等了，立刻发（agent 在干活时就是插话）。"""
+        run = self._get(run_id)
+        item = self._find_held(run, hid)
+        run.meta.held.remove(item)
+        self._emit_held(run)
+        return await self._send_now(run, str(item.get("text") or ""), list(item.get("files") or []))
+
+    async def _send_next_held(self, run: _Run) -> None:
+        if not run.meta.held or self._working(run) or run.pending:
+            return
+        item = run.meta.held.pop(0)
+        self._emit_held(run)
+        try:
+            await self._send_now(run, str(item.get("text") or ""), list(item.get("files") or []))
+        except RunnerError:
+            logger.exception("sending held message failed for run %s", run.meta.id)
+
+    async def _deliver(self, run: _Run, message: str, attachments: list[str], prompt: str, *, echo: bool = True) -> RunMeta:
         with self.runtime_use():
-            return await self._deliver_to_session(run, message, attachments, prompt)
+            return await self._deliver_to_session(run, message, attachments, prompt, echo=echo)
 
-    async def _deliver_to_session(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
+    async def _deliver_to_session(
+        self, run: _Run, message: str, attachments: list[str], prompt: str, *, echo: bool = True
+    ) -> RunMeta:
         async with run.lock:
             if self._runs.get(run.meta.id) is not run:  # 排队时这个对话已被删除
                 raise NotFound("运行不存在")
@@ -335,25 +476,122 @@ class Runner:
                     await self._close_session(run, strict=True)
                 except Exception as exc:
                     raise SessionFailed(f"上次会话未能关闭，请稍后重试：{exc}") from exc
-            need_open = run.session is None
-            if need_open and run.meta.status not in ACTIVE_STATUSES and self.active_count() >= self.config.max_active:
-                raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
             # 先记下用户的话再起会话：起不来时页面上也能看到发了什么、为什么失败
-            self._emit(run, {"type": "user", "text": message, "files": attachments})
+            if echo:
+                self._emit(run, {"type": "user", "text": message, "files": attachments})
             self._clear_awaiting(run)
-            run.last_text = ""
-            if need_open:
-                await self._open(run)
-            self._cancel_idle(run)
-            self._set_status(run, "running")
-            try:
-                assert run.session is not None
-                await run.session.send(prompt)
-            except Exception as exc:  # noqa: BLE001 - 任何发送失败都要反映到页面上
-                logger.exception("send failed for run %s", run.meta.id)
-                await self._fail(run, f"消息没能发给 {harness_label(run.meta.harness)}：{exc}")
-                raise SessionFailed(str(exc)) from exc
+            if run.session is None and (run.meta.status == QUEUED or not self._has_room(run)):
+                self._enqueue(run, prompt)
+                return run.meta
+            await self._start_turn(run, prompt)
         return run.meta
+
+    async def _start_turn(self, run: _Run, prompt: str) -> None:
+        """持有 run.lock 时调用：需要就起进程，然后把这一轮发出去。"""
+        run.last_text = ""
+        if run.session is None:
+            await self._open(run)
+        self._cancel_idle(run)
+        self._set_status(run, "running")
+        try:
+            assert run.session is not None
+            await run.session.send(prompt)
+        except Exception as exc:  # noqa: BLE001 - 任何发送失败都要反映到页面上
+            logger.exception("send failed for run %s", run.meta.id)
+            await self._fail(run, f"消息没能发给 {harness_label(run.meta.harness)}：{exc}")
+            raise SessionFailed(str(exc)) from exc
+
+    # ---- 排队 ----
+
+    def _enqueue(self, run: _Run, prompt: str) -> None:
+        # 排队时又发了一条：接在后面一起发
+        run.meta.queued_prompt = f"{run.meta.queued_prompt}\n\n{prompt}" if run.meta.queued_prompt else prompt
+        if run.meta.queued_at is None:
+            run.meta.queued_at = time.time()
+        first = run.meta.status != QUEUED
+        self._set_status(run, QUEUED)
+        self.store.save_meta(run.meta)
+        if first:
+            free = mem_available_mb()
+            why = (f"服务器内存不够（剩 {free} MB）" if free is not None and free < self.config.min_free_mb
+                   else f"同时最多跑 {self.config.max_active} 个")
+            self._emit(run, {"type": "notice", "level": "info",
+                             "text": f"{why}，排队中（第 {self.queue_position(run.meta.id)} 位），有空位会自动开始"})
+        self._ensure_queue_tick()
+
+    def _cancel_queue(self, run: _Run) -> bool:
+        if run.meta.status != QUEUED:
+            return False
+        run.meta.queued_prompt = None
+        run.meta.queued_at = None
+        self._emit(run, {"type": "notice", "level": "info", "text": "已取消排队"})
+        self._set_status(run, "idle")
+        self.store.save_meta(run.meta)
+        return True
+
+    def _kick_queue(self) -> None:
+        if any(run.meta.status == QUEUED for run in self._runs.values()):
+            try:
+                asyncio.get_running_loop().create_task(self.drain_queue())
+            except RuntimeError:
+                pass
+
+    async def drain_queue(self) -> int:
+        """按先来后到把能开始的排队对话发出去；排头的放不下就停（不插队）。"""
+        started = 0
+        async with self._drain_lock:
+            while not self._runtime_maintenance:
+                queued = sorted((r for r in self._runs.values() if r.meta.status == QUEUED),
+                                key=lambda r: r.meta.queued_at or 0)
+                if not queued or not self._has_room(queued[0]):
+                    break
+                run = queued[0]
+                async with run.lock:
+                    if run.meta.status != QUEUED or self._runs.get(run.meta.id) is not run:
+                        continue
+                    prompt = run.meta.queued_prompt or "继续"
+                    run.meta.queued_prompt = None
+                    run.meta.queued_at = None
+                    self.store.save_meta(run.meta)
+                    self._emit(run, {"type": "notice", "level": "info", "text": "排到了，开始"})
+                    try:
+                        with self.runtime_use():
+                            await self._start_turn(run, prompt)
+                    except Conflict:
+                        break  # 正在更新运行工具：等更新完再排
+                    except RunnerError:
+                        logger.exception("queued run %s failed to start", run.meta.id)
+                started += 1
+        return started
+
+    def _ensure_queue_tick(self) -> None:
+        """内存回来了也要能开始：有人排队时每 15 秒看一眼。"""
+        if self._queue_tick is not None and not self._queue_tick.done():
+            return
+        try:
+            self._queue_tick = asyncio.get_running_loop().create_task(self._queue_loop())
+        except RuntimeError:
+            self._queue_tick = None
+
+    async def _queue_loop(self) -> None:
+        while any(run.meta.status == QUEUED for run in self._runs.values()):
+            await asyncio.sleep(15)
+            try:
+                await self.drain_queue()
+            except Exception:  # noqa: BLE001
+                logger.exception("drain queue failed")
+
+    def resume_queue(self) -> int:
+        """服务启动时调用（在事件循环里）：重启前排着的对话接着排。"""
+        count = 0
+        for meta in self.store.list_meta():
+            if meta.status == QUEUED:
+                self._get(meta.id)
+                count += 1
+        if count:
+            self._ensure_queue_tick()
+            self._kick_queue()
+        return count
 
     async def _open(self, run: _Run) -> None:
         spec = SessionSpec(
@@ -368,6 +606,7 @@ class Runner:
             # Codex 续接时沿用这次运行已经定下的模型（中途清单更新也不换）
             model=run.meta.model or (run.meta.actual_model if run.meta.harness == "codex" and run.meta.session_id else None),
         )
+        run.opening = True
         try:
             session = await self.session_factory(spec)
         except Exception as exc:  # noqa: BLE001
@@ -376,6 +615,8 @@ class Runner:
             self._emit(run, {"type": "error", "text": f"启动 {label} 失败：{exc}"})
             self._set_status(run, "error", f"启动 {label} 失败：{exc}")
             raise SessionFailed(str(exc)) from exc
+        finally:
+            run.opening = False
         run.session = session
         run.closing = False
         run.pump = asyncio.create_task(self._pump(run, session))
@@ -419,7 +660,10 @@ class Runner:
                 self._set_status(run, "idle")
                 self.store.save_meta(run.meta)
                 self._schedule_idle(run)
-                if run.meta.awaiting_reply:
+                if run.meta.held and not event.get("is_error") and not run.interrupted and not self._session_busy(run):
+                    # 正常结束一轮：挂起的消息接着发（等确认时它就是回复，不再排自动继续）
+                    asyncio.get_running_loop().create_task(self._send_next_held(run))
+                elif run.meta.awaiting_reply:
                     self._schedule_auto_reply(run)
             return
         if kind == "text" and not event.get("parent"):
@@ -447,13 +691,17 @@ class Runner:
             self._set_status(run, "waiting")
             if len(run.pending) == 1:
                 self._schedule_auto_reply(run)
+                self._schedule_detach(run)
             try:
                 return await future
             finally:
                 run.pending.pop(qid, None)
-                if not run.pending:
+                # 脱离进程的提问（见 _detach_later）还算挂着：不取消自动回复、不改状态
+                detached = qid in run.meta.detached_questions
+                if not run.pending and not detached:
                     self._cancel_auto_reply(run)
-                if not run.pending and run.meta.status == "waiting":
+                    self._cancel_detach(run)
+                if not run.pending and run.meta.status == "waiting" and not detached:
                     self._set_status(run, "running")
         decision = policy.decide(
             tool_name,
@@ -469,7 +717,7 @@ class Runner:
             return PermissionOutcome(allow=False, message=decision.message)
         return PermissionOutcome(allow=True)
 
-    def answer(
+    async def answer(
         self,
         run_id: str,
         qid: str,
@@ -477,7 +725,8 @@ class Runner:
         response: str | None = None,
     ) -> RunMeta:
         run = self._get(run_id)
-        if qid not in run.pending:
+        detached = qid in run.meta.detached_questions
+        if qid not in run.pending and not detached:
             raise Conflict("这个提问已经回答过或已失效")
         payload: dict[str, Any] = {}
         if answers:
@@ -486,8 +735,55 @@ class Runner:
             payload["response"] = response
         if not payload:
             raise RunnerError("回答不能为空")
-        self._resolve_question(run, qid, payload)
+        if detached:
+            await self._answer_detached(run, qid, payload)
+        else:
+            self._resolve_question(run, qid, payload)
         return run.meta
+
+    async def _answer_detached(self, run: _Run, qid: str, payload: dict[str, Any]) -> None:
+        """进程已关的提问：记下回答，把回答作为新消息发出去（按会话 ID 续接）。"""
+        questions = {qid: run.meta.detached_questions.pop(qid)}
+        self.store.save_meta(run.meta)
+        self._emit(run, {"type": "answer", "qid": qid, **payload})
+        if run.meta.detached_questions:
+            return  # 同一轮还有别的问题没答：答完再一起续
+        text = answer_text(questions, payload.get("answers"), payload.get("response"))
+        await self._deliver(run, text, [], text, echo=False)
+
+    # ---- 提问挂太久：脱离进程 ----
+
+    def _schedule_detach(self, run: _Run) -> None:
+        self._cancel_detach(run)
+        if self.config.question_detach_s > 0:
+            run.detach_task = asyncio.create_task(self._detach_later(run))
+
+    def _cancel_detach(self, run: _Run) -> None:
+        if run.detach_task is not None and run.detach_task is not asyncio.current_task():
+            run.detach_task.cancel()
+        run.detach_task = None
+
+    async def _detach_later(self, run: _Run) -> None:
+        await asyncio.sleep(self.config.question_detach_s)
+        run.detach_task = None
+        if not run.pending or run.session is None:
+            return
+        async with run.lock:
+            if not run.pending or run.session is None:
+                return
+            run.meta.detached_questions = {qid: p.questions for qid, p in run.pending.items()}
+            # 先标成关闭中：拒绝提问后 agent 收尾的事件不再推给页面
+            run.closing = True
+            for pending in list(run.pending.values()):
+                if not pending.future.done():
+                    pending.future.set_result(PermissionOutcome(allow=False, message=DETACH_MESSAGE, interrupt=True))
+            await self._close_session(run)
+            run.pending.clear()
+            run.meta.awaiting_reply = True
+            self.store.save_meta(run.meta)
+            self._emit(run, {"type": "notice", "level": "info",
+                             "text": f"{wait_text(self.config.question_detach_s)}没回答，先关掉进程省内存；问题还在，回答后接着做"})
+            self._set_status(run, "idle")
 
     def _resolve_question(self, run: _Run, qid: str, payload: dict[str, Any]) -> None:
         pending = run.pending[qid]
@@ -499,6 +795,9 @@ class Runner:
 
     async def interrupt(self, run_id: str) -> RunMeta:
         run = self._get(run_id)
+        run.interrupted = True  # 停下后挂起的消息不自动发，留着让用户决定
+        if self._cancel_queue(run):
+            return run.meta
         self._clear_awaiting(run)
         for pending in list(run.pending.values()):
             if not pending.future.done():
@@ -516,7 +815,9 @@ class Runner:
         """Close all accepted work before replacing a run; retain its history and resume ID."""
         run = self._get(run_id)
         async with run.lock:
+            self._cancel_queue(run)
             self._clear_awaiting(run)
+            self._cancel_detach(run)
             for pending in list(run.pending.values()):
                 if not pending.future.done():
                     pending.future.set_result(PermissionOutcome(allow=False, message="用户停止了任务", interrupt=True))
@@ -539,6 +840,7 @@ class Runner:
             if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
                 raise Conflict("任务还在运行，先中断再删除")
             self._cancel_auto_reply(run)
+            self._cancel_detach(run)
             try:
                 await self._close_session(run, strict=True)
             except Exception as exc:
@@ -586,6 +888,15 @@ class Runner:
             run.meta.auto_replies += 1
             self.store.save_meta(run.meta)
             waited = wait_text(run.meta.auto_reply_s)
+            if run.meta.detached_questions and not run.pending:
+                self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回答，已自动选推荐选项"})
+                for qid, questions in list(run.meta.detached_questions.items()):
+                    answers = {str(q.get("question", "")): recommended_answer(q) for q in questions or []}
+                    try:
+                        await self._answer_detached(run, qid, {"answers": answers})
+                    except RunnerError:
+                        logger.exception("auto reply failed for run %s", run.meta.id)
+                return
             if run.pending:
                 for qid, pending in list(run.pending.items()):
                     answers = {str(q.get("question", "")): recommended_answer(q) for q in pending.questions}
@@ -608,7 +919,7 @@ class Runner:
         """服务启动时调用（在事件循环里）：重启前排着的自动回复接着排，时间照旧。"""
         resumed = 0
         for meta in self.store.list_meta():
-            if meta.status == "idle" and meta.awaiting_reply and meta.auto_reply_at is not None:
+            if meta.status == "idle" and (meta.awaiting_reply or meta.detached_questions) and meta.auto_reply_at is not None:
                 run = self._get(meta.id)
                 self._schedule_auto_reply(run, delay=max(5.0, meta.auto_reply_at - time.time()))
                 resumed += 1
@@ -655,6 +966,8 @@ class Runner:
                 if run.pump is not None and run.pump is not asyncio.current_task():
                     run.pump.cancel()
                 run.pump = None
+        # 腾出了名额：排队的接着开始
+        self._kick_queue()
 
     async def _fail(self, run: _Run, message: str) -> None:
         self._clear_awaiting(run)
@@ -669,6 +982,18 @@ class Runner:
         """服务启动时调用：上次没跑完的运行标成 error，用户发消息即可按会话续跑。"""
         recovered = 0
         for meta in self.store.list_meta():
+            if meta.status == "waiting":
+                # 挂着的提问还能答：存成脱离进程的提问，回答时续接
+                questions = self._unanswered_questions(meta.id)
+                if questions and meta.session_id:
+                    run = self._get(meta.id)
+                    run.meta.detached_questions = questions
+                    run.meta.awaiting_reply = True
+                    self.store.save_meta(run.meta)
+                    self._emit(run, {"type": "notice", "level": "info", "text": "服务重启过，问题还在，回答后接着做"})
+                    self._set_status(run, "idle")
+                    recovered += 1
+                    continue
             if meta.status in ACTIVE_STATUSES:
                 run = self._get(meta.id)
                 message = "服务重启导致任务中断，发送一条消息（比如「继续」）即可从断点接着跑"
@@ -677,8 +1002,20 @@ class Runner:
                 recovered += 1
         return recovered
 
+    def _unanswered_questions(self, run_id: str) -> dict[str, Any]:
+        asked: dict[str, Any] = {}
+        for event in self.store.read_events(run_id, 0):
+            if event.get("type") == "question" and event.get("qid"):
+                asked[event["qid"]] = event.get("questions") or []
+            elif event.get("type") == "answer":
+                asked.pop(event.get("qid"), None)
+        return asked
+
     async def shutdown(self) -> None:
+        if self._queue_tick is not None:
+            self._queue_tick.cancel()
         for run in list(self._runs.values()):
+            self._cancel_detach(run)
             if run.auto_task is not None:
                 run.auto_task.cancel()  # 不清 auto_reply_at：重启后 resume_auto_replies 接着排
             if run.session is not None:

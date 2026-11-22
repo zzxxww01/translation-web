@@ -107,6 +107,12 @@ class SdkSession:
     def __init__(self, client: ClaudeSDKClient, cwd: str | None = None):
         self._client = client
         self._cwd = cwd
+        # 发出去还没出结果的轮数：运行中插的话会在上一轮结果之后接着跑，期间不能关进程
+        self._turns = 0
+
+    @property
+    def busy(self) -> bool:
+        return self._turns > 0
 
     @classmethod
     async def open(cls, config: Config, spec: SessionSpec) -> "SdkSession":
@@ -116,8 +122,10 @@ class SdkSession:
 
     async def send(self, text: str) -> None:
         await self._client.query(text)
+        self._turns += 1
 
     async def interrupt(self) -> None:
+        self._turns = 0  # 中断后排着的话也不再跑
         await self._client.interrupt()
 
     async def close(self) -> None:
@@ -127,6 +135,8 @@ class SdkSession:
         mapper = MessageMapper(self._cwd)
         async for message in self._client.receive_messages():
             for event in mapper.map(message):
+                if event.get("type") == "result":
+                    self._turns = max(0, self._turns - 1)
                 yield event
 
 
