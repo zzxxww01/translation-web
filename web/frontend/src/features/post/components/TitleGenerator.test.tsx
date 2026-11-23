@@ -20,11 +20,12 @@ it('counts Unicode code points and flags old saved overlong titles instead of ac
     const buttons = Array.from(host.querySelectorAll('button')).filter(button => button.title.includes('标题'));
     expect(buttons).toHaveLength(4);
     for (const index of [0, 2]) {
-      expect(buttons[index].textContent).toContain('20/20 字');
+      expect(buttons[index].textContent).toBe(titles[index]);
+      expect(buttons[index].querySelector('svg')).toBeNull();
       expect(buttons[index].disabled).toBe(false);
     }
     for (const index of [1, 3]) {
-      expect(buttons[index].textContent).toContain('21/20 字 · 超限');
+      expect(buttons[index].textContent).toContain('超过20字');
       expect(buttons[index].disabled).toBe(true);
       await act(async () => buttons[index].click());
     }

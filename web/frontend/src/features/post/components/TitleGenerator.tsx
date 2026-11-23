@@ -3,9 +3,11 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, Copy, Loader2 } from 'lucide-react';
+import { Sparkles, Loader2 } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
 import { TITLE_INSTRUCTION_MAX_LENGTH } from '../types';
+
+const TITLE_MAX_LENGTH = 20;
 
 interface TitleGeneratorProps {
   onGenerate: (instruction?: string) => Promise<string[]>;
@@ -94,22 +96,25 @@ export function TitleGenerator({
 
         {titles.length > 0 ? (
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {titles.map((title, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`group relative min-h-12 rounded-lg border border-border-subtle bg-bg-tertiary/40 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary-200 hover:bg-paper-hover disabled:opacity-60 ${selectedTitle === title ? 'border-primary-300 bg-primary-50' : ''}`}
-                onClick={() => handleCopy(title)}
-                disabled={Array.from(title).length > 20}
-                title={Array.from(title).length > 20 ? "标题超过20字，请重新生成" : "复制标题"}
-              >
-                {title}
-                <span className={`block text-xs ${Array.from(title).length > 20 ? 'text-destructive' : 'text-muted-foreground'}`}>
-                  {Array.from(title).length}/20 字{Array.from(title).length > 20 ? ' · 超限，请重新生成' : ''}
-                </span>
-                <Copy className="absolute right-3 top-3 h-4 w-4 opacity-60 transition-opacity group-hover:opacity-90" />
-              </button>
-            ))}
+            {titles.map((title, i) => {
+              // 后端保证新生成的标题不超过 20 字；这里只拦早先存下的超长标题，不再逐条显示字数
+              const tooLong = Array.from(title).length > TITLE_MAX_LENGTH;
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  className={`min-h-12 rounded-lg border border-border-subtle bg-bg-tertiary/40 p-3 text-left text-sm leading-relaxed transition-colors hover:border-primary-200 hover:bg-paper-hover disabled:opacity-60 ${selectedTitle === title ? 'border-primary-300 bg-primary-50' : ''}`}
+                  onClick={() => handleCopy(title)}
+                  disabled={tooLong}
+                  title={tooLong ? '标题超过20字，请重新生成' : '点击复制标题'}
+                >
+                  {title}
+                  {tooLong && (
+                    <span className="block text-xs text-destructive">超过20字，请重新生成</span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         ) : (
           <p className="py-2 text-xs text-text-muted">
