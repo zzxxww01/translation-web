@@ -218,7 +218,7 @@ async def list_articles(
     pm: ProjectManagerDep,
     library: SubstackLibraryDep,
     offset: int = Query(0, ge=0),
-    limit: int = Query(24, ge=1, le=50),
+    limit: int = Query(24, ge=1, le=100),
     search: str = Query("", max_length=200),
     imported_filter: ArticleFilter = Query("all", alias="filter"),
 ):

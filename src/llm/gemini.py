@@ -53,7 +53,21 @@ logger = logging.getLogger(__name__)
 # 传输层超时相对 future 门限的比例。取小于 1 让 httpx 先于 future.result() 醒来，
 # 这样超时的 worker 通常已经退出，_timeout_leak_count 才只统计真正的泄漏。
 _TRANSPORT_TIMEOUT_RATIO = 0.9
+# Gemini 拒绝小于 10s 的 deadline（400 INVALID_ARGUMENT），重试也必然失败。
+_MIN_TRANSPORT_TIMEOUT_MS = 10_000
 _genai_module: ModuleType | None = None
+
+
+def _transport_timeout_ms(budget: float) -> int:
+    """Per-request SDK timeout for the remaining budget, honoring Gemini's 10s minimum."""
+    timeout_ms = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+    if timeout_ms >= _MIN_TRANSPORT_TIMEOUT_MS:
+        return timeout_ms
+    if budget * 1000 >= _MIN_TRANSPORT_TIMEOUT_MS:
+        return _MIN_TRANSPORT_TIMEOUT_MS
+    raise LLMDeadlineExceededError(
+        f"Gemini needs at least {_MIN_TRANSPORT_TIMEOUT_MS // 1000}s but only {budget:.1f}s of budget is left"
+    )
 
 
 def _load_genai_module() -> ModuleType | None:
@@ -884,7 +898,7 @@ class GeminiProvider(LLMProvider):
                 if response_mime_type:
                     config["response_mime_type"] = response_mime_type
                 if budget is not None:
-                    config["http_options"]["timeout"] = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+                    config["http_options"]["timeout"] = _transport_timeout_ms(budget)
                 # Configured clients already have explicit per-client proxy and
                 # trust_env settings. Do not serialize network IO under an env lock.
                 proxy_scope = nullcontext() if getattr(self, "network_policy", None) is not None else self._temporary_proxy_env()
@@ -1019,7 +1033,7 @@ class GeminiProvider(LLMProvider):
                         "http_options": {"retry_options": {"attempts": 1}},
                     }
                     if budget is not None:
-                        config["http_options"]["timeout"] = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+                        config["http_options"]["timeout"] = _transport_timeout_ms(budget)
                     proxy_scope = nullcontext() if getattr(self, "network_policy", None) is not None else self._temporary_proxy_env()
                     with proxy_scope:
                         return client.models.generate_content(model=attempt.model_name, contents=prompt, config=config)
