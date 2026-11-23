@@ -23,7 +23,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import ProxyHandler, Request, build_opener
 
-from skill_runner.auth import COOKIE_NAME, issue_token
+from skill_runner.auth import COOKIE_NAME, PREVIOUS_COOKIE_NAME, issue_token
 from src.core.file_utils import read_json, write_json_atomic
 
 logger = logging.getLogger(__name__)
@@ -76,7 +76,8 @@ class SkillRunnerClient:
     def _request(self, method: str, path: str, *, data: Optional[bytes] = None,
                  content_type: Optional[str] = None, timeout: float = 30) -> bytes:
         cookie = issue_token(read_skill_runner_secret(self.env_file))
-        headers = {"Cookie": f"{COOKIE_NAME}={cookie}"}
+        # 两个名字都带：skill-runner 重启前只认改名前的 cookie，重启后认新的（同一个签名，哪个都有效）
+        headers = {"Cookie": f"{COOKIE_NAME}={cookie}; {PREVIOUS_COOKIE_NAME}={cookie}"}
         if content_type:
             headers["Content-Type"] = content_type
         request = Request(self.base_url + path, data=data, method=method, headers=headers)
