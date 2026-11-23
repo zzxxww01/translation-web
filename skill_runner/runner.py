@@ -310,6 +310,15 @@ class Runner:
         self.store.save_meta(run.meta)
         return run.meta
 
+    def dismiss_awaiting(self, run_id: str) -> RunMeta:
+        """页面上叉掉「等你确认」：这一轮不用再确认，也不自动按建议继续；下一轮照常。
+        挂着的提问不在这里处理（页面上由提问卡片回答）。"""
+        run = self._get(run_id)
+        if run.meta.status == "idle" and run.meta.awaiting_reply and not run.meta.detached_questions:
+            self._clear_awaiting(run)
+            self._emit(run, {"type": "status", "status": run.meta.status, "error": run.meta.error, "awaiting": False})
+        return run.meta
+
     def active_count(self) -> int:
         return sum(1 for run in self._runs.values() if run.meta.status in ACTIVE_STATUSES or self._session_busy(run))
 
