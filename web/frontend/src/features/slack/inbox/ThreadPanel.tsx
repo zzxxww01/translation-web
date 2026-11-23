@@ -79,10 +79,10 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
     : noPost
       ? '没有要翻的帖子 · 查看'
       : d.sent_at
-        ? `已发送 · v${d.state.versions.length}`
+        ? '已发送'
         : d.status === 'done'
-        ? `已完成 · v${d.state.versions.length}`
-        : `查看翻译 · v${d.state.versions.length}`;
+        ? '已完成'
+        : '查看翻译';
 
   return (
     <>
