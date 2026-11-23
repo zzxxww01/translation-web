@@ -345,6 +345,32 @@ async def test_agent_import_keeps_a_started_web_version_as_primary(pm, main_id):
     assert pm.get(main_id).primary_target == main_id
 
 
+def _machine_partial_web(pm, main_id):
+    """网页版自动翻了一段就停了（没在跑、也没人手写）。"""
+    section_id, first = _body_paragraphs(pm, main_id)[0]
+    section = next(s for s in pm.get_sections(main_id) if s.section_id == section_id)
+    paragraph = next(p for p in section.paragraphs if p.id == first.id)
+    paragraph.add_translation("机器翻的一段", "gpt")
+    paragraph.status = ParagraphStatus.TRANSLATED
+    pm._save_section(main_id, section)
+
+
+@pytest.mark.asyncio
+async def test_agent_import_replaces_a_web_version_stalled_midway(pm, main_id):
+    # 2026-11-23：网页版早停在 9%，claude 版翻完了，主译本还挂在半截的网页版上，文章一直显示失败
+    _machine_partial_web(pm, main_id)
+    codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
+    assert pm.get(main_id).primary_target == codex
+
+
+@pytest.mark.asyncio
+async def test_explicitly_chosen_stalled_version_is_kept(pm, main_id):
+    _machine_partial_web(pm, main_id)
+    await workbench.set_primary(main_id, workbench.PrimaryRequest(target=main_id), pm)
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm)
+    assert pm.get(main_id).primary_target == main_id and pm.get(main_id).primary_chosen
+
+
 @pytest.mark.asyncio
 async def test_agent_import_never_overrides_an_explicit_primary(pm, main_id):
     codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
@@ -381,3 +407,15 @@ async def test_workbench_skips_a_variant_that_vanishes_while_loading(pm, main_id
     monkeypatch.setattr(pm, "get", flaky_get)
     data = await workbench.get_workbench(main_id, pm, FakeStatus())
     assert data["variants"] == []
+
+
+def test_punctuation_only_paragraph_is_kept_as_is(pm, main_id):
+    # 原网页残留的一个「.」：Agent 稿里没有对应块，也不该算缺译
+    section = pm.get_sections(main_id)[-1]
+    last = section.paragraphs[-1]
+    section.paragraphs.append(last.model_copy(deep=True, update={"id": "pdot", "index": last.index + 1, "source": "."}))
+    pm._save_section(main_id, section)
+    variant = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex")["variant_id"]
+    paragraph = next(p for s in pm.get_sections(variant) for p in s.paragraphs if p.id == "pdot")
+    assert paragraph.latest_translation(non_empty=True).text == "."

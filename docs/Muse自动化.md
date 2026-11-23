@@ -67,8 +67,12 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 - **登录**：后端读 Claude 页的 env 文件（`SKILL_RUNNER_ENV_FILE`，默认 `~/.config/skill-runner/env`）里的口令，按 skill-runner 同样的算法签 cookie
   （2026-11-23 用户选的方案：直接用口令，不另建专用凭证）。口令不落盘、不打日志。改了 Claude 页口令不用改翻译服务。
 - 任务记录在 `data/automation_agent_runs.json`（`AUTOMATION_AGENT_RUNS_FILE`），后台每 60 秒轮询一次，翻译服务重启后接着看。
-- 失败（`engines.<agent>.status = failed`）：Agent 出错、这一轮结束却没找到 `zh.md`/`en.md`、英文稿和原文对不上（<80% 段落）、
+- 失败（`engines.<agent>.status = failed`）：Agent 出错、停在半路超过 20 分钟仍没有 `zh.md`/`en.md`、英文稿和原文对不上（<80% 段落）、
   Claude 页里任务被删。重新 `translate-article --engine <agent>` 会再起一次。
+  - 分块翻译的后台子代理没跑完时，Claude 页的 run 带 `busy: true`，算在跑，不会被判停在半路（PR #94）。
+  - 停在半路判的失败（记了 `stalled_at`）3 天内还会回看：有人在 Claude 页发「继续」让它接着翻，记录回到 `running`，翻完照样自动导回。
+- 导入后主译本：网页版是自动翻译停在半路的（没翻完、没在翻、没人手写过），且不是用户亲手点「设为主译本」选的，
+  就换成刚导入的 Agent 版，`status` 顶层随之变成 `done`；否则不动，Agent 的结果看 `engines.<agent>`。
 - Agent 跑一篇要几十分钟，占 Claude 页并发名额（最多 3 个，满了排队）。
 
 ### translate-article 细节

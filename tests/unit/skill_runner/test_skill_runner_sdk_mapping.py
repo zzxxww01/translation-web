@@ -309,3 +309,18 @@ async def test_background_subagents_keep_session_busy_after_result():
     assert session.busy
     now[0] += STALE_TASK_S + 1
     assert not session.busy
+
+
+async def test_zero_turn_result_on_resume_does_not_end_the_real_turn():
+    # 续接时 CLI 先给积压的子代理通知回一个 num_turns=0 的结果，紧接着才跑「继续」这一轮；
+    # 把它当成这一轮的结果就会 5 秒后关进程（2026-11-23 16:55「继续」被吞）
+    now = [0.0]
+    empty = ResultMessage(subtype="success", duration_ms=68, duration_api_ms=0, is_error=False,
+                          num_turns=0, session_id="s", total_cost_usd=None, usage=None, result="")
+    session = SdkSession(_ScriptedClient([empty]), clock=lambda: now[0])
+    await session.send("继续")
+    [event async for event in session.events()]
+    assert session.busy
+    session._client.messages = [_sdk_result()]
+    [event async for event in session.events()]
+    assert not session.busy

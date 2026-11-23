@@ -172,7 +172,10 @@ class SdkSession:
             self._track_task(message)
             for event in mapper.map(message):
                 if event.get("type") == "result":
-                    self._turns = max(0, self._turns - 1)
+                    # 一轮都没跑的结果（num_turns=0）不是我们发的话的结果：续接时 CLI 先给积压的子代理通知回一个，
+                    # 当成「继续」跑完了就会 5 秒后关进程，把刚开始的那一轮杀掉（2026-11-23 16:55）
+                    if event.get("num_turns") != 0:
+                        self._turns = max(0, self._turns - 1)
                     self._result_at = self._clock()
                 yield event
 

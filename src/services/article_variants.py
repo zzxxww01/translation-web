@@ -39,6 +39,9 @@ _variant_locks: Dict[str, threading.RLock] = {}
 _variant_locks_guard = threading.Lock()
 
 
+_WORD = re.compile(r"[^\W_]")
+
+
 def variant_lock(main_id: str) -> threading.RLock:
     with _variant_locks_guard:
         return _variant_locks.setdefault(main_id, threading.RLock())
@@ -155,8 +158,10 @@ def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown:
     alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, targets)
     if not alignment.texts:
         raise ValueError("Agent 的译文和这篇文章对不上，可能不是同一篇")
-    total = sum(1 for target in targets if target.kind != "image")
-    aligned = total - alignment.stats["unaligned"]
+    # 只有标点的段（下面原样保留）不算在里面
+    countable = [t for t in targets if t.kind != "image" and _WORD.search(t.source or "")]
+    total = len(countable)
+    aligned = sum(1 for t in countable if t.key in alignment.texts)
     if not force and total and aligned < MIN_ALIGNED_RATIO * total:
         raise AlignmentTooLow(aligned, total)
     # id 后缀用 Agent id：claude / codex 和以前一样，Gemini 版是 {主id}--antigravity
@@ -168,6 +173,8 @@ def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown:
             section.title_translation = title.split("\n")[0].strip()
         for paragraph in section.paragraphs:
             text = alignment.texts.get(f"{section.section_id}/{paragraph.id}")
+            if not text and not _WORD.search(paragraph.source or ""):
+                text = paragraph.source  # 只有标点、符号的段（原网页残留的一个「.」）：原样保留，不算缺译
             if text and paragraph.element_type.value != "image" and paragraph.status != ParagraphStatus.APPROVED:
                 paragraph.add_translation(text, "claude")
                 paragraph.status = ParagraphStatus.TRANSLATED
