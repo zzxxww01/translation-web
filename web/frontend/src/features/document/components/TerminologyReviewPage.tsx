@@ -1,7 +1,9 @@
-﻿import { useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, ArrowLeft, CheckCircle2, Clock3, Languages, Sparkles } from 'lucide-react';
+﻿import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
+import { cn } from '@/lib/utils';
 import type {
+  TermReviewCandidate,
   TermReviewDecision,
   TermReviewPayload,
 } from '../../confirmation/types';
@@ -14,24 +16,39 @@ interface TerminologyReviewPageProps {
   onCancel: () => void;
 }
 
-type DecisionAction = 'accept' | 'custom' | 'skip';
-
 interface DecisionState {
-  action: DecisionAction;
   translation: string;
+  skip: boolean;
 }
 
+/** 为什么要你看这个词：一两个字说清，和出现次数写在同一行小字里 */
 const reasonLabels: Record<string, string> = {
-  needs_decision: '译法需要确认',
-  title: '标题/小标题命中',
-  high_frequency: '全文高频',
-  ambiguous: '存在歧义或多种译法',
+  needs_decision: '译法要定',
+  title: '标题里有',
+  high_frequency: '高频',
+  ambiguous: '有多种译法',
 };
 
-// 术语原文可能含空格等字符，统一编码后再做 DOM id，供「跳到第一个未填写」定位
+// 术语原文可能含空格等字符，统一编码后再做 DOM id，供「跳到第一个没填的」定位
 const termAnchorId = (term: string) => `term-card-${encodeURIComponent(term)}`;
 const termInputId = (term: string) => `term-input-${encodeURIComponent(term)}`;
 
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** 上下文里把术语标出来，一眼看到它在句子里怎么用 */
+function highlight(context: string, term: string): ReactNode {
+  if (!term.trim()) return context;
+  const parts = context.split(new RegExp(`(${escapeRegExp(term)})`, 'gi'));
+  return parts.map((part, index) => index % 2 === 1
+    ? <mark key={index} className="rounded-sm bg-primary-100 font-medium text-text-primary">{part}</mark>
+    : <Fragment key={index}>{part}</Fragment>);
+}
+
+/**
+ * 术语确认（2026-11-23 用户：原来的页面看不懂、没信息量）。
+ * 一个词一行：左边原文和「出现几次、首次在哪章、为什么要看」，右边直接是译法输入框（预填建议），
+ * 下面一句带高亮的原文上下文、术语库里相近的词（点了就用）。不改 = 采用建议，改了 = 自定义，勾「跳过」= 不预设。
+ */
 export function TerminologyReviewPage({
   review,
   isSubmitting = false,
@@ -39,388 +56,197 @@ export function TerminologyReviewPage({
   onSubmit,
   onCancel,
 }: TerminologyReviewPageProps) {
-  const [decisions, setDecisions] = useState<Record<string, DecisionState>>(() => {
-    const entries = review.sections.flatMap(section =>
-      section.candidates.map(candidate => [
-        candidate.term,
-        {
-          action: (candidate.suggested_translation ? 'accept' : 'custom') as DecisionAction,
-          translation: candidate.suggested_translation,
-        },
-      ])
-    );
-
-    return Object.fromEntries(entries);
-  });
-  const [autoContinueDeadline] = useState(
-    () => Date.now() + Math.max(0, autoContinueSeconds) * 1000
+  const candidates = useMemo(
+    () => review.sections.flatMap(section => section.candidates.map(candidate => ({ candidate, sectionTitle: section.section_title }))),
+    [review.sections],
   );
+  const [decisions, setDecisions] = useState<Record<string, DecisionState>>(() =>
+    Object.fromEntries(candidates.map(({ candidate }) => [candidate.term, { translation: candidate.suggested_translation, skip: false }]))
+  );
+  const [autoContinueDeadline] = useState(() => Date.now() + Math.max(0, autoContinueSeconds) * 1000);
   const [clockTime, setClockTime] = useState(() => Date.now());
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setClockTime(Date.now());
-    }, 1000);
+    const intervalId = window.setInterval(() => setClockTime(Date.now()), 1000);
     return () => window.clearInterval(intervalId);
   }, []);
 
-  const remainingSeconds = Math.max(
-    0,
-    Math.ceil((autoContinueDeadline - clockTime) / 1000)
-  );
+  const remainingSeconds = Math.max(0, Math.ceil((autoContinueDeadline - clockTime) / 1000));
+  const remainingLabel = `${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, '0')}`;
 
-  const remainingLabel = `${Math.floor(remainingSeconds / 60)}:${String(
-    remainingSeconds % 60
-  ).padStart(2, '0')}`;
-
-  const stats = useMemo(() => {
-    const values = Object.values(decisions);
-    return {
-      accept: values.filter(item => item.action === 'accept').length,
-      custom: values.filter(item => item.action === 'custom').length,
-      skip: values.filter(item => item.action === 'skip').length,
-    };
-  }, [decisions]);
-
-  // 保留术语顺序，既用于禁用提交，也用于底栏「跳到第一个未填写」
+  // 保留术语顺序，既用于禁用提交，也用于「跳到第一个没填的」
   const invalidTerms = useMemo(
-    () =>
-      Object.entries(decisions)
-        .filter(([, item]) => item.action !== 'skip' && !item.translation.trim())
-        .map(([term]) => term),
+    () => Object.entries(decisions).filter(([, item]) => !item.skip && !item.translation.trim()).map(([term]) => term),
     [decisions]
   );
-  const hasInvalidDecision = invalidTerms.length > 0;
+  const changed = candidates.filter(({ candidate }) => {
+    const decision = decisions[candidate.term];
+    return decision.skip || decision.translation.trim() !== candidate.suggested_translation;
+  }).length;
 
   const jumpToFirstInvalid = () => {
     const term = invalidTerms[0];
     if (!term) return;
-    document
-      .getElementById(termAnchorId(term))
-      ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById(termAnchorId(term))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     document.getElementById(termInputId(term))?.focus();
   };
 
-  const updateDecision = (
-    term: string,
-    next: Partial<DecisionState>
-  ) => {
-    setDecisions(current => ({
-      ...current,
-      [term]: {
-        ...current[term],
-        ...next,
-      },
-    }));
+  const updateDecision = (term: string, next: Partial<DecisionState>) => {
+    setDecisions(current => ({ ...current, [term]: { ...current[term], ...next } }));
   };
 
   const handleSubmit = async () => {
-    const payload: TermReviewDecision[] = review.sections.flatMap(section =>
-      section.candidates.map(candidate => {
-        const decision = decisions[candidate.term];
-        return {
-          term: candidate.term,
-          action: decision.action,
-          translation:
-            decision.action === 'skip'
-              ? undefined
-              // 不再用建议译法回填用户清空的输入——那正是用户手动改写的意图。
-              // 空值由提交前的 invalidTerms 校验拦下，不会走到这里。
-              : decision.translation.trim(),
-          first_occurrence: candidate.first_occurrence ?? candidate.related_sections[0]?.section_id,
-        };
-      })
-    );
-    await onSubmit(payload);
+    const payload: TermReviewDecision[] = candidates.map(({ candidate }) => {
+      const decision = decisions[candidate.term];
+      const translation = decision.translation.trim();
+      // 不再用建议译法回填用户清空的输入——那正是用户手动改写的意图；空值在提交前就拦下了。
+      const action = decision.skip ? 'skip' : translation === candidate.suggested_translation ? 'accept' : 'custom';
+      return {
+        term: candidate.term,
+        action,
+        translation: decision.skip ? undefined : translation,
+        first_occurrence: candidate.first_occurrence ?? candidate.related_sections[0]?.section_id,
+      };
+    });
+    setSubmitting(true);
+    try {
+      await onSubmit(payload);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-8">
-      <div className="mb-6 flex items-start justify-between gap-4">
-        <div>
-          <div className="mb-2 flex items-center gap-2 text-sm text-warning">
-            <AlertTriangle className="h-4 w-4" />
-            术语预检
-          </div>
-          <h1 className="text-2xl font-bold text-text-primary">{review.project_title}</h1>
-          <p className="mt-2 text-sm text-text-muted">
-            后台任务已经启动，当前停在术语确认阶段。系统只展示标题命中、高频和明显歧义的术语。
+    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col">
+      <div className="sticky top-0 z-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border-subtle bg-white/95 px-5 py-3 backdrop-blur">
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-medium text-text-primary">
+            {candidates.length} 个术语等你定译法
+            {changed > 0 && <span className="ml-2 font-normal text-text-muted">改了 {changed} 个</span>}
+          </p>
+          <p className="mt-0.5 flex items-center gap-1 text-xs text-text-muted">
+            <Clock3 className="h-3.5 w-3.5" />
+            {remainingLabel} 后自动按建议译法继续翻译
           </p>
         </div>
-        <Button variant="outline" onClick={onCancel} leftIcon={<ArrowLeft className="h-4 w-4" />}>
-          返回文档
+        <Button variant="ghost" size="sm" onClick={onCancel}>稍后再说</Button>
+        <Button size="sm" onClick={handleSubmit} isLoading={isSubmitting || submitting} disabled={invalidTerms.length > 0}>
+          确认，继续翻译
         </Button>
-      </div>
-
-      <div className="mb-6 flex items-start gap-3 rounded-xl border border-primary-500/20 bg-primary-500/5 p-4">
-        <Clock3 className="mt-0.5 h-5 w-5 flex-none text-primary-600" />
-        <div>
-          <div className="font-medium text-text-primary">
-            自动继续倒计时：{remainingLabel}
-          </div>
-          <p className="mt-1 text-sm text-text-muted">
-            倒计时结束后，后台会自动采用当前建议并继续翻译。关闭或刷新浏览器不会中断任务；只有“停止全文翻译”会终止它。
+        {invalidTerms.length > 0 && (
+          <p className="w-full text-xs text-error">
+            {invalidTerms.length} 个术语没填译法（不想定就勾「跳过」）
+            <button type="button" onClick={jumpToFirstInvalid} className="ml-2 underline underline-offset-2">去填</button>
           </p>
-        </div>
+        )}
       </div>
 
-      <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <div className="rounded-xl border border-border-subtle bg-bg-secondary p-4">
-          <div className="text-sm text-text-muted">待确认术语</div>
-          <div className="mt-2 text-2xl font-semibold text-text-primary">{review.total_candidates}</div>
-        </div>
-        <div className="rounded-xl border border-border-subtle bg-bg-secondary p-4">
-          <div className="text-sm text-text-muted">采用建议</div>
-          <div className="mt-2 text-2xl font-semibold text-success">{stats.accept}</div>
-        </div>
-        <div className="rounded-xl border border-border-subtle bg-bg-secondary p-4">
-          <div className="text-sm text-text-muted">自定义译法</div>
-          <div className="mt-2 text-2xl font-semibold text-primary-600">{stats.custom}</div>
-        </div>
-        <div className="rounded-xl border border-border-subtle bg-bg-secondary p-4">
-          <div className="text-sm text-text-muted">先跳过</div>
-          <div className="mt-2 text-2xl font-semibold text-warning">{stats.skip}</div>
-        </div>
-      </div>
+      {review.is_partial && (
+        <p className="mx-5 mt-3 rounded-md bg-warning/10 px-3 py-2 text-xs text-warning-text">
+          只扫了 {review.scanned_sections ?? '?'} / {review.total_sections ?? '?'} 章，没扫到的章节里可能还有新术语。
+        </p>
+      )}
 
-      <div className="space-y-6">
-        {review.sections.map(section => (
-          <section
-            key={section.section_id}
-            className="rounded-2xl border border-border-subtle bg-bg-secondary p-5"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <div className="rounded-full bg-primary-500/10 p-2 text-primary-600">
-                <Languages className="h-4 w-4" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-text-primary">{section.section_title}</h2>
-                <p className="text-sm text-text-muted">
-                  本章共 {section.candidates.length} 个高优先级新术语候选
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {section.candidates.map(candidate => {
-                const decision = decisions[candidate.term];
-                const isMissingTranslation =
-                  decision.action !== 'skip' && !decision.translation.trim();
-                return (
-                  <div
-                    key={candidate.term}
-                    id={termAnchorId(candidate.term)}
-                    className={`rounded-xl border bg-bg-primary p-4 ${
-                      isMissingTranslation ? 'border-error' : 'border-border-subtle'
-                    }`}
-                  >
-                    <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <div className="text-lg font-semibold text-text-primary">{candidate.term}</div>
-                        <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-text-muted">
-                          <span>建议译法：{candidate.suggested_translation || '未提供'}</span>
-                          <span>出现次数：{candidate.occurrence_count}</span>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {candidate.reasons.map(reason => (
-                          <span
-                            key={reason}
-                            className="rounded-full bg-warning/10 px-2.5 py-1 text-xs text-warning"
-                          >
-                            {reasonLabels[reason] || reason}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {candidate.contexts.length > 0 && (
-                      <div className="mb-3 rounded-lg bg-bg-secondary px-3 py-2 text-sm text-text-secondary">
-                        <div className="mb-1 font-medium text-text-primary">上下文</div>
-                        {candidate.contexts.map(context => (
-                          <p key={context} className="line-clamp-2">
-                            {context}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-
-                    {candidate.similar_terms.length > 0 && (
-                      <div className="mb-4">
-                        <div className="mb-2 flex items-center gap-2 text-sm font-medium text-text-primary">
-                          <Sparkles className="h-4 w-4 text-primary-500" />
-                          相似术语推荐
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {candidate.similar_terms.map(term => (
-                            <button
-                              key={`${candidate.term}-${term.original}`}
-                              type="button"
-                              onClick={() =>
-                                updateDecision(candidate.term, {
-                                  action: 'custom',
-                                  translation: term.translation || '',
-                                })
-                              }
-                              className="rounded-lg border border-border-subtle px-3 py-2 text-left text-xs hover:border-primary-400 hover:bg-primary-500/5"
-                            >
-                              <div className="font-medium text-text-primary">
-                                {term.original} → {term.translation || '保留原文'}
-                              </div>
-                              {term.note ? (
-                                <div className="mt-1 text-text-muted">
-                                  词义说明：{term.note}
-                                </div>
-                              ) : null}
-                              <div className="mt-1 text-text-muted">
-                                {term.scope === 'global' ? '全局术语' : '项目术语'} · 相似度 {term.similarity}
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div
-                      className="grid gap-3 md:grid-cols-3"
-                      role="radiogroup"
-                      aria-label={`${candidate.term} 的处理方式`}
-                    >
-                      <button
-                        type="button"
-                        role="radio"
-                        aria-checked={decision.action === 'accept'}
-                        onClick={() =>
-                          updateDecision(candidate.term, {
-                            action: 'accept',
-                            translation: candidate.suggested_translation,
-                          })
-                        }
-                        className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-                          decision.action === 'accept'
-                            ? 'border-success bg-success/10'
-                            : 'border-border-subtle hover:border-success/50'
-                        }`}
-                      >
-                        <div className="mb-1 flex items-center gap-2 font-medium text-text-primary">
-                          <CheckCircle2 className="h-4 w-4 text-success" />
-                          采用建议
-                        </div>
-                        <div className="text-sm text-text-muted">
-                          {candidate.suggested_translation || '使用系统建议译法'}
-                        </div>
-                      </button>
-
-                      {/* 输入框不能再嵌在 button 内：既是无效 HTML，点击输入框也会被外层
-                          onClick 用建议译法覆盖用户刚清空的内容。改为外层 div + 独立标题按钮。 */}
-                      <div
-                        className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-                          decision.action === 'custom'
-                            ? 'border-primary-500 bg-primary-500/10'
-                            : 'border-border-subtle'
-                        }`}
-                      >
-                        <button
-                          type="button"
-                          role="radio"
-                          aria-checked={decision.action === 'custom'}
-                          onClick={() =>
-                            updateDecision(candidate.term, { action: 'custom' })
-                          }
-                          className="mb-1 w-full text-left font-medium text-text-primary"
-                        >
-                          自定义译法
-                        </button>
-                        <input
-                          id={termInputId(candidate.term)}
-                          value={decision.translation}
-                          onChange={event =>
-                            updateDecision(candidate.term, {
-                              action: 'custom',
-                              translation: event.target.value,
-                            })
-                          }
-                          placeholder="输入你的项目术语译法"
-                          aria-label={`${candidate.term} 的自定义译法`}
-                          aria-invalid={isMissingTranslation}
-                          className="mt-2 w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-sm text-text-primary outline-none focus:border-primary-500"
-                        />
-                        {isMissingTranslation && (
-                          <p className="mt-1.5 text-xs text-error">
-                            请填写译法，或改选「先跳过」
-                          </p>
-                        )}
-                      </div>
-
-                      <button
-                        type="button"
-                        role="radio"
-                        aria-checked={decision.action === 'skip'}
-                        onClick={() =>
-                          updateDecision(candidate.term, {
-                            action: 'skip',
-                            translation: candidate.suggested_translation,
-                          })
-                        }
-                        className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-                          decision.action === 'skip'
-                            ? 'border-warning bg-warning/10'
-                            : 'border-border-subtle hover:border-warning/50'
-                        }`}
-                      >
-                        <div className="mb-1 font-medium text-text-primary">先跳过</div>
-                        <div className="text-sm text-text-muted">
-                          本次不预设译法，也不写入项目术语库。
-                        </div>
-                      </button>
-                    </div>
-
-                    {candidate.related_sections.length > 1 && (
-                      <div className="mt-3 flex items-center gap-2 text-xs text-text-muted">
-                        <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
-                        后续还会出现在：
-                        {candidate.related_sections.slice(1).map(sectionItem => sectionItem.section_title).join('、')}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+      <ul className="divide-y divide-border-subtle">
+        {candidates.map(({ candidate, sectionTitle }) => (
+          <TermRow
+            key={candidate.term}
+            candidate={candidate}
+            sectionTitle={candidate.related_sections[0]?.section_title || sectionTitle}
+            decision={decisions[candidate.term]}
+            onChange={next => updateDecision(candidate.term, next)}
+          />
         ))}
+      </ul>
+    </div>
+  );
+}
+
+function TermRow({ candidate, sectionTitle, decision, onChange }: {
+  candidate: TermReviewCandidate;
+  sectionTitle: string;
+  decision: DecisionState;
+  onChange: (next: Partial<DecisionState>) => void;
+}) {
+  const [allContexts, setAllContexts] = useState(false);
+  const missing = !decision.skip && !decision.translation.trim();
+  const edited = !decision.skip && decision.translation.trim() !== candidate.suggested_translation;
+  const meta = [
+    `出现 ${candidate.occurrence_count} 次`,
+    sectionTitle && `首次在「${sectionTitle}」`,
+    ...candidate.reasons.map(reason => reasonLabels[reason]).filter(Boolean),
+  ].filter(Boolean).join(' · ');
+  const contexts = allContexts ? candidate.contexts : candidate.contexts.slice(0, 1);
+  const similar = candidate.similar_terms.filter(term => term.translation);
+
+  return (
+    <li id={termAnchorId(candidate.term)} className={cn('grid gap-x-5 gap-y-2 px-5 py-4 md:grid-cols-[minmax(0,12rem)_minmax(0,1fr)]', decision.skip && 'bg-bg-secondary/60')}>
+      <div className="min-w-0">
+        <p className={cn('break-words text-[15px] font-semibold text-text-primary', decision.skip && 'text-text-muted')}>{candidate.term}</p>
+        <p className="mt-0.5 text-xs leading-5 text-text-muted">{meta}</p>
       </div>
 
-      <div className="sticky bottom-0 mt-6 flex items-center justify-between rounded-2xl border border-border-subtle bg-white px-5 py-4 shadow-sm">
-        <div className="text-sm text-text-muted">
-          {hasInvalidDecision ? (
-            <span className="flex flex-wrap items-center gap-2 text-error">
-              还有 {invalidTerms.length} 个术语未填写译法
-              <button
-                type="button"
-                onClick={jumpToFirstInvalid}
-                className="underline underline-offset-2"
-              >
-                跳到第一个未填写
+      <div className="min-w-0 space-y-2">
+        <div className="flex items-center gap-3">
+          <input
+            id={termInputId(candidate.term)}
+            value={decision.translation}
+            disabled={decision.skip}
+            onChange={event => onChange({ translation: event.target.value })}
+            placeholder="填译法"
+            aria-label={`${candidate.term} 的译法`}
+            aria-invalid={missing}
+            className={cn(
+              'h-9 min-w-0 flex-1 rounded-md border bg-white px-3 text-sm text-text-primary outline-none transition-colors focus:border-primary-400 focus:ring-[3px] focus:ring-primary-500/12 disabled:bg-transparent disabled:text-text-disabled',
+              missing ? 'border-error' : edited ? 'border-primary-300' : 'border-border'
+            )}
+          />
+          <label className="flex shrink-0 cursor-pointer items-center gap-1.5 text-xs text-text-muted" title="这次不预设译法，也不写进术语表">
+            <input type="checkbox" checked={decision.skip} onChange={event => onChange({ skip: event.target.checked })}
+              className="h-3.5 w-3.5 accent-[var(--color-primary-500)]" />
+            跳过
+          </label>
+        </div>
+        {edited && candidate.suggested_translation && (
+          <p className="text-xs text-text-muted">
+            建议是「{candidate.suggested_translation}」
+            <button type="button" onClick={() => onChange({ translation: candidate.suggested_translation })} className="ml-1.5 text-primary-700 hover:underline">改回</button>
+          </p>
+        )}
+
+        {contexts.length > 0 && (
+          <div className="space-y-1">
+            {contexts.map(context => (
+              <p key={context} className={cn('text-[13px] leading-relaxed text-text-secondary [font-family:var(--font-source)]', !allContexts && 'line-clamp-2')}>
+                {highlight(context, candidate.term)}
+              </p>
+            ))}
+            {candidate.contexts.length > 1 && (
+              <button type="button" onClick={() => setAllContexts(open => !open)} className="text-xs text-text-muted hover:text-text-primary">
+                {allContexts ? '收起' : `还有 ${candidate.contexts.length - 1} 处原文`}
               </button>
-            </span>
-          ) : (
-            '确认结果会优先写入项目术语库，后续你可以在术语管理页里再提升到全局。'
-          )}
-        </div>
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={onCancel}>
-            返回文档（后台继续等待）
-          </Button>
-          <Button
-            variant="default"
-            onClick={handleSubmit}
-            isLoading={isSubmitting}
-            disabled={hasInvalidDecision}
-          >
-            保存术语并让后台继续
-          </Button>
-        </div>
+            )}
+          </div>
+        )}
+
+        {similar.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5 text-xs">
+            <span className="text-text-muted">术语表里相近的：</span>
+            {similar.map(term => (
+              <button
+                key={`${term.scope}-${term.original}`}
+                type="button"
+                onClick={() => onChange({ translation: term.translation || '', skip: false })}
+                title={[term.scope === 'global' ? '全局术语表' : '本文术语表', term.note].filter(Boolean).join('：')}
+                className="rounded-md border border-border-subtle bg-white px-2 py-0.5 text-text-secondary hover:border-primary-300 hover:text-primary-700"
+              >
+                {term.original} → {term.translation}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-    </div>
+    </li>
   );
 }

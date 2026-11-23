@@ -5,9 +5,10 @@ import { articlesApi } from '../api';
 import type { AgentChoice } from './agentChoice';
 import { startClaudeTrack } from './claude';
 
-/** 导入后翻哪几版：网页版要不要翻；Agent 用谁、什么模型（null = 不用 Agent）。两个都不要 = 只导入。 */
+/** 导入后翻哪几版：网页版要不要翻、用什么模型（空 = 默认）；Agent 用谁、什么模型（null = 不用 Agent）。两个都不要 = 只导入。 */
 export interface ImportChoice {
   web: boolean;
+  webModel?: string;
   agent: AgentChoice | null;
 }
 
@@ -22,7 +23,7 @@ export async function importAndTranslate(
   if (imported.already_imported) return projectId;
   if (choice.web) {
     try {
-      await articlesApi.startWorkflow(projectId);
+      await articlesApi.startWorkflow(projectId, { model: choice.webModel || undefined });
     } catch (error) {
       notify(`网页版没能开始：${error instanceof Error ? error.message : error}`);
     }

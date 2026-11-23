@@ -376,9 +376,14 @@ describe('importAndTranslate', () => {
     [false, null],
   ] as const)('web %s, agent %o', async (web, agent) => {
     await expect(importAndTranslate({ url: 'u', title: 'Demo', zh_title: '演示' }, { web, agent }, vi.fn())).resolves.toBe('p1');
-    expect(api.startWorkflow.mock.calls).toEqual(web ? [['p1']] : []);
+    expect(api.startWorkflow.mock.calls).toEqual(web ? [['p1', { model: undefined }]] : []);
     // 对话标题用文章的中文标题
     expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', agent, '演示']] : []);
+  });
+
+  it('passes the chosen API model to the web workflow', async () => {
+    await importAndTranslate({ url: 'u' }, { web: true, webModel: 'gpt-5.5', agent: null }, vi.fn());
+    expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: 'gpt-5.5' });
   });
 
   it('does not start anything again for an article imported before', async () => {
