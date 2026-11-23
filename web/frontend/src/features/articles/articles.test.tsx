@@ -1169,9 +1169,8 @@ describe('Workbench', () => {
 });
 
 describe('articleStatus sent', () => {
-  it('shows the sent date instead of translation progress', () => {
-    expect(articleStatus('sent', 100, '2026-11-23T02:00:00+00:00')).toMatchObject({ text: '已发送 11/23', tone: 'sent' });
-    expect(articleStatus('sent', 100, null)?.text).toBe('已发送');
+  it('shows 已发送 without the date instead of translation progress', () => {
+    expect(articleStatus('sent', 100)).toMatchObject({ text: '已发送', tone: 'sent' });
     expect(articleStatus('translated', 100)?.text).toBe('已翻译');
   });
 });
