@@ -179,8 +179,6 @@ class _Run:
     detach_task: asyncio.Task | None = None
     # 正在起进程（还没赋给 session）：也占名额，避免同时起多个
     opening: bool = False
-    # 用户点了停止：这一轮结束后挂起的消息不自动发
-    interrupted: bool = False
     # 这一轮最后一段文字（判断是不是以等待标记结尾）
     last_text: str = ""
     closing: bool = False
@@ -443,6 +441,9 @@ class Runner:
         if mode == "queue" and self._working(run):
             self._hold(run, message, attachments)
             return run.meta
+        if run.meta.held and run.meta.held_paused and not self._working(run):
+            # 停下后没发出去的挂起消息：按原来的顺序放在这条前面一起发，不再等下一轮结束后才冒出来
+            message, attachments = self._take_held(run, run.meta.held, message, attachments)
         return await self._send_now(run, message, attachments)
 
     async def _page_command(self, run: _Run, message: str, attachments: list[str]) -> bool:
@@ -518,10 +519,12 @@ class Runner:
                 "model": meta.actual_model or meta.model or None, "effort": meta.effort}
 
     def _working(self, run: _Run) -> bool:
-        return run.meta.status in ACTIVE_STATUSES or run.meta.status == QUEUED or self._session_busy(run)
+        """这一轮还没结束（在跑、等回答、排队）。后台任务（run_in_background 的命令、子代理）不算：
+        CLI 里它们也不挡用户发话，算上的话一轮结束后挂起的消息要等后台任务跑完（最长 15 分钟）才发。"""
+        return run.meta.status in ACTIVE_STATUSES or run.meta.status == QUEUED
 
     async def _send_now(self, run: _Run, message: str, attachments: list[str]) -> RunMeta:
-        run.interrupted = False
+        self._pause_held(run, False)
         prompt = build_prompt(None, message, attachments)
         if run.meta.detached_questions:
             # 进程已关的提问：这条消息就是回答，提问卡片随之收起
@@ -536,7 +539,28 @@ class Runner:
 
     def _emit_held(self, run: _Run) -> None:
         self.store.save_meta(run.meta)
-        self._emit(run, {"type": "held", "items": list(run.meta.held)})
+        self._emit(run, {"type": "held", "items": list(run.meta.held), "paused": run.meta.held_paused})
+
+    def _pause_held(self, run: _Run, paused: bool) -> None:
+        """这一轮没正常结束时停住挂起的消息（页面上标「没发出去」）；再发任何消息就恢复。"""
+        if run.meta.held_paused == paused:
+            return
+        run.meta.held_paused = paused
+        if run.meta.held:
+            self._emit_held(run)
+        else:
+            self.store.save_meta(run.meta)
+
+    def _take_held(
+        self, run: _Run, items: list[dict[str, Any]], message: str = "", attachments: list[str] | None = None
+    ) -> tuple[str, list[str]]:
+        """把几条挂起的消息（和可选的新消息）按顺序合成一条，并从挂起列表里拿掉。"""
+        texts = [str(item.get("text") or "").strip() for item in items] + [message.strip()]
+        files = [f for item in items for f in item.get("files") or []] + list(attachments or [])
+        for item in items:
+            run.meta.held.remove(item)
+        self._emit_held(run)
+        return "\n\n".join(t for t in texts if t), list(dict.fromkeys(files))
 
     def _hold(self, run: _Run, message: str, attachments: list[str]) -> None:
         run.meta.held.append({"id": uuid.uuid4().hex[:12], "text": message, "files": attachments, "created_at": time.time()})
@@ -568,17 +592,16 @@ class Runner:
         """不等了，立刻发（agent 在干活时就是插话）。"""
         run = self._get(run_id)
         item = self._find_held(run, hid)
-        run.meta.held.remove(item)
-        self._emit_held(run)
-        return await self._send_now(run, str(item.get("text") or ""), list(item.get("files") or []))
+        message, attachments = self._take_held(run, [item])
+        return await self._send_now(run, message, attachments)
 
     async def _send_next_held(self, run: _Run) -> None:
-        if not run.meta.held or self._working(run) or run.pending:
+        """一轮正常结束：挂起的消息合成一条一起发（像 Claude Code 一样），不再一条占一轮。"""
+        if not run.meta.held or run.meta.held_paused or self._working(run) or run.pending:
             return
-        item = run.meta.held.pop(0)
-        self._emit_held(run)
+        message, attachments = self._take_held(run, list(run.meta.held))
         try:
-            await self._send_now(run, str(item.get("text") or ""), list(item.get("files") or []))
+            await self._send_now(run, message, attachments)
         except RunnerError:
             logger.exception("sending held message failed for run %s", run.meta.id)
 
@@ -791,12 +814,15 @@ class Runner:
                 run.last_text = output
                 self._emit(run, {"type": "text", "text": output, "parent": None})
             self._emit(run, event)
+            if event.get("is_error"):
+                # 出错（额度用尽、API 报错……）结束的一轮：挂起的消息不自动发，免得接着撞同一个错
+                self._pause_held(run, True)
             if not run.pending:
                 run.meta.awaiting_reply = not event.get("is_error") and awaits_reply(run.last_text)
                 self._set_status(run, "idle")
                 self.store.save_meta(run.meta)
                 self._schedule_idle(run)
-                if run.meta.held and not event.get("is_error") and not run.interrupted and not self._session_busy(run):
+                if run.meta.held and not run.meta.held_paused:
                     # 正常结束一轮：挂起的消息接着发（等确认时它就是回复，不再排自动继续）
                     asyncio.get_running_loop().create_task(self._send_next_held(run))
                 elif run.meta.awaiting_reply:
@@ -931,7 +957,7 @@ class Runner:
 
     async def interrupt(self, run_id: str) -> RunMeta:
         run = self._get(run_id)
-        run.interrupted = True  # 停下后挂起的消息不自动发，留着让用户决定
+        self._pause_held(run, True)  # 停下后挂起的消息不自动发，留着让用户决定
         if self._cancel_queue(run):
             return run.meta
         self._clear_awaiting(run)
@@ -963,6 +989,7 @@ class Runner:
                 # A replacement must not start while the previous process may still be live.
                 raise SessionFailed(f"旧任务未能停止：{exc}") from exc
             self._clear_awaiting(run)
+            self._pause_held(run, True)
             self._set_status(run, "error", "任务已停止；对话和文件已保留，发送消息可以继续原会话")
         return run.meta
 
@@ -1075,11 +1102,11 @@ class Runner:
         await asyncio.sleep(self.config.idle_timeout_s)
         if run.meta.status == "idle" and not run.pending:
             run.idle_task = None
-            if self._session_busy(run):
-                self._schedule_idle(run)
-            elif run.meta.held and not run.interrupted:
-                # 上一轮结束时还算忙、没发出去的挂起消息：现在空了，接着发
+            if run.meta.held and not run.meta.held_paused:
+                # 一轮结束时没赶上发的挂起消息（比如结果出来的同时刚挂上）：接着发，不关进程
                 await self._send_next_held(run)
+            elif self._session_busy(run):
+                self._schedule_idle(run)
             else:
                 await self._close_session(run)
 
@@ -1109,6 +1136,7 @@ class Runner:
 
     async def _fail(self, run: _Run, message: str) -> None:
         self._clear_awaiting(run)
+        self._pause_held(run, True)
         for pending in list(run.pending.values()):
             if not pending.future.done():
                 pending.future.set_result(PermissionOutcome(allow=False, message=message, interrupt=True))
@@ -1135,6 +1163,7 @@ class Runner:
             if meta.status in ACTIVE_STATUSES:
                 run = self._get(meta.id)
                 message = "服务重启导致任务中断，发送一条消息（比如「继续」）即可从断点接着跑"
+                self._pause_held(run, True)
                 self._emit(run, {"type": "error", "text": message})
                 self._set_status(run, "error", message)
                 recovered += 1

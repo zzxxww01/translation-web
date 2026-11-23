@@ -12,6 +12,8 @@ interface ComposerProps {
   agent: Agent;
   status: RunStatus | null;
   hasPendingQuestion: boolean;
+  /** 停住没发出去的挂起消息条数：这时发新消息会把它们放在前面一起发 */
+  pausedHeld?: number;
   maxUploadMb: number;
   /** 输入框上方的一行提示（比如「在等你确认」），不另占一整条横幅 */
   notice?: ReactNode;
@@ -23,7 +25,7 @@ const MAX_HEIGHT = 200;
  * 对话底部的输入框。agent 在干活时发的话先挂起，这一轮结束后自动发；
  * 挂起的消息在对话末尾可以改、删，要马上发就点它上面的「立即发送」。
  */
-export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb, notice }: ComposerProps) {
+export function Composer({ runId, agent, status, hasPendingQuestion, pausedHeld = 0, maxUploadMb, notice }: ComposerProps) {
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState<number | null>(null);
@@ -73,9 +75,11 @@ export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb
     ? '也可以直接在这里写字回答上面的问题'
     : holdable
       ? `${agent.title}在干活，发的话等这一轮结束再发；输入 /status 看状态`
-      : status === 'error'
-        ? '发一条消息（比如「继续」）从断点接着做'
-        : `回复${agent.title}，或者交代下一步`;
+      : pausedHeld > 0
+        ? `发新消息时，上面没发出去的 ${pausedHeld} 条会放在前面一起发`
+        : status === 'error'
+          ? '发一条消息（比如「继续」）从断点接着做'
+          : `回复${agent.title}，或者交代下一步`;
   const sending = progress === null ? null : progress < 100 ? `上传 ${progress}%` : '发送中…';
 
   return (

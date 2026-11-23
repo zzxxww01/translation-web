@@ -53,6 +53,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
   const { data: files = [] } = useRunFiles(run.id, status);
   const outputCount = files.filter(file => !file.path.startsWith('input/')).length;
   const held = view.held ?? run.held ?? [];
+  const heldPaused = view.held ? view.heldPaused : Boolean(run.held_paused);
   const toggleSide = () => {
     setSideOpen(open => {
       try {
@@ -191,7 +192,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-info" /> {agent.title}正在干活…
                 </div>
               )}
-              <HeldMessages runId={run.id} items={held} />
+              <HeldMessages runId={run.id} items={held} paused={heldPaused && !active && !queued} />
             </div>
           </div>
           <Composer
@@ -199,6 +200,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
             agent={agent}
             status={status}
             hasPendingQuestion={pending.size > 0}
+            pausedHeld={heldPaused && !active && !queued ? held.length : 0}
             maxUploadMb={maxUploadMb}
             notice={
               awaitingText ? (

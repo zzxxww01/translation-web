@@ -189,7 +189,7 @@ async def test_waiting_run_recovers_as_detached_question(tmp_path, factory):
     assert meta.status == "idle" and "tu-9" in meta.detached_questions
 
 
-async def test_queue_mode_holds_message_until_turn_ends(tmp_path, factory):
+async def test_queue_mode_holds_messages_and_sends_them_together_when_turn_ends(tmp_path, factory):
     runner = make_runner(tmp_path, factory)
     run_id = await start(runner)
     session = factory.last
@@ -202,19 +202,39 @@ async def test_queue_mode_holds_message_until_turn_ends(tmp_path, factory):
     runner.edit_held(run_id, held[1]["id"], "第二条（改过）")
     finish(session)
     await settle(10)
-    assert session.sent[-1] == "第一条补充"
+    # 多条挂起的话合成一条发，不再一条占一轮
+    assert session.sent[-1] == "第一条补充\n\n第二条（改过）"
+    assert len(session.sent) == 2
     assert runner.meta(run_id).status == "running"
-    assert [h["text"] for h in runner.meta(run_id).held] == ["第二条（改过）"]
-
-    finish(session)
-    await settle(10)
-    assert session.sent[-1] == "第二条（改过）"
     assert runner.meta(run_id).held == []
     assert "held" in [e["type"] for e in runner.store.read_events(run_id)]
 
 
-async def test_held_message_waits_for_busy_session_then_goes_out_instead_of_closing(tmp_path, factory):
-    # 结果出来时会话还算忙（运行中插的话被并进这一轮后计数多出来），挂起的话不能就此丢下：空了就接着发
+async def test_held_messages_stay_put_after_error_and_ride_along_with_next_message(tmp_path, factory):
+    runner = make_runner(tmp_path, factory, idle_timeout_s=0.01)
+    run_id = await start(runner)
+    session = factory.last
+    await runner.send_message(run_id, "补一句", [], mode="queue")
+    session.push({"type": "result", "session_id": "s", "is_error": True})
+    await settle(10)
+    await asyncio.sleep(0.05)
+    await settle(10)
+    # 出错结束（比如额度用尽）：不自动发，也不在空闲回收时偷偷发出去
+    assert session.sent == ["/four-step-translate 翻译这篇"]
+    meta = runner.meta(run_id)
+    assert meta.held_paused and [h["text"] for h in meta.held] == ["补一句"]
+    held_events = [e for e in runner.store.read_events(run_id) if e["type"] == "held"]
+    assert held_events[-1]["paused"] is True
+
+    # 用户接着发新消息：没发出去的那条按顺序放在前面一起发，之后不会再冒出来
+    await runner.send_message(run_id, "继续", [], mode="now")
+    assert factory.last.sent[-1] == "补一句\n\n继续"
+    meta = runner.meta(run_id)
+    assert meta.held == [] and not meta.held_paused
+
+
+async def test_held_message_goes_out_when_turn_ends_even_if_background_task_still_runs(tmp_path, factory):
+    # 这一轮出了结果，但 agent 起的后台命令 / 子代理还在跑（会话算忙）：挂起的话照样发，进程也不关
     runner = make_runner(tmp_path, factory, idle_timeout_s=0.01)
     run_id = await start(runner)
     session = factory.last
@@ -222,15 +242,20 @@ async def test_held_message_waits_for_busy_session_then_goes_out_instead_of_clos
     await runner.send_message(run_id, "补一句", [], mode="queue")
     finish(session)
     await settle(10)
-    await asyncio.sleep(0.05)
-    assert session.sent == ["/four-step-translate 翻译这篇"]
-    assert not session.closed
-
-    session.busy = False
-    await asyncio.sleep(0.05)
-    await settle(10)
     assert session.sent[-1] == "补一句"
     assert not session.closed
+    assert runner.meta(run_id).held == []
+
+
+async def test_message_sent_while_only_background_task_runs_is_not_held(tmp_path, factory):
+    runner = make_runner(tmp_path, factory, idle_timeout_s=0.01)
+    run_id = await start(runner)
+    session = factory.last
+    session.busy = True
+    finish(session)
+    await settle(10)
+    await runner.send_message(run_id, "接着做", [], mode="queue")
+    assert session.sent[-1] == "接着做"
     assert runner.meta(run_id).held == []
 
 
@@ -257,11 +282,34 @@ async def test_queue_mode_sends_immediately_when_idle_and_not_after_interrupt(tm
     assert session.sent[-1] == "接着做"
 
     await runner.send_message(run_id, "等会儿再发", [], mode="queue")
+    await runner.send_message(run_id, "还有这个", [], mode="queue")
     await runner.interrupt(run_id)
     finish(session)
     await settle(10)
     assert session.sent[-1] == "接着做"
-    assert [h["text"] for h in runner.meta(run_id).held] == ["等会儿再发"]
+    assert [h["text"] for h in runner.meta(run_id).held] == ["等会儿再发", "还有这个"]
+    assert runner.meta(run_id).held_paused
+
+    # 停下后点其中一条的「发送」：只发这一条；剩下的恢复成这一轮结束后发
+    first = runner.meta(run_id).held[0]
+    await runner.send_held(run_id, first["id"])
+    assert session.sent[-1] == "等会儿再发"
+    assert not runner.meta(run_id).held_paused
+    finish(session)
+    await settle(10)
+    assert session.sent[-1] == "还有这个"
+    assert runner.meta(run_id).held == []
+
+
+async def test_held_messages_are_paused_after_restart(tmp_path, factory):
+    runner = make_runner(tmp_path, factory)
+    run_id = await start(runner)
+    await runner.send_message(run_id, "补一句", [], mode="queue")
+    fresh = Runner(runner.config, runner.store, factory)
+    fresh.recover()
+    meta = fresh.meta(run_id)
+    assert meta.status == "error" and meta.held_paused
+    assert [h["text"] for h in meta.held] == ["补一句"]
 
 
 async def test_status_command_is_answered_by_the_runner_not_the_model(tmp_path, factory):

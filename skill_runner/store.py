@@ -70,8 +70,10 @@ class RunMeta:
     queued_at: float | None = None
     # 提问挂太久时进程已关，问题存在这里（qid → questions），回答时作为新消息续接
     detached_questions: dict[str, Any] = field(default_factory=dict)
-    # 挂起的消息：agent 干活时发的话先存着，这一轮正常结束后按顺序一条条发（{id, text, files, created_at}）
+    # 挂起的消息：agent 干活时发的话先存着，这一轮正常结束后合成一条一起发（{id, text, files, created_at}）
     held: list[dict[str, Any]] = field(default_factory=list)
+    # 这一轮没正常结束（停止、出错、服务重启）：挂起的消息不自动发，等用户点发送或发新消息时一起带上
+    held_paused: bool = False
     # 第一条真正的消息（带 skill 派发提示）发出去了没有；新建时 False，旧任务没有这个字段按已开始算
     begun: bool = True
 
