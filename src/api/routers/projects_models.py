@@ -83,6 +83,7 @@ class ProjectResponse(BaseModel):
     status: str
     progress: dict
     created_at: str
+    sent_at: Optional[str] = None  # 标记已发送的时间（只有项目列表填）
 
 
 class SectionResponse(BaseModel):

@@ -12,7 +12,8 @@ function when(ts: number): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen'>): string {
+function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen' | 'sent_at' | 'sent_changed'>): string {
+  if (item.sent_at) return item.sent_changed ? '已发送 · 发送后有改动' : '已发送';
   if (item.status === 'done') return '已完成';
   return item.auto && !item.seen ? '自动翻好' : '草稿';
 }

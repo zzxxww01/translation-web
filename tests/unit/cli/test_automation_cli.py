@@ -238,6 +238,21 @@ def test_slack_todos_and_drafts(std, monkeypatch):
     assert seen[1].full_url.endswith("/internal/automation/drafts?status=draft&limit=50&source=slack&q=AI+racks")
 
 
+def test_mark_sent_routes_drafts_and_articles(std, monkeypatch):
+    seen = _capture(monkeypatch, {"sent": True})
+    _run(std, ["mark-sent", DRAFT_ID])
+    assert seen[0].full_url.endswith(f"/internal/automation/drafts/{DRAFT_ID}/sent")
+    assert json.loads(seen[0].data) == {"sent": True}
+    for argv in (["mark-sent", "demo-post", "--undo"], ["articles", "--status", "sent"], ["drafts", "--sent", "no"]):
+        std.out.buffer.seek(0)
+        std.out.buffer.truncate()
+        _run(std, argv)
+    assert seen[1].full_url.endswith("/internal/automation/projects/demo-post/sent")
+    assert json.loads(seen[1].data) == {"sent": False}
+    assert seen[2].full_url.endswith("/internal/automation/articles?status=sent&limit=50")
+    assert seen[3].full_url.endswith("/internal/automation/drafts?status=draft&limit=50&sent=no")
+
+
 def test_draft_keeps_image_data_intact(std, monkeypatch):
     # 随机字节的 base64 偶尔长得像密钥（/AIza…），不能被脱敏改坏
     blob = "/AIzaSyA1234567890abcdefghijklmnop+xoxc-not"

@@ -5,10 +5,13 @@
 - state：和帖子翻译页前端 store 同构的快照（原文、各版译文、版本信息、标题），前端整份读写；
 - Slack 来的稿子另有 slack（来源 thread）、extraction（选材说明）、images（配图）；
 - rev 每存一次 +1，前端带着自己读到的 rev 来存，对不上（别处改过）就拒绝，避免互相覆盖。
+- sent_at / sent_digest：「已发送」（在 Slack 等系统外发出去后手动标的），和 status（草稿 / 已完成）分开；
+  只有 set_sent 能改，前端存稿、后台重翻都原样保留，也不动 rev（不算内容改动，不让正在编辑的页面冲突）。
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -63,6 +66,19 @@ def current_translation(state: Dict[str, Any]) -> str:
     return str(versions[-1].get("content") or "") if versions and isinstance(versions[-1], dict) else ""
 
 
+def _digest(text: str) -> str:
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
+
+
+def sent_view(doc: Dict[str, Any]) -> Dict[str, Any]:
+    """sent_at：标记已发送的时间（没标过 None）；sent_changed：标了之后当前译文又变了。"""
+    sent_at = doc.get("sent_at")
+    if not isinstance(sent_at, (int, float)):
+        return {"sent_at": None, "sent_changed": False}
+    return {"sent_at": sent_at,
+            "sent_changed": doc.get("sent_digest") != _digest(current_translation(doc.get("state") or {}))}
+
+
 def summarize(doc: Dict[str, Any]) -> Dict[str, Any]:
     """翻译记录列表里的一行。"""
     state = doc.get("state") or {}
@@ -73,6 +89,7 @@ def summarize(doc: Dict[str, Any]) -> Dict[str, Any]:
         "id": doc["id"],
         "source": doc["source"],
         "status": doc.get("status", "draft"),
+        **sent_view(doc),
         "auto": bool(doc.get("auto")),
         "seen": bool(doc.get("seen", True)),
         "title": state.get("selectedTitle") or (titles[0] if titles else "")
@@ -113,7 +130,12 @@ def clean_doc(doc: Dict[str, Any], existing: Optional[Dict[str, Any]]) -> Dict[s
     extraction = doc.get("extraction", (existing or {}).get("extraction"))
     if isinstance(extraction, dict):
         out["extraction"] = extraction
+    out.update(_kept_sent(existing))
     return out
+
+
+def _kept_sent(existing: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    return {k: existing[k] for k in ("sent_at", "sent_digest") if k in (existing or {})}
 
 
 class PostDraftStore:
@@ -169,8 +191,22 @@ class PostDraftStore:
         """后端流程（提取 / 自动翻译）整份写入；rev +1。"""
         with self._lock:
             existing = self.get(doc["id"])
-            doc = {**doc, "rev": (existing or {}).get("rev", 0) + 1, "updated_at": _now()}
+            doc = {**_kept_sent(existing), **doc, "rev": (existing or {}).get("rev", 0) + 1, "updated_at": _now()}
             doc.setdefault("created_at", (existing or {}).get("created_at", _now()))
+            self._write(doc)
+            return doc
+
+    def set_sent(self, draft_id: str, sent: bool) -> Dict[str, Any]:
+        """标记 / 撤销已发送；再标一次按现在的译文重算。rev、updated_at 不变。"""
+        with self._lock:
+            doc = self.get(draft_id)
+            if not doc:
+                raise DraftError("DRAFT_NOT_FOUND", "找不到这份翻译稿", 404)
+            doc.pop("sent_at", None)
+            doc.pop("sent_digest", None)
+            if sent:
+                doc["sent_at"] = _now()
+                doc["sent_digest"] = _digest(current_translation(doc.get("state") or {}))
             self._write(doc)
             return doc
 
@@ -227,6 +263,7 @@ class PostDraftStore:
                 out[f"{slack['channel_id']}:{slack['thread_ts']}"] = {
                     "id": doc["id"],
                     "status": doc.get("status", "draft"),
+                    "sent_at": sent_view(doc)["sent_at"],
                     "auto": bool(doc.get("auto")),
                     "seen": bool(doc.get("seen", True)),
                     "versions": len(state.get("versions") or []),

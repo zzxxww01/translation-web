@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, Send, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
@@ -49,6 +49,8 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const [doc, setDoc] = useState<DraftDoc | null>(null);
   const [images, setImages] = useState<DraftImage[]>([]);
   const [status, setStatus] = useState<'draft' | 'done'>('draft');
+  const [sentAt, setSentAt] = useState<number | null>(null);
+  const [sentBusy, setSentBusy] = useState(false);
   const [running, setRunning] = useState(false);
   const [instruction, setInstruction] = useState('');
   const [picking, setPicking] = useState(false);
@@ -59,6 +61,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
     setDoc(next);
     setImages(next.images);
     setStatus(next.status);
+    setSentAt(next.sent_at ?? null);
     store.getState().loadSnapshot(next.state, next.id, next.rev);
     sync.markLoaded();
     queryClient.setQueryData(draftKeys.slack(channelId, threadTs), { draft: next });
@@ -98,6 +101,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
         setDoc(existing);
         setImages(existing.images);
         setStatus(existing.status);
+        setSentAt(existing.sent_at ?? null);
       } else {
         load(existing);
       }
@@ -129,6 +133,24 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
     toast.success(status === 'done' ? '已改回草稿' : '已标记完成');
   };
 
+  /** 已发送和「标记完成」分开：发出去之后点；先把正在改的存好，后端记下的译文才是发出去的那版 */
+  const setSent = async (sent: boolean) => {
+    if (!draftId || sentBusy) return;
+    setSentBusy(true);
+    try {
+      if (sent) await sync.flush();
+      const result = await draftsApi.setSent(draftId, sent);
+      setSentAt(result.sent_at);
+      void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
+      void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'activity'] });
+      toast.success(sent ? '已标记为已发送' : '已撤销「已发送」');
+    } catch (error) {
+      toast.error(`没保存上：${error instanceof Error ? error.message : '请重试'}`);
+    } finally {
+      setSentBusy(false);
+    }
+  };
+
   const downloadZip = async () => {
     await sync.flush();
     if (draftId) window.location.href = draftsApi.imagesZipUrl(draftId);
@@ -137,7 +159,12 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const copyWithTitle = async () => {
     const title = ws.selectedTitle || ws.generatedTitles[0] || '';
     const text = title ? `${title}\n\n${ws.currentContent}` : ws.currentContent;
-    if (await copyToClipboard(text)) toast.success(title ? '标题和译文已复制' : '译文已复制');
+    if (await copyToClipboard(text)) {
+      // 复制了不等于发了，不自动标；顺手给个按钮
+      toast.success(title ? '标题和译文已复制' : '译文已复制', sentAt || !draftId ? undefined : {
+        action: { label: '标记已发送', onClick: () => void setSent(true) }, duration: 8000,
+      });
+    }
   };
 
   const extraction = doc?.extraction;
@@ -310,6 +337,13 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
           <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-7 shrink-0" onClick={toggleDone}>
             {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
             {status === 'done' ? '已完成' : '标记完成'}
+          </Button>
+        )}
+        {draftId && (
+          <Button variant={sentAt ? 'secondary' : 'ghost'} size="sm" className="h-7 shrink-0" disabled={sentBusy}
+            onClick={() => void setSent(!sentAt)} title={sentAt ? `发送于 ${new Date(sentAt * 1000).toLocaleString('zh-CN')}，点一下撤销` : '在 Slack 等地方发出去之后点一下'}>
+            <Send className={sentAt ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
+            {sentAt ? '已发送' : '标记已发送'}
           </Button>
         )}
         <div className="w-40 shrink-0" title="翻译和优化用的模型">

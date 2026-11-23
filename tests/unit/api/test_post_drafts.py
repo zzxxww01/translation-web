@@ -57,6 +57,34 @@ def test_store_saves_with_rev_check_lists_and_indexes(tmp_path):
         store.get("../../etc/passwd")
 
 
+def test_sent_is_separate_from_done_and_survives_saves_and_reruns(tmp_path):
+    store = PostDraftStore(tmp_path)
+    v1 = [{"id": "v1", "content": "第一版译文", "versionNumber": 1}]
+    doc = store.save("m_0123456789ab", {"state": {**state("Post", v1), "currentVersionId": "v1"}}, rev=None)
+    assert store.list()[0]["sent_at"] is None
+
+    sent = store.set_sent("m_0123456789ab", True)
+    assert sent["rev"] == doc["rev"] and sent["updated_at"] == doc["updated_at"]  # 不让正在编辑的页面冲突
+    item = store.list()[0]
+    assert item["status"] == "draft" and item["sent_at"] == sent["sent_at"] and not item["sent_changed"]
+
+    # 前端存稿（带不带 sent_at 都一样）和后台重翻都保留标记；改了当前译文就提示
+    v2 = v1 + [{"id": "v2", "content": "发出去以后又改", "versionNumber": 2}]
+    store.save("m_0123456789ab", {"state": {**state("Post", v2), "currentVersionId": "v2"}, "status": "done",
+                                  "sent_at": None}, rev=doc["rev"])
+    item = store.list()[0]
+    assert item["status"] == "done" and item["sent_at"] == sent["sent_at"] and item["sent_changed"]
+    store.put_system({**store.get("m_0123456789ab"), "status": "draft"})
+    assert store.list()[0]["sent_at"] == sent["sent_at"]
+
+    assert store.set_sent("m_0123456789ab", True)["sent_at"] and not store.list()[0]["sent_changed"]
+    store.set_sent("m_0123456789ab", False)
+    assert store.list()[0]["sent_at"] is None and "sent_digest" not in store.get("m_0123456789ab")
+    with pytest.raises(DraftError) as exc:
+        store.set_sent("m_000000000000", True)
+    assert exc.value.code == "DRAFT_NOT_FOUND"
+
+
 class FakeInbox:
     def __init__(self):
         self.store = SimpleNamespace(load=lambda: {"token": "x"})
@@ -171,6 +199,11 @@ def test_draft_routes_round_trip(env):
         listed = client.get("/api/post-drafts", params={"q": "机柜"}).json()["items"]
         assert [i["id"] for i in listed] == [ran["id"]]
         assert client.get("/api/post-drafts/bad-id").status_code == 400
+        marked = client.put(f"/api/post-drafts/{created['id']}/sent", json={"sent": True}).json()
+        assert marked["sent_at"] and marked["sent_changed"] is False
+        got = client.get(f"/api/post-drafts/{created['id']}").json()
+        assert got["sent_at"] == marked["sent_at"] and got["rev"] == 2
+        assert client.put(f"/api/post-drafts/{created['id']}", json={"state": state("Edited"), "rev": 2}).status_code == 200
         # 翻译记录不提供删除（2026-11-22 用户要求）
         assert client.delete(f"/api/post-drafts/{created['id']}").status_code == 405
         assert client.get(f"/api/post-drafts/{created['id']}").status_code == 200

@@ -12,6 +12,7 @@ import { editHistory } from './lib/history';
 import { AUTO_SYNC_GAP_MS, useAutoSyncArticles } from './hooks';
 import { AlignmentTooLow } from './lib/claude';
 import { importAndTranslate } from './lib/importFlow';
+import { articleStatus } from './lib/tracks';
 import { skillsApi } from '@/features/skills/api';
 import { ApiErrorWrapper } from '@/shared/api/client';
 import type { RunMeta } from '@/features/skills/types';
@@ -28,6 +29,7 @@ const api = vi.hoisted(() => ({
   sourceHtml: vi.fn(),
   changes: vi.fn(),
   setPrimary: vi.fn(),
+  setSent: vi.fn(),
 }));
 const substack = vi.hoisted(() => ({ importArticle: vi.fn(), syncArticles: vi.fn() }));
 const claude = vi.hoisted(() => ({ startClaudeTrack: vi.fn(), importClaudeTrack: vi.fn() }));
@@ -45,7 +47,7 @@ vi.mock('./hooks', async importOriginal => ({
 }));
 vi.mock('@/features/substack/api', () => ({ substackApi: substack, isCookieError: () => false }));
 vi.mock('./lib/claude', async importOriginal => ({ ...(await importOriginal<object>()), ...claude }));
-vi.mock('sonner', () => ({ toast: { success: vi.fn(), error: vi.fn(), warning: vi.fn() } }));
+vi.mock('sonner', () => ({ toast: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() } }));
 
 let root: Root;
 let host: HTMLDivElement;
@@ -835,6 +837,26 @@ describe('Workbench', () => {
     expect(buttonIn(host, '定位')).toBeTruthy();
   });
 
+  it('marks the article as sent from the top bar and shows the date', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    api.setSent.mockResolvedValue({ ok: true, sent: { at: '2026-11-23T02:00:00+00:00', changed: false } });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const button = Array.from(host.querySelectorAll('button')).find(b => b.textContent === '标记已发送') as HTMLButtonElement;
+    await act(async () => { button.click(); });
+    await flush();
+    expect(api.setSent).toHaveBeenCalledWith('p1', true);
+    expect(host.textContent).toContain('已发送 11/23');
+    expect(host.textContent).not.toContain('标记已发送');
+  });
+
+  it('flags edits made after sending', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, sent: { at: '2026-11-23T02:00:00+00:00', changed: true } });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.textContent).toContain('发送后有改动');
+  });
+
   it('copies the whole primary translation and says so on the export button', async () => {
     api.workbench.mockResolvedValue(DATA);
     api.exportMarkdown.mockResolvedValue({ filename: 'x.md', content: '# 2027 数据中心\n\n数据中心正在爆发。' });
@@ -1143,5 +1165,13 @@ describe('Workbench', () => {
     await render(<Workbench projectId="p1" />);
     await flush();
     expect(progressChip()).toBeUndefined();
+  });
+});
+
+describe('articleStatus sent', () => {
+  it('shows the sent date instead of translation progress', () => {
+    expect(articleStatus('sent', 100, '2026-11-23T02:00:00+00:00')).toMatchObject({ text: '已发送 11/23', tone: 'sent' });
+    expect(articleStatus('sent', 100, null)?.text).toBe('已发送');
+    expect(articleStatus('translated', 100)?.text).toBe('已翻译');
   });
 });

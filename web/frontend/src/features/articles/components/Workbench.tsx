@@ -127,6 +127,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const agentStartLock = useRef(false);
   const [saving, setSaving] = useState(false);
   const [markBusy, setMarkBusy] = useState(false);
+  const [sentBusy, setSentBusy] = useState(false);
   const [readingJump, setReadingJump] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
   /** 正在看大图的是第几张；null = 没在看 */
@@ -244,6 +245,28 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
+  /** 「已发送」：译文在系统外发出去后手动标；标之前先把正在改的段落存好，指纹才对得上 */
+  const setSent = async (sent: boolean) => {
+    if (sentBusy) return;
+    setSentBusy(true);
+    try {
+      if (sent && !(await flushEdits())) {
+        toast.error('有段落没保存上，先处理再标记');
+        return;
+      }
+      await queryClient.cancelQueries({ queryKey: articleKeys.workbench(project.id) });
+      const result = await articlesApi.setSent(project.id, sent);
+      queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && { ...current, sent: result.sent });
+      void queryClient.invalidateQueries({ queryKey: ['articles', 'library'] });
+      void queryClient.invalidateQueries({ queryKey: articleKeys.projects });
+      toast.success(sent ? '已标记为已发送' : '已撤销「已发送」');
+    } catch (error) {
+      toast.error(`没保存上：${error instanceof Error ? error.message : '请重试'}`);
+    } finally {
+      setSentBusy(false);
+    }
+  };
+
   /** 取导出的 Markdown；QA 没过时问一句「仍然导出？」，不导就把原来的错误抛出去 */
   const loadExport = async (target: string, format: 'zh' | 'en'): Promise<ExportResult> => {
     try {
@@ -286,7 +309,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     const markdown = loadExport(primary.id, 'zh').then(result => result.content);
     if (how === 'wechat') notify('正在排版…', false);
     (how === 'wechat' ? copyForWechat(markdown) : copyFullText(markdown)).then(
-      () => notify(how === 'wechat' ? '已复制，可粘到公众号' : '已复制全文'),
+      () => {
+        notify(how === 'wechat' ? '已复制，可粘到公众号' : '已复制全文');
+        // 复制了不等于发了，不自动标；顺手问一句
+        if (!data.sent) {
+          toast.info('发出去之后可以标记已发送', { action: { label: '标记已发送', onClick: () => void setSent(true) }, duration: 8000 });
+        }
+      },
       error => {
         notify(null);
         toast.error(`没复制上：${error instanceof Error ? error.message : '请重试'}`);
@@ -580,7 +609,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
           mark={readingProgress} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
           onExportPrimary={() => void exportVersion(primary.id, 'zh')} primaryActions={primaryActions} exportItems={exportItems}
-          exportNotice={exportNotice}
+          exportNotice={exportNotice} sent={data.sent ?? null} onSetSent={sent => void setSent(sent)} sentBusy={sentBusy}
           onImmersive={enterImmersive} legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
       )}
 

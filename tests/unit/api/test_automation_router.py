@@ -277,6 +277,29 @@ async def test_status_mapping(env, state, payload, expected):
 
 
 @pytest.mark.asyncio
+async def test_articles_lists_unsent_then_sent_after_mark(env):
+    from src.api.routers import substack
+    project_id = await _imported_project(env)
+    env.monkeypatch.setattr(substack, "_translation_state", lambda *a, **k: ("translated", 100))
+    env.monkeypatch.setattr(automation, "_translation_state", lambda *a, **k: ("translated", 100))
+    env.monkeypatch.setattr(automation, "get_translation_status_service", lambda: FakeStatusService({}))
+
+    unsent = await automation.articles(status="unsent", limit=50)
+    assert [a["project_id"] for a in unsent["articles"]] == [project_id] and unsent["articles"][0]["sent_at"] is None
+    marked = await automation.mark_sent(project_id, automation.MarkSentRequest(sent=True))
+    assert marked["sent_at"]
+    assert (await automation.articles(status="unsent", limit=50))["total"] == 0
+    (sent,) = (await automation.articles(status="sent", limit=50))["articles"]
+    assert sent["sent_at"] == marked["sent_at"] and sent["result"].endswith(f"/articles/{project_id}")
+    assert (await automation.project_status(project_id))["sent_at"] == marked["sent_at"]
+
+    await automation.mark_sent(project_id, automation.MarkSentRequest(sent=False))
+    assert (await automation.articles(status="unsent", limit=50))["total"] == 1
+    with pytest.raises(APIException):
+        await automation.mark_sent("missing-project", automation.MarkSentRequest(sent=True))
+
+
+@pytest.mark.asyncio
 async def test_status_unknown_project(env):
     env.monkeypatch.setattr(automation, "get_translation_status_service", lambda: FakeStatusService({}))
     with pytest.raises(APIException) as exc:
@@ -418,6 +441,20 @@ async def test_drafts_lists_unconfirmed_by_default(drafts_env):
     assert item["slack"]["conversation_id"] == "C0123456789" and item["auto"] is True
     everything = await automation.drafts(status="all", source="", q="", limit=50)
     assert {i["draft_id"] for i in everything["items"]} == {DRAFT_ID, "m_0123456789ab"}
+
+
+@pytest.mark.asyncio
+async def test_drafts_mark_sent_and_filter_by_sent(drafts_env):
+    marked = await automation.mark_draft_sent(DRAFT_ID, automation.MarkSentRequest(sent=True))
+    assert marked["sent"] is True and marked["sent_at"]
+    (item,) = (await automation.drafts(status="draft", source="", q="", limit=50, sent="yes"))["items"]
+    assert item["draft_id"] == DRAFT_ID and item["status"] == "draft" and item["sent_changed"] is False
+    unsent = await automation.drafts(status="all", source="", q="", limit=50, sent="no")
+    assert [i["draft_id"] for i in unsent["items"]] == ["m_0123456789ab"]
+    await automation.mark_draft_sent(DRAFT_ID, automation.MarkSentRequest(sent=False))
+    assert (await automation.drafts(status="all", source="", q="", limit=50, sent="yes"))["total"] == 0
+    with pytest.raises(APIException):
+        await automation.mark_draft_sent("m_000000000000", automation.MarkSentRequest(sent=True))
 
 
 @pytest.mark.asyncio

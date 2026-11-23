@@ -6,13 +6,15 @@ import { cn } from '@/lib/utils';
 import { substackApi, type ArticleFilter, type SubstackArticle } from '@/features/substack/api';
 import { NewProjectModal } from '@/features/document/components/NewProjectModal';
 import { useLibrary, useProjects } from '../hooks';
-import { articleStatus, TONE } from '../lib/tracks';
+import { articleStatus, sentLabel, TONE } from '../lib/tracks';
 import { StatusTag } from './StatusTag';
 
 const FILTERS: { id: ArticleFilter; label: string }[] = [
   { id: 'all', label: '全部' },
   { id: 'not_imported', label: '未导入' },
   { id: 'imported', label: '已导入' },
+  { id: 'unsent', label: '未发送' },
+  { id: 'sent', label: '已发送' },
 ];
 
 // 列表项：选中时左边一条梅子色竖线 + 浅梅子底
@@ -114,7 +116,8 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
               type="button"
               aria-pressed={filter === item.id}
               onClick={() => setFilter(item.id)}
-              className={cn('flex-1 rounded-full px-2 py-1 text-xs transition-colors', filter === item.id ? 'bg-white font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}
+              title={item.id === 'unsent' ? '翻译完了还没标记已发送' : undefined}
+              className={cn('flex-auto whitespace-nowrap rounded-full px-1.5 py-1 text-xs transition-colors', filter === item.id ? 'bg-white font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}
             >
               {item.label}
               {counts?.[item.id] !== undefined && <span className="ml-1 tabular-nums opacity-70">{counts[item.id]}</span>}
@@ -131,7 +134,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
         )}
         {articles.map(article => {
           const selected = article.project_id ? article.project_id === selectedProjectId : article.slug === selectedSlug;
-          const status = articleStatus(article.status, article.progress);
+          const status = articleStatus(article.status, article.progress, article.sent_at);
           return (
             <li key={article.url}>
               <button
@@ -173,7 +176,9 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                   className={cn(ITEM, project.id === selectedProjectId ? ITEM_SELECTED : 'hover:bg-bg-hover')}
                 >
                   <span className="line-clamp-2 font-[family-name:var(--font-display)] text-[15px] font-semibold leading-snug text-text-primary">{project.title}</span>
-                  <span className="mt-0.5 block text-[11px] text-text-muted">已译 {Math.round(project.progress?.percent ?? 0)}%</span>
+                  <span className="mt-0.5 block text-[11px] text-text-muted">
+                    {project.sent_at ? sentLabel(project.sent_at) : `已译 ${Math.round(project.progress?.percent ?? 0)}%`}
+                  </span>
                 </button>
               </li>
             ))}

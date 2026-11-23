@@ -33,7 +33,7 @@ export function sectionsWithMissing(rows: WorkbenchRow[], text: (row: WorkbenchR
   return ids.map(id => ({ id, title: titles.get(id) ?? id }));
 }
 
-export type StatusTone = 'muted' | 'busy' | 'wait' | 'done';
+export type StatusTone = 'muted' | 'busy' | 'wait' | 'done' | 'sent';
 
 /** 各状态的文字色和圆点 / 进度条色 */
 export const TONE: Record<StatusTone, { text: string; bar: string }> = {
@@ -41,12 +41,22 @@ export const TONE: Record<StatusTone, { text: string; bar: string }> = {
   busy: { text: 'text-info', bar: 'bg-info' },
   wait: { text: 'text-warning-text', bar: 'bg-warning' },
   done: { text: 'text-success', bar: 'bg-success' },
+  sent: { text: 'text-primary-600', bar: 'bg-primary-500' },
 };
 
+const sentDate = new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' });
+
+/** 「已发送 11/23」；时间读不出来就只写已发送 */
+export function sentLabel(sentAt: string | null | undefined): string {
+  const time = sentAt ? Date.parse(sentAt) : NaN;
+  return Number.isFinite(time) ? `已发送 ${sentDate.format(time)}` : '已发送';
+}
+
 /** 已导入文章的翻译进度（只看主译本，后端算好）；没导入时为 null。 */
-export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone; percent: number } | null {
+export function articleStatus(status: ArticleStatus, progress: number, sentAt?: string | null): { text: string; tone: StatusTone; percent: number } | null {
   const percent = Math.round(progress);
   switch (status) {
+    case 'sent': return { text: sentLabel(sentAt), tone: 'sent', percent: 100 };
     case 'imported': return { text: '还没翻', tone: 'muted', percent: 0 };
     case 'awaiting_terms': return { text: '等你确认术语', tone: 'wait', percent };
     case 'translating': return { text: `翻译中 ${percent}%`, tone: 'busy', percent };

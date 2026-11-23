@@ -40,7 +40,7 @@ from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
 from src.core.file_utils import read_json, write_json_atomic
-from src.services import article_primary, article_variants
+from src.services import article_primary, article_sent, article_variants
 from src.services.agent_translate import AGENTS, WORKING, AgentRunError, AgentRunStore, SkillRunnerClient, find_outputs
 from src.services.post_drafts import DraftError, current_translation
 from src.services.slack_inbox import SlackInboxError
@@ -60,10 +60,13 @@ from .slack_compose import compose_slack_message
 from .slack_models import ConversationMessage, SlackComposeRequest, SlackProcessRequest
 from .slack_models import STYLE_MAP as REPLY_STYLES
 from .slack_process import process_slack_message
+from .translate_utils import validate_path_component
+from .workbench import set_sent
 from .substack import (
     _imported_projects,
     _to_api_error,
     _translation_state,
+    article_state,
     get_substack_client,
     get_substack_library,
     import_substack_article,
@@ -140,10 +143,9 @@ async def updates(since: float = Query(..., ge=0)):
         if _parse_post_date(post.post_date) <= since:
             break  # posts() 按发布时间从新到旧
         project = imported.get(article_key(post.url) or "")
-        status, project_id = "not_imported", None
+        status, project_id, sent_at = "not_imported", None, None
         if project is not None:
-            status, _ = await asyncio.to_thread(
-                _translation_state, pm, project.id, variants.get(project.id, []), project.primary_target)
+            status, _, sent_at = await asyncio.to_thread(article_state, pm, project, variants.get(project.id, []))
             project_id = project.id if status != "not_imported" else None
         articles.append({
             "slug": post.slug,
@@ -156,6 +158,7 @@ async def updates(since: float = Query(..., ge=0)):
             "word_count": post.wordcount,
             "status": status,
             "project_id": project_id,
+            "sent_at": sent_at,
         })
 
     inbox = get_slack_inbox()
@@ -424,7 +427,11 @@ async def project_status(project_id: str, with_markdown: bool = False,
         "zh_summary": post.zh_summary if post else "",
         "result": _article_link(project_id) if status == "done" else None,
         "error": None,
+        "sent_at": None,
     }
+    sent = await asyncio.to_thread(article_sent.read, pm, project_id)
+    if sent:
+        result["sent_at"] = sent["at"]
     if status == "failed":
         result["error"] = _last_error(payload) or f"翻译停在 {progress}%（状态 {payload.get('status') or state}）"
     engines = await _engine_statuses(pm, project_id)
@@ -444,6 +451,67 @@ async def project_status(project_id: str, with_markdown: bool = False,
         elif engine:
             result["markdown_error"] = f"{engine} 这一版还没翻完"
     return result
+
+
+# ---------------------------------------------------------------- 已发送
+
+
+@router.get("/articles")
+async def articles(status: str = Query("unsent", pattern="^(unsent|sent)$"),
+                   limit: int = Query(50, ge=1, le=200)):
+    """导入过的文章里：unsent 译完还没标已发送 / sent 已发送（按标记时间从新到旧）。不去 Substack 同步。"""
+    pm = get_project_manager()
+
+    def collect() -> List[Dict[str, Any]]:
+        imported, variants = _imported_projects(pm)
+        posts = {article_key(post.url): post for post in get_substack_library().posts()}
+        items = []
+        for key, project in imported.items():
+            state, _, sent_at = article_state(pm, project, variants.get(project.id, []))
+            if state != ("sent" if status == "sent" else "translated"):
+                continue
+            post = posts.get(key)
+            items.append({
+                "project_id": project.id,
+                "title": project.title,
+                "zh_title": post.zh_title if post else "",
+                "url": project.original_url,
+                "published_at": post.post_date if post else None,
+                "sent_at": sent_at,
+                "result": _article_link(project.id),
+            })
+        sort_key = "sent_at" if status == "sent" else "published_at"
+        items.sort(key=lambda item: item[sort_key] or "", reverse=True)
+        return items
+
+    items = await asyncio.to_thread(collect)
+    return {"status": status, "total": len(items), "articles": items[:limit]}
+
+
+class MarkSentRequest(BaseModel):
+    sent: bool = True  # false = 撤销
+
+
+@router.post("/drafts/{draft_id}/sent")
+async def mark_draft_sent(draft_id: str, body: MarkSentRequest):
+    """翻译稿标记 / 撤销「已发送」，和网页上的按钮同一个记录。"""
+    try:
+        doc = await run_blocking(get_draft_store().set_sent, draft_id, body.sent)
+    except DraftError as error:
+        raise _draft_error(error) from error
+    return {"draft_id": draft_id, "sent": body.sent, "sent_at": _iso(doc["sent_at"]) if doc.get("sent_at") else None}
+
+
+@router.post("/projects/{project_id}/sent")
+async def mark_sent(project_id: str, body: MarkSentRequest):
+    """标记 / 撤销「已发送」，和工作台上的按钮同一个记录。"""
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
+    try:
+        sent = await run_blocking(set_sent, get_project_manager(), project_id, body.sent)
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
+    return {"project_id": project_id, "sent": body.sent, "sent_at": sent["at"] if sent else None}
 
 
 # ---------------------------------------------------------------- health
@@ -692,6 +760,8 @@ def _summary_view(item: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "draft_id": item["id"],
         "status": item["status"],  # draft 还没点「标记完成」/ done 已完成
+        "sent_at": _iso(item["sent_at"]) if item.get("sent_at") else None,  # 标记已发送的时间，和 status 无关
+        "sent_changed": item.get("sent_changed", False),  # 标了已发送之后译文又改过
         "source": item["source"],  # slack / manual（帖子翻译页手动粘贴的）
         "auto": item["auto"],  # 后台或 Muse 自动翻的
         "title": item["title"],
@@ -707,13 +777,16 @@ def _summary_view(item: Dict[str, Any]) -> Dict[str, Any]:
 @router.get("/drafts")
 async def drafts(status: str = Query("draft", pattern="^(draft|done|all)$"),
                  source: str = Query("", pattern="^(|slack|manual)$"),
-                 q: str = Query("", max_length=200), limit: int = Query(50, ge=1, le=300)):
+                 q: str = Query("", max_length=200), limit: int = Query(50, ge=1, le=300),
+                 sent: str = Query("", pattern="^(|yes|no)$")):
     try:
         items = await run_blocking(get_draft_store().list, q, source)
     except DraftError as error:
         raise _draft_error(error) from error
     if status != "all":
         items = [i for i in items if i["status"] == status]
+    if sent in ("yes", "no"):  # 直接调用时 Query 默认值不生效
+        items = [i for i in items if bool(i.get("sent_at")) == (sent == "yes")]
     return {"total": len(items), "items": [_summary_view(i) for i in items[:limit]]}
 
 

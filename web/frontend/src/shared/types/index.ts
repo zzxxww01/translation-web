@@ -36,6 +36,8 @@ export interface Project {
   progress?: ProjectProgress;
   status?: string;
   created_at?: string;
+  /** 标记已发送的时间（只有项目列表带） */
+  sent_at?: string | null;
 }
 
 export interface ProjectProgress {

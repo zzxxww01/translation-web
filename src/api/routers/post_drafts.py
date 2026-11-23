@@ -30,6 +30,7 @@ from src.services.post_drafts import (
     DraftError,
     PostDraftStore,
     new_manual_id,
+    sent_view,
     slack_draft_id,
 )
 from src.services.slack_inbox import SlackInboxError
@@ -91,7 +92,8 @@ async def create_manual_draft(request: Request, body: DraftBody):
 
 @router.get("/slack/{channel_id}/{thread_ts}")
 async def get_slack_draft(channel_id: str, thread_ts: str):
-    return {"draft": await _store(get_draft_store().get, slack_draft_id(channel_id, thread_ts))}
+    doc = await _store(get_draft_store().get, slack_draft_id(channel_id, thread_ts))
+    return {"draft": {**doc, **sent_view(doc)} if doc else None}
 
 
 @router.get("/{draft_id}")
@@ -99,13 +101,24 @@ async def get_draft(draft_id: str):
     doc = await _store(get_draft_store().get, draft_id)
     if not doc:
         raise APIException(status_code=404, detail="找不到这份翻译稿", error_code="DRAFT_NOT_FOUND")
-    return doc
+    return {**doc, **sent_view(doc)}
 
 
 @router.put("/{draft_id}")
 @limiter.limit("120/minute")
 async def save_draft(request: Request, draft_id: str, body: DraftBody):
     return await _store(get_draft_store().save, draft_id, body.model_dump(exclude={"rev"}), rev=body.rev)
+
+
+class SentBody(BaseModel):
+    sent: bool  # false = 撤销
+
+
+@router.put("/{draft_id}/sent")
+async def set_draft_sent(draft_id: str, body: SentBody):
+    """「已发送」：和「标记完成」分开，不动 rev，正在编辑的页面不会因此冲突。"""
+    doc = await _store(get_draft_store().set_sent, draft_id, body.sent)
+    return {"ok": True, **sent_view(doc)}
 
 
 @router.get("/{draft_id}/images.zip")

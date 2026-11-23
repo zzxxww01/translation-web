@@ -69,11 +69,18 @@ export interface WorkbenchRow {
   alt: Record<string, string | null>;
 }
 
+export interface SentMark {
+  at: string;
+  changed: boolean;
+}
+
 export interface Workbench {
   project: WorkbenchProject;
   variants: WorkbenchVariant[];
   rows: WorkbenchRow[];
   reading_mark?: { key: string; at: string } | null;
+  /** 标记已发送的时间；changed = 标了之后主译本又改过（或换了主译本）。旧后端没有 */
+  sent?: SentMark | null;
 }
 
 export type PaneId = 'source' | 'main' | 'compare';

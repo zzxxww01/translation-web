@@ -27,6 +27,7 @@ from ..middleware import BadRequestException, ConflictException, NotFoundExcepti
 from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
 from .translate_utils import validate_path_component
+from src.services import article_sent
 from src.services.article_variants import delete_with_variants, list_variants
 from src.services.translation_run_registry import translation_run_registry
 
@@ -126,7 +127,14 @@ async def list_projects(pm: ProjectManagerDep):
     # Read only list fields; full metadata can include megabytes of legacy
     # section snapshots and total=0 must not trigger a sections scan here.
     projects = await asyncio.to_thread(pm.list_summaries)
-    return [_build_project_response(p) for p in projects]
+
+    def build(summary) -> ProjectResponse:
+        response = _build_project_response(summary)
+        sent = article_sent.read(pm, summary.id)
+        response.sent_at = sent["at"] if sent else None
+        return response
+
+    return await asyncio.to_thread(lambda: [build(p) for p in projects])
 
 
 @router.post("/projects", response_model=ProjectResponse)
