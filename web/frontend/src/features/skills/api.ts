@@ -31,6 +31,9 @@ export const skillsApi = {
   stop: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/stop`, undefined, { retry: false, timeout: 90_000 }),
   remove: (runId: string) => apiClient.delete<{ ok: boolean }>(`/skills/runs/${runId}`),
   pin: (runId: string, pinned: boolean) => apiClient.put<RunMeta>(`/skills/runs/${runId}/pin`, { pinned }, { retry: false }),
+  /** 叉掉「等你确认」：这一轮不用确认，也不自动按建议继续 */
+  dismissAwaiting: (runId: string) =>
+    apiClient.post<RunMeta>(`/skills/runs/${runId}/dismiss-awaiting`, undefined, { retry: false }),
   editHeld: (runId: string, hid: string, text: string) =>
     apiClient.put<RunMeta>(`/skills/runs/${runId}/held/${hid}`, { text }, { retry: false }),
   deleteHeld: (runId: string, hid: string) => apiClient.delete<RunMeta>(`/skills/runs/${runId}/held/${hid}`),

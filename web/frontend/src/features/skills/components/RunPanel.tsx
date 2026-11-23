@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { FolderDown, Hand, PanelRightClose, PanelRightOpen, Trash2, WifiOff } from 'lucide-react';
+import { FolderDown, Hand, PanelRightClose, PanelRightOpen, Trash2, WifiOff, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -89,6 +89,15 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
       toast.error(error instanceof Error ? error.message : '没发出去');
     } finally {
       setContinuing(false);
+    }
+  };
+
+  const dismissAwaiting = async () => {
+    try {
+      await skillsApi.dismissAwaiting(run.id);
+      await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '没关掉');
     }
   };
 
@@ -211,6 +220,17 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
                   </span>
                   <Button size="sm" variant="outline" className="h-6 px-2 text-xs" onClick={() => void continueAsSuggested()} disabled={continuing}>
                     {continuing ? '发送中…' : '按建议继续'}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="h-6 w-6 p-0 text-text-muted"
+                    onClick={() => void dismissAwaiting()}
+                    disabled={continuing}
+                    title="这一轮不用确认，也不自动继续"
+                    aria-label="关闭等待确认"
+                  >
+                    <X className="h-3.5 w-3.5" />
                   </Button>
                 </div>
               ) : null

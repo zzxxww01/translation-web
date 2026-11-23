@@ -73,6 +73,25 @@ async def test_user_reply_cancels_auto_reply(runner, store, factory):
     assert runner.meta(run_id).auto_replies == 0
 
 
+async def test_dismissing_awaiting_cancels_this_turns_auto_reply(runner, store, factory):
+    run_id = await start(runner, auto_reply_s=0.05)
+    session = factory.last
+    await end_turn(session, f"做完了，要不要再加个测试？\n{AWAIT_MARK}")
+    meta = runner.dismiss_awaiting(run_id)
+    assert meta.status == "idle" and not meta.awaiting_reply and meta.auto_reply_at is None
+    last = store.read_events(run_id)[-1]
+    assert last["type"] == "status" and last["status"] == "idle" and last["awaiting"] is False
+
+    await asyncio.sleep(0.1)
+    await settle()
+    assert len(session.sent) == 1 and runner.meta(run_id).auto_replies == 0
+
+    # 下一轮又停在等确认：照常计时
+    await runner.send_message(run_id, "好", [])
+    await end_turn(session, f"还要确认一下\n{AWAIT_MARK}")
+    assert runner.meta(run_id).awaiting_reply and runner.meta(run_id).auto_reply_at is not None
+
+
 async def test_without_auto_reply_it_waits_but_still_marks_awaiting(runner, store, factory):
     run_id = await start(runner, auto_reply_s=0)
     session = factory.last

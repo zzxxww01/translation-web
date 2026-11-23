@@ -304,6 +304,10 @@ def create_app(
     async def pin_run(run_id: str, body: PinBody):
         return runner.pin(run_id, body.pinned).to_dict()
 
+    @api.post("/runs/{run_id}/dismiss-awaiting")
+    async def dismiss_awaiting(run_id: str):
+        return runner.dismiss_awaiting(run_id).to_dict()
+
     @api.post("/runs/{run_id}/answer")
     async def answer(run_id: str, body: AnswerBody):
         return (await runner.answer(run_id, body.qid, body.answers, body.response)).to_dict()
