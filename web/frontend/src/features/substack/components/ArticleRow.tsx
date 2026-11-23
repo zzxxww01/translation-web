@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { BellRing, CheckCircle2, Download, ExternalLink, FolderOpen, Languages, Loader2 } from 'lucide-react';
+import { BellRing, CheckCircle2, Download, ExternalLink, FolderOpen, Languages, Loader2, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
+import { sentLabel } from '@/features/articles/lib/tracks';
 import type { SubstackArticle } from '../api';
 
 export type ImportMode = 'import' | 'translate';
@@ -113,6 +114,16 @@ export function ArticleRow({ article, busyMode, isNew, onImport, onTranslate, on
         <span className="inline-flex items-center gap-1 text-sm font-medium text-success">
           <CheckCircle2 className="h-3.5 w-3.5" />
           已译完
+        </span>
+        {openButton}
+      </>
+    );
+  } else if (article.status === 'sent') {
+    actions = (
+      <>
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
+          <Send className="h-3.5 w-3.5" />
+          {sentLabel(article.sent_at)}
         </span>
         {openButton}
       </>

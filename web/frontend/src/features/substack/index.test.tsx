@@ -210,6 +210,15 @@ describe('SubstackFeature', () => {
     expect(host.textContent).toContain('项目页');
   });
 
+  it('shows 已发送 instead of falling back to 还没翻译 for sent articles', async () => {
+    listWith([article({ project_id: 'p1', status: 'sent', progress: 100, sent_at: '2026-11-23T10:09:55+00:00' })]);
+    await render();
+    const text = host.textContent ?? '';
+    expect(text).toContain('已发送 11/23');
+    expect(text).not.toContain('还没翻译');
+    expect(button('开始翻译')).toBeUndefined();
+  });
+
   it('asks for the cookie on a paywall error and retries after saving', async () => {
     const importArticle = vi.spyOn(substackApi, 'importArticle')
       .mockRejectedValueOnce(
