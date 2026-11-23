@@ -5,12 +5,16 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Send, Copy, Trash2 } from 'lucide-react';
+import { Copy, RotateCw, Send, Trash2 } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
 import { EmailStyle } from '@/shared/constants';
 import { cn } from '@/lib/utils';
+import { PANE, PANE_FOOTER, PANE_HEADER, PANE_TEXTAREA } from '@/shared/ui/pane';
+
+// 卡片里的单行输入：无边框，和下面的正文连成一张纸
+const FIELD = 'h-10 rounded-none border-0 px-4 text-sm focus:border-transparent focus:shadow-none';
+// 正文比文本翻译少掉发件人 / 主题那一行（41px），整张卡和文本翻译一样高，切标签时底边不跳；右栏随左栏等高
+const BODY_MIN_H = 'min-h-[40svh] lg:min-h-[max(439px,calc(100svh-321px))]';
 
 export function EmailReplyGenerator() {
   const emailMutation = useGenerateEmailReply();
@@ -44,19 +48,21 @@ export function EmailReplyGenerator() {
     }
   };
 
-  return (
-    <div className="grid min-w-0 gap-6 lg:grid-cols-2">
-      <section className="flex min-w-0 flex-col gap-4" aria-labelledby="email-input-heading">
-        <h2 id="email-input-heading" className="sr-only">邮件信息</h2>
-        <div className="space-y-1.5">
-          <Label htmlFor="email-sender">发件人（可选）</Label>
-          <Input id="email-sender" placeholder="例如: John Smith" value={sender} onChange={(e) => setSender(e.target.value)} />
-        </div>
+  const handleClear = () => {
+    setSender('');
+    setSubject('');
+    setContent('');
+    setReplies([]);
+  };
 
-        <div className="space-y-1.5">
-          <Label id="email-style-label">回复风格</Label>
+  // 版式和文本翻译一样：左边收到的邮件、右边回复建议，两张等高的「纸」
+  return (
+    <div className="grid min-w-0 gap-5 md:grid-cols-2">
+      <section className={PANE} aria-labelledby="email-input-label">
+        <header className={PANE_HEADER}>
+          <h2 id="email-input-label" className="text-[13px] font-semibold text-text-secondary">收到的邮件</h2>
           <Select value={style} onValueChange={(v) => setStyle(v as EmailStyle)}>
-            <SelectTrigger aria-labelledby="email-style-label">
+            <SelectTrigger className="h-7 w-auto gap-1 rounded-full border-transparent bg-bg-inset px-3 text-xs hover:border-transparent" aria-label="回复风格">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -65,80 +71,82 @@ export function EmailReplyGenerator() {
               <SelectItem value="casual">轻松随意</SelectItem>
             </SelectContent>
           </Select>
+        </header>
+        <div className="grid shrink-0 grid-cols-2 divide-x divide-border-subtle border-b border-border-subtle">
+          <Input aria-label="发件人（可选）" placeholder="发件人（可选）" value={sender} onChange={(e) => setSender(e.target.value)} className={FIELD} />
+          <Input aria-label="邮件主题（可选）" placeholder="主题（可选）" value={subject} onChange={(e) => setSubject(e.target.value)} className={FIELD} />
         </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="email-subject">邮件主题（可选）</Label>
-          <Input id="email-subject" placeholder="邮件主题..." value={subject} onChange={(e) => setSubject(e.target.value)} />
-        </div>
-
-        <div className="flex flex-1 flex-col space-y-1.5">
-          <Label htmlFor="email-content">邮件内容</Label>
-          <Textarea
-            id="email-content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="粘贴收到的邮件内容..."
-            className="min-h-[220px] flex-1 resize-y lg:max-h-[340px]"
-          />
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <Button
-            variant="outline"
-            onClick={() => { setSender(''); setSubject(''); setContent(''); setReplies([]); }}
-          >
-            <Trash2 className="h-4 w-4" />
-            清空
+        <Textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+              e.preventDefault();
+              void handleGenerate();
+            }
+          }}
+          placeholder="粘贴收到的邮件内容…（Ctrl/⌘ + Enter 生成）"
+          aria-label="邮件内容"
+          className={cn(PANE_TEXTAREA, BODY_MIN_H)}
+        />
+        <footer className={PANE_FOOTER}>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" onClick={handleClear} disabled={!sender && !subject && !content && !replies.length}>
+              <Trash2 />
+              清空
+            </Button>
+            <span className="text-xs tabular-nums text-text-muted">{content.length} 字</span>
+          </div>
+          <Button size="sm" className="h-9 min-w-24" onClick={handleGenerate} disabled={!content.trim() || emailMutation.isPending}>
+            {emailMutation.isPending ? <RotateCw className="animate-spin" /> : <Send />}
+            生成回复
           </Button>
-          <Button
-            onClick={handleGenerate}
-            disabled={!content.trim() || emailMutation.isPending}
-          >
-            <Send className="h-4 w-4" />
-            {emailMutation.isPending ? '生成中...' : '生成回复'}
-          </Button>
-        </div>
+        </footer>
       </section>
 
-      <section className="flex min-w-0 flex-col gap-3" aria-labelledby="email-replies-heading" aria-live="polite">
-        {replies.length > 0 ? (
-          <>
-            <h2 id="email-replies-heading" className="text-sm font-semibold">回复建议</h2>
-            <div className="max-h-[640px] flex-1 space-y-2 overflow-y-auto">
+      <section className={PANE} aria-labelledby="email-replies-label">
+        <header className={PANE_HEADER}>
+          <h2 id="email-replies-label" className="text-[13px] font-semibold text-text-secondary">
+            回复建议{replies.length > 0 ? ` · ${replies.length} 条` : ''}
+          </h2>
+        </header>
+        {/* 正文绝对定位、自己滚动：高度跟着左栏走，回复再多也不把卡片撑高 */}
+        <div className="relative min-h-[40svh] flex-1 md:min-h-0">
+        <div
+          className={cn('absolute inset-0 overflow-y-auto bg-paper-primary px-4 py-3', emailMutation.isPending && 'opacity-60')}
+          aria-live="polite"
+        >
+          {replies.length > 0 ? (
+            <div className="space-y-2.5">
               {replies.map((reply, i) => (
-                <Card
+                <button
                   key={i}
+                  type="button"
                   className={cn(
-                    'transition-colors',
-                    selectedIdx === i && 'border-primary ring-1 ring-primary'
+                    'w-full rounded-lg border bg-white p-3.5 text-left transition-colors',
+                    selectedIdx === i ? 'border-primary ring-1 ring-primary' : 'border-border-subtle hover:border-border'
                   )}
+                  onClick={() => setSelectedIdx(i)}
+                  aria-pressed={selectedIdx === i}
                 >
-                  <CardContent className="p-4">
-                    <button
-                      type="button"
-                      className="w-full text-left"
-                      onClick={() => setSelectedIdx(i)}
-                      aria-pressed={selectedIdx === i}
-                    >
-                    <div className="mb-2 text-xs font-medium text-muted-foreground">{reply.type}</div>
-                    <div className="mb-3 text-sm whitespace-pre-wrap border-l-2 border-primary pl-3">{reply.content_en}</div>
-                    <div className="text-xs text-muted-foreground whitespace-pre-wrap border-l-2 border-muted pl-3">{reply.content_zh}</div>
-                    </button>
-                  </CardContent>
-                </Card>
+                  <div className="mb-2 text-xs font-medium text-text-muted">{reply.type}</div>
+                  <div className="mb-2.5 whitespace-pre-wrap text-sm leading-6 text-text-primary">{reply.content_en}</div>
+                  <div className="whitespace-pre-wrap border-l-2 border-border-subtle pl-3 text-xs leading-6 text-text-muted">{reply.content_zh}</div>
+                </button>
               ))}
             </div>
-            <Button variant="outline" onClick={handleCopy}>
-              <Copy className="h-4 w-4" />
-              复制选中回复
-            </Button>
-          </>
-        ) : (
-          <div id="email-replies-heading" className="flex min-h-[220px] items-center justify-center text-sm text-muted-foreground">
-            生成的回复将在这里显示
-          </div>
-        )}
+          ) : (
+            <p className="text-[15px] leading-7 text-text-disabled">生成的回复会出现在这里</p>
+          )}
+        </div>
+        </div>
+        <footer className={PANE_FOOTER}>
+          <span className="px-2 text-xs text-text-muted">{replies.length > 1 ? '点一条选中' : ''}</span>
+          <Button variant="outline" size="sm" className="h-9" onClick={handleCopy} disabled={!replies.length}>
+            <Copy />
+            复制选中回复
+          </Button>
+        </footer>
       </section>
     </div>
   );

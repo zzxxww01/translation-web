@@ -59,7 +59,7 @@ export function TextTranslator() {
           <label id="translator-source-label" className="text-[13px] font-semibold text-text-secondary">原文</label>
           <div className="flex items-center gap-1">
             {source && (
-              <Button variant="ghost" size="sm" className="h-7 px-2 text-text-tertiary" onClick={handleClear} title="清空原文和译文" aria-label="清空">
+              <Button variant="ghost" size="sm" className="h-7 px-2 text-text-muted" onClick={handleClear} title="清空原文和译文" aria-label="清空">
                 <X />
               </Button>
             )}
@@ -94,7 +94,7 @@ export function TextTranslator() {
               <ArrowRightLeft />
               交换
             </Button>
-            <span className="text-xs tabular-nums text-text-tertiary">{source.length} 字</span>
+            <span className="text-xs tabular-nums text-text-muted">{source.length} 字</span>
           </div>
           <Button size="sm" className="h-9 min-w-24" onClick={handleTranslate} disabled={!source.trim() || translateMutation.isPending}>
             {translateMutation.isPending ? <RotateCw className="animate-spin" /> : <Languages />}
@@ -118,7 +118,7 @@ export function TextTranslator() {
           className={`${TALL_TEXTAREA} bg-paper-primary ${translateMutation.isPending ? 'opacity-60' : ''}`}
         />
         <footer className={PANE_FOOTER}>
-          <span className="px-2 text-xs tabular-nums text-text-tertiary">{target ? `${target.length} 字` : ''}</span>
+          <span className="px-2 text-xs tabular-nums text-text-muted">{target ? `${target.length} 字` : ''}</span>
           <Button variant="outline" size="sm" className="h-9" onClick={handleCopy} disabled={!target}>
             <Copy />
             复制译文
