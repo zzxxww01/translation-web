@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
 from src.core.models import ElementType, Section
-from src.services import article_edits, article_primary, article_variants
+from src.services import article_edits, article_primary, article_sent, article_variants
 
 from ..dependencies import ProjectManagerDep, TranslationStatusServiceDep
 from ..middleware import BadRequestException, ConflictException, NotFoundException, ServiceUnavailableException
@@ -174,10 +174,12 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         rows = _build_rows(project_id, sections, variant_sections)
         mark = _read_mark(pm, project_id, {row["key"] for row in rows})
         started = article_primary.main_started(pm, project_id)
-        return meta, variant_metas, imports, rows, mark, started
+        texts = {project_id: (meta.title_translation, sections)}
+        texts.update({v.id: (v.title_translation, variant_sections[v.id]) for v in variant_metas})
+        return meta, variant_metas, imports, rows, mark, started, texts, article_sent.read(pm, project_id)
 
     try:
-        meta, variant_metas, imports, rows, mark, main_started = await run_blocking(load)
+        meta, variant_metas, imports, rows, mark, main_started, texts, sent = await run_blocking(load)
     except FileNotFoundError as exc:
         raise NotFoundException(detail="Project not found") from exc
 
@@ -199,6 +201,9 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
     primary = await run_blocking(
         article_primary.resolve_primary, pm, project_id, [v.id for v in variant_metas],
         primary_target=meta.primary_target, main_started=main_started)
+    if sent is not None:
+        current = await run_blocking(article_sent.digest, *texts[primary])
+        sent = {"at": sent["at"], "changed": article_sent.changed_since(sent, primary, current)}
     return {
         "project": {
             "id": meta.id,
@@ -216,6 +221,7 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         "variants": variants,
         "rows": rows,
         "reading_mark": mark,
+        "sent": sent,
     }
 
 
@@ -235,6 +241,38 @@ async def set_primary(project_id: str, body: PrimaryRequest, pm: ProjectManagerD
     except FileNotFoundError as exc:
         raise NotFoundException(detail="Project not found") from exc
     return {"ok": True, "primary_target": body.target}
+
+
+class SentRequest(BaseModel):
+    sent: bool  # true = 标记已发送（再标一次会按现在的主译本更新时间和指纹）；false = 撤销
+
+
+def set_sent(pm, project_id: str, sent: bool) -> Optional[Dict[str, Any]]:
+    """标记 / 撤销「已发送」，返回 {"at", "changed"} 或 None。Muse 自动化也走这里。"""
+    meta = pm.get(project_id)  # 文章不存在时抛 FileNotFoundError
+    if meta.variant_of:
+        raise BadRequestException(detail="请在文章的主项目上标记已发送", error_code="IS_VARIANT")
+    if not sent:
+        article_sent.clear(pm, project_id)
+        return None
+    variant_ids = [v.id for v in article_variants.list_variants(pm, project_id)]
+    primary = article_primary.resolve_primary(pm, project_id, variant_ids, primary_target=meta.primary_target,
+                                              main_started=article_primary.main_started(pm, project_id))
+    record = article_sent.mark(pm, project_id, primary)
+    return {"at": record["at"], "changed": False}
+
+
+@router.put("/projects/{project_id}/workbench/sent")
+async def put_sent(project_id: str, body: SentRequest, pm: ProjectManagerDep):
+    """「已发送」：译文在系统外发出去后手动标记（存在服务器上，文章列表据此显示）。"""
+    _check_id(project_id)
+    try:
+        sent = await run_blocking(set_sent, pm, project_id, body.sent)
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
+    except OSError as error:
+        raise ServiceUnavailableException(detail="没保存上，请重试") from error
+    return {"ok": True, "sent": sent}
 
 
 @router.put("/projects/{project_id}/workbench/reading-mark")

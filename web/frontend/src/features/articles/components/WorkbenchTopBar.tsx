@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import {
   ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, Flag, History, Images, Maximize2, Menu,
-  MoreHorizontal, PanelLeft, type LucideIcon,
+  MoreHorizontal, PanelLeft, Send, Undo2, type LucideIcon,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from '@/components/layout/navItems';
@@ -11,7 +11,9 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { HUMAN_EDITS_URL } from '../api';
+import { sentLabel } from '../lib/tracks';
 import { FOCUS_RING, STROKE } from '../lib/ui';
+import type { SentMark } from '../types';
 import { IconAction } from './VersionHeader';
 
 export interface ExportItem {
@@ -37,7 +39,8 @@ const MENU_LABEL = 'px-2.5 pb-1 pt-1.5 text-[11px] font-normal tracking-[0.12em]
  * compact（手机）：返回只留箭头、不放快速切换，导出收进「⋯」。
  */
 export function WorkbenchTopBar({ projectId, title, original, onShowList, imageCount = 0, onShowImages, save, mark, onJump, onClearMark, markBusy,
-  onExportPrimary, primaryActions, exportItems, exportNotice = null, onImmersive, legacyHref, originalUrl, compact = false }: {
+  onExportPrimary, primaryActions, exportItems, exportNotice = null, sent = null, onSetSent, sentBusy = false, onImmersive, legacyHref, originalUrl,
+  compact = false }: {
   /** 回文章列表时带上，列表里选中这篇 */
   projectId: string;
   title: string;
@@ -60,6 +63,11 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
   exportItems: ExportItem[];
   /** 复制成功等提示：暂时写在导出按钮上 */
   exportNotice?: string | null;
+  /** 已发送标记；null = 还没发 */
+  sent?: SentMark | null;
+  /** 标记 / 撤销已发送；不传就不显示 */
+  onSetSent?: (sent: boolean) => void;
+  sentBusy?: boolean;
   /** 进入沉浸模式（整屏只留三栏） */
   onImmersive: () => void;
   legacyHref: string;
@@ -126,6 +134,26 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
           读到 {mark.percent}%
         </button>
       )}
+      {onSetSent && !compact && (sent ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button type="button" disabled={sentBusy} title={sent.changed ? '发出去之后主译本又改过（或换了主译本）' : '已经发出去了'}
+              className={cn('inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-primary-50 px-3 text-[12.5px] font-medium text-primary-700 transition-colors hover:bg-primary-100 disabled:opacity-60', FOCUS_RING)}>
+              <Send aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} />
+              {sentLabel(sent.at)}
+              {sent.changed && <span className="font-normal text-warning-text">· 发送后有改动</span>}
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" sideOffset={6} className={cn(MENU, 'w-56')}>
+            <SentMenuItems sent={sent} onSetSent={onSetSent} disabled={sentBusy} />
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <button type="button" onClick={() => onSetSent(true)} disabled={sentBusy} title="译文发出去（公众号等）之后点一下，列表里就能分出翻完没发的"
+          className={cn('inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-[12.5px] text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary disabled:opacity-60', FOCUS_RING)}>
+          <Send aria-hidden className="h-4 w-4" strokeWidth={STROKE} />标记已发送
+        </button>
+      ))}
       {!compact && (<>
         <span role="status" className="sr-only">{exportNotice ?? ''}</span>
         {/* 不用 overflow-hidden 裁圆角：会把键盘焦点的描边裁掉。两半各自带圆角。 */}
@@ -172,6 +200,16 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
               <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
             </>
           )}
+          {compact && onSetSent && (
+            <>
+              {sent ? <SentMenuItems sent={sent} onSetSent={onSetSent} disabled={sentBusy} /> : (
+                <DropdownMenuItem className={MENU_ITEM} disabled={sentBusy} onSelect={() => onSetSent(true)}>
+                  <Send strokeWidth={STROKE} /> 标记已发送
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+            </>
+          )}
           {mark && (
             <>
               <DropdownMenuItem className={MENU_ITEM} disabled={markBusy} onSelect={onClearMark}>
@@ -195,6 +233,23 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
+  );
+}
+
+/** 已发送之后的菜单：有改动时可以按现在的译文重新标记，或撤销 */
+function SentMenuItems({ sent, onSetSent, disabled }: { sent: SentMark; onSetSent: (sent: boolean) => void; disabled: boolean }) {
+  return (
+    <>
+      <DropdownMenuLabel className={MENU_LABEL}>{sentLabel(sent.at)}{sent.changed ? ' · 之后有改动' : ''}</DropdownMenuLabel>
+      {sent.changed && (
+        <DropdownMenuItem className={MENU_ITEM} disabled={disabled} onSelect={() => onSetSent(true)}>
+          <Send strokeWidth={STROKE} /> 改动也发了，重新标记
+        </DropdownMenuItem>
+      )}
+      <DropdownMenuItem className={MENU_ITEM} disabled={disabled} onSelect={() => onSetSent(false)}>
+        <Undo2 strokeWidth={STROKE} /> 撤销已发送
+      </DropdownMenuItem>
+    </>
   );
 }
 

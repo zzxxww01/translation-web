@@ -5,7 +5,7 @@ from src.api.middleware import APIException
 from src.api.routers import substack
 from src.core.models import ProjectStatus
 from src.core.project import ProjectManager, ProjectTranslationSummary
-from src.services import article_variants
+from src.services import article_sent, article_variants
 from src.services.substack_library import SubstackLibrary
 from src.services.substack_service import (
     ArchivePost,
@@ -231,7 +231,7 @@ async def test_list_articles_counts_imported_and_not_imported(tmp_path, pm):
     await _import(tmp_path, pm)
     library = _library(tmp_path)
     page = await _list(pm, library)
-    assert page.counts == {"all": 2, "not_imported": 1, "imported": 1}
+    assert page.counts == {"all": 2, "not_imported": 1, "imported": 1, "unsent": 0, "sent": 0}
     assert (await _list(pm, library, imported_filter="imported")).counts == page.counts
 
 
@@ -268,6 +268,27 @@ async def test_list_articles_counts_a_barely_started_web_version_as_started(tmp_
     ))
     article = (await _list(pm, _library(tmp_path))).articles[0]
     assert article.progress != 100
+
+
+@pytest.mark.asyncio
+async def test_list_articles_separates_translated_from_sent(tmp_path, pm, monkeypatch):
+    project_id = await _import(tmp_path, pm)
+    monkeypatch.setattr(pm, "get_translation_summary", lambda pid: ProjectTranslationSummary(
+        status=ProjectStatus.IN_PROGRESS, total_sections=1, total_paragraphs=4,
+        translated_sections=0, translated_paragraphs=4,
+    ))
+    library = _library(tmp_path)
+    page = await _list(pm, library)
+    assert (page.articles[0].status, page.articles[0].sent_at) == ("translated", None)
+    assert (page.counts["unsent"], page.counts["sent"]) == (1, 0)
+    assert [a.slug for a in (await _list(pm, library, imported_filter="unsent")).articles] == ["demo-post"]
+
+    record = article_sent.mark(pm, project_id, project_id)
+    page = await _list(pm, library)
+    assert (page.articles[0].status, page.articles[0].progress, page.articles[0].sent_at) == ("sent", 100, record["at"])
+    assert (page.counts["unsent"], page.counts["sent"], page.counts["imported"]) == (0, 1, 1)
+    assert (await _list(pm, library, imported_filter="unsent")).articles == []
+    assert [a.slug for a in (await _list(pm, library, imported_filter="sent")).articles] == ["demo-post"]
 
 
 @pytest.mark.asyncio

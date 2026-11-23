@@ -9,6 +9,10 @@ export interface DraftSummary {
   id: string;
   source: 'manual' | 'slack';
   status: 'draft' | 'done';
+  /** 标记已发送的时间（秒）；和 status 无关。旧后端没有 */
+  sent_at?: number | null;
+  /** 标了已发送之后当前译文又变了 */
+  sent_changed?: boolean;
   auto: boolean;
   seen: boolean;
   title: string;
@@ -41,6 +45,8 @@ export interface DraftDoc {
   id: string;
   source: 'manual' | 'slack';
   status: 'draft' | 'done';
+  sent_at?: number | null;
+  sent_changed?: boolean;
   auto: boolean;
   seen: boolean;
   rev: number;
@@ -72,6 +78,9 @@ export const draftsApi = {
       retry: false,
       timeout: 300_000,
     }),
+  /** 已发送：单独一个接口，不动 rev，正在编辑也不会冲突 */
+  setSent: (id: string, sent: boolean) =>
+    apiClient.put<{ ok: boolean; sent_at: number | null; sent_changed: boolean }>(`/post-drafts/${id}/sent`, { sent }, { retry: false }),
   imagesZipUrl: (id: string) => `/api/post-drafts/${id}/images.zip`,
 };
 

@@ -3,7 +3,7 @@ import type { Project } from '@/shared/types';
 
 /**
  * not_imported 没导入；imported 已导入还没翻；awaiting_terms 翻译在等你确认术语；
- * translating 翻译中；partial 翻了一部分停下了；translated 已译完。只看主译本那一版
+ * translating 翻译中；partial 翻了一部分停下了；translated 已译完；sent 标记过已发送（不管进度）。只看主译本那一版
  */
 export type ArticleStatus =
   | 'not_imported'
@@ -11,9 +11,11 @@ export type ArticleStatus =
   | 'awaiting_terms'
   | 'translating'
   | 'partial'
-  | 'translated';
+  | 'translated'
+  | 'sent';
 
-export type ArticleFilter = 'all' | 'not_imported' | 'imported';
+/** unsent 译完还没发；sent 已发送 */
+export type ArticleFilter = 'all' | 'not_imported' | 'imported' | 'unsent' | 'sent';
 
 export interface SubstackArticle {
   title: string;
@@ -32,6 +34,8 @@ export interface SubstackArticle {
   status: ArticleStatus;
   /** 已翻段落的百分比 */
   progress: number;
+  /** 标记已发送的时间（旧后端没有） */
+  sent_at?: string | null;
 }
 
 export interface SubstackArticlePage {

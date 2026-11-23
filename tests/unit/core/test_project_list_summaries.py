@@ -88,6 +88,7 @@ def test_list_summaries_preserves_response_shape_and_sort_without_sections_scan(
         "status": "created",
         "progress": {"total": 20, "approved": 5, "percent": 25.0},
         "created_at": "2026-01-01T00:00:00",
+        "sent_at": None,  # 只有项目列表接口会填（services/article_sent.py）
     }
     assert responses[1].progress == {
         "total": 0,

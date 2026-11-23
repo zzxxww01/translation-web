@@ -16,6 +16,10 @@ export const articlesApi = {
     apiClient.put<{ ok: boolean; reading_mark: Workbench['reading_mark'] }>(
       `/projects/${projectId}/workbench/reading-mark`, { key }, { retry: false }),
 
+  setSent: (projectId: string, sent: boolean) =>
+    apiClient.put<{ ok: boolean; sent: Workbench['sent'] }>(
+      `/projects/${projectId}/workbench/sent`, { sent }, { retry: false }),
+
   saveText: (projectId: string, body: { target: string; section_id: string; paragraph_id: string | null; text: string }) =>
     apiClient.put<{ ok: boolean }>(`/projects/${projectId}/workbench/text`, body, { retry: false }),
 

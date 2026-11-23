@@ -13,7 +13,7 @@ from fastapi import APIRouter, Depends, Query, Request
 from pydantic import BaseModel, Field
 
 from src.core.project import ProjectListSummary, ProjectManager
-from src.services import article_primary
+from src.services import article_primary, article_sent
 from src.services.substack_library import LibraryPost, SubstackLibrary, make_llm_digest_fn
 from src.services.substack_service import (
     SubstackClient,
@@ -62,8 +62,11 @@ def get_substack_library() -> SubstackLibrary:
 SubstackLibraryDep = Annotated[SubstackLibrary, Depends(get_substack_library)]
 
 # not_imported 没导入；imported 已导入还没翻；awaiting_terms 翻译在等你确认术语；
-# translating 翻译中；partial 翻了一部分停下了；translated 已译完。网页版和译本 2 取进度高的那一版
-ArticleStatus = Literal["not_imported", "imported", "awaiting_terms", "translating", "partial", "translated"]
+# translating 翻译中；partial 翻了一部分停下了；translated 已译完；sent 标记过已发送（services/article_sent.py，
+# 不管进度）。进度只看主译本
+ArticleStatus = Literal["not_imported", "imported", "awaiting_terms", "translating", "partial", "translated", "sent"]
+# all 全部；not_imported / imported 导没导入；unsent 译完还没发；sent 已发送
+ArticleFilter = Literal["all", "not_imported", "imported", "unsent", "sent"]
 
 
 class SubstackArticle(BaseModel):
@@ -80,6 +83,7 @@ class SubstackArticle(BaseModel):
     project_id: Optional[str] = None
     status: ArticleStatus = "not_imported"
     progress: int = 0  # 已翻段落的百分比
+    sent_at: Optional[str] = None  # 标记已发送的时间
 
 
 class SubstackArticlePage(BaseModel):
@@ -87,7 +91,7 @@ class SubstackArticlePage(BaseModel):
     next_offset: Optional[int] = None  # 没有更多时为 None
     total: int = 0  # 符合当前搜索和筛选的总篇数
     pending_digests: int = 0  # 还没有中文标题和摘要的篇数
-    counts: Dict[str, int] = Field(default_factory=dict)  # 当前搜索下各筛选的篇数：all / not_imported / imported
+    counts: Dict[str, int] = Field(default_factory=dict)  # 当前搜索下各筛选（ArticleFilter）的篇数
     digesting: bool = False  # 后台正在生成；前端据此决定要不要定时刷新
 
 
@@ -178,8 +182,17 @@ def _translation_state(pm: ProjectManager, project_id: str, variant_ids: List[st
     return "imported", 0
 
 
+def article_state(pm: ProjectManager, project: ProjectListSummary,
+                  variant_ids: List[str]) -> Tuple[ArticleStatus, int, Optional[str]]:
+    """(状态, 进度, 标记已发送的时间)。标过已发送就显示 sent，进度照旧给。Muse 自动化也用。"""
+    status, progress = _translation_state(pm, project.id, variant_ids, project.primary_target)
+    sent = article_sent.read(pm, project.id) if status != "not_imported" else None
+    return ("sent" if sent else status), progress, (sent["at"] if sent else None)
+
+
 def _to_article(
-    pm: ProjectManager, post: LibraryPost, project: Optional[ProjectListSummary], variant_ids: List[str]
+    pm: ProjectManager, post: LibraryPost, project: Optional[ProjectListSummary], variant_ids: List[str],
+    state: Optional[Tuple[ArticleStatus, int, Optional[str]]] = None,
 ) -> SubstackArticle:
     article = SubstackArticle(
         title=post.title,
@@ -194,9 +207,9 @@ def _to_article(
         zh_summary=post.zh_summary,
     )
     if project is not None:
-        status, progress = _translation_state(pm, project.id, variant_ids, project.primary_target)
+        status, progress, sent_at = state or article_state(pm, project, variant_ids)
         if status != "not_imported":
-            article.project_id, article.status, article.progress = project.id, status, progress
+            article.project_id, article.status, article.progress, article.sent_at = project.id, status, progress, sent_at
     return article
 
 
@@ -207,7 +220,7 @@ async def list_articles(
     offset: int = Query(0, ge=0),
     limit: int = Query(24, ge=1, le=50),
     search: str = Query("", max_length=200),
-    imported_filter: Literal["all", "not_imported", "imported"] = Query("all", alias="filter"),
+    imported_filter: ArticleFilter = Query("all", alias="filter"),
 ):
     # 读服务器上存的清单；只有第一次（清单还是空的）才会当场把全部文章拉一遍
     try:
@@ -222,15 +235,39 @@ async def list_articles(
     def project_of(post: LibraryPost) -> Optional[ProjectListSummary]:
         return imported.get(article_key(post.url) or "")
 
-    imported_count = sum(1 for post in posts if project_of(post) is not None)
-    counts = {"all": len(posts), "not_imported": len(posts) - imported_count, "imported": imported_count}
-    if imported_filter != "all":
-        want_imported = imported_filter == "imported"
-        posts = [post for post in posts if (project_of(post) is not None) == want_imported]
+    # 已导入的几十篇都要算状态（「未发送 / 已发送」要计数和筛选）；进度有缓存，不重读段落
+    def states():
+        result = {}
+        for post in posts:
+            project = project_of(post)
+            if project is not None and post.url not in result:
+                result[post.url] = article_state(pm, project, variants.get(project.id, []))
+        return result
+
+    state_of = await asyncio.to_thread(states)
+
+    def kind(post: LibraryPost) -> str:
+        state = state_of.get(post.url)
+        if state is None or state[0] == "not_imported":
+            return "not_imported"
+        return {"sent": "sent", "translated": "unsent"}.get(state[0], "imported")
+
+    kinds = [kind(post) for post in posts]
+    counts = {
+        "all": len(posts),
+        "not_imported": kinds.count("not_imported"),
+        "imported": len(posts) - kinds.count("not_imported"),
+        "unsent": kinds.count("unsent"),
+        "sent": kinds.count("sent"),
+    }
+    if imported_filter == "imported":
+        posts = [post for post, k in zip(posts, kinds) if k != "not_imported"]
+    elif imported_filter != "all":
+        posts = [post for post, k in zip(posts, kinds) if k == imported_filter]
 
     def to_article(post: LibraryPost) -> SubstackArticle:
         project = project_of(post)
-        return _to_article(pm, post, project, variants.get(project.id, []) if project else [])
+        return _to_article(pm, post, project, variants.get(project.id, []) if project else [], state_of.get(post.url))
 
     page = posts[offset:offset + limit]
     articles = await asyncio.to_thread(lambda: [to_article(post) for post in page])

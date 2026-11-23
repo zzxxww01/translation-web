@@ -166,6 +166,22 @@ def cmd_status(args: argparse.Namespace) -> Dict[str, Any]:
                  params=params or None, timeout=args.timeout or 60)
 
 
+def cmd_articles(args: argparse.Namespace) -> Dict[str, Any]:
+    return _call(args.base_url, "GET", "/articles", params={"status": args.status, "limit": args.limit},
+                 timeout=args.timeout or 60)
+
+
+def cmd_mark_sent(args: argparse.Namespace) -> Dict[str, Any]:
+    # draft_id（m_… / s_…）是翻译稿，其余按文章 project_id
+    if _DRAFT_ID_RE.match(args.id):
+        path = f"/drafts/{args.id}/sent"
+    elif _PROJECT_ID_RE.match(args.id):
+        path = f"/projects/{quote(args.id, safe='')}/sent"
+    else:
+        raise CliError("要给文章的 project_id 或翻译稿的 draft_id")
+    return _call(args.base_url, "POST", path, body={"sent": not args.undo}, timeout=args.timeout or 60)
+
+
 def cmd_health(args: argparse.Namespace) -> Dict[str, Any]:
     return _call(args.base_url, "GET", "/health", timeout=args.timeout or 60)
 
@@ -190,6 +206,8 @@ def cmd_dms(args: argparse.Namespace) -> Dict[str, Any]:
 
 def cmd_drafts(args: argparse.Namespace) -> Dict[str, Any]:
     params: Dict[str, Any] = {"status": args.status, "limit": args.limit}
+    if args.sent:
+        params["sent"] = args.sent
     if args.source:
         params["source"] = args.source
     if args.q:
@@ -280,6 +298,8 @@ COMMANDS = {
     "updates": cmd_updates,
     "translate-article": cmd_translate_article,
     "status": cmd_status,
+    "articles": cmd_articles,
+    "mark-sent": cmd_mark_sent,
     "health": cmd_health,
     "translate-slack": cmd_translate_slack,
     "slack-todos": cmd_slack_todos,
@@ -315,6 +335,14 @@ def build_parser() -> _Parser:
     p.add_argument("--with-markdown", action="store_true", help="完成时把中文 Markdown 全文放进 JSON")
     p.add_argument("--engine", choices=ENGINES, help="配合 --with-markdown：要哪一版的全文（默认网页上显示的那版）")
 
+    p = sub.add_parser("articles", help="导入过的文章：unsent 译完还没发（默认）/ sent 已发送（只读）")
+    p.add_argument("--status", choices=["unsent", "sent"], default="unsent")
+    p.add_argument("--limit", type=int, default=50)
+
+    p = sub.add_parser("mark-sent", help="把文章或翻译稿标记为已发送（和网页上的按钮一样）；--undo 撤销")
+    p.add_argument("id", help="文章的 project_id 或翻译稿的 draft_id")
+    p.add_argument("--undo", action="store_true", help="撤销已发送")
+
     sub.add_parser("health", help="自检")
 
     p = sub.add_parser("translate-slack", help="翻译一条 Slack 消息 / 整个 thread（会花模型费，须经 Felix 确认）")
@@ -331,6 +359,7 @@ def build_parser() -> _Parser:
     p.add_argument("--status", choices=["draft", "done", "all"], default="draft")
     p.add_argument("--source", choices=["slack", "manual"], help="只看 Slack 帖子 / 帖子翻译页手动翻的")
     p.add_argument("--q", help="在标题、原文、译文里搜")
+    p.add_argument("--sent", choices=["yes", "no"], help="只看已发送 / 还没发送的（和 --status 无关）")
     p.add_argument("--limit", type=int, default=50)
 
     p = sub.add_parser("draft", help="一份翻译稿：原文、当前译文、标题和原始配图（base64）")

@@ -26,7 +26,7 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | `translate-article <slug 或 Substack 链接> [--engine web\|claude\|codex\|antigravity]…` | 导入（已导入复用）→ 按 `--engine` 起翻译，**可写多次同时翻**（默认 `web`）。`web` = 网页版四步法，自动采用术语建议；`claude` / `codex` / `antigravity`（agy）= 交给 Claude 页的 Agent 跑 four-step-translate，后台每分钟看一次，翻完自动导回成该 Agent 的译本（`{项目}--codex` 等）。返回 `engines`：每个引擎 `started` / `resumed` / `already_exists`（在跑或已译完，附 `translation_status`）/ `failed`（附 `error`）；只给 `web` 时结果也平铺在顶层（老格式） |
 | `slack-todos` | **我要处理什么**：和网页 Slack 页「我的待办」同一份。`items` 是找我的事（私信、thread 里直接 @我），每条有 `task`（谁要我干什么）、`action`（`reply` 要回复 / `do` 要做事，多半是翻译 / `read` 看看就行）、`conversation_id`、`thread_ts`、`draft`（已有翻译稿时给 `draft_id`、`status`）；`fyi` 是只被群发 @ 到的，不用处理 |
 | `dms` | **私信**：还没回的每条私信给 `messages`（对方的英文原话，未读的那几条）、`task`（找你干什么，中文）、`translation`（中文理解）、`replies`（A 简洁 / B 标准 / C 正式，各有 `english`、`chinese`）、`link`。和网页私信回复面板同一套输入（对方在你最后一次发言之后的消息 + 之前的对话），结果也存进面板历史，网页上能看到同一组；对方没发新消息就直接用存着的，**定时拉不重复花钱**。一次最多新生成 10 条，其余带 `note`，下次再生成 |
-| `drafts [--status draft\|done\|all] [--source slack\|manual] [--q 关键词] [--limit 50]` | **翻译记录**（网页「我翻译的」/「全部翻译记录」）。默认 `--status draft`：还没点「标记完成」的。每条有 `draft_id`、`title`、`preview`（译文开头）、`versions`（0 = 只提取了原文还没出译文）、`image_count`、`auto`（后台或 Muse 自动翻的） |
+| `drafts [--status draft\|done\|all] [--sent yes\|no] [--source slack\|manual] [--q 关键词] [--limit 50]` | **翻译记录**（网页「我翻译的」/「全部翻译记录」）。默认 `--status draft`：还没点「标记完成」的。每条有 `draft_id`、`title`、`preview`（译文开头）、`versions`（0 = 只提取了原文还没出译文）、`image_count`、`auto`（后台或 Muse 自动翻的）、`sent_at`（标记已发送的时间，没标过 null；和 `status` 无关）、`sent_changed`（标了之后译文又改过）。`--sent no` 只看还没发的 |
 | `draft <draft_id> [--no-images]` | **一份翻译结果**：`source_text`（要翻的英文）、`translation`（当前版译文）、`titles` / `selected_title`、`slack.permalink`、`link`（网页打开这份稿子），`images` 按发帖顺序给**原图**：`n`、`name`、`mimetype`、`size`、`sha256`、`data_base64`（单张 >30MB 或合计 >100MB 的只给元数据和 `error`）。`--no-images` 只给元数据 |
 | `optimize-draft <draft_id> (--option X \| --instruction 要求)` | **快捷指令优化**翻译稿，和网页帖子翻译的优化按钮同一套：`coherence` 更连贯 / `readable` 可读性 / `idiomatic` 地道 / `professional` 专业（4 个快捷项），`shorten` 精简 / `expand` 展开说明 / `formal` 正式公文 / `story` 故事化 / `qa` 问答格式 / `social` 社交媒体（「更多…」，指令在 `config/post_more_options.json`，网页同一份），或 `--instruction` 自定义一句话。在当前版上优化，存成新版本并设为当前（网页上能看到、能切回），最近 3 次要求作为上下文带上。返回和 `draft --no-images` 一样的结果 |
 | `translate-slack-post <conversation_id> <thread_ts> [--instruction 说明] [--no-images]` | 把一个 thread 当帖子翻，和网页「翻译这个帖子」同一条流程：提取原文和配图 → 翻译 → 生成标题，存成翻译稿（标成自动翻的），返回和 `draft` 一样的结果。已有稿子时追加新版本。`--instruction` 用在 AI 挑错了时（如「翻第二版文案」）。几十秒到两分钟 |
@@ -34,6 +34,8 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | `translate-post [原文] [--hashtags]` | **直接翻一段帖子原文**（推文、公众号段落……），和网页「帖子翻译」同一条链路（术语库、帖子翻译默认模型），同步返回 `translation`、`model`；不存翻译稿。默认不加话题标签，`--hashtags` 才在末尾加小红书标签。上限 10000 字符 |
 | `slack-reply [内容] [--mode auto\|incoming\|compose] [--history JSON]` | **帮 Felix 回 Slack**，和网页「Slack 回复」同一套。对方的英文消息（`incoming`）→ `translation`（中文理解）+ `replies`（3 版英文回复）；Felix 的中文草稿（`compose`）→ `replies`（3 版英文）。每版有 `version`（A/B/C）、`style`、`english`、`chinese`。`auto` 按中文占比判断，返回的 `mode` 是实际用的。`--history` 给之前的对话：`[{"role":"them\|me","content":"..."}]` |
 | `status <project_id> [--with-markdown] [--engine E]` | 文章：`running`（附 `stage`）/ `done`（`result` 是翻译服务链接）/ `failed`（`error`）/ `not_started`，看的是网页上显示的主译本；带 `zh_title`、`zh_summary`。`engines` 给每个引擎各自的进度（`web` 总有；Agent 只列起过的）：`running` / `done`（附 `variant_id`）/ `failed`（附 `error`）。`--with-markdown` 完成时附中文 Markdown 全文，`--engine codex` 就给 Codex 那一版。`slack-…`：`done`，`result` 是译文 |
+| `articles [--status unsent\|sent] [--limit 50]` | 导入过的文章里 **译完还没发的**（`unsent`，默认，按发布时间从新到旧）或 **已发送的**（`sent`，按标记时间从新到旧）。每条有 `project_id`、`title`、`zh_title`、`url`、`published_at`、`sent_at`、`result`（翻译服务链接）。只读，不去 Substack 同步 |
+| `mark-sent <project_id\|draft_id> [--undo]` | 把文章或翻译稿标记为**已发送**（Felix 在系统外发出去之后），和网页上「标记已发送」是同一个记录（`m_…` / `s_…` 按翻译稿，其余按文章）；`--undo` 撤销。返回 `sent_at`。`status`、`updates` 里的文章也带 `sent_at`（`updates` 的 `status` 标过就是 `sent`） |
 | `health` | `substack` / `slack` / `models` / `agents` 各自 `ok` 或 `error: …`（`models` 只检查配置，不发请求；`agents` 是能不能调通 Claude 页）；`slack_groups` 是自动识别 / 手配的用户组个数 |
 
 ### updates 细节
@@ -54,9 +56,10 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 ### Muse 的典型用法（三个场景，Muse 定时拉，Felix 只核对、选择）
 
 1. **帖子里 @我**：`drafts` 看后台自动翻好的稿子（`slack-todos` 里 `action: do` 且 `draft` 为空的，可 `translate-slack-post` 补翻）→
-   Felix 要时 `draft <id>` 给完整译本（原文、译文、标题、原图）→ Felix 说「更地道」「精简」「第二段别用赋能」→ `optimize-draft`。
+   Felix 要时 `draft <id>` 给完整译本（原文、译文、标题、原图）→ Felix 说「更地道」「精简」「第二段别用赋能」→ `optimize-draft`；发出去后 `mark-sent <draft_id>`，`drafts --sent no` 查还没发的。
 2. **SemiAnalysis 新文章**：`updates` 拿到新文章（带中文标题、摘要）→ Felix 决定翻不翻、用什么翻（可多选）→
    `translate-article <slug> --engine web --engine codex` → 定时 `status <project_id>` 看 `engines`，翻完给链接或 `--with-markdown --engine X` 全文。
+   Felix 发出去后 `mark-sent <project_id>`；`articles` 随时查还有哪些翻完没发。
 3. **私信**：`dms` → 每条给英文原话、找我干什么、中文理解、3 版回复 → Felix 挑一版自己复制发（翻译服务对 Slack 只读）。
 
 ### Agent 翻译（`--engine claude/codex/antigravity`）细节
