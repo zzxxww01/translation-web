@@ -35,6 +35,18 @@ describe('foldEvents', () => {
     expect(view.pendingQids).toEqual(['q1']);
     expect(view.items.some(item => item.kind === 'notice')).toBe(false);
     expect(view.held?.map(item => item.text)).toEqual(['补一句']);
+    expect(view.heldPaused).toBe(false);
     expect(view.items.at(-1)).toMatchObject({ kind: 'report', lines: ['状态：空闲'] });
+  });
+
+  it('marks held messages paused after an abnormal end', () => {
+    const item = { id: 'h1', text: '补一句', files: [], created_at: 0 };
+    const paused = foldEvents([{ ...base, seq: 1, type: 'held', items: [item], paused: true }]);
+    expect(paused.heldPaused).toBe(true);
+    const resumed = foldEvents([
+      { ...base, seq: 1, type: 'held', items: [item], paused: true },
+      { ...base, seq: 2, type: 'held', items: [item] },
+    ]);
+    expect(resumed.heldPaused).toBe(false);
   });
 });

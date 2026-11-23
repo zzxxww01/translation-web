@@ -28,10 +28,12 @@ export interface RunView {
   pendingQids: string[];
   /** 挂起待发的消息；null = 事件流里还没出现过（旧对话），用 meta 里的 */
   held: HeldMessage[] | null;
+  /** 挂起的消息停住了（上一轮没正常结束），不会自动发 */
+  heldPaused: boolean;
   lastSeq: number;
 }
 
-export const EMPTY_VIEW: RunView = { items: [], todos: [], status: null, awaiting: false, error: null, pendingQids: [], held: null, lastSeq: 0 };
+export const EMPTY_VIEW: RunView = { items: [], todos: [], status: null, awaiting: false, error: null, pendingQids: [], held: null, heldPaused: false, lastSeq: 0 };
 
 // Agent 在等你确认时回复末尾带的标记（见 skill_runner/runner.py 的 AWAIT_MARK）；页面上用状态表示，不显示这行字
 const AWAIT_MARK = /\n?[ \t]*【等待确认】[ \t]*$/;
@@ -45,6 +47,7 @@ export function foldEvents(events: SkillEvent[]): RunView {
   const pending = new Set<string>();
   let todos: TodoItem[] = [];
   let held: HeldMessage[] | null = null;
+  let heldPaused = false;
   let status: RunStatus | null = null;
   let awaiting = false;
   let error: string | null = null;
@@ -96,6 +99,7 @@ export function foldEvents(events: SkillEvent[]): RunView {
         break;
       case 'held':
         held = event.items;
+        heldPaused = Boolean(event.paused);
         break;
       case 'report':
         items.push({ kind: 'report', key, title: event.title, lines: event.lines });
@@ -123,7 +127,7 @@ export function foldEvents(events: SkillEvent[]): RunView {
     }
   }
 
-  return { items, todos, status, awaiting, error, pendingQids: [...pending], held, lastSeq };
+  return { items, todos, status, awaiting, error, pendingQids: [...pending], held, heldPaused, lastSeq };
 }
 
 /** 合并新事件：按 seq 去重、保序（断线重连可能重放一段）。 */

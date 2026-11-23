@@ -6,19 +6,27 @@ import { cn } from '@/lib/utils';
 import { skillsApi } from '../api';
 import type { HeldMessage } from '../types';
 
-/** 对话末尾的待发消息：这一轮结束后按顺序自动发；之前可以改、删、立刻发 */
-export function HeldMessages({ runId, items }: { runId: string; items: HeldMessage[] }) {
+/**
+ * 对话末尾的待发消息：这一轮正常结束后合成一条一起发；之前可以改、删、立刻发。
+ * paused：上一轮没正常结束（停止、出错、服务重启），不会自动发，等你点发送或发新消息时一起带上。
+ */
+export function HeldMessages({ runId, items, paused }: { runId: string; items: HeldMessage[]; paused: boolean }) {
   if (!items.length) return null;
+  const label = paused
+    ? '没发出去（上一轮没正常结束）'
+    : items.length > 1
+      ? '这一轮结束后一起发'
+      : '这一轮结束后发';
   return (
     <div className="space-y-2">
-      {items.map((item, index) => (
-        <HeldBubble key={item.id} runId={runId} item={item} first={index === 0} />
+      {items.map(item => (
+        <HeldBubble key={item.id} runId={runId} item={item} label={label} paused={paused} />
       ))}
     </div>
   );
 }
 
-function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; first: boolean }) {
+function HeldBubble({ runId, item, label, paused }: { runId: string; item: HeldMessage; label: string; paused: boolean }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(item.text);
   const [busy, setBusy] = useState(false);
@@ -49,11 +57,12 @@ function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; 
     <div className="flex justify-end">
       {/* 编辑时撑满到和对话气泡一样宽，输入框是一整条，不跟着字数缩成小方块 */}
       <div className={cn(
-        'max-w-[85%] rounded-xl rounded-tr-sm border border-dashed border-primary-200 bg-white px-3.5 py-2 text-sm text-text-primary',
+        'max-w-[85%] rounded-xl rounded-tr-sm border border-dashed bg-white px-3.5 py-2 text-sm text-text-primary',
+        paused ? 'border-warning/60' : 'border-primary-200',
         editing && 'w-full'
       )}>
         <div className="mb-1 flex items-center gap-1.5 text-xs text-text-muted">
-          <Clock className="h-3 w-3" /> {first ? '这一轮结束后发' : '排在后面'}
+          <Clock className="h-3 w-3" /> {label}
         </div>
         {editing ? (
           <textarea
@@ -104,8 +113,8 @@ function HeldBubble({ runId, item, first }: { runId: string; item: HeldMessage; 
               <Button variant="ghost" size="sm" disabled={busy} onClick={() => void act(() => skillsApi.deleteHeld(runId, item.id), '没删掉')} title="删除">
                 <Trash2 /> 删除
               </Button>
-              <Button variant="outline" size="sm" disabled={busy} onClick={() => void act(() => skillsApi.sendHeld(runId, item.id), '没发出去')} title="不等了，马上发给它">
-                <Send /> 立即发送
+              <Button variant="outline" size="sm" disabled={busy} onClick={() => void act(() => skillsApi.sendHeld(runId, item.id), '没发出去')} title={paused ? '发出去' : '不等了，马上发给它'}>
+                <Send /> {paused ? '发送' : '立即发送'}
               </Button>
             </>
           )}

@@ -27,8 +27,10 @@ export interface RunMeta {
   source?: string;
   /** 排队开始的时间（epoch 秒）；不在排队时为 null */
   queued_at?: number | null;
-  /** 挂起的消息：agent 干活时发的话，这一轮结束后按顺序发 */
+  /** 挂起的消息：agent 干活时发的话，这一轮结束后合成一条一起发 */
   held?: HeldMessage[];
+  /** 这一轮没正常结束（停止、出错、服务重启），挂起的消息不会自动发 */
+  held_paused?: boolean;
   /** 置顶的时间（epoch 秒）；没置顶为 null。列表里置顶的在前，各自按 updated_at 从新到旧 */
   pinned_at?: number | null;
 }
@@ -121,7 +123,7 @@ export type SkillEvent = Base &
     | { type: 'question'; qid: string; questions: Question[] }
     | { type: 'answer'; qid: string; answers?: Answers; response?: string }
     | { type: 'todos'; items: TodoItem[] }
-    | { type: 'held'; items: HeldMessage[] }
+    | { type: 'held'; items: HeldMessage[]; paused?: boolean }
     /** 页面命令（/status）的回答，服务端直接给，不经过模型 */
     | { type: 'report'; title: string; lines: string[] }
     | { type: 'status'; status: RunStatus; error: string | null; awaiting?: boolean }
