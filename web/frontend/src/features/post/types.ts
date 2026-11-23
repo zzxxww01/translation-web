@@ -12,6 +12,8 @@ export interface Instruction {
 }
 
 export const POST_CONTENT_MAX_LENGTH = 10_000;
+/** 译文框计数显示的参考长度：只是提醒，超了变色，不截断也不拦操作（硬上限仍是上面的 10,000） */
+export const POST_TARGET_LENGTH = 1_000;
 export const OPTIMIZATION_INSTRUCTION_MAX_LENGTH = 1_000;
 export const TITLE_INSTRUCTION_MAX_LENGTH = 1_000;
 

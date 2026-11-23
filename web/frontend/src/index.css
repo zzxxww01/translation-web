@@ -460,3 +460,15 @@
 @utility paper-grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .15 0 0 0 0 .19 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
 }
+
+/* iOS Safari 点进字号 < 16px 的输入框会自动放大整页，之后不缩回，下次打开还是放大的。
+   只在 iOS 上把输入控件抬到 16px（-webkit-touch-callout 只有 iOS 认）；不进 @layer，
+   优先级高过 text-sm 这类工具类。电脑和安卓不受影响。 */
+@supports (-webkit-touch-callout: none) {
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    font-size: 16px;
+  }
+}
