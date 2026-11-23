@@ -109,7 +109,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
           <Search className="h-3.5 w-3.5 text-text-muted" />
           <input value={input} onChange={event => setInput(event.target.value)} placeholder="搜索标题" aria-label="搜索文章" className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-text-disabled" />
         </label>
-        <div className="flex gap-0.5 rounded-full bg-bg-inset p-[3px]" role="group" aria-label="筛选文章">
+        <div className="flex rounded-full bg-bg-inset p-[3px]" role="group" aria-label="筛选文章">
           {FILTERS.map(item => (
             <button
               key={item.id}
@@ -117,10 +117,11 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
               aria-pressed={filter === item.id}
               onClick={() => setFilter(item.id)}
               title={item.id === 'unsent' ? '翻译完了还没标记已发送' : undefined}
-              className={cn('flex-auto whitespace-nowrap rounded-full px-1.5 py-1 text-xs transition-colors', filter === item.id ? 'bg-white font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}
+              className={cn('flex-auto whitespace-nowrap rounded-full px-1 py-1 text-xs transition-colors', filter === item.id ? 'bg-white font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}
             >
               {item.label}
-              {counts?.[item.id] !== undefined && <span className="ml-1 tabular-nums opacity-70">{counts[item.id]}</span>}
+              {/* 「全部」的数和标题旁的总数一样，不写：340px 宽的侧栏放不下五个带数的按钮 */}
+              {item.id !== 'all' && counts?.[item.id] !== undefined && <span className="ml-0.5 tabular-nums opacity-70">{counts[item.id]}</span>}
             </button>
           ))}
         </div>
