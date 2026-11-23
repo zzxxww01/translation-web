@@ -7,6 +7,8 @@
 - rev 每存一次 +1，前端带着自己读到的 rev 来存，对不上（别处改过）就拒绝，避免互相覆盖。
 - sent_at / sent_digest：「已发送」（在 Slack 等系统外发出去后手动标的），和 status（草稿 / 已完成）分开；
   只有 set_sent 能改，前端存稿、后台重翻都原样保留，也不动 rev（不算内容改动，不让正在编辑的页面冲突）。
+  没标过的稿子建了超过两周（SENT_AUTO_AFTER）就当已发送（2026-11-23 用户要求，「未发送」只看两周内的）；
+  对这种稿子手动「撤销已发送」会记 sent_cleared，之后按未发送算。
 """
 
 from __future__ import annotations
@@ -26,6 +28,7 @@ FILE_ID_RE = re.compile(r"^F[A-Z0-9]{6,20}$")
 MAX_STATE_BYTES = 2_000_000
 MAX_IMAGES = 30
 STATUSES = ("draft", "done")
+SENT_AUTO_AFTER = 14 * 86400
 
 
 class DraftError(Exception):
@@ -70,12 +73,16 @@ def _digest(text: str) -> str:
     return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
 
 
-def sent_view(doc: Dict[str, Any]) -> Dict[str, Any]:
-    """sent_at：标记已发送的时间（没标过 None）；sent_changed：标了之后当前译文又变了。"""
+def sent_view(doc: Dict[str, Any], now: Optional[float] = None) -> Dict[str, Any]:
+    """sent：算不算已发送；sent_at：手动标的时间（没标过 None）；sent_auto：没标过、超过两周默认已发送；
+    sent_changed：标了之后当前译文又变了。"""
     sent_at = doc.get("sent_at")
     if not isinstance(sent_at, (int, float)):
-        return {"sent_at": None, "sent_changed": False}
-    return {"sent_at": sent_at,
+        created = doc.get("created_at")
+        auto = (not doc.get("sent_cleared") and isinstance(created, (int, float))
+                and (now if now is not None else _now()) - created > SENT_AUTO_AFTER)
+        return {"sent": auto, "sent_at": None, "sent_auto": auto, "sent_changed": False}
+    return {"sent": True, "sent_at": sent_at, "sent_auto": False,
             "sent_changed": doc.get("sent_digest") != _digest(current_translation(doc.get("state") or {}))}
 
 
@@ -135,7 +142,7 @@ def clean_doc(doc: Dict[str, Any], existing: Optional[Dict[str, Any]]) -> Dict[s
 
 
 def _kept_sent(existing: Optional[Dict[str, Any]]) -> Dict[str, Any]:
-    return {k: existing[k] for k in ("sent_at", "sent_digest") if k in (existing or {})}
+    return {k: existing[k] for k in ("sent_at", "sent_digest", "sent_cleared") if k in (existing or {})}
 
 
 class PostDraftStore:
@@ -204,9 +211,12 @@ class PostDraftStore:
                 raise DraftError("DRAFT_NOT_FOUND", "找不到这份翻译稿", 404)
             doc.pop("sent_at", None)
             doc.pop("sent_digest", None)
+            doc.pop("sent_cleared", None)
             if sent:
                 doc["sent_at"] = _now()
                 doc["sent_digest"] = _digest(current_translation(doc.get("state") or {}))
+            else:
+                doc["sent_cleared"] = True  # 超过两周的稿子撤销后也按未发送算
             self._write(doc)
             return doc
 
@@ -230,12 +240,16 @@ class PostDraftStore:
                 continue
         return docs
 
-    def list(self, query: str = "", source: str = "", limit: int = 300) -> List[Dict[str, Any]]:
-        """翻译记录：按最近修改从新到旧；query 在标题、原文、译文里找（每个词都要出现）。"""
+    def list(self, query: str = "", source: str = "", limit: int = 300, sent: str = "") -> List[Dict[str, Any]]:
+        """翻译记录：按最近修改从新到旧；query 在标题、原文、译文里找（每个词都要出现）；
+        sent：yes 只要已发送（含超两周默认的），no 只要未发送。"""
         words = [w.lower() for w in (query or "").split() if w]
+        now = _now()
         out = []
         for doc in self._all():
             if source and doc.get("source") != source:
+                continue
+            if sent and sent_view(doc, now)["sent"] != (sent == "yes"):
                 continue
             if (doc.get("extraction") or {}).get("has_post") is False:
                 continue  # 提取后发现没有要发的帖子（纯讨论）：不进翻译记录
@@ -263,7 +277,7 @@ class PostDraftStore:
                 out[f"{slack['channel_id']}:{slack['thread_ts']}"] = {
                     "id": doc["id"],
                     "status": doc.get("status", "draft"),
-                    "sent_at": sent_view(doc)["sent_at"],
+                    **{k: v for k, v in sent_view(doc).items() if k in ("sent", "sent_at", "sent_auto")},
                     "auto": bool(doc.get("auto")),
                     "seen": bool(doc.get("seen", True)),
                     "versions": len(state.get("versions") or []),

@@ -16,7 +16,10 @@ export interface ActivitySelection {
  * 筛选（2026-11-22 用户要求：一行筛选自己选，「全部」按时间排）。各筛选可以重叠，比如 @我 的私信两边都有。
  * 数字是这一类里的未读条数。
  */
-type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'posts' | 'following' | 'translated';
+type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'posts' | 'following' | 'translated' | 'unsent';
+
+const isTranslated = (i: SlackActivityItem) => !!i.draft && !i.draft.no_post;
+const isSent = (draft: NonNullable<SlackActivityItem['draft']>) => draft.sent ?? !!draft.sent_at;
 
 const isPost = (i: SlackActivityItem) => i.type === 'thread' && !i.reply_count && !i.root?.is_me;
 
@@ -27,7 +30,8 @@ const FILTERS: { id: Filter; label: string; hint: string; match: (i: SlackActivi
   { id: 'dm', label: '私信', hint: '私信和群聊私信', match: i => i.type === 'dm' },
   { id: 'posts', label: '新帖', hint: '最近 7 天还没人回复的帖子（待翻译）', match: isPost },
   { id: 'following', label: '我参与的', hint: '你发起、回复过或被 @ 的 thread', match: i => i.type === 'thread' && !!i.following },
-  { id: 'translated', label: '我翻译的', hint: '最近 7 天翻过的帖子；更早的和帖子翻译页的在「全部翻译记录」', match: i => !!i.draft && !i.draft.no_post },
+  { id: 'translated', label: '我翻译的', hint: '最近 7 天翻过的帖子；更早的和帖子翻译页的在「全部翻译记录」', match: isTranslated },
+  { id: 'unsent', label: '未发送', hint: '最近 7 天翻过、还没标已发送的帖子；全部的在「全部翻译记录」里筛', match: i => isTranslated(i) && !isSent(i.draft!) },
 ];
 
 const FILTER_KEY = 'slack-activity-filter';
@@ -176,7 +180,7 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
             {filter === 'unread' ? '都看完了' : filter === 'all' ? '最近 7 天没有动态' : `最近 7 天没有「${current.label}」`}
           </div>
         )}
-        {filter === 'translated' && (
+        {(filter === 'translated' || filter === 'unsent') && (
           <button
             type="button"
             onClick={onShowHistory}
@@ -217,7 +221,8 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
 /** 翻译稿状态写在第二行末尾的小字里；后台自动翻好、还没看过的整行底色稍深一点（2026-11-22 用户：不要彩色标签） */
 function draftNote(draft: SlackActivityItem['draft']): string {
   if (!draft || draft.no_post) return '';
-  return draft.status === 'done' ? ' · 已翻译' : ' · 翻译草稿';
+  if (isSent(draft)) return ' · 已发送';
+  return draft.status === 'done' ? ' · 已翻译 · 未发送' : ' · 翻译草稿 · 未发送';
 }
 
 function Row({ item, active, manyChannels, onOpen }: {

@@ -155,6 +155,10 @@ export interface SlackDraftBadge {
   seen: boolean;
   versions: number;
   no_post: boolean;
+  /** 算不算已发送：手动标过，或没标过但建了超过两周。旧后端没有 */
+  sent?: boolean;
+  sent_at?: number | null;
+  sent_auto?: boolean;
 }
 
 /** 我的待办里的一件事 */

@@ -11,6 +11,9 @@ export interface DraftSummary {
   status: 'draft' | 'done';
   /** 标记已发送的时间（秒）；和 status 无关。旧后端没有 */
   sent_at?: number | null;
+  /** 算不算已发送：手动标过，或没标过但建了超过两周（sent_auto） */
+  sent?: boolean;
+  sent_auto?: boolean;
   /** 标了已发送之后当前译文又变了 */
   sent_changed?: boolean;
   auto: boolean;
@@ -46,6 +49,8 @@ export interface DraftDoc {
   source: 'manual' | 'slack';
   status: 'draft' | 'done';
   sent_at?: number | null;
+  sent?: boolean;
+  sent_auto?: boolean;
   sent_changed?: boolean;
   auto: boolean;
   seen: boolean;
@@ -65,8 +70,8 @@ export interface DraftExtra {
 }
 
 export const draftsApi = {
-  list: (q = '', source = '') =>
-    apiClient.get<{ items: DraftSummary[] }>('/post-drafts', { params: { q, source }, retry: false }),
+  list: (q = '', source = '', sent: SentFilter = '') =>
+    apiClient.get<{ items: DraftSummary[] }>('/post-drafts', { params: { q, source, sent }, retry: false }),
   get: (id: string) => apiClient.get<DraftDoc>(`/post-drafts/${id}`, { retry: false }),
   create: (body: { state: PostSnapshot } & DraftExtra) => apiClient.post<DraftDoc>('/post-drafts', body, { retry: false }),
   save: (id: string, body: { state: PostSnapshot; rev: number | null } & DraftExtra) =>
@@ -80,19 +85,29 @@ export const draftsApi = {
     }),
   /** 已发送：单独一个接口，不动 rev，正在编辑也不会冲突 */
   setSent: (id: string, sent: boolean) =>
-    apiClient.put<{ ok: boolean; sent_at: number | null; sent_changed: boolean }>(`/post-drafts/${id}/sent`, { sent }, { retry: false }),
+    apiClient.put<{ ok: boolean; sent: boolean; sent_at: number | null; sent_auto: boolean; sent_changed: boolean }>(`/post-drafts/${id}/sent`, { sent }, { retry: false }),
   imagesZipUrl: (id: string) => `/api/post-drafts/${id}/images.zip`,
 };
 
+/** 「已发送」按钮的提示：手动标的写时间；没标过的是超过两周默认已发送 */
+export function sentTitle(sent: boolean, sentAt: number | null): string {
+  if (!sent) return '在 Slack 等地方发出去之后点一下';
+  if (!sentAt) return '超过两周，默认算已发送；点一下改成未发送';
+  return `发送于 ${new Date(sentAt * 1000).toLocaleString('zh-CN')}，点一下撤销`;
+}
+
+/** 翻译记录筛选：yes 已发送（含超两周默认的），no 未发送（只剩两周内的） */
+export type SentFilter = '' | 'yes' | 'no';
+
 export const draftKeys = {
-  list: (q: string) => ['post-drafts', 'list', q] as const,
+  list: (q: string, sent: SentFilter = '') => ['post-drafts', 'list', q, sent] as const,
   slack: (channelId: string, threadTs: string) => ['post-drafts', 'slack', channelId, threadTs] as const,
 };
 
-export function useDraftList(q: string) {
+export function useDraftList(q: string, sent: SentFilter = '') {
   return useQuery({
-    queryKey: draftKeys.list(q),
-    queryFn: () => draftsApi.list(q),
+    queryKey: draftKeys.list(q, sent),
+    queryFn: () => draftsApi.list(q, '', sent),
     select: data => data.items,
     staleTime: 10_000,
   });

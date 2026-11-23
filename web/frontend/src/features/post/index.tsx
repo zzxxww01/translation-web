@@ -14,7 +14,7 @@ import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
 import { DraftHistory } from './components/DraftHistory';
 import { DiscardEditDialog, PendingChip } from './components/WorkspaceChrome';
-import { draftsApi, useDraftSync, type DraftDoc, type DraftSummary } from './drafts';
+import { draftsApi, sentTitle, useDraftSync, type DraftDoc, type DraftSummary } from './drafts';
 import { usePostWorkspace } from './usePostWorkspace';
 
 /**
@@ -37,10 +37,12 @@ export function PostFeature() {
     queryKey: ['post-drafts', 'doc', draftId],
     queryFn: () => draftsApi.get(draftId!),
     enabled: !!draftId,
-    select: doc => doc.sent_at ?? null,
+    select: doc => ({ sent: doc.sent ?? !!doc.sent_at, sentAt: doc.sent_at ?? null, auto: !!doc.sent_auto }),
     staleTime: 30_000,
   });
-  const sentAt = draftId ? sentQuery.data ?? null : null;
+  const sentInfo = draftId ? sentQuery.data : undefined;
+  const sentAt = sentInfo?.sentAt ?? null;
+  const isSent = !!sentInfo?.sent;
 
   /** 和 Slack 翻译模式一样：发出去之后点；先把正在改的存好，后端记下的译文才是发出去的那版 */
   const setSent = async (sent: boolean) => {
@@ -49,7 +51,7 @@ export function PostFeature() {
     try {
       if (sent) await sync.flush();
       const result = await draftsApi.setSent(draftId, sent);
-      queryClient.setQueryData<DraftDoc>(['post-drafts', 'doc', draftId], doc => doc && { ...doc, sent_at: result.sent_at });
+      queryClient.setQueryData<DraftDoc>(['post-drafts', 'doc', draftId], doc => doc && { ...doc, sent: result.sent, sent_at: result.sent_at, sent_auto: result.sent_auto });
       void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
       toast.success(sent ? '已标记为已发送' : '已撤销「已发送」');
     } catch (error) {
@@ -104,10 +106,10 @@ export function PostFeature() {
                 <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
               </div>
               {draftId && (
-                <Button variant={sentAt ? 'secondary' : 'ghost'} size="sm" className="h-9" disabled={sentBusy}
-                  onClick={() => void setSent(!sentAt)} title={sentAt ? `发送于 ${new Date(sentAt * 1000).toLocaleString('zh-CN')}，点一下撤销` : '在 Slack 等地方发出去之后点一下'}>
-                  <Send className={sentAt ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
-                  <span className="hidden sm:inline">{sentAt ? '已发送' : '标记已发送'}</span>
+                <Button variant={isSent ? 'secondary' : 'ghost'} size="sm" className="h-9" disabled={sentBusy}
+                  onClick={() => void setSent(!isSent)} title={sentTitle(isSent, sentAt)}>
+                  <Send className={isSent ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
+                  <span className="hidden sm:inline">{isSent ? '已发送' : '标记已发送'}</span>
                 </Button>
               )}
               <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">

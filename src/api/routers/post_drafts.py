@@ -78,8 +78,12 @@ class DraftBody(BaseModel):
 
 
 @router.get("")
-async def list_drafts(q: str = Query("", max_length=200), source: str = Query("", pattern="^(|slack|manual)$")):
-    return {"items": await _store(get_draft_store().list, q, source)}
+async def list_drafts(
+    q: str = Query("", max_length=200),
+    source: str = Query("", pattern="^(|slack|manual)$"),
+    sent: str = Query("", pattern="^(|yes|no)$"),
+):
+    return {"items": await _store(get_draft_store().list, q, source, sent=sent)}
 
 
 @router.post("")
