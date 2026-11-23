@@ -67,6 +67,8 @@ class ProjectMeta(BaseModel):
     claude_run_id: Optional[str] = None
     # 主项目：主译本是哪一版（主项目自己或某个孪生项目的 id）；None 按默认规则（services/article_primary.py）
     primary_target: Optional[str] = None
+    # 主译本是用户在工作台亲手点「设为主译本」选的（不是导入时自动记下的）：之后导入什么都不替他换
+    primary_chosen: bool = False
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     status: ProjectStatus = ProjectStatus.CREATED

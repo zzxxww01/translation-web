@@ -22,6 +22,9 @@ COMMON_TOKEN_RATIO = 0.3
 # （"DeepSeek Open Source" 与「…DeepSeek's open source week…」），只看词会和标题块打平，
 # 结果正文进了标题行、标题被并到上一段末尾、这一段空着（2026-10-29 华为与 DeepSeek 一文 3 处）。
 KIND_MISMATCH = 0.8
+# 覆盖率打平时看块里有多少是这段的词：短段（"Source: Meta"）对短块，不去抢下一段长正文
+# （"Meta" 两边都有；抢了之后长段名下挂三段、拼不回原文、拆不开，后两段空着，2026-11-23 TPU 一文）。权重小到只用来破平局
+PRECISION_WEIGHT = 0.01
 
 _HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
 _LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.*)$")
@@ -30,7 +33,13 @@ _TOKEN = re.compile(r"[a-z0-9]+")
 _NUMBER = re.compile(r"\d+")
 # 仅对纯文本做启发式切分；格式化文本整段保留，避免切断 Markdown 或链接。
 _MARKDOWN = re.compile(r"[\[\]*_`<>\\~|&]|https?://|www\.", re.IGNORECASE)
-_ZH_SENTENCE = re.compile(r".+?(?:[。！？!?]+[”’」』）)\"']*|$)", re.DOTALL)
+# 链接、加粗、斜体、行内代码：整体不切，但在它们外面的句末照样能切（2026-11-23：带一处链接或加粗的长段
+# 原来整段不切，下一行显示缺译，文章进度停在 95%）。去掉这些之后还有别的标记（HTML、实体、转义、裸链接）就仍整段保留
+_PROTECTED = re.compile(r"\[[^\]\n]*\]\([^)\s]*\)|\*\*[^\n]+?\*\*|__[^\n]+?__|`[^`\n]+`|\*[^*\n]+\*")
+_MD_LINK = re.compile(r"\[([^\]\n]*)\]\([^)\s]*\)")
+_MD_MARKS = re.compile(r"\*\*|__|[*`]")
+# 句末后紧跟的收尾符号（引号、括号，以及加粗 / 代码的收尾标记）归前一句
+_ZH_SENTENCE = re.compile(r".+?(?:[。！？!?]+[”’」』）)\"'*_`]*|$)", re.DOTALL)
 _ZH_CLAUSE = re.compile(r".+?(?:[，；：;]+|(?<!\d),(?!\d)|$)", re.DOTALL)
 _EN_SENTENCE = re.compile(r".+?(?:[.!?。！？]+(?=\s|$)|$)", re.DOTALL)
 
@@ -171,9 +180,10 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
         for token in tokens:
             doc_freq[token] = doc_freq.get(token, 0) + 1
     limit = max(2, int(n * COMMON_TOKEN_RATIO))
-    target_words = []
+    target_words, target_sets = [], []
     for target in targets:
         words = set(_tokens(target))
+        target_sets.append(words)
         target_words.append([t for t in words if doc_freq.get(t, 0) <= limit] or list(words))
 
     kinds_known = block_kinds is not None and target_kinds is not None
@@ -185,7 +195,10 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
         covered = sum(1 for t in words if t in block_sets[i]) / len(words)
         if kinds_known and _is_heading(target_kinds[j]) != _is_heading(block_kinds[i]):
             covered *= KIND_MISMATCH
-        return covered
+        if covered < MIN_SCORE:
+            return covered
+        precision = len(target_sets[j] & block_sets[i]) / (len(block_sets[i]) or 1)
+        return covered + PRECISION_WEIGHT * precision
 
     neg = float("-inf")
     # best[j][i]：前 j 个目标、所用块都 ≤ i 时的最高分；choice 记回溯
@@ -212,8 +225,40 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
     return result
 
 
+def fill_gaps(mapping: List[Optional[int]], block_kinds: Sequence[str], target_kinds: Sequence[str]) -> int:
+    """两个已对上的段落之间，没对上的段落和没用上的块一样多、标题正文也一一相符时，按顺序配上（原地改 mapping）。
+    词对不上但位置确定的段：比如网页把署名折叠成「A, B, C, and 4 others」，en.md 照抄，原文却是完整名单。返回配上了几段。"""
+    used = {b for b in mapping if b is not None}
+    filled = 0
+    j = 0
+    while j < len(mapping):
+        if mapping[j] is not None or target_kinds[j] == "image":
+            j += 1
+            continue
+        start = j
+        while j < len(mapping) and mapping[j] is None:
+            j += 1
+        before = next((mapping[k] for k in range(start - 1, -1, -1) if mapping[k] is not None), -1)
+        after = mapping[j] if j < len(mapping) else len(block_kinds)
+        gap_targets = [k for k in range(start, j) if target_kinds[k] != "image"]
+        gap_blocks = [b for b in range(before + 1, after) if b not in used and block_kinds[b] != "image"]
+        if (gap_targets and len(gap_targets) == len(gap_blocks)
+                and all(_is_heading(target_kinds[t]) == _is_heading(block_kinds[b])
+                        for t, b in zip(gap_targets, gap_blocks))):
+            for t, b in zip(gap_targets, gap_blocks):
+                mapping[t] = b
+                used.add(b)
+            filled += len(gap_targets)
+    return filled
+
+
 def _pieces(pattern: re.Pattern, text: str) -> List[str]:
     return [m.group(0) for m in pattern.finditer(text) if m.group(0).strip()]
+
+
+def plain_markdown(text: str) -> str:
+    """去掉链接、加粗、斜体、代码的标记，只留文字：和导入时从网页里取出的原文比。"""
+    return _MD_MARKS.sub("", _MD_LINK.sub(r"\1", text))
 
 
 def _units(text: str, pattern: re.Pattern) -> List[str]:
@@ -221,19 +266,34 @@ def _units(text: str, pattern: re.Pattern) -> List[str]:
     if len(units) > 1 and not units[-1].strip():
         trailing = units.pop()
         units[-1] += trailing
-    return units
+    # 切点落在链接、加粗等里面就不切：和后一句并起来
+    spans = [m.span() for m in _PROTECTED.finditer(text)]
+    if not spans:
+        return units
+    merged: List[str] = []
+    current, pos = "", 0
+    for unit in units:
+        current += unit
+        pos += len(unit)
+        if not any(start < pos < end for start, end in spans):
+            merged.append(current)
+            current = ""
+    if current:
+        merged.append(current)
+    return merged
 
 
 def split_like(zh: str, sources: Sequence[str]) -> Optional[List[str]]:
     """一段中文切成 len(sources) 份，对应导入时按句拆开的几段原文。只在句末切（句子不够才退到逗号）：
     中文句数和英文相同就按每段的句数切，否则按英文各段的长度比例找最近的句末。
-    含 Markdown、链接或换行，或切不出这么多份时返回 None，由调用方整段保留。"""
+    链接、加粗、斜体、行内代码不会被切开；含别的标记（HTML、实体、转义、裸链接）或换行，
+    或切不出这么多份时返回 None，由调用方整段保留。"""
     count = len(sources)
     if not count or not zh.strip():
         return None
     if count == 1:
         return [zh]
-    if _MARKDOWN.search(zh) or "\n" in zh or "\r" in zh:
+    if _MARKDOWN.search(_PROTECTED.sub("", zh)) or "\n" in zh or "\r" in zh:
         return None
     units = _units(zh, _ZH_SENTENCE)
     if len(units) < count:
@@ -276,6 +336,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
 
     mapping = align_targets([b.text for b in en_blocks], [t.source for t in targets],
                             [b.kind for b in en_blocks], [t.kind for t in targets])
+    gap_filled = fill_gaps(mapping, [b.kind for b in en_blocks], [t.kind for t in targets])
     groups: Dict[int, List[int]] = {}
     for target_index, block_index in enumerate(mapping):
         if block_index is not None:
@@ -297,7 +358,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
         is_split_paragraph = (
             en_blocks[block_index].kind in {"p", "quote"}
             and all(targets[m].kind in {"p", "blockquote", "quote"} for m in members)
-            and " ".join(" ".join(sources).split()) == " ".join(en_blocks[block_index].text.split())
+            and " ".join(plain_markdown(" ".join(sources)).split()) == " ".join(plain_markdown(en_blocks[block_index].text).split())
         )
         parts = split_like(lines[0], sources) if len(lines) == 1 and is_split_paragraph else None
         if len(lines) == len(members) and not _MARKDOWN.search(zh_text):
@@ -341,5 +402,6 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
         "merged_blocks": orphan_blocks,
         "split_by_sentence": split_by_sentence,
         "split_failures": split_failures,
+        "gap_filled": gap_filled,
     }
     return alignment

@@ -826,6 +826,48 @@ async def test_agent_run_without_outputs_or_deleted_fails(agent_env):
 
 
 @pytest.mark.asyncio
+async def test_agent_stalled_midway_waits_then_imports_when_finished_later(agent_env):
+    import time
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["claude"]))
+    pid, run = result["project_id"], agent_env.runner.runs["run-claude"]
+    outputs, agent_env.runner.outputs = agent_env.runner.outputs, {}
+
+    # 这一轮结束了但后台子代理还在跑；刚停下：都不算失败
+    run.update(status="idle", busy=True, updated_at=time.time())
+    assert await automation.poll_agent_runs() == 0
+    run["busy"] = False
+    assert await automation.poll_agent_runs() == 0
+    assert (await automation.project_status(pid))["engines"]["claude"]["status"] == "running"
+
+    # 停了超过宽限期：判失败，但记下 stalled_at 接着回看
+    run["updated_at"] = time.time() - automation.STALL_GRACE_S - 1
+    assert await automation.poll_agent_runs() == 0
+    claude = (await automation.project_status(pid))["engines"]["claude"]
+    assert claude["status"] == "failed" and "继续" in claude["error"]
+    assert await automation.poll_agent_runs() == 0  # 回看时还是没产出：保持失败
+
+    # 有人在 Claude 页发了「继续」：回到在跑，翻完照样导回
+    run["status"] = "running"
+    assert await automation.poll_agent_runs() == 0
+    assert (await automation.project_status(pid))["engines"]["claude"]["status"] == "running"
+    run["status"], agent_env.runner.outputs = "idle", outputs
+    assert await automation.poll_agent_runs() == 1
+    assert (await automation.project_status(pid))["engines"]["claude"]["status"] == "done"
+
+
+@pytest.mark.asyncio
+async def test_legacy_stalled_record_is_imported_once_outputs_exist(agent_env):
+    import time
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
+        article="new-post", engines=["claude"]))
+    agent_env.store.update(result["project_id"], "claude", status="failed",
+                           error="Agent 这一轮结束了，但没找到 zh.md 和 en.md")
+    agent_env.runner.runs["run-claude"].update(status="idle", updated_at=time.time())
+    assert await automation.poll_agent_runs() == 1
+
+
+@pytest.mark.asyncio
 async def test_agent_waiting_for_terms_is_not_imported(agent_env):
     result = await automation.translate_article(_request(), automation.TranslateArticleRequest(
         article="new-post", engines=["claude"]))

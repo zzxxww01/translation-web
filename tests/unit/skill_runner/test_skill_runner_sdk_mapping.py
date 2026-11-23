@@ -275,3 +275,52 @@ async def test_queued_turn_that_really_starts_keeps_session_busy():
     [event async for event in session.events()]
     now[0] = STALE_AFTER_RESULT_S * 10
     assert session.busy  # 第二轮已经开始出内容，结果没出来之前一直算忙
+
+
+async def test_background_subagents_keep_session_busy_after_result():
+    # 分块翻译：主代理派出后台子代理就结束了这一轮，子代理还在跑；这时关进程会把它们一起杀掉
+    from claude_agent_sdk import TaskNotificationMessage, TaskStartedMessage, TaskUpdatedMessage
+
+    from skill_runner.sdk_session import STALE_TASK_S
+
+    def started(task_id):
+        return TaskStartedMessage(subtype="task_started", data={}, task_id=task_id, description="翻第 9 节",
+                                  uuid="u", session_id="s")
+
+    now = [0.0]
+    session = SdkSession(_ScriptedClient([
+        started("a"), started("b"), _sdk_result(),
+        TaskNotificationMessage(subtype="task_notification", data={}, task_id="a", status="completed",
+                                output_file="", summary="", uuid="u", session_id="s"),
+    ]), clock=lambda: now[0])
+    await session.send("开始")
+    [event async for event in session.events()]
+    now[0] = STALE_AFTER_RESULT_S * 2
+    assert session.busy  # b 还没结束
+
+    session._client.messages = [TaskUpdatedMessage(subtype="task_updated", data={}, task_id="b",
+                                                   patch={"status": "killed"})]
+    [event async for event in session.events()]
+    assert not session.busy
+
+    # 一直没动静的任务（CLI 没报结束）过了期限就不再拦着关进程
+    session._client.messages = [started("c")]
+    [event async for event in session.events()]
+    assert session.busy
+    now[0] += STALE_TASK_S + 1
+    assert not session.busy
+
+
+async def test_zero_turn_result_on_resume_does_not_end_the_real_turn():
+    # 续接时 CLI 先给积压的子代理通知回一个 num_turns=0 的结果，紧接着才跑「继续」这一轮；
+    # 把它当成这一轮的结果就会 5 秒后关进程（2026-11-23 16:55「继续」被吞）
+    now = [0.0]
+    empty = ResultMessage(subtype="success", duration_ms=68, duration_api_ms=0, is_error=False,
+                          num_turns=0, session_id="s", total_cost_usd=None, usage=None, result="")
+    session = SdkSession(_ScriptedClient([empty]), clock=lambda: now[0])
+    await session.send("继续")
+    [event async for event in session.events()]
+    assert session.busy
+    session._client.messages = [_sdk_result()]
+    [event async for event in session.events()]
+    assert not session.busy

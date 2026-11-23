@@ -234,7 +234,7 @@ async def set_primary(project_id: str, body: PrimaryRequest, pm: ProjectManagerD
         if pm.get(project_id).variant_of:
             raise BadRequestException(detail="主译本只能设在文章的主项目上", error_code="IS_VARIANT")
         _check_target(pm, project_id, body.target)
-        pm.merge_meta_fields(project_id, fields={"primary_target": body.target})
+        pm.merge_meta_fields(project_id, fields={"primary_target": body.target, "primary_chosen": True})
 
     try:
         await run_blocking(save)

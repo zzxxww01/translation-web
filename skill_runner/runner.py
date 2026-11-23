@@ -295,6 +295,10 @@ class Runner:
     def meta(self, run_id: str) -> RunMeta:
         return self._get(run_id).meta
 
+    def busy(self, run_id: str) -> bool:
+        """这一轮虽然结束了，进程里还有活：排着的话、没跑完的后台子代理。"""
+        return self._session_busy(self._get(run_id))
+
     def list_runs(self) -> list[RunMeta]:
         metas = self.store.list_meta()
         # 内存里的状态比磁盘新（磁盘只在状态切换时写）

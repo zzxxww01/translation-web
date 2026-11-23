@@ -18,7 +18,12 @@ from claude_agent_sdk import (
     ClaudeSDKClient,
     RateLimitEvent,
     ResultMessage,
+    TERMINAL_TASK_STATUSES,
     SystemMessage,
+    TaskNotificationMessage,
+    TaskProgressMessage,
+    TaskStartedMessage,
+    TaskUpdatedMessage,
     TextBlock,
     ToolResultBlock,
     ToolUseBlock,
@@ -109,6 +114,8 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
 
 # 上一轮结果之后 CLI 这么久一条消息都没再发，就不再认为还有排着的轮次（见 SdkSession.busy）
 STALE_AFTER_RESULT_S = 300.0
+# 后台任务（run_in_background 的子代理、后台命令）这么久一条消息都没有，就当它已经没了，不再拦着关进程
+STALE_TASK_S = 900.0
 
 
 class SdkSession:
@@ -120,14 +127,21 @@ class SdkSession:
         self._turns = 0
         # 最近一条消息是结果时记下时间；之后有新消息、或又发了话就清掉
         self._result_at: float | None = None
+        # 还没结束的后台任务 → 最近一次动静的时间。这一轮出了结果它们还在跑，
+        # 进程一关就跟着被杀（分块翻译的子代理被关掉过，2026-11-23）；完成时 CLI 会自己起一轮回报
+        self._tasks: dict[str, float] = {}
 
     @property
     def busy(self) -> bool:
+        now = self._clock()
+        self._tasks = {task_id: seen for task_id, seen in self._tasks.items() if now - seen <= STALE_TASK_S}
+        if self._tasks:
+            return True
         if self._turns <= 0:
             return False
         # 运行中插的话常被 CLI 并进当前这一轮、只回一个结果，计数就多出来，永远归不了零：
         # 进程关不掉、名额一直占着，排队的对话再也排不上（2026-11-23）。结果之后久久没动静就清零
-        if self._result_at is not None and self._clock() - self._result_at > STALE_AFTER_RESULT_S:
+        if self._result_at is not None and now - self._result_at > STALE_AFTER_RESULT_S:
             self._turns = 0
             return False
         return True
@@ -155,11 +169,29 @@ class SdkSession:
         async for message in self._client.receive_messages():
             if _is_turn_activity(message):
                 self._result_at = None
+            self._track_task(message)
             for event in mapper.map(message):
                 if event.get("type") == "result":
-                    self._turns = max(0, self._turns - 1)
+                    # 一轮都没跑的结果（num_turns=0）不是我们发的话的结果：续接时 CLI 先给积压的子代理通知回一个，
+                    # 当成「继续」跑完了就会 5 秒后关进程，把刚开始的那一轮杀掉（2026-11-23 16:55）
+                    if event.get("num_turns") != 0:
+                        self._turns = max(0, self._turns - 1)
                     self._result_at = self._clock()
                 yield event
+
+    def _track_task(self, message: Any) -> None:
+        if isinstance(message, TaskNotificationMessage):
+            status = message.status
+        elif isinstance(message, TaskUpdatedMessage):
+            status = message.status or message.patch.get("status")
+        elif isinstance(message, (TaskStartedMessage, TaskProgressMessage)):
+            status = "running"
+        else:
+            return
+        if status in TERMINAL_TASK_STATUSES:
+            self._tasks.pop(message.task_id, None)
+        elif isinstance(message, (TaskStartedMessage, TaskProgressMessage)) or message.task_id in self._tasks:
+            self._tasks[message.task_id] = self._clock()
 
 
 def _is_turn_activity(message: Any) -> bool:

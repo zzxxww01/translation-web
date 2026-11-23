@@ -104,12 +104,29 @@ def test_split_like_falls_back_to_length_ratio_and_never_leaves_a_part_empty():
     assert split_like("只有一句。", ["One.", "Two.", "Three."]) is None
 
 
+@pytest.mark.parametrize("text, parts", [
+    ("**加粗。还在加粗。**后面一句。", ["**加粗。还在加粗。**", "后面一句。"]),
+    ("[链接。里面](https://x.com)。外面。", ["[链接。里面](https://x.com)。", "外面。"]),
+    ("[链接](https://x.com/search?q=1,2)。外面。", ["[链接](https://x.com/search?q=1,2)。", "外面。"]),
+    ("__加粗。还在加粗。__后面一句。", ["__加粗。还在加粗。__", "后面一句。"]),
+    ("`代码。还是代码。`后面一句。", ["`代码。还是代码。`", "后面一句。"]),
+])
+def test_links_and_emphasis_are_never_cut_but_sentences_around_them_are(text, parts):
+    assert split_like(text, ["First sentence.", "Second sentence."]) == parts
+
+
+def test_split_paragraph_with_a_link_in_the_english_markdown_still_gets_cut():
+    # 英文稿里是 Markdown 链接，项目原文是网页取出的纯文字（2026-11-23 北京一文 2 处因此没切）
+    en = "As they [wrote in April](https://doi.org/x), progress is slow. Self-restraint is an illusion.\n"
+    zh = "正如他们[四月所写](https://doi.org/x)，进展缓慢。自我约束是幻想。\n"
+    split = [Target("p1", "s", "As they wrote in April, progress is slow."), Target("p2", "s", "Self-restraint is an illusion.")]
+    result = align_claude_translation(en, zh, split)
+    assert result.texts == {"p1": "正如他们[四月所写](https://doi.org/x)，进展缓慢。", "p2": "自我约束是幻想。"}
+    assert result.stats["split_failures"] == 0
+
+
 @pytest.mark.parametrize("text", [
-    "**加粗。还在加粗。**后面一句。",
-    "[链接。里面](https://x.com)。外面。",
-    "[链接](https://x.com/search?q=1,2)。外面。",
-    "__加粗。还在加粗。__后面一句。",
-    "`代码。还是代码。`后面一句。",
+    "**加粗。一直加粗到最后。**",
     "<span>里面。还是里面。</span>外面。",
     "甲 &amp; 乙，丙和丁",
     "第一句。\\*这是字面星号。",
@@ -217,3 +234,54 @@ def test_extra_chinese_block_is_paired_with_its_neighbour_not_dropped():
     zh = parse_blocks("## 甲\n\n一段 2027。\n\n补充一句。\n\n## 乙\n")
     pairs = dict(pair_blocks(en, zh))
     assert pairs[1] == [1, 2] and pairs[2] == [3]
+
+
+def test_short_caption_goes_to_its_own_block_not_the_long_paragraph_sharing_its_word():
+    # 2026-11-23 TPU 一文：「Source」到处都是被当虚词，「Source: Meta」只剩 "meta"，和下一段长正文打平；
+    # 抢走长段之后长段名下挂三段、拼不回原文、拆不开，真正的两段空着
+    en = ("Source: Google\n\nSource: Meta\n\n"
+          "Muse Spark Open is Meta’s latest open model for agentic inference. "
+          "Furthermore, the submission uses HiCache offloading to improve prefix cache hits.\n\n"
+          "Source: SemiAnalysis\n\nSource: RadixArk\n")
+    zh = ("来源：Google\n\n来源：Meta\n\n"
+          "Muse Spark Open 是 Meta 最新的开源模型，用于智能体推理。为了提高前缀缓存命中率，这份提交还启用了 HiCache 卸载。\n\n"
+          "来源：SemiAnalysis\n\n来源：RadixArk\n")
+    project = [
+        Target("p0", "s", "Source: Google"),
+        Target("p1", "s", "Source: Meta"),
+        Target("p2", "s", "Muse Spark Open is Meta’s latest open model for agentic inference."),
+        Target("p3", "s", "Furthermore, the submission uses HiCache offloading to improve prefix cache hits."),
+        Target("p4", "s", "Source: SemiAnalysis"),
+        Target("p5", "s", "Source: RadixArk"),
+    ]
+    result = align_claude_translation(en, zh, project)
+    assert result.texts["p1"] == "来源：Meta"
+    assert result.texts["p2"] == "Muse Spark Open 是 Meta 最新的开源模型，用于智能体推理。"
+    assert result.texts["p3"] == "为了提高前缀缓存命中率，这份提交还启用了 HiCache 卸载。"
+    assert result.stats["unaligned"] == 0
+
+
+def test_unmatched_line_between_two_anchors_takes_the_one_leftover_block():
+    # 网页把署名折叠成「A, B, and 4 others」，en.md 照抄，项目里是完整名单：词对不上，位置是确定的
+    en = ("### Subtitle about TPU inference economics\n\nBy Bryan Shan, Alec Ibarra, and 4 others\n\n"
+          "Nov 05, 2026 · Paid\n\nIn November we published a newsletter about TPU sales.\n")
+    zh = ("### 关于 TPU 推理经济性的副标题\n\n作者：Bryan Shan、Alec Ibarra 等 6 人\n\n"
+          "2026 年 11 月 5 日 · 付费\n\n去年 11 月，我们发表了一篇关于 TPU 销售的文章。\n")
+    project = [
+        Target("p0", "s", "Subtitle about TPU inference economics", "h3"),
+        Target("p1", "s", "By Bryan Shan, Alec Ibarra, Cam Quilici, Kimbo Chen, Wenyao Gao, Dylan Patel, and Myron Xie"),
+        Target("p2", "s", "Nov 05, 2026 · Paid"),
+        Target("p3", "s", "In November we published a newsletter about TPU sales."),
+    ]
+    result = align_claude_translation(en, zh, project)
+    assert result.texts["p1"] == "作者：Bryan Shan、Alec Ibarra 等 6 人"
+    assert result.stats["gap_filled"] == 1 and result.stats["unaligned"] == 0
+
+
+def test_gap_is_not_filled_when_counts_differ():
+    en = "Alpha paragraph about wafers.\n\nUnrelated promo one.\n\nUnrelated promo two.\n\nOmega paragraph about HBM.\n"
+    zh = "关于晶圆的阿尔法段。\n\n推广一。\n\n推广二。\n\n关于 HBM 的欧米伽段。\n"
+    project = [Target("a", "s", "Alpha paragraph about wafers."), Target("x", "s", "Completely different words here"),
+               Target("o", "s", "Omega paragraph about HBM.")]
+    result = align_claude_translation(en, zh, project)
+    assert "x" not in result.texts and result.stats["gap_filled"] == 0
