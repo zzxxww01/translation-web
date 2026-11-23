@@ -118,6 +118,23 @@ def test_runs_are_listed_by_latest_activity_with_pinned_first(setup):
     assert client.put(f"{PREFIX}/runs/20200101-000000-aaaaaa/pin", json={"pinned": True}).status_code == 404
 
 
+def test_messages_and_turn_results_count_as_activity_without_status_change(setup):
+    client, factory, runner = setup
+    login(client)
+    first = client.post(f"{PREFIX}/runs", data={"message": "先开的"}).json()
+    second = client.post(f"{PREFIX}/runs", data={"message": "后开的"}).json()
+    run = runner._get(first["id"])
+    run.meta.status = "running"  # 一直在跑：插话、接着发挂起的消息都不会切换状态
+    run.meta.updated_at = runner._get(second["id"]).meta.updated_at - 10
+    runner._emit(run, {"type": "user", "text": "插一句", "files": []})
+    assert run.meta.status == "running"
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs").json()][:2] == [first["id"], second["id"]]
+
+    run.meta.updated_at = runner._get(second["id"]).meta.updated_at - 10
+    runner._emit(run, {"type": "result", "is_error": False})
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs").json()][:2] == [first["id"], second["id"]]
+
+
 def test_runtime_routes_check_versions_and_reject_updates_during_work(setup, monkeypatch):
     client, _, runner = setup
     login(client)

@@ -344,6 +344,11 @@ class Runner:
         run.seq += 1
         stamped = {"seq": run.seq, "ts": time.time(), **event}
         self.store.append_event(run.meta.id, stamped)
+        if event.get("type") in ("user", "result"):
+            # 列表按最近活跃排序：运行中插话、一轮结束就接着发挂起的消息时状态一直是 running，
+            # 只靠 _set_status 刷新的话，正在聊的会话会被挤到后面
+            run.meta.updated_at = stamped["ts"]
+            self.store.save_meta(run.meta)
         for queue in list(run.subscribers):
             queue.put_nowait(stamped)
         return stamped
