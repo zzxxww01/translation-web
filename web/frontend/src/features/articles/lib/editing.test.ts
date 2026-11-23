@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { COALESCE_MS, editHistory, undoShortcut } from './history';
-import { hasInlineMarkup, rawSelection, renderedToRaw } from './inline';
+import { hasInlineMarkup, linkCount, rawSelection, renderedToRaw } from './inline';
 
 describe('renderedToRaw', () => {
   it('maps a rendered offset back into the raw Markdown', () => {
@@ -118,5 +118,14 @@ describe('editHistory', () => {
     expect(undoShortcut(key({ key: 'y', ctrlKey: true }))).toBe('redo');
     expect(undoShortcut(key({ key: 'z' }))).toBeNull();
     expect(undoShortcut(key({ key: 'z', ctrlKey: true, isComposing: true }))).toBeNull();
+  });
+});
+
+describe('linkCount', () => {
+  it('counts links, including ones inside italic source lines', () => {
+    expect(linkCount('见[报道](https://a.com)和[模型](https://b.com)。')).toBe(2);
+    expect(linkCount('*来源：[GitHub](https://github.com)*')).toBe(1);
+    expect(linkCount('改写后链接没了。')).toBe(0);
+    expect(linkCount(null)).toBe(0);
   });
 });

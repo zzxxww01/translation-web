@@ -44,6 +44,11 @@ export function hasInlineMarkup(text: string): boolean {
   return parseInline(text).some(node => node.kind !== 'text');
 }
 
+/** 有几个 [文字](链接)：改写整句时容易把链接写法一起删掉，保存时据此提醒 */
+export function linkCount(text: string | null | undefined): number {
+  return visible(parseInline(text ?? '')).filter(node => node.kind === 'link').length;
+}
+
 /**
  * 排版后第 offset 个字的位置，换算成原始 Markdown 里的位置。
  * 正好落在两段的交界处时：left 算前一段的末尾，right 算后一段的开头。
