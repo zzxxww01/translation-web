@@ -104,12 +104,29 @@ def test_split_like_falls_back_to_length_ratio_and_never_leaves_a_part_empty():
     assert split_like("只有一句。", ["One.", "Two.", "Three."]) is None
 
 
+@pytest.mark.parametrize("text, parts", [
+    ("**加粗。还在加粗。**后面一句。", ["**加粗。还在加粗。**", "后面一句。"]),
+    ("[链接。里面](https://x.com)。外面。", ["[链接。里面](https://x.com)。", "外面。"]),
+    ("[链接](https://x.com/search?q=1,2)。外面。", ["[链接](https://x.com/search?q=1,2)。", "外面。"]),
+    ("__加粗。还在加粗。__后面一句。", ["__加粗。还在加粗。__", "后面一句。"]),
+    ("`代码。还是代码。`后面一句。", ["`代码。还是代码。`", "后面一句。"]),
+])
+def test_links_and_emphasis_are_never_cut_but_sentences_around_them_are(text, parts):
+    assert split_like(text, ["First sentence.", "Second sentence."]) == parts
+
+
+def test_split_paragraph_with_a_link_in_the_english_markdown_still_gets_cut():
+    # 英文稿里是 Markdown 链接，项目原文是网页取出的纯文字（2026-11-23 北京一文 2 处因此没切）
+    en = "As they [wrote in April](https://doi.org/x), progress is slow. Self-restraint is an illusion.\n"
+    zh = "正如他们[四月所写](https://doi.org/x)，进展缓慢。自我约束是幻想。\n"
+    split = [Target("p1", "s", "As they wrote in April, progress is slow."), Target("p2", "s", "Self-restraint is an illusion.")]
+    result = align_claude_translation(en, zh, split)
+    assert result.texts == {"p1": "正如他们[四月所写](https://doi.org/x)，进展缓慢。", "p2": "自我约束是幻想。"}
+    assert result.stats["split_failures"] == 0
+
+
 @pytest.mark.parametrize("text", [
-    "**加粗。还在加粗。**后面一句。",
-    "[链接。里面](https://x.com)。外面。",
-    "[链接](https://x.com/search?q=1,2)。外面。",
-    "__加粗。还在加粗。__后面一句。",
-    "`代码。还是代码。`后面一句。",
+    "**加粗。一直加粗到最后。**",
     "<span>里面。还是里面。</span>外面。",
     "甲 &amp; 乙，丙和丁",
     "第一句。\\*这是字面星号。",

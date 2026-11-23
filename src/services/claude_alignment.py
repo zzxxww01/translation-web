@@ -30,7 +30,13 @@ _TOKEN = re.compile(r"[a-z0-9]+")
 _NUMBER = re.compile(r"\d+")
 # 仅对纯文本做启发式切分；格式化文本整段保留，避免切断 Markdown 或链接。
 _MARKDOWN = re.compile(r"[\[\]*_`<>\\~|&]|https?://|www\.", re.IGNORECASE)
-_ZH_SENTENCE = re.compile(r".+?(?:[。！？!?]+[”’」』）)\"']*|$)", re.DOTALL)
+# 链接、加粗、斜体、行内代码：整体不切，但在它们外面的句末照样能切（2026-11-23：带一处链接或加粗的长段
+# 原来整段不切，下一行显示缺译，文章进度停在 95%）。去掉这些之后还有别的标记（HTML、实体、转义、裸链接）就仍整段保留
+_PROTECTED = re.compile(r"\[[^\]\n]*\]\([^)\s]*\)|\*\*[^\n]+?\*\*|__[^\n]+?__|`[^`\n]+`|\*[^*\n]+\*")
+_MD_LINK = re.compile(r"\[([^\]\n]*)\]\([^)\s]*\)")
+_MD_MARKS = re.compile(r"\*\*|__|[*`]")
+# 句末后紧跟的收尾符号（引号、括号，以及加粗 / 代码的收尾标记）归前一句
+_ZH_SENTENCE = re.compile(r".+?(?:[。！？!?]+[”’」』）)\"'*_`]*|$)", re.DOTALL)
 _ZH_CLAUSE = re.compile(r".+?(?:[，；：;]+|(?<!\d),(?!\d)|$)", re.DOTALL)
 _EN_SENTENCE = re.compile(r".+?(?:[.!?。！？]+(?=\s|$)|$)", re.DOTALL)
 
@@ -216,24 +222,44 @@ def _pieces(pattern: re.Pattern, text: str) -> List[str]:
     return [m.group(0) for m in pattern.finditer(text) if m.group(0).strip()]
 
 
+def plain_markdown(text: str) -> str:
+    """去掉链接、加粗、斜体、代码的标记，只留文字：和导入时从网页里取出的原文比。"""
+    return _MD_MARKS.sub("", _MD_LINK.sub(r"\1", text))
+
+
 def _units(text: str, pattern: re.Pattern) -> List[str]:
     units = [match.group(0) for match in pattern.finditer(text)]
     if len(units) > 1 and not units[-1].strip():
         trailing = units.pop()
         units[-1] += trailing
-    return units
+    # 切点落在链接、加粗等里面就不切：和后一句并起来
+    spans = [m.span() for m in _PROTECTED.finditer(text)]
+    if not spans:
+        return units
+    merged: List[str] = []
+    current, pos = "", 0
+    for unit in units:
+        current += unit
+        pos += len(unit)
+        if not any(start < pos < end for start, end in spans):
+            merged.append(current)
+            current = ""
+    if current:
+        merged.append(current)
+    return merged
 
 
 def split_like(zh: str, sources: Sequence[str]) -> Optional[List[str]]:
     """一段中文切成 len(sources) 份，对应导入时按句拆开的几段原文。只在句末切（句子不够才退到逗号）：
     中文句数和英文相同就按每段的句数切，否则按英文各段的长度比例找最近的句末。
-    含 Markdown、链接或换行，或切不出这么多份时返回 None，由调用方整段保留。"""
+    链接、加粗、斜体、行内代码不会被切开；含别的标记（HTML、实体、转义、裸链接）或换行，
+    或切不出这么多份时返回 None，由调用方整段保留。"""
     count = len(sources)
     if not count or not zh.strip():
         return None
     if count == 1:
         return [zh]
-    if _MARKDOWN.search(zh) or "\n" in zh or "\r" in zh:
+    if _MARKDOWN.search(_PROTECTED.sub("", zh)) or "\n" in zh or "\r" in zh:
         return None
     units = _units(zh, _ZH_SENTENCE)
     if len(units) < count:
@@ -297,7 +323,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
         is_split_paragraph = (
             en_blocks[block_index].kind in {"p", "quote"}
             and all(targets[m].kind in {"p", "blockquote", "quote"} for m in members)
-            and " ".join(" ".join(sources).split()) == " ".join(en_blocks[block_index].text.split())
+            and " ".join(plain_markdown(" ".join(sources)).split()) == " ".join(plain_markdown(en_blocks[block_index].text).split())
         )
         parts = split_like(lines[0], sources) if len(lines) == 1 and is_split_paragraph else None
         if len(lines) == len(members) and not _MARKDOWN.search(zh_text):
