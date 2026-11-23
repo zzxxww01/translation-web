@@ -34,6 +34,7 @@ import { AddAgentPopover, RetranslatePopover } from './TranslatePopovers';
 import { IconAction, PlainLine, VersionName } from './VersionHeader';
 import { AddVersionButton, VersionTabs } from './VersionTabs';
 import { WorkbenchTopBar } from './WorkbenchTopBar';
+import { loadWebModel } from '../lib/webModel';
 import { confirmAction } from '@/shared/ui/confirm';
 
 function useIsMobile(): boolean {
@@ -377,7 +378,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const continueTranslation = async (version: VersionView) => {
     try {
       if (version.source === 'web' && !rows.some(row => row.web)) {
-        await articlesApi.startWorkflow(project.id);
+        await articlesApi.startWorkflow(project.id, { model: loadWebModel() || undefined });
       } else {
         const sections = sectionsWithMissing(rows, version.text);
         if (!sections.length) return;

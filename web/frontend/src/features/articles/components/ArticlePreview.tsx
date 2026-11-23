@@ -3,11 +3,13 @@ import { ExternalLink, Loader2, Settings2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
+import { ModelSelector } from '@/components/ModelSelector';
 import { isCookieError, type SubstackArticle } from '@/features/substack/api';
 import { CookieForm } from '@/features/substack/components/CookieForm';
 import { harnessLabel } from '@/features/skills/harness';
 import { ARTICLE_HARNESSES, loadAgentChoice, saveAgentChoice, type AgentChoice } from '../lib/agentChoice';
 import { importAndTranslate } from '../lib/importFlow';
+import { loadWebModel, saveWebModel } from '../lib/webModel';
 import { AgentChoiceFields } from './AgentCards';
 
 const longDate = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -20,19 +22,21 @@ interface ArticlePreviewProps {
 export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
   const queryClient = useQueryClient();
   const [web, setWeb] = useState(true);
+  const [webModel, setWebModel] = useState(loadWebModel);
   const [useAgent, setUseAgent] = useState(true);
   const [choice, setChoice] = useState<AgentChoice>(() => loadAgentChoice());
   const [busy, setBusy] = useState(false);
   const [needCookie, setNeedCookie] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const agentName = `${harnessLabel(choice.harness)}${choice.model ? ` · ${choice.model}` : ''}`;
-  const plan = [web && '网页版', useAgent && `Agent（${agentName}）`].filter(Boolean).join(' + ') || '导入后自己决定怎么翻';
+  const plan = [web && (webModel ? `网页版（${webModel}）` : '网页版'), useAgent && `Agent（${agentName}）`].filter(Boolean).join(' + ') || '导入后自己决定怎么翻';
   const date = Date.parse(article.post_date);
 
   const start = async () => {
     setBusy(true);
     try {
-      const projectId = await importAndTranslate(article, { web, agent: useAgent ? choice : null });
+      const projectId = await importAndTranslate(article, { web, webModel, agent: useAgent ? choice : null });
+      if (web) saveWebModel(webModel);
       if (useAgent) saveAgentChoice(choice);
       await queryClient.invalidateQueries({ queryKey: ['articles'] });
       onImported(projectId);
@@ -80,7 +84,13 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
             </div>
             {showOptions && (
               <div className="mt-3 space-y-1 border-t border-border-subtle pt-3">
-                <Check checked={web} onChange={setWeb} label="网页版" note="网站自己的翻译流程" disabled={busy} />
+                <Check checked={web} onChange={setWeb} label="网页版" note="网站自己的翻译流程，用 API 模型" disabled={busy}>
+                  {web && (
+                    <div className="mt-2.5 max-w-xs">
+                      <ModelSelector value={webModel || undefined} onChange={setWebModel} className="h-8 text-xs" disabled={busy} />
+                    </div>
+                  )}
+                </Check>
                 <Check checked={useAgent} onChange={setUseAgent} label="Agent" note="在服务器上跑，关掉页面也不会停" disabled={busy}>
                   {useAgent && (
                     <div className="mt-2.5">

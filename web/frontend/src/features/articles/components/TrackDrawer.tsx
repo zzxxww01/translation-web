@@ -26,7 +26,7 @@ export function TrackDrawer({ state, mainId, onClose }: { state: DrawerState; ma
         <SheetHeader className="border-b border-border-subtle px-5 py-3 text-left">
           <SheetTitle className="text-base">{state?.kind === 'terms' ? '网页版：确认术语' : harnessLabel(state?.run.harness)}</SheetTitle>
           <SheetDescription className="text-xs">
-            {state?.kind === 'terms' ? '确认后网页版接着翻；不确认的话到时间会自动采用建议。' : '和 Agent 页里是同一个任务。'}
+            {state?.kind === 'terms' ? '网页版翻译停在这一步，等你定下这些词怎么译' : '和 Agent 页里是同一个任务。'}
           </SheetDescription>
         </SheetHeader>
         <div className="min-h-0 flex-1 overflow-auto">
@@ -67,9 +67,7 @@ function TermsPanel({ projectId, jobId, mainId, onDone }: { projectId: string; j
   };
 
   return (
-    <div className="p-4">
-      <TerminologyReviewPage key={review.artifact_id} review={review} autoContinueSeconds={remaining} onSubmit={submit} onCancel={onDone} />
-    </div>
+    <TerminologyReviewPage key={review.artifact_id} review={review} autoContinueSeconds={remaining} onSubmit={submit} onCancel={onDone} />
   );
 }
 
