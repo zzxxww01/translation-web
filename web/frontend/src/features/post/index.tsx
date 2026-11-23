@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { History } from 'lucide-react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { History, Send } from 'lucide-react';
+import { toast } from 'sonner';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { ModelSelector } from '@/components/ModelSelector';
 import { Button } from '@/components/ui/Button';
@@ -12,12 +14,13 @@ import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
 import { DraftHistory } from './components/DraftHistory';
 import { DiscardEditDialog, PendingChip } from './components/WorkspaceChrome';
-import { draftsApi, useDraftSync, type DraftSummary } from './drafts';
+import { draftsApi, useDraftSync, type DraftDoc, type DraftSummary } from './drafts';
 import { usePostWorkspace } from './usePostWorkspace';
 
 /**
  * 帖子翻译页（旧功能，以后逐步迁到 Slack 里）：布局和用法保持原样——粘贴原文 → 翻译 → 优化 → 标题。
  * 2026-11-22 只加了一样：右上角「历史记录」，点开才展开（Slack 里翻的和这里翻的都在）。
+ * 2026-11-23 右上角加「标记已发送」（存过的稿子才有），和 Slack 翻译模式共用同一个接口。
  * 这里出过译文的内容会自动存进历史记录。
  */
 export function PostFeature() {
@@ -27,6 +30,34 @@ export function PostFeature() {
   const [params, setParams] = useSearchParams();
   const [historyOpen, setHistoryOpen] = useState(false);
   const sync = useDraftSync(usePostStore);
+  const queryClient = useQueryClient();
+  const [sentBusy, setSentBusy] = useState(false);
+  // 「已发送」不在 store 里：换了稿子（打开历史、新建、刷新后恢复）就从后端读
+  const sentQuery = useQuery({
+    queryKey: ['post-drafts', 'doc', draftId],
+    queryFn: () => draftsApi.get(draftId!),
+    enabled: !!draftId,
+    select: doc => doc.sent_at ?? null,
+    staleTime: 30_000,
+  });
+  const sentAt = draftId ? sentQuery.data ?? null : null;
+
+  /** 和 Slack 翻译模式一样：发出去之后点；先把正在改的存好，后端记下的译文才是发出去的那版 */
+  const setSent = async (sent: boolean) => {
+    if (!draftId || sentBusy) return;
+    setSentBusy(true);
+    try {
+      if (sent) await sync.flush();
+      const result = await draftsApi.setSent(draftId, sent);
+      queryClient.setQueryData<DraftDoc>(['post-drafts', 'doc', draftId], doc => doc && { ...doc, sent_at: result.sent_at });
+      void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
+      toast.success(sent ? '已标记为已发送' : '已撤销「已发送」');
+    } catch (error) {
+      toast.error(`没保存上：${error instanceof Error ? error.message : '请重试'}`);
+    } finally {
+      setSentBusy(false);
+    }
+  };
 
   const openDraft = async (item: Pick<DraftSummary, 'id' | 'source' | 'slack'>) => {
     if (item.source === 'slack' && item.slack) {
@@ -72,6 +103,13 @@ export function PostFeature() {
               <div className="hidden w-48 sm:block lg:w-40 xl:w-48" title="翻译用的模型">
                 <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
               </div>
+              {draftId && (
+                <Button variant={sentAt ? 'secondary' : 'ghost'} size="sm" className="h-9" disabled={sentBusy}
+                  onClick={() => void setSent(!sentAt)} title={sentAt ? `发送于 ${new Date(sentAt * 1000).toLocaleString('zh-CN')}，点一下撤销` : '在 Slack 等地方发出去之后点一下'}>
+                  <Send className={sentAt ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
+                  <span className="hidden sm:inline">{sentAt ? '已发送' : '标记已发送'}</span>
+                </Button>
+              )}
               <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">
                 <History className="h-4 w-4" /> <span className="hidden sm:inline lg:hidden xl:inline">历史记录</span>
               </Button>
