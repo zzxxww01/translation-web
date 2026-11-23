@@ -113,7 +113,7 @@ it('the todo button shows the same count as my todos and goes back to them', asy
   const onShowTodos = vi.fn();
   await render({ onShowTodos });
   const button = host.querySelector<HTMLButtonElement>('[aria-label="我的待办"]')!;
-  expect(button.textContent?.trim()).toBe('1');
+  expect(button.textContent?.trim()).toBe('我的待办1');
   await act(async () => button.click());
   expect(onShowTodos).toHaveBeenCalled();
   expect(host.textContent).not.toContain('AI 速览');

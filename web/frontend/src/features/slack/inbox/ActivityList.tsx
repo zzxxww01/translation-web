@@ -121,9 +121,24 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
 
   return (
     <>
-      <div className="flex items-center gap-1 border-b border-border-subtle px-2 py-2">
+      {/* 我的待办单独一行放最上面：挤在筛选行右边时，筛选放不下要横向滚动，滚动条被它挡住（2026-11-23 用户反馈） */}
+      <button
+        type="button"
+        onClick={onShowTodos}
+        className={cn(
+          'flex items-center gap-2 border-b border-border-subtle px-4 py-2 text-left text-[13px] transition-colors',
+          todosActive ? 'bg-bg-tertiary font-medium text-text-primary' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
+        )}
+        title="还没读的 @我 和私信"
+        aria-label="我的待办"
+      >
+        <ClipboardList className="h-4 w-4 shrink-0" />
+        <span className="flex-1">我的待办</span>
+        {todoCount > 0 && <span className="rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">{todoCount}</span>}
+      </button>
+      <div className="border-b border-border-subtle px-2 py-2">
         {/* 分段选择：浅灰底，选中项白底 + 深色字；不用和顶部导航同一个梅红色，免得抢眼（2026-11-22 用户反馈） */}
-        <div className="flex min-w-0 flex-1 items-center gap-px overflow-x-auto rounded-lg bg-bg-tertiary p-0.5" role="tablist" aria-label="筛选">
+        <div className="flex items-center gap-px overflow-x-auto rounded-lg bg-bg-tertiary p-0.5" role="tablist" aria-label="筛选">
           {FILTERS.map(f => {
             const n = f.id === 'all' ? 0 : unreadIn(f);
             const on = filter === f.id;
@@ -136,7 +151,7 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
                 title={f.hint}
                 onClick={() => setFilter(f.id)}
                 className={cn(
-                  'flex shrink-0 items-baseline gap-1 whitespace-nowrap rounded-md px-1.5 py-[3px] text-[12.5px] leading-5 transition-all',
+                  'flex flex-auto shrink-0 items-baseline justify-center gap-1 whitespace-nowrap rounded-md px-1 py-[3px] text-[12.5px] leading-5 transition-all',
                   on ? 'bg-white font-medium text-text-primary shadow-sm' : 'text-text-secondary hover:text-text-primary'
                 )}
               >
@@ -146,18 +161,6 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
             );
           })}
         </div>
-        <button
-          type="button"
-          onClick={onShowTodos}
-          className={cn(
-            'inline-flex h-8 shrink-0 items-center gap-1 rounded-lg px-2 transition-colors',
-            todosActive ? 'bg-bg-tertiary text-text-primary' : 'text-text-muted hover:bg-bg-hover hover:text-text-primary'
-          )}
-          title="我的待办：还没读的 @我 和私信"
-          aria-label="我的待办"
-        >
-          <ClipboardList className="h-4 w-4" />{todoCount > 0 && <span className="rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">{todoCount}</span>}
-        </button>
       </div>
 
       <div className="min-h-0 flex-1 overflow-auto" aria-label="Slack 动态">
