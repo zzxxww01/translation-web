@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FileText, Hash, Loader2, Plus, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useDraftList, type DraftSummary } from '../drafts';
+import { useDraftList, type DraftSummary, type SentFilter } from '../drafts';
 
 function when(ts: number): string {
   const d = new Date(ts * 1000);
@@ -12,11 +12,20 @@ function when(ts: number): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen' | 'sent_at' | 'sent_changed'>): string {
-  if (item.sent_at) return item.sent_changed ? '已发送 · 发送后有改动' : '已发送';
-  if (item.status === 'done') return '已完成';
-  return item.auto && !item.seen ? '自动翻好' : '草稿';
+function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen' | 'sent' | 'sent_at' | 'sent_auto' | 'sent_changed'>): string {
+  if (item.sent ?? item.sent_at) {
+    if (item.sent_auto) return '已发送（超过两周）';
+    return item.sent_changed ? '已发送 · 发送后有改动' : '已发送';
+  }
+  if (item.status === 'done') return '未发送 · 已完成';
+  return item.auto && !item.seen ? '未发送 · 自动翻好' : '未发送 · 草稿';
 }
+
+const SENT_FILTERS: { id: SentFilter; label: string; hint: string }[] = [
+  { id: '', label: '全部', hint: '全部翻译记录' },
+  { id: 'no', label: '未发送', hint: '两周内还没标已发送的；超过两周的默认已发送' },
+  { id: 'yes', label: '已发送', hint: '标了已发送的，加上超过两周的' },
+];
 
 /**
  * 翻译记录：帖子翻译页手动翻的和 Slack 里翻的合在一起，按最近修改排。点一条打开（Slack 的跳到 Slack 翻译模式）。
@@ -29,7 +38,8 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
   onNew?: () => void;
 }) {
   const [q, setQ] = useState('');
-  const list = useDraftList(q.trim());
+  const [sent, setSent] = useState<SentFilter>('');
+  const list = useDraftList(q.trim(), sent);
 
   return (
     <div className="flex h-full flex-col">
@@ -51,12 +61,29 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
             className="min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none placeholder:text-text-muted"
           />
         </label>
+        <div className="flex gap-1" role="group" aria-label="按发送状态筛选">
+          {SENT_FILTERS.map(f => (
+            <button
+              key={f.id || 'all'}
+              type="button"
+              onClick={() => setSent(f.id)}
+              title={f.hint}
+              aria-pressed={sent === f.id}
+              className={cn(
+                'rounded-full px-2.5 py-0.5 text-xs transition-colors',
+                sent === f.id ? 'bg-primary-500 text-white' : 'text-text-secondary hover:bg-bg-hover'
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="min-h-0 flex-1 overflow-auto">
         {list.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
         {list.data && list.data.length === 0 && (
           <div className="px-4 py-10 text-center text-sm text-text-muted">
-            {q ? '没有找到' : '还没有翻译记录。翻出第一版译文后会自动存进来。'}
+            {q ? '没有找到' : sent === 'no' ? '两周内的都标了已发送' : sent === 'yes' ? '还没有已发送的' : '还没有翻译记录。翻出第一版译文后会自动存进来。'}
           </div>
         )}
         {list.data?.map(item => (

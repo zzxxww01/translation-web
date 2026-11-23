@@ -85,6 +85,36 @@ def test_sent_is_separate_from_done_and_survives_saves_and_reruns(tmp_path):
     assert exc.value.code == "DRAFT_NOT_FOUND"
 
 
+def test_drafts_older_than_two_weeks_count_as_sent_unless_unmarked(tmp_path, monkeypatch):
+    import src.services.post_drafts as drafts_mod
+
+    store = PostDraftStore(tmp_path)
+    now = drafts_mod._now()
+    monkeypatch.setattr(drafts_mod, "_now", lambda: now - 15 * 86400)
+    store.save("m_00000000000a", {"state": state("Old post")}, rev=None)
+    monkeypatch.setattr(drafts_mod, "_now", lambda: now)
+    store.save("m_00000000000b", {"state": state("New post")}, rev=None)
+    store.save("m_00000000000c", {"state": state("New and sent")}, rev=None)
+    store.set_sent("m_00000000000c", True)
+
+    items = {i["id"]: i for i in store.list()}
+    assert items["m_00000000000a"]["sent"] and items["m_00000000000a"]["sent_auto"]
+    assert items["m_00000000000a"]["sent_at"] is None
+    assert not items["m_00000000000b"]["sent"] and not items["m_00000000000b"]["sent_auto"]
+    assert items["m_00000000000c"]["sent"] and not items["m_00000000000c"]["sent_auto"]
+    assert [i["id"] for i in store.list(sent="no")] == ["m_00000000000b"]
+    assert {i["id"] for i in store.list(sent="yes")} == {"m_00000000000a", "m_00000000000c"}
+
+    # 超两周的手动撤销后按未发送算，存稿也不丢这个标记；再标一次就回到已发送
+    store.set_sent("m_00000000000a", False)
+    doc = store.get("m_00000000000a")
+    store.save("m_00000000000a", {"state": state("Old post edited")}, rev=doc["rev"])
+    assert {i["id"] for i in store.list(sent="no")} == {"m_00000000000a", "m_00000000000b"}
+    store.set_sent("m_00000000000a", True)
+    assert "sent_cleared" not in store.get("m_00000000000a")
+    assert [i["id"] for i in store.list(sent="no")] == ["m_00000000000b"]
+
+
 class FakeInbox:
     def __init__(self):
         self.store = SimpleNamespace(load=lambda: {"token": "x"})

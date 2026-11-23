@@ -9,7 +9,7 @@ import { copyToClipboard } from '@/shared/utils';
 import { createPostStore, type PostStoreHook } from '@/shared/stores/postStore';
 import { WorkColumn } from '@/features/post';
 import { DiscardEditDialog, PendingChip, SaveState } from '@/features/post/components/WorkspaceChrome';
-import { draftKeys, draftsApi, useDraftSync, type DraftDoc, type DraftImage } from '@/features/post/drafts';
+import { draftKeys, draftsApi, sentTitle, useDraftSync, type DraftDoc, type DraftImage } from '@/features/post/drafts';
 import { usePostWorkspace } from '@/features/post/usePostWorkspace';
 import { MessageItem } from '../inbox/MessageItem';
 import { useSlackReplies } from '../inbox/hooks';
@@ -50,6 +50,9 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const [images, setImages] = useState<DraftImage[]>([]);
   const [status, setStatus] = useState<'draft' | 'done'>('draft');
   const [sentAt, setSentAt] = useState<number | null>(null);
+  /** 没标过但建了超过两周：默认已发送 */
+  const [sentAuto, setSentAuto] = useState(false);
+  const isSent = !!sentAt || sentAuto;
   const [sentBusy, setSentBusy] = useState(false);
   const [running, setRunning] = useState(false);
   const [instruction, setInstruction] = useState('');
@@ -62,6 +65,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
     setImages(next.images);
     setStatus(next.status);
     setSentAt(next.sent_at ?? null);
+    setSentAuto(!!next.sent_auto);
     store.getState().loadSnapshot(next.state, next.id, next.rev);
     sync.markLoaded();
     queryClient.setQueryData(draftKeys.slack(channelId, threadTs), { draft: next });
@@ -102,6 +106,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
         setImages(existing.images);
         setStatus(existing.status);
         setSentAt(existing.sent_at ?? null);
+        setSentAuto(!!existing.sent_auto);
       } else {
         load(existing);
       }
@@ -141,6 +146,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
       if (sent) await sync.flush();
       const result = await draftsApi.setSent(draftId, sent);
       setSentAt(result.sent_at);
+      setSentAuto(result.sent_auto);
       void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
       void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'activity'] });
       toast.success(sent ? '已标记为已发送' : '已撤销「已发送」');
@@ -161,7 +167,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
     const text = title ? `${title}\n\n${ws.currentContent}` : ws.currentContent;
     if (await copyToClipboard(text)) {
       // 复制了不等于发了，不自动标；顺手给个按钮
-      toast.success(title ? '标题和译文已复制' : '译文已复制', sentAt || !draftId ? undefined : {
+      toast.success(title ? '标题和译文已复制' : '译文已复制', isSent || !draftId ? undefined : {
         action: { label: '标记已发送', onClick: () => void setSent(true) }, duration: 8000,
       });
     }
@@ -340,10 +346,10 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
           </Button>
         )}
         {draftId && (
-          <Button variant={sentAt ? 'secondary' : 'ghost'} size="sm" className="h-7 shrink-0" disabled={sentBusy}
-            onClick={() => void setSent(!sentAt)} title={sentAt ? `发送于 ${new Date(sentAt * 1000).toLocaleString('zh-CN')}，点一下撤销` : '在 Slack 等地方发出去之后点一下'}>
-            <Send className={sentAt ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
-            {sentAt ? '已发送' : '标记已发送'}
+          <Button variant={isSent ? 'secondary' : 'ghost'} size="sm" className="h-7 shrink-0" disabled={sentBusy}
+            onClick={() => void setSent(!isSent)} title={sentTitle(isSent, sentAt)}>
+            <Send className={isSent ? 'h-4 w-4 text-primary-600' : 'h-4 w-4'} />
+            {isSent ? '已发送' : '标记已发送'}
           </Button>
         )}
         <div className="w-40 shrink-0" title="翻译和优化用的模型">

@@ -88,7 +88,7 @@ it('one row of filters with unread counts, remembered; unread view has mark-all'
   );
   await render();
   expect(Array.from(host.querySelectorAll('[role="tab"]')).map(t => t.textContent))
-    .toEqual(['全部', '未读2', '@我1', '私信', '新帖1', '我参与的', '我翻译的1']);
+    .toEqual(['全部', '未读2', '@我1', '私信', '新帖1', '我参与的', '我翻译的1', '未发送1']);
   await act(async () => tab(/^未读/).click());
   expect(rows().map(r => r.textContent?.includes('Elon') || r.textContent?.includes('Fresh'))).toEqual([true, true]);
   const markButton = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('全部标为已读'))!;
@@ -104,6 +104,10 @@ it('one row of filters with unread counts, remembered; unread view has mark-all'
   const postRows = rows().filter(r => !r.textContent?.includes('全部翻译记录'));
   expect(postRows.map(r => r.textContent?.includes('Elon'))).toEqual([true]);
   expect(host.textContent).toContain('全部翻译记录 ›');
+  expect(postRows[0].textContent).toContain('未发送');
+  // 未发送：翻过但没标已发送的
+  await act(async () => tab(/^未发送/).click());
+  expect(rows().filter(r => !r.textContent?.includes('全部翻译记录')).map(r => r.textContent?.includes('Elon'))).toEqual([true]);
 });
 
 it('the todo button shows the same count as my todos and goes back to them', async () => {
