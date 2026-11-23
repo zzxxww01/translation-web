@@ -601,6 +601,27 @@ describe('Workbench', () => {
     expect(unsavedEdits.any()).toBe(false);
   });
 
+  it('warns when an edit drops a link that was in the paragraph', async () => {
+    vi.mocked(toast.warning).mockReset();
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], source: 'See the report.', web: '见[报道](https://a.com)。' },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="主译本正文"]')!;
+    await act(async () => { (article.querySelector('[aria-label="编辑：主译本：See the report."]') as HTMLElement).click(); });
+    const textarea = host.querySelector('textarea')!;
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, '见相关报道。');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await act(async () => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 's', ctrlKey: true })); });
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 180)); });
+    expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: 'p000', text: '见相关报道。' });
+    expect(toast.warning).toHaveBeenCalledWith('这段比原来少了 1 个链接。不是有意删的话，按 Ctrl+Z 撤销');
+  });
+
   it('persists a reading mark, restores it on reload, jumps to it and clears it', async () => {
     let mark: { key: string; at: string } | null = null;
     api.workbench.mockImplementation(async () => ({ ...DATA, reading_mark: mark }));

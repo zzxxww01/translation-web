@@ -285,3 +285,19 @@ def test_gap_is_not_filled_when_counts_differ():
                Target("o", "s", "Omega paragraph about HBM.")]
     result = align_claude_translation(en, zh, project)
     assert "x" not in result.texts and result.stats["gap_filled"] == 0
+
+
+def test_numbered_paragraph_keeps_its_number_when_project_stores_it_as_text():
+    en = ("1. Models fail to realize that chip measurements are confounded.\n"
+          "2. Models realize the issues with the chip assay.\n\n"
+          "- A bullet item about wafers\n")
+    zh = "1. 模型没有意识到芯片测量受到干扰。\n2. 模型意识到芯片检测有问题。\n\n- 关于晶圆的列表项\n"
+    project = [
+        Target("a", "s", "1. Models fail to realize that chip measurements are confounded."),
+        Target("b", "s", "2. Models realize the issues with the chip assay."),
+        Target("c", "s", "A bullet item about wafers", "li"),
+    ]
+    result = align_claude_translation(en, zh, project)
+    assert result.texts["a"] == "1. 模型没有意识到芯片测量受到干扰。"
+    assert result.texts["b"] == "2. 模型意识到芯片检测有问题。"
+    assert result.texts["c"] == "关于晶圆的列表项"

@@ -16,6 +16,7 @@ import { AlignmentTooLow, importClaudeTrack, startClaudeTrack } from '../lib/cla
 import { flushEdits, unsavedEdits } from '../lib/edits';
 import { copyForWechat, copyFullText, printAsPdf, sendToWechatEditor } from '../lib/exporting';
 import { editHistory, undoShortcut } from '../lib/history';
+import { linkCount } from '../lib/inline';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
 import { articleImages, COVER_KEY } from '../lib/images';
@@ -220,6 +221,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
   const save = useCallback(async (target: string, row: WorkbenchRow, text: string) => {
     await articlesApi.saveText(project.id, { target, section_id: row.section_id, paragraph_id: row.paragraph_id, text });
+    // 修改记录里有 9 段是改写时把 [文字](链接) 一起删了，用户自己没发觉
+    const lost = linkCount(target === project.id ? row.web : row.alt[target]) - linkCount(text);
+    if (lost > 0) toast.warning(`这段比原来少了 ${lost} 个链接。不是有意删的话，按 Ctrl+Z 撤销`);
     queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && {
       ...current,
       rows: current.rows.map(item => item.key !== row.key ? item : target === project.id

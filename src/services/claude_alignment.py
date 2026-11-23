@@ -28,6 +28,7 @@ PRECISION_WEIGHT = 0.01
 
 _HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
 _LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.*)$")
+_NUMBERED = re.compile(r"^\s*(\d+[.)])\s")
 _IMAGE_ONLY = re.compile(r"^!\[[^\]]*\]\([^)]*\)\s*$")
 _TOKEN = re.compile(r"[a-z0-9]+")
 _NUMBER = re.compile(r"\d+")
@@ -392,7 +393,14 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
             texts.setdefault(host, []).insert(0, "\n".join(zh_list))
 
     for target_index, parts in texts.items():
-        alignment.texts[targets[target_index].key] = "\n\n".join(parts)
+        target = targets[target_index]
+        text = "\n\n".join(parts)
+        # 网页把「1. Models fail…」存成普通段落、编号留在原文里；parse_blocks 把中文的
+        # 编号当列表标记剥掉了，这里补回（GDPx 篇 5 段靠人工补）
+        number = _NUMBERED.match(target.source or "")
+        if number and target.kind != "li" and not _NUMBERED.match(text):
+            text = f"{number.group(1)} {text}"
+        alignment.texts[target.key] = text
     alignment.stats = {
         "targets": len(targets),
         "aligned": sum(1 for target in targets if target.key in alignment.texts),
