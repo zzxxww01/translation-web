@@ -149,7 +149,7 @@ def test_gemini_output_limit_reaches_sdk_and_usage_preserves_thinking(monkeypatc
     from src.llm import gemini as gm
     provider = gm.GeminiProvider.__new__(gm.GeminiProvider)
     provider.model_name, provider.backup_model, provider.api_keys = 'model', None, ['fake']
-    provider.max_attempts, provider.request_timeout, provider.retry_delay = 1, 2, .5
+    provider.max_attempts, provider.request_timeout, provider.retry_delay = 1, 30, .5
     provider.network_policy = NS()
     provider.model_type = 'pro'
     provider._use_rest_transport = lambda: False

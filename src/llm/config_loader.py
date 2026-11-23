@@ -180,7 +180,8 @@ class ConfigLoader:
                 return ""
             value = value.strip()
             if not value:
-                logger.warning(f"环境变量 {var_name} 为空")
+                # 留空的备用 key 是常态，每次加载都 warning 只会刷屏
+                logger.debug(f"环境变量 {var_name} 为空")
             return value
         return data
 

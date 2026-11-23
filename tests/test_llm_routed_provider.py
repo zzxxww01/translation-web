@@ -162,7 +162,7 @@ def test_sdk_retries_are_disabled():
     obj._temporary_proxy_env = nullcontext
     obj._generate_with_timeout_fn = lambda fn, timeout: fn()
     obj._generate_once(prompt='prompt', attempt=NS(api_key='fake', model_name='model'),
-                       timeout=5, temperature=.3, response_mime_type=None)
+                       timeout=30, temperature=.3, response_mime_type=None)
     options = client.models.generate_content.call_args.kwargs['config']['http_options']
     assert options['retry_options']['attempts'] == 1
     assert options['timeout'] > 0
