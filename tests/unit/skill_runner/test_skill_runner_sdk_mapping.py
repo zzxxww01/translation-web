@@ -275,3 +275,37 @@ async def test_queued_turn_that_really_starts_keeps_session_busy():
     [event async for event in session.events()]
     now[0] = STALE_AFTER_RESULT_S * 10
     assert session.busy  # 第二轮已经开始出内容，结果没出来之前一直算忙
+
+
+async def test_background_subagents_keep_session_busy_after_result():
+    # 分块翻译：主代理派出后台子代理就结束了这一轮，子代理还在跑；这时关进程会把它们一起杀掉
+    from claude_agent_sdk import TaskNotificationMessage, TaskStartedMessage, TaskUpdatedMessage
+
+    from skill_runner.sdk_session import STALE_TASK_S
+
+    def started(task_id):
+        return TaskStartedMessage(subtype="task_started", data={}, task_id=task_id, description="翻第 9 节",
+                                  uuid="u", session_id="s")
+
+    now = [0.0]
+    session = SdkSession(_ScriptedClient([
+        started("a"), started("b"), _sdk_result(),
+        TaskNotificationMessage(subtype="task_notification", data={}, task_id="a", status="completed",
+                                output_file="", summary="", uuid="u", session_id="s"),
+    ]), clock=lambda: now[0])
+    await session.send("开始")
+    [event async for event in session.events()]
+    now[0] = STALE_AFTER_RESULT_S * 2
+    assert session.busy  # b 还没结束
+
+    session._client.messages = [TaskUpdatedMessage(subtype="task_updated", data={}, task_id="b",
+                                                   patch={"status": "killed"})]
+    [event async for event in session.events()]
+    assert not session.busy
+
+    # 一直没动静的任务（CLI 没报结束）过了期限就不再拦着关进程
+    session._client.messages = [started("c")]
+    [event async for event in session.events()]
+    assert session.busy
+    now[0] += STALE_TASK_S + 1
+    assert not session.busy
