@@ -34,6 +34,12 @@ SKILL = "four-step-translate"
 MESSAGE = "精翻附件里的这篇文章。输出目录放在当前目录下的 output/ 里（不用 SKILL.md 配置里的 output_root）。"
 AUTO_REPLY_MINUTES = 10
 WORKING = {"running", "waiting", "queued"}
+# 一轮结束了却还没有 zh.md（停在半路，比如子代理被打断）：先等这么久，可能有人在 Claude 页发「继续」
+STALL_GRACE_S = 20 * 60
+# 停在半路判了失败的，这么久之内还接着看：后来有人把它翻完了，照样导回来
+STALLED_RECHECK_S = 3 * 24 * 3600
+# 2026-11-23 之前停在半路的记录没有 stalled_at，只有这句报错
+_LEGACY_STALL_ERROR = "Agent 这一轮结束了，但没找到 zh.md 和 en.md"
 
 _direct = build_opener(ProxyHandler({}))  # 本机直连，不走 .env 里给外网用的代理
 
@@ -136,7 +142,7 @@ def find_outputs(files: List[Dict[str, Any]]) -> Optional[Dict[str, str]]:
 
 
 class AgentRunStore:
-    """{project_id: {agent: {run_id, status: running|done|failed, started_at, error, variant_id, model}}}"""
+    """{project_id: {agent: {run_id, status: running|done|failed, started_at, error, variant_id, model, stalled_at}}}"""
 
     def __init__(self, path: Path):
         self.path = path
@@ -161,6 +167,14 @@ class AgentRunStore:
             write_json_atomic(self.path, data)
             return record
 
-    def running(self) -> List[tuple]:
-        return [(pid, agent, rec) for pid, agents in self.all().items()
-                for agent, rec in agents.items() if rec.get("status") == "running"]
+    def to_poll(self) -> List[tuple]:
+        """在跑的，加上停在半路判了失败、还在回看期内的（stalled_at）。"""
+        cutoff = time.time() - STALLED_RECHECK_S
+
+        def stalled_at(rec: Dict[str, Any]) -> float:
+            if rec.get("status") != "failed":
+                return 0
+            return rec.get("stalled_at") or (rec.get("updated_at") or 0 if rec.get("error") == _LEGACY_STALL_ERROR else 0)
+
+        return [(pid, agent, rec) for pid, agents in self.all().items() for agent, rec in agents.items()
+                if rec.get("status") == "running" or stalled_at(rec) > cutoff]

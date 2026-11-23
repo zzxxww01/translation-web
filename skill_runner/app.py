@@ -272,7 +272,8 @@ def create_app(
 
     @api.get("/runs/{run_id}")
     async def get_run(run_id: str):
-        return runner.meta(run_id).to_dict()
+        # busy：status 是 idle 但后台子代理还在跑，翻译服务据此不把它当成翻完了
+        return {**runner.meta(run_id).to_dict(), "busy": runner.busy(run_id)}
 
     @api.post("/runs/{run_id}/messages")
     async def post_message(

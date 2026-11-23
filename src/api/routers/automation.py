@@ -41,7 +41,8 @@ from pydantic import BaseModel, Field
 from src.api.utils.concurrency import run_blocking
 from src.core.file_utils import read_json, write_json_atomic
 from src.services import article_primary, article_variants
-from src.services.agent_translate import AGENTS, WORKING, AgentRunError, AgentRunStore, SkillRunnerClient, find_outputs
+from src.services.agent_translate import AGENTS, STALL_GRACE_S, WORKING, AgentRunError, AgentRunStore, SkillRunnerClient, \
+    find_outputs
 from src.services.post_drafts import DraftError, current_translation
 from src.services.slack_inbox import SlackInboxError
 from src.services.substack_service import SubstackError, article_key
@@ -291,7 +292,7 @@ async def _start_agent(pm, project_id: str, title: str, agent: str) -> Dict[str,
     except AgentRunError as error:
         return {"status": "failed", "error": error.message}
     await asyncio.to_thread(store.update, project_id, agent, run_id=run["id"], status="running",
-                            started_at=time.time(), error=None, variant_id=None)
+                            started_at=time.time(), error=None, variant_id=None, stalled_at=None)
     # 网页文章工作台也显示这个任务的进度（和网页点「交给 Agent」一样）
     await run_blocking(lambda: pm.merge_meta_fields(project_id, fields={"claude_run_id": run["id"]}))
     return {"status": "started", "run_id": run["id"]}
@@ -301,27 +302,33 @@ async def poll_agent_runs() -> int:
     """看一遍在跑的 Agent 任务：一轮结束、不在等确认就取回 zh.md / en.md 导成译本。返回这次导入了几篇。"""
     store, client, pm = get_agent_store(), get_skill_runner(), get_project_manager()
     imported = 0
-    for project_id, agent, record in await asyncio.to_thread(store.running):
+    for project_id, agent, record in await asyncio.to_thread(store.to_poll):
         run_id = record.get("run_id") or ""
+        stalled = record.get("status") == "failed"  # 停在半路判过失败的：只看后来有没有人把它翻完
 
-        def fail(message: str) -> None:
-            store.update(project_id, agent, status="failed", error=message)
+        def fail(message: str, stalled_at: Optional[float] = None) -> None:
+            store.update(project_id, agent, status="failed", error=message, stalled_at=stalled_at)
 
         try:
             run = await run_blocking(client.run, run_id)
             if run.get("status") == "error":
                 await asyncio.to_thread(fail, run.get("error") or "Agent 出错停下了")
                 continue
-            if run.get("status") in WORKING or run.get("awaiting_reply"):
-                continue  # 在跑 / 等术语确认（10 分钟没人回会自动继续）
+            if run.get("status") in WORKING or run.get("awaiting_reply") or run.get("busy"):
+                if stalled:  # 有人在 Claude 页让它接着翻了
+                    await asyncio.to_thread(store.update, project_id, agent, status="running", error=None,
+                                            stalled_at=None)
+                continue  # 在跑 / 等术语确认（10 分钟没人回会自动继续）/ 这一轮结束了但后台子代理还在跑
             existing = await asyncio.to_thread(_agent_variant, pm, project_id, agent)
             if existing and existing.get("run_id") == run_id:  # 网页那边已经导过了
                 await asyncio.to_thread(store.update, project_id, agent, status="done",
-                                        variant_id=existing["variant_id"], error=None)
+                                        variant_id=existing["variant_id"], error=None, stalled_at=None)
                 continue
             outputs = find_outputs(await run_blocking(client.files, run_id))
             if not outputs:
-                await asyncio.to_thread(fail, "Agent 这一轮结束了，但没找到 zh.md 和 en.md")
+                if not stalled and time.time() - (run.get("updated_at") or 0) > STALL_GRACE_S:
+                    await asyncio.to_thread(fail, "Agent 停在半路，没产出 zh.md 和 en.md（在 Claude 页发「继续」"
+                                                  "接着翻完会自动导回）", time.time())
                 continue
             zh = await run_blocking(client.read, run_id, outputs["zh"])
             en = await run_blocking(client.read, run_id, outputs["en"])
@@ -341,7 +348,7 @@ async def poll_agent_runs() -> int:
             await asyncio.to_thread(fail, f"导入失败：{error}")
             continue
         await asyncio.to_thread(store.update, project_id, agent, status="done", variant_id=result["variant_id"],
-                                model=run.get("actual_model") or run.get("model"), error=None)
+                                model=run.get("actual_model") or run.get("model"), error=None, stalled_at=None)
         imported += 1
     return imported
 
