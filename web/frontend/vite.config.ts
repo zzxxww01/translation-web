@@ -46,6 +46,10 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
+        // 2026-11-24：关掉 sourcemap 后 JS 末尾少了 sourceMappingURL 注释，但文件名哈希不变，
+        // Cloudflare 按 immutable 缓存着同名旧文件，verify_release 比对不上。换一次哈希字符集，
+        // 让所有资源文件名都变掉。以后改构建配置导致「同名不同内容」时也可以这样处理。
+        hashCharacters: 'base36',
         manualChunks(id) {
           if (!id.includes('node_modules')) {
             return;
