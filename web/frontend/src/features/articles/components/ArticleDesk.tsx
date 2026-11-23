@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import type { SubstackArticle } from '@/features/substack/api';
 import { useLibrary } from '../hooks';
-import { articleStatus, sentLabel, TONE } from '../lib/tracks';
+import { articleStatus, TONE } from '../lib/tracks';
 import { StatusTag } from './StatusTag';
 
 const today = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' });
@@ -85,7 +85,7 @@ export function ArticleDesk({ onSelectArticle, onSelectProject }: ArticleDeskPro
               <li key={article.url}>
                 <button type="button" onClick={() => open(article)} className="flex w-full items-baseline gap-4 px-5 py-3 text-left transition-colors hover:bg-bg-hover">
                   <span className="min-w-0 flex-1 truncate font-[family-name:var(--font-display)] text-[15px] font-semibold text-text-primary">{article.zh_title || article.title}</span>
-                  {article.status === 'sent' && <StatusTag status={{ text: sentLabel(article.sent_at), tone: 'sent' }} className="ml-0 shrink-0 text-xs" />}
+                  {article.status === 'sent' && <StatusTag status={{ text: '已发送', tone: 'sent' }} className="ml-0 shrink-0 text-xs" />}
                   <span className="shrink-0 text-xs tabular-nums text-text-muted">{formatDate(article.post_date)}</span>
                 </button>
               </li>

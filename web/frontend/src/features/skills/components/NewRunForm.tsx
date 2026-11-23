@@ -115,8 +115,8 @@ export function NewRunForm({ catalog, maxUploadMb, initialAgent = '', onStarted,
         }}
       >
         <div className="flex items-center gap-2 px-3 pt-3 text-xs text-text-muted">
-          <span className="pl-1">交给 </span>
-          <div ref={pickerRef} className="relative">
+          <span className="shrink-0 whitespace-nowrap pl-1">交给 </span>
+          <div ref={pickerRef} className="relative shrink-0">
             <button
               type="button"
               aria-label="选 Agent"
@@ -126,7 +126,7 @@ export function NewRunForm({ catalog, maxUploadMb, initialAgent = '', onStarted,
               className="inline-flex items-center gap-1.5 rounded-md border border-border-subtle bg-bg-secondary px-2 py-1 text-text-secondary transition-colors hover:border-primary-200 hover:text-text-primary"
             >
               <AgentAvatar icon={agent.icon} size="sm" className="h-5 w-5 rounded" />
-              <span className="font-medium">{agent.title}</span>
+              <span className="whitespace-nowrap font-medium">{agent.title}</span>
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
             {/* 列表一直在 DOM 里，收起时隐藏：键盘和读屏都能找到 */}

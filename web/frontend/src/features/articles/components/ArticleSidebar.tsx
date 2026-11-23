@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { substackApi, type ArticleFilter, type SubstackArticle } from '@/features/substack/api';
 import { NewProjectModal } from '@/features/document/components/NewProjectModal';
 import { useLibrary, useProjects } from '../hooks';
-import { articleStatus, sentLabel, TONE } from '../lib/tracks';
+import { articleStatus, TONE } from '../lib/tracks';
 import { StatusTag } from './StatusTag';
 
 const FILTERS: { id: ArticleFilter; label: string }[] = [
@@ -134,7 +134,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
         )}
         {articles.map(article => {
           const selected = article.project_id ? article.project_id === selectedProjectId : article.slug === selectedSlug;
-          const status = articleStatus(article.status, article.progress, article.sent_at);
+          const status = articleStatus(article.status, article.progress);
           return (
             <li key={article.url}>
               <button
@@ -177,7 +177,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                 >
                   <span className="line-clamp-2 font-[family-name:var(--font-display)] text-[15px] font-semibold leading-snug text-text-primary">{project.title}</span>
                   <span className="mt-0.5 block text-[11px] text-text-muted">
-                    {project.sent_at ? sentLabel(project.sent_at) : `已译 ${Math.round(project.progress?.percent ?? 0)}%`}
+                    {project.sent_at ? '已发送' : `已译 ${Math.round(project.progress?.percent ?? 0)}%`}
                   </span>
                 </button>
               </li>
