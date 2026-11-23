@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { copyToClipboard } from '@/shared/utils';
 import { TranslationVersionType } from '@/shared/constants';
 import type { TranslationVersion } from '@/shared/types';
-import { POST_CONTENT_MAX_LENGTH } from '../types';
+import { POST_CONTENT_MAX_LENGTH, POST_TARGET_LENGTH } from '../types';
 import { PANE, PANE_FOOTER, PANE_HEADER, PANE_TEXTAREA } from '@/shared/ui/pane';
 
 interface TranslationOutputProps {
@@ -104,8 +104,11 @@ export function TranslationOutput({
     <div className="flex shrink-0 items-center gap-2">
       {isEdited && <Badge variant="warning">已编辑</Badge>}
       {isBasedOnOlderSource && <Badge variant="outline">原文已更新</Badge>}
-      <span className="text-xs tabular-nums text-text-muted">
-        {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()}
+      <span
+        className={charCount > POST_TARGET_LENGTH ? 'text-xs font-medium tabular-nums text-warning' : 'text-xs tabular-nums text-text-muted'}
+        title={charCount > POST_TARGET_LENGTH ? `超过建议的 ${POST_TARGET_LENGTH.toLocaleString()} 字` : undefined}
+      >
+        {charCount.toLocaleString()}/{POST_TARGET_LENGTH.toLocaleString()}
       </span>
     </div>
   );
