@@ -34,7 +34,8 @@ function shortTime(seconds?: number) {
 
 /**
  * Chatbot 页：普通的 AI 对话，可以联网搜索。会话存在服务器上（左边是会话列表，手机上收在顶栏「对话」里）；
- * 模型、联网开关和「新对话」在全站顶栏右侧。回复按 Markdown 显示，联网时下面列出引用的网页。
+ * 模型在全站顶栏右侧；「新对话」在会话列表最上面，联网开关在输入框里（2026-11-23 用户要求）。
+ * 回复按 Markdown 显示，联网时下面列出引用的网页。
  */
 export function ChatFeature() {
   const { currentId, model, webSearch, draft, messages: legacy, setCurrentId, setModel, setWebSearch, setDraft, clearLegacy } = useChatStore();
@@ -202,7 +203,13 @@ export function ChatFeature() {
   };
 
   const list = (
-    <SessionList sessions={sessions} currentId={currentId} busyId={pendingFor} onOpen={open} onRename={rename} onPin={pin} onRemove={remove} />
+    <>
+      <button type="button" onClick={startNew} disabled={!currentId && !draft}
+        className="mb-1 flex w-full items-center gap-2 rounded-md px-2.5 py-2 text-sm text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary disabled:pointer-events-none disabled:opacity-50">
+        <MessageSquarePlus className="h-4 w-4" />新对话
+      </button>
+      <SessionList sessions={sessions} currentId={currentId} busyId={pendingFor} onOpen={open} onRename={rename} onPin={pin} onRemove={remove} />
+    </>
   );
   const shown: ChatMessage[] = pendingQuestion && pending
     ? [...messages, { id: 'pending', role: 'user', content: pendingQuestion }]
@@ -225,14 +232,6 @@ export function ChatFeature() {
         <div className="w-36 sm:w-48 lg:w-40 xl:w-48" title="对话用的模型">
           <ModelSelector value={model} onChange={value => setModel(value)} className="h-9 text-sm" disabled={pending} />
         </div>
-        <Button variant={webSearch ? 'secondary' : 'ghost'} size="sm" className="h-9" aria-pressed={webSearch}
-          onClick={() => setWebSearch(!webSearch)}
-          title={webSearch ? '联网搜索已开：需要最新信息时模型会自己去搜' : '联网搜索已关：只用模型自己知道的'}>
-          <Globe /><span className="hidden sm:inline lg:hidden xl:inline">联网</span>
-        </Button>
-        <Button variant="ghost" size="sm" className="h-9" onClick={startNew} disabled={!currentId && !draft}>
-          <MessageSquarePlus /><span className="hidden sm:inline lg:hidden xl:inline">新对话</span>
-        </Button>
       </PageActions>
 
       <aside className="hidden w-60 shrink-0 flex-col border-r border-border-subtle md:flex" aria-label="对话列表">
@@ -298,6 +297,12 @@ export function ChatFeature() {
               aria-label="输入消息"
               className="max-h-48 min-h-9 flex-1 resize-none bg-transparent px-2 py-1.5 text-sm leading-6 text-text-primary outline-none [field-sizing:content] placeholder:text-text-disabled"
             />
+            <button type="button" aria-pressed={webSearch} onClick={() => setWebSearch(!webSearch)}
+              title={webSearch ? '联网搜索已开：需要最新信息时模型会自己去搜' : '联网搜索已关：只用模型自己知道的'}
+              className={cn('inline-flex h-9 shrink-0 items-center gap-1 rounded-lg px-2.5 text-xs transition-colors',
+                webSearch ? 'bg-primary-50 text-primary-700 hover:bg-primary-100' : 'text-text-muted hover:bg-bg-hover hover:text-text-primary')}>
+              <Globe className="h-4 w-4" />联网
+            </button>
             <Button size="icon" className="h-9 w-9 shrink-0 rounded-lg" onClick={() => void send()} disabled={!draft.trim() || busy} aria-label="发送">
               {busy ? <Loader2 className="animate-spin" /> : <ArrowUp />}
             </Button>
