@@ -3,7 +3,8 @@
 用户在工作台点「设为主译本」时存进主项目 meta 的 primary_target；没选过（或指向的版本已经没了）时按默认规则：
 网页版有译文或正在翻 → 网页版；否则最近导入的 Agent 版；都没有 → 网页版。
 有了第一版 Agent 译文后就把当时显示的那一版写进 meta（导入时；旧数据在打开工作台时），
-之后再加 Agent 版、在网页版里写字都不会让主译本自己换。设计见
+之后再加 Agent 版、在网页版里写字都不会让主译本自己换；例外是主译本是自动翻译停在半路的（没翻完、没在翻、没人手写过），且不是用户亲手点「设为主译本」选的，
+这时导入新的 Agent 版就换成新的。设计见
 docs/superpowers/specs/2026-10-28-workbench-agent-model-design.md 4.2。
 """
 
@@ -58,12 +59,34 @@ def pin_existing_default(pm: ProjectManager, main_id: str) -> None:
             pm.merge_meta_fields(main_id, fields={"primary_target": shown})
 
 
+def _stalled(pm: ProjectManager, project_id: str) -> bool:
+    """这一版是自动翻译停在半路的：没翻完、没在翻，也没有人手写过一段（手写的是人在慢慢翻，不算）。"""
+    try:
+        summary = pm.get_translation_summary(project_id)
+        sections = pm.get_sections(project_id)
+    except FileNotFoundError:
+        return True  # 指向的版本已经没了
+    if summary.translated_paragraphs >= summary.total_paragraphs:
+        return False
+    if translation_run_registry.get_active_run(project_id) is not None:
+        return False
+    return not any("manual" in paragraph.translations for section in sections for paragraph in section.paragraphs)
+
+
 def import_agent_version(pm: ProjectManager, main_id: str, **kwargs) -> Dict:
-    """导入 Agent 译文；还没存过主译本时顺手记下：网页版没开始又没有别的 Agent 版 → 就是这一版，否则是导入前显示的那一版。"""
+    """导入 Agent 译文；还没存过主译本时顺手记下：网页版没开始又没有别的 Agent 版 → 就是这一版，否则是导入前显示的那一版。
+    导入前显示的那一版是自动翻译停在半路的（没翻完、没在翻、没人手写过），而且不是用户亲手选的主译本时，换成这一版：
+    不能让一版翻完的译文一直挂在一版半截的后面
+    （2026-11-23：网页版早停在 9%，claude 版翻完了，文章和 Muse 的 status 还一直显示失败）。"""
     with article_variants.variant_lock(main_id):
+        meta = pm.get(main_id)
         shown = _shown_default(pm, main_id)
         fresh = shown == main_id and not main_started(pm, main_id)
+        current = shown or meta.primary_target
+        stalled = not meta.primary_chosen and bool(current) and _stalled(pm, current)
         result = article_variants.import_claude_translation(pm, main_id, **kwargs)
-        if shown is not None:
-            pm.merge_meta_fields(main_id, fields={"primary_target": result["variant_id"] if fresh else shown})
+        if fresh or stalled:
+            pm.merge_meta_fields(main_id, fields={"primary_target": result["variant_id"]})
+        elif shown is not None:
+            pm.merge_meta_fields(main_id, fields={"primary_target": shown})
         return result

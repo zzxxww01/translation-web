@@ -22,6 +22,9 @@ COMMON_TOKEN_RATIO = 0.3
 # （"DeepSeek Open Source" 与「…DeepSeek's open source week…」），只看词会和标题块打平，
 # 结果正文进了标题行、标题被并到上一段末尾、这一段空着（2026-10-29 华为与 DeepSeek 一文 3 处）。
 KIND_MISMATCH = 0.8
+# 覆盖率打平时看块里有多少是这段的词：短段（"Source: Meta"）对短块，不去抢下一段长正文
+# （"Meta" 两边都有；抢了之后长段名下挂三段、拼不回原文、拆不开，后两段空着，2026-11-23 TPU 一文）。权重小到只用来破平局
+PRECISION_WEIGHT = 0.01
 
 _HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
 _LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.*)$")
@@ -177,9 +180,10 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
         for token in tokens:
             doc_freq[token] = doc_freq.get(token, 0) + 1
     limit = max(2, int(n * COMMON_TOKEN_RATIO))
-    target_words = []
+    target_words, target_sets = [], []
     for target in targets:
         words = set(_tokens(target))
+        target_sets.append(words)
         target_words.append([t for t in words if doc_freq.get(t, 0) <= limit] or list(words))
 
     kinds_known = block_kinds is not None and target_kinds is not None
@@ -191,7 +195,10 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
         covered = sum(1 for t in words if t in block_sets[i]) / len(words)
         if kinds_known and _is_heading(target_kinds[j]) != _is_heading(block_kinds[i]):
             covered *= KIND_MISMATCH
-        return covered
+        if covered < MIN_SCORE:
+            return covered
+        precision = len(target_sets[j] & block_sets[i]) / (len(block_sets[i]) or 1)
+        return covered + PRECISION_WEIGHT * precision
 
     neg = float("-inf")
     # best[j][i]：前 j 个目标、所用块都 ≤ i 时的最高分；choice 记回溯
@@ -216,6 +223,33 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str],
                 result[j - 1] = i
             j -= 1
     return result
+
+
+def fill_gaps(mapping: List[Optional[int]], block_kinds: Sequence[str], target_kinds: Sequence[str]) -> int:
+    """两个已对上的段落之间，没对上的段落和没用上的块一样多、标题正文也一一相符时，按顺序配上（原地改 mapping）。
+    词对不上但位置确定的段：比如网页把署名折叠成「A, B, C, and 4 others」，en.md 照抄，原文却是完整名单。返回配上了几段。"""
+    used = {b for b in mapping if b is not None}
+    filled = 0
+    j = 0
+    while j < len(mapping):
+        if mapping[j] is not None or target_kinds[j] == "image":
+            j += 1
+            continue
+        start = j
+        while j < len(mapping) and mapping[j] is None:
+            j += 1
+        before = next((mapping[k] for k in range(start - 1, -1, -1) if mapping[k] is not None), -1)
+        after = mapping[j] if j < len(mapping) else len(block_kinds)
+        gap_targets = [k for k in range(start, j) if target_kinds[k] != "image"]
+        gap_blocks = [b for b in range(before + 1, after) if b not in used and block_kinds[b] != "image"]
+        if (gap_targets and len(gap_targets) == len(gap_blocks)
+                and all(_is_heading(target_kinds[t]) == _is_heading(block_kinds[b])
+                        for t, b in zip(gap_targets, gap_blocks))):
+            for t, b in zip(gap_targets, gap_blocks):
+                mapping[t] = b
+                used.add(b)
+            filled += len(gap_targets)
+    return filled
 
 
 def _pieces(pattern: re.Pattern, text: str) -> List[str]:
@@ -302,6 +336,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
 
     mapping = align_targets([b.text for b in en_blocks], [t.source for t in targets],
                             [b.kind for b in en_blocks], [t.kind for t in targets])
+    gap_filled = fill_gaps(mapping, [b.kind for b in en_blocks], [t.kind for t in targets])
     groups: Dict[int, List[int]] = {}
     for target_index, block_index in enumerate(mapping):
         if block_index is not None:
@@ -367,5 +402,6 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
         "merged_blocks": orphan_blocks,
         "split_by_sentence": split_by_sentence,
         "split_failures": split_failures,
+        "gap_filled": gap_filled,
     }
     return alignment
