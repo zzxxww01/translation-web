@@ -255,10 +255,11 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
 }
 
 /**
- * 段落上边缘的小工具条按钮：悬停或聚焦这一段时才出现。没出现时也点不到——
+ * 段落上边缘的小工具条按钮：鼠标在这一段停一会儿（或聚焦）才出现，移开立即消失。没出现时也点不到——
  * 以前透明的「采用整段」就压在两段之间，点空白处会把整段换掉。
+ * 不能用的按钮只把字变灰，不用 disabled:opacity：那条会盖过隐藏，每段都露出一个淡淡的「采用整段」（2026-11-23 用户反馈）。
  */
-const TOOL = `rounded-md border border-border-subtle bg-bg-secondary px-2 py-0.5 shadow-thumb transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:opacity-40 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100 ${FOCUS_RING}`;
+const TOOL = `rounded-md border border-border-subtle bg-bg-secondary px-2 py-0.5 shadow-thumb transition-opacity hover:border-primary-200 hover:text-primary-700 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-hover/reading:delay-300 group-focus-within/reading:opacity-100 ${FOCUS_RING}`;
 
 const markClock = new Intl.DateTimeFormat('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
 
