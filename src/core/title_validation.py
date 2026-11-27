@@ -20,6 +20,8 @@ _NAMES = {
     "agility robotics", "verne robotics", "sunday robotics", "weave robotics",
 }
 _IDENTIFIER = re.compile(r"[A-Za-z][A-Za-z0-9._+-]*")
+_MODEL_FAMILY = r"(?:DeepSeek|Qwen|Kimi|MiniMax|GLM|GPT|Claude|Gemini|Gemma|Fable|Opus|Sonnet|Haiku|Grok|Llama)"
+_MODEL_SUFFIXES = r"(?: (?:[VMK]?\d[\d.Xx-]*[BT]?|Pro|Flash|Preview|Turbo|FP\d+))*"
 
 
 def is_protected_name(text: str) -> bool:
@@ -28,7 +30,11 @@ def is_protected_name(text: str) -> bool:
         return True
     # Model-only labels may include spaces and versions, but not prose such as
     # "Trillion Parameters" or "is catching up".
-    if re.fullmatch(r"(?:DeepSeek|Qwen|Kimi|MiniMax|GLM|GPT|Claude|Gemini)(?:[ -]?[VMK]?\d[\d.Xx-]*)?(?: (?:[VMK]?\d[\d.Xx-]*[BT]?|Pro|Flash|Preview|Turbo|FP\d+))*", text):
+    if re.fullmatch(_MODEL_FAMILY + r"(?:[ -]?[VMK]?\d[\d.Xx-]*)?" + _MODEL_SUFFIXES, text):
+        return True
+    # A versioned model may end with one codename word ("Gemini 4 Neon",
+    # "GPT-6.2 Astra"); the version is required so "Claude Is" stays prose.
+    if re.fullmatch(_MODEL_FAMILY + r"[ -]?[VMK]?\d[\d.Xx-]*" + _MODEL_SUFFIXES + r"(?: [A-Z][a-z]+)?", text):
         return True
     if not _IDENTIFIER.fullmatch(text):
         return False

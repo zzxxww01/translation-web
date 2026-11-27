@@ -385,7 +385,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         await articlesApi.startWorkflow(project.id, { model: loadWebModel() || undefined });
       } else {
         const sections = sectionsWithMissing(rows, version.text);
-        if (!sections.length) return;
+        if (!sections.length) {
+          // 正文都齐、只缺章节标题：按断点续跑，后台只补标题，不动已有译文
+          await articlesApi.startWorkflow(version.id, { model: version.fillModel, autoAcceptTerms: true });
+          toast.info('正文已齐，后台正在补缺的章节标题');
+          await refresh();
+          return;
+        }
         const names = sections.map(section => `「${section.title}」`).join('、');
         if (!await confirmAction({
           title: `重译缺译段落所在的 ${sections.length} 章？`,
