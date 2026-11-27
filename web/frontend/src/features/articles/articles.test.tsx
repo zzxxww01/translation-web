@@ -1033,6 +1033,21 @@ describe('Workbench', () => {
     expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: undefined, autoAcceptTerms: true, sectionIds: ['s1'] });
   });
 
+  it('resumes without retranslating chapters when only a section title is missing', async () => {
+    const partial = { ...DATA, rows: DATA.rows.map(row => row.key === 'section:s1' ? { ...row, web: null } : row) };
+    api.workbench.mockResolvedValue(partial);
+    api.startWorkflow.mockResolvedValue({ run_id: 'r' });
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+    confirm.mockClear();
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.textContent).toContain('缺 1 段');
+    await act(async () => { buttonIn(host, '继续翻译').click(); });
+    await flush();
+    expect(confirm).not.toHaveBeenCalled();
+    expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: undefined, autoAcceptTerms: true });
+  });
+
   it('does not import a draft that does not match the download until asked to', async () => {
     api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-3' } });
     agentRun.current = { ...runningAgent, id: 'run-3', status: 'idle' };

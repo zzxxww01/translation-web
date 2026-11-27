@@ -170,6 +170,7 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
     "Google Cloud", "Hugging Face", "Azure", "Intel", "google cloud",
     "Microsoft Azure", "Amazon Web Services", "Semi Analysis", "Tokenomics",
     "GLM 5.3", "MiniMax M3", "DeepSeek V4 Pro 0813", "Qwen3.5 397B", "Kimi K2.X",
+    "Gemini 4 Neon", "Fable 5.2", "GPT-6.2 Astra",
 ])
 @pytest.mark.parametrize("mode", ["existing", "batch", "fallback"])
 async def test_protected_names_agree_across_generation_resume_and_export(name, mode):
@@ -203,6 +204,7 @@ async def test_protected_names_agree_across_generation_resume_and_export(name, m
     "Google Cloud is catching up", "Hugging Face launches a model",
     "Azure powers the next generation", "Intel is growing",
     "Introduction", "Trillion Parameters", "DeepSeek V4 Pro is catching up",
+    "Gemini 4 Neon Review", "Fable Is Overrated",
 ])
 def test_protected_name_does_not_exempt_english_prose_across_layers(source):
     service, project, _, progress = make_service(source=source, existing=source)
