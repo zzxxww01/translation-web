@@ -32,10 +32,11 @@ import { SaveStatus } from './SaveStatus';
 import { StatusLine } from './StatusLine';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
 import { AddAgentPopover, RetranslatePopover } from './TranslatePopovers';
+import { ModelSelector } from '@/components/ModelSelector';
 import { IconAction, PlainLine, VersionName } from './VersionHeader';
 import { AddVersionButton, VersionTabs } from './VersionTabs';
 import { WorkbenchTopBar } from './WorkbenchTopBar';
-import { loadWebModel } from '../lib/webModel';
+import { loadWebModel, saveWebModel } from '../lib/webModel';
 import { confirmAction } from '@/shared/ui/confirm';
 
 function useIsMobile(): boolean {
@@ -379,32 +380,45 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  /** 网页版下拉框默认的模型：这篇上次用的（后端记的），没记过就用浏览器里上次选的；空串 = 后台默认 */
+  const [webPick, setWebPick] = useState<string | null>(null);
+  const webModel = webPick ?? (project.web_model || loadWebModel());
+
+  /** 继续翻译：网页版用状态行下拉框里选的模型，模型版固定用它自己的模型 */
   const continueTranslation = async (version: VersionView) => {
+    const model = version.source === 'web' ? webModel || undefined : version.fillModel;
     try {
       if (version.source === 'web' && !rows.some(row => row.web)) {
-        await articlesApi.startWorkflow(project.id, { model: loadWebModel() || undefined });
+        await articlesApi.startWorkflow(project.id, { model });
       } else {
         const sections = sectionsWithMissing(rows, version.text);
         if (!sections.length) {
           // 正文都齐、只缺章节标题：按断点续跑，后台只补标题，不动已有译文
-          await articlesApi.startWorkflow(version.id, { model: version.fillModel, autoAcceptTerms: true });
+          await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true });
           toast.info('正文已齐，后台正在补缺的章节标题');
-          await refresh();
-          return;
+        } else {
+          const names = sections.map(section => `「${section.title}」`).join('、');
+          if (!await confirmAction({
+            title: `重译缺译段落所在的 ${sections.length} 章？`,
+            description: `${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。`,
+            confirmLabel: '重译这几章',
+          })) return;
+          await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true, sectionIds: sections.map(section => section.id) });
         }
-        const names = sections.map(section => `「${section.title}」`).join('、');
-        if (!await confirmAction({
-          title: `重译缺译段落所在的 ${sections.length} 章？`,
-          description: `${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。`,
-          confirmLabel: '重译这几章',
-        })) return;
-        await articlesApi.startWorkflow(version.id, { model: version.fillModel, autoAcceptTerms: true, sectionIds: sections.map(section => section.id) });
       }
+      if (version.source === 'web') saveWebModel(webModel);
       await refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : '没能开始');
     }
   };
+
+  /** 网页版「继续翻译 / 开始翻译」前面放模型下拉框 */
+  const actionExtra = (version: VersionView) => (action: VersionAction) =>
+    action.kind === 'continue' && version.source === 'web' ? (
+      <ModelSelector value={webModel || undefined} onChange={setWebPick} disabled={busy}
+        className="h-6 w-auto max-w-[12rem] gap-1 px-2 text-[12px]" />
+    ) : null;
 
   /** 交给 Agent：有旧任务先停干净再开新的。成功返回 true（弹框据此关掉）。 */
   const startAgent = async (choice: AgentChoice): Promise<boolean> => {
@@ -536,7 +550,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       tone: primary.tone,
       readOnly: primary.readOnly,
       header: { primary: true, eyebrow: '主译本', title: <VersionName>{primary.name}</VersionName>,
-        line: <StatusLine version={primary} onAction={action => onAction(primary, action)} />,
+        line: <StatusLine version={primary} onAction={action => onAction(primary, action)} actionExtra={actionExtra(primary)} />,
         actions: <>{retranslate(primary)}<ColumnMenu label="主译本的更多操作" items={menuFor(primary)} /></> },
       text: primary.text,
       save: (row, text) => save(primary.id, row, text),
@@ -558,7 +572,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
               <AddVersionButton />
             </AddAgentPopover>
           ) : null} />,
-        line: <StatusLine version={compare} onAction={action => onAction(compare, action)} />,
+        line: <StatusLine version={compare} onAction={action => onAction(compare, action)} actionExtra={actionExtra(compare)} />,
         actions: <>
           {retranslate(compare)}
           {!compare.pending && (

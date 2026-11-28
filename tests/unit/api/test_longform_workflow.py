@@ -418,3 +418,54 @@ async def test_explicit_cancellation_stops_workflow_before_translation(tmp_path)
     assert service.translated == 0
     assert store.get("demo", job["job_id"])["confirmation_status"] == "cancelled"
     assert service.released == [("demo", {"lease_id": "lease-1"})]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("requested,remembered,expected,stored", [
+    (None, "gpt-6.2-sol", "gpt-6.2-sol", None),        # 续翻没指定：沿用这篇上次的模型
+    ("gemini-flash", "gpt-6.2-sol", "gemini-flash", "gemini-flash"),  # 指定了别的：用它并记下
+    ("gpt-6.2-sol", None, "gpt-6.2-sol", "gpt-6.2-sol"),  # 第一次开始：记下
+    (None, None, None, None),                           # 都没有：后端默认，什么也不记
+])
+async def test_workflow_reuses_and_remembers_the_articles_model(monkeypatch, requested, remembered, expected, stored):
+    built, merged = [], []
+
+    class WorkflowService:
+        project_manager = SimpleNamespace(get=lambda _project_id: object(), glossary_manager=object())
+        llm = object()
+
+        async def claim_translation_slot(self, project_id):
+            return {"status": "acquired", "project_id": project_id, "run_id": None, "lease_id": "lease-m"}
+
+        def _set_active_run(self, *_args, **_kwargs):
+            pass
+
+        def _release_active_run(self, *_args, **_kwargs):
+            pass
+
+    async def fake_resume_workflow(**_kwargs):
+        pass
+
+    def build(_base, body):
+        built.append(body.model)
+        return WorkflowService()
+
+    checkpoint = SimpleNamespace(resumable=True, translated_paragraphs=1, total_paragraphs=2, to_dict=lambda: {})
+    monkeypatch.setattr(confirmation_translation.limiter, "enabled", False)  # 参数化连跑 4 次会撞每分钟限流
+    monkeypatch.setattr(confirmation_translation, "_build_longform_service", build)
+    monkeypatch.setattr(confirmation_translation, "inspect_translation_resume", lambda *_args: checkpoint)
+    monkeypatch.setattr(confirmation_translation, "_run_longform_resume_workflow", fake_resume_workflow)
+    base_service = SimpleNamespace(project_manager=SimpleNamespace(
+        get=lambda _project_id: SimpleNamespace(web_model=remembered),
+        merge_meta_fields=lambda project_id, *, fields: merged.append((project_id, fields)),
+    ))
+
+    await confirmation_translation.start_longform_workflow(
+        _request(), "demo", base_service, LongformWorkflowStartRequest(method="four-step", model=requested))
+
+    assert built == [expected]
+    assert merged == ([("demo", {"web_model": stored})] if stored else [])
+    for _ in range(100):
+        if not confirmation_translation._longform_workflow_tasks:
+            break
+        await asyncio.sleep(0.01)

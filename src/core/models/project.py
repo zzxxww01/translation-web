@@ -69,6 +69,8 @@ class ProjectMeta(BaseModel):
     primary_target: Optional[str] = None
     # 主译本是用户在工作台亲手点「设为主译本」选的（不是导入时自动记下的）：之后导入什么都不替他换
     primary_chosen: bool = False
+    # 网页版（后台四步法）上次用的模型别名：「继续翻译」没指定模型时沿用它，不悄悄换回默认模型
+    web_model: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     status: ProjectStatus = ProjectStatus.CREATED

@@ -652,9 +652,13 @@ async def start_longform_workflow(
 ):
     """Start a server-owned terminology-review and translation workflow."""
     try:
-        await asyncio.to_thread(service.project_manager.get, project_id)
+        project_meta = await asyncio.to_thread(service.project_manager.get, project_id)
     except FileNotFoundError as exc_:
         raise NotFoundException(detail="Project not found") from exc_
+    # 没指定模型（续翻、Muse CLI）：沿用这篇上次用的模型，而不是悄悄换成默认模型
+    remembered_model = getattr(project_meta, "web_model", None)
+    if not body.model and remembered_model:
+        body = body.model_copy(update={"model": remembered_model})
 
     try:
         translation_service = await asyncio.to_thread(_build_longform_service, service, body)
@@ -669,6 +673,12 @@ async def start_longform_workflow(
             )
         )
     lease_id = str(slot_claim["lease_id"])
+    if body.model and body.model != remembered_model:
+        try:
+            await asyncio.to_thread(service.project_manager.merge_meta_fields, project_id,
+                                    fields={"web_model": body.model})
+        except Exception as exc:  # 记不下来只影响下次续翻的默认模型，不拦这次翻译
+            logger.warning("[%s] Failed to remember web model %s: %s", project_id, body.model, exc)
 
     try:
         checkpoint = await asyncio.to_thread(

@@ -24,6 +24,8 @@ export interface WorkbenchProject {
   primary_target?: string | null;
   /** 实际的主译本：选过的那个，或后端按默认规则算出的（services/article_primary.py） */
   primary?: string;
+  /** 网页版这篇上次用的模型别名（后端记的）；继续翻译时默认用它 */
+  web_model?: string | null;
   progress: { total: number; approved: number };
   status: TrackStatus;
 }
