@@ -145,7 +145,9 @@ class FakeAI:
             return {"has_post": False, "source_text": "", "note": "纯讨论", "message_ids": [], "image_ids": [], "candidates": []}
         return {"has_post": True, "source_text": "AI racks are heavy", "note": "用的是重发版",
                 "message_ids": [3], "image_ids": ["F0000002"],
-                "candidates": [{"label": "第一版", "source_text": "old", "message_ids": [2], "image_ids": []}]}
+                "candidates": [{"label": "第一版", "source_text": "old", "message_ids": [2], "image_ids": []}],
+                "send_time": None if instruction else
+                {"text": "post tmw 9am", "message_id": 3, "date": "2026-11-29", "time": "09:00", "tz": None}}
 
 
 @pytest.fixture
@@ -183,10 +185,14 @@ def test_pipeline_extracts_translates_titles_and_appends_on_rerun(env):
     assert doc["images"] == [{"id": "F0000002", "name": "new.png"}]
     assert doc["extraction"]["message_ts"] == ["3.3"] and doc["extraction"]["candidates"][0]["message_ts"] == ["2.2"]
     assert doc["slack"]["title"] == "AI Racks Are Heavy" and not doc["auto"] and doc["seen"]
+    # 建议发送时间：没写时区按美中，换成上海时间；列表行也带上
+    assert doc["send_time"]["shanghai_label"] == "11月29日 周日 23:00" and doc["send_time"]["message_ts"] == "3.3"
+    assert env.store.slack_index()[f"{CID}:{TS}"]["send_time"]["shanghai"] == "2026-11-29T23:00:00+08:00"
     again = run(drafts_router.run_slack_pipeline(CID, TS, instruction="用第一版"))
     assert env.ai.calls == [None, "用第一版"]
     assert [x["versionNumber"] for x in again["state"]["versions"]] == [1, 2]  # 旧版本保留
     assert again["state"]["versions"][1]["instruction"] == "用第一版" and again["rev"] == 4
+    assert again["send_time"] is None  # 重新挑时没说时间：不留旧的
 
 
 def test_pipeline_without_post_saves_note_only(env):
@@ -222,7 +228,7 @@ def test_draft_routes_round_trip(env):
         assert saved["rev"] == 2
         stale = client.put(f"/api/post-drafts/{created['id']}", json={"state": state("Old"), "rev": 1})
         assert stale.status_code == 409
-        assert client.get(f"/api/post-drafts/slack/{CID}/{TS}").json() == {"draft": None}
+        assert client.get(f"/api/post-drafts/slack/{CID}/{TS}").json() == {"draft": None, "running": False}
         ran = client.post(f"/api/post-drafts/slack/{CID}/{TS}/run", json={}).json()
         assert ran["id"] == slack_draft_id(CID, TS)
         assert client.get(f"/api/post-drafts/slack/{CID}/{TS}").json()["draft"]["rev"] == ran["rev"]
@@ -287,3 +293,31 @@ def test_settings_round_trip(monkeypatch, tmp_path):
         client.put("/api/slack-inbox/conversations/D0A7WQCA8NP/reply-state", json={"state": {"groups": [1]}})
         assert client.get("/api/slack-inbox/conversations/D0A7WQCA8NP/reply-state").json() == {"state": {"groups": [1]}}
         assert client.get("/api/slack-inbox/conversations/../reply-state").status_code in (400, 404)
+
+
+@pytest.mark.asyncio
+async def test_slack_run_is_idempotent_while_in_flight(monkeypatch):
+    """连点「重新挑」、切走再回来再点：同一个 thread 同样的要求只跑一次，大家拿同一个结果；跑的时候 GET 报 running。"""
+    calls = []
+    release = asyncio.Event()
+
+    async def pipeline(channel_id, thread_ts, *, instruction=None, auto=False):
+        calls.append((channel_id, thread_ts, instruction, auto))
+        await release.wait()
+        return {"id": "doc", "instruction": instruction}
+
+    monkeypatch.setattr(drafts_router, "run_slack_pipeline", pipeline)
+    first = asyncio.ensure_future(drafts_router.run_slack_once(CID, TS))
+    second = asyncio.ensure_future(drafts_router.run_slack_once(CID, TS, instruction="  "))
+    other = asyncio.ensure_future(drafts_router.run_slack_once(CID, TS, instruction="用第一版"))
+    await asyncio.sleep(0)
+    assert drafts_router.slack_run_in_progress(CID, TS)
+    assert not drafts_router.slack_run_in_progress(CID, "1.2")
+    release.set()
+    assert await first == await second == {"id": "doc", "instruction": None}
+    assert (await other)["instruction"] == "用第一版"
+    assert calls == [(CID, TS, None, False), (CID, TS, "用第一版", False)]
+    assert not drafts_router.slack_run_in_progress(CID, TS)
+    # 跑完了再点：重新跑
+    await drafts_router.run_slack_once(CID, TS)
+    assert len(calls) == 3

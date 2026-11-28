@@ -1,3 +1,4 @@
+import type { SendTime } from '@/features/post/drafts';
 export type ConversationKind = 'channel' | 'private' | 'im' | 'mpim';
 
 export interface SlackStatus {
@@ -159,6 +160,8 @@ export interface SlackDraftBadge {
   sent?: boolean;
   sent_at?: number | null;
   sent_auto?: boolean;
+  /** 建议发送时间（上海时间）；没提到时没有 */
+  send_time?: SendTime | null;
 }
 
 /** 我的待办里的一件事 */

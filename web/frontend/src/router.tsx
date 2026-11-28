@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider, useParams } from 'react-router-dom';
+import { useToolsStore } from './shared/stores/toolsStore';
 import { AppLayout } from './components/layout/AppLayout';
 import { AuthGate } from './components/layout/AuthGate';
 import { NotFoundPage, RouteErrorPage } from './components/layout/NotFoundPage';
@@ -22,9 +23,6 @@ const SlackFeature = lazy(() =>
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
 );
-const ChatFeature = lazy(() =>
-  import('./features/chat/index.tsx').then(module => ({ default: module.ChatFeature }))
-);
 const SkillsFeature = lazy(() =>
   import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
 );
@@ -40,6 +38,11 @@ const QualityReportPage = lazy(() =>
     default: module.QualityReportPage,
   }))
 );
+
+function ChatRedirect() {
+  useToolsStore.getState().setCurrentTool('chat');
+  return <Navigate to="/tools" replace />;
+}
 
 function RouteFallback() {
   return (
@@ -152,12 +155,9 @@ const router = createBrowserRouter([
             ),
           },
           {
+            // 2026-11-28 Chatbot 收进工具箱（第二个工具）；旧链接 /chat 跳过去
             path: 'chat',
-            element: (
-              <LazyPage>
-                <ChatFeature />
-              </LazyPage>
-            ),
+            element: <ChatRedirect />,
           },
           {
             path: 'skills',

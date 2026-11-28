@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-export type CurrentTool = 'translator' | 'email' | 'timezone';
+export type CurrentTool = 'translator' | 'email' | 'timezone' | 'chat';
 
-const TOOLS: CurrentTool[] = ['timezone', 'translator', 'email'];
+const TOOLS: CurrentTool[] = ['timezone', 'chat', 'translator', 'email'];
 
 /**
  * 工具箱状态：只记住上次打开的是哪个工具。

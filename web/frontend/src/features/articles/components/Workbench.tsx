@@ -384,34 +384,58 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [webPick, setWebPick] = useState<string | null>(null);
   const webModel = webPick ?? (project.web_model || loadWebModel());
 
+  /** 正在发「继续翻译」请求的那一版：按钮先收起、状态行写「正在开始」，防止连点重复发请求 */
+  const [starting, setStarting] = useState<string | null>(null);
+  const startingRef = useRef(false);
+
   /** 继续翻译：网页版用状态行下拉框里选的模型，模型版固定用它自己的模型 */
   const continueTranslation = async (version: VersionView) => {
+    if (startingRef.current) return;
+    startingRef.current = true;
     const model = version.source === 'web' ? webModel || undefined : version.fillModel;
     try {
-      if (version.source === 'web' && !rows.some(row => row.web)) {
-        await articlesApi.startWorkflow(project.id, { model });
-      } else {
+      let sectionIds: string[] | undefined;
+      if (!(version.source === 'web' && !rows.some(row => row.web))) {
         const sections = sectionsWithMissing(rows, version.text);
-        if (!sections.length) {
-          // 正文都齐、只缺章节标题：按断点续跑，后台只补标题，不动已有译文
-          await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true });
-          toast.info('正文已齐，后台正在补缺的章节标题');
-        } else {
+        if (sections.length) {
           const names = sections.map(section => `「${section.title}」`).join('、');
           if (!await confirmAction({
             title: `重译缺译段落所在的 ${sections.length} 章？`,
             description: `${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。`,
             confirmLabel: '重译这几章',
           })) return;
-          await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true, sectionIds: sections.map(section => section.id) });
+          sectionIds = sections.map(section => section.id);
         }
+      }
+      setStarting(version.id);
+      if (version.source === 'web' && !rows.some(row => row.web)) {
+        await articlesApi.startWorkflow(project.id, { model });
+      } else if (!sectionIds) {
+        // 正文都齐、只缺章节标题：按断点续跑，后台只补标题，不动已有译文
+        await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true });
+        toast.info('正文已齐，后台正在补缺的章节标题');
+      } else {
+        await articlesApi.startWorkflow(version.id, { model, autoAcceptTerms: true, sectionIds });
       }
       if (version.source === 'web') saveWebModel(webModel);
       await refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : '没能开始');
+      // 已经在翻（别的页面点过、或上一次请求其实成功了）：不算错，刷新出进度
+      if (error instanceof ApiErrorWrapper && error.status === 409) {
+        toast.info('这一版已经在翻了');
+        await refresh();
+      } else {
+        toast.error(error instanceof Error ? error.message : '没能开始');
+      }
+    } finally {
+      startingRef.current = false;
+      setStarting(null);
     }
   };
+
+  /** 状态行：刚点了继续翻译、后台还没报上来进度时，先写「正在开始」，行动收起来 */
+  const withStarting = (version: VersionView): VersionView => starting === version.id
+    ? { ...version, tone: 'busy', line: ['正在开始…'], actions: [] } : version;
 
   /** 网页版「继续翻译 / 开始翻译」前面放模型下拉框 */
   const actionExtra = (version: VersionView) => (action: VersionAction) =>
@@ -550,7 +574,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       tone: primary.tone,
       readOnly: primary.readOnly,
       header: { primary: true, eyebrow: '主译本', title: <VersionName>{primary.name}</VersionName>,
-        line: <StatusLine version={primary} onAction={action => onAction(primary, action)} actionExtra={actionExtra(primary)} />,
+        line: <StatusLine version={withStarting(primary)} onAction={action => onAction(primary, action)} actionExtra={actionExtra(primary)} />,
         actions: <>{retranslate(primary)}<ColumnMenu label="主译本的更多操作" items={menuFor(primary)} /></> },
       text: primary.text,
       save: (row, text) => save(primary.id, row, text),
@@ -572,7 +596,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
               <AddVersionButton />
             </AddAgentPopover>
           ) : null} />,
-        line: <StatusLine version={compare} onAction={action => onAction(compare, action)} actionExtra={actionExtra(compare)} />,
+        line: <StatusLine version={withStarting(compare)} onAction={action => onAction(compare, action)} actionExtra={actionExtra(compare)} />,
         actions: <>
           {retranslate(compare)}
           {!compare.pending && (

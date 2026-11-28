@@ -282,5 +282,13 @@ class PostDraftStore:
                     "seen": bool(doc.get("seen", True)),
                     "versions": len(state.get("versions") or []),
                     "no_post": bool((doc.get("extraction") or {}).get("has_post") is False),
+                    # 列表行显示「建议 11/29 23:00 发」
+                    "send_time": _send_time_badge(doc.get("send_time")),
                 }
         return out
+
+
+def _send_time_badge(send_time: Any) -> Optional[Dict[str, Any]]:
+    if not isinstance(send_time, dict):
+        return None
+    return {k: send_time.get(k) for k in ("shanghai", "shanghai_label", "date_only", "source_local", "source_label", "text")}
