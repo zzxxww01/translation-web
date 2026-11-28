@@ -21,6 +21,7 @@ import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
@@ -475,6 +476,14 @@ def _later(a: Optional[str], b: Optional[str]) -> Optional[str]:
     if not b:
         return a
     return a if float(a) >= float(b) else b
+
+
+def format_ts_ct(ts: str) -> str:
+    """消息时间按美中时间写：2026-11-27 09:30 Fri"""
+    try:
+        return datetime.fromtimestamp(float(ts), ZoneInfo("America/Chicago")).strftime("%Y-%m-%d %H:%M %a")
+    except (TypeError, ValueError):
+        return ""
 
 
 def format_ts(ts: str) -> str:
@@ -1451,6 +1460,9 @@ class SlackInbox:
                 "n": n,
                 "from": m["user_name"] + ("（我）" if m["is_me"] else ""),
                 "time": m["time"],
+                # 建议发送时间：同事按美中时间说「tmw 9am」，模型要知道那条消息是美中哪天发的
+                "time_ct": format_ts_ct(m["ts"]),
+                "at_me": bool(m.get("mentions_me")),
                 "text": (m["text"] or "")[:4000],
                 "images": [f["id"] for f in imgs],
             })

@@ -229,7 +229,7 @@ export function ChatFeature() {
             <div className="min-h-0 flex-1 overflow-y-auto p-2">{list}</div>
           </SheetContent>
         </Sheet>
-        <div className="w-36 sm:w-48 lg:w-40 xl:w-48" title="对话用的模型">
+        <div className="w-28 sm:w-48 lg:w-40 xl:w-48" title="对话用的模型">
           <ModelSelector value={model} onChange={value => setModel(value)} className="h-9 text-sm" disabled={pending} />
         </div>
       </PageActions>

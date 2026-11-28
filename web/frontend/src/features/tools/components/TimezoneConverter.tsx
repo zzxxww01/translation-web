@@ -1,198 +1,168 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import { useConvertTimezone } from '../hooks';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ChevronRight, RotateCw } from 'lucide-react';
 import type { TimezoneConvertResult } from '@/shared/types';
+import { cn } from '@/lib/utils';
 import { PANE, PANE_HEADER } from '@/shared/ui/pane';
+import { addDays, BEIJING, dateIn, describe, diffFromBeijing, ZONES, zonedToInstant } from '../lib/zones';
 
-// 与后端 src/api/utils/timezone.py 的解析规则一一对应，改那边要同步改这里
-const INPUT_FORMATS = [
-  { label: '今天 / 明天', examples: '今天下午3点、明天上午9点半、明天 15:30' },
-  { label: '月/日[/年]', examples: '1/26 4pm、1/26/26 4:30 pm、1/26 16:00' },
-  { label: '年-月-日', examples: '2026-01-26 14:00' },
-  { label: '英文月份', examples: 'Jan 26, 2026 4pm' },
-];
+/** 顶上一排的实时时钟 */
+const CLOCKS = ['Asia/Shanghai', 'America/New_York', 'America/Chicago', 'America/Los_Angeles'];
+/** 换算的来源时区：美中排第一、默认选它（同事排期一般按美中说） */
+const SOURCES = ['America/Chicago', 'America/New_York', 'America/Los_Angeles', 'Asia/Shanghai', 'UTC'];
+const zone = (id: string) => ZONES.find(z => z.id === id)!;
 
-const WEEKDAY_LABELS: Record<string, string> = {
-  Sun: '周日',
-  Mon: '周一',
-  Tue: '周二',
-  Wed: '周三',
-  Thu: '周四',
-  Fri: '周五',
-  Sat: '周六',
-};
-
-// C38: 用 Intl.DateTimeFormat 直接按目标时区格式化，避免
-// new Date(now.toLocaleString('en-US', { timeZone })) 在不同浏览器下解析不一致的问题。
-function formatTimeInZone(now: Date, timeZone: string): string {
-  return new Intl.DateTimeFormat('zh-CN', {
-    timeZone,
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).format(now);
-}
-
-function formatDateInZone(now: Date, timeZone: string): string {
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    weekday: 'short',
-  }).formatToParts(now);
-
-  const lookup = (type: Intl.DateTimeFormatPartTypes) =>
-    parts.find(part => part.type === type)?.value ?? '';
-
-  const year = lookup('year');
-  const month = lookup('month');
-  const day = lookup('day');
-  const weekday = WEEKDAY_LABELS[lookup('weekday')] ?? '';
-
-  return `${year}/${month}/${day} ${weekday}`.trim();
-}
-
-// 「现在」一栏的一行：左边地名和日期，右边大号时间
-function LiveTimeRow({ title, timeZone }: { title: string; timeZone: string }) {
-  const [time, setTime] = useState('');
-  const [date, setDate] = useState('');
-
+function useNow(intervalMs = 1000) {
+  const [now, setNow] = useState(() => new Date());
   useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      setTime(formatTimeInZone(now, timeZone));
-      setDate(formatDateInZone(now, timeZone));
-    };
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, [timeZone]);
+    const id = window.setInterval(() => setNow(new Date()), intervalMs);
+    return () => window.clearInterval(id);
+  }, [intervalMs]);
+  return now;
+}
 
+function Clock({ id, now }: { id: string; now: Date }) {
+  const d = describe(now, id, now);
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-5">
-      <div className="min-w-0">
-        <div className="text-sm font-medium text-text-secondary">{title}</div>
-        <div className="mt-1 text-xs tabular-nums text-text-muted">{date}</div>
-      </div>
-      <div className="text-[28px] font-semibold leading-none tabular-nums text-text-primary sm:text-[32px]" style={{ fontFamily: 'var(--font-display)' }}>
-        {time || <Skeleton className="h-8 w-28" />}
-      </div>
+    <div className={cn('rounded-xl border px-4 py-3', id === BEIJING ? 'border-primary-100 bg-primary-50/60' : 'border-border-subtle bg-white')}>
+      <div className="text-[13px] font-medium text-text-secondary">{zone(id).label}</div>
+      <div className="mt-1 text-[28px] font-semibold leading-tight tabular-nums text-text-primary [font-family:var(--font-display)]">{d.time}</div>
+      <div className="text-xs tabular-nums text-text-muted">{d.date} {d.weekday}</div>
+      <div className="mt-0.5 text-[11px] text-text-muted">{id === BEIJING ? '基准' : diffFromBeijing(now, id)}</div>
     </div>
   );
 }
 
-const RESULT_ROWS = [
-  { label: '北京时间', key: 'beijing' },
-  { label: '美东时间', key: 'est' },
-  { label: '美中时间', key: 'cst' },
-  { label: '美山时间', key: 'mst' },
-  { label: '美西时间', key: 'pst' },
-] as const;
+function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button type="button" onClick={onClick} aria-pressed={active}
+      className={cn('h-8 rounded-full px-3 text-[13px] transition-colors',
+        active ? 'bg-primary-600 font-medium text-white' : 'bg-bg-tertiary text-text-secondary hover:bg-primary-50 hover:text-primary-700')}>
+      {children}
+    </button>
+  );
+}
 
-export function TimezoneConverter() {
-  const timezoneMutation = useConvertTimezone();
+/** 粘贴一句话（例如「1/26 4pm PT」）走后端解析：同事消息里的写法直接贴进来 */
+function PasteConvert() {
+  const mutation = useConvertTimezone();
   const [input, setInput] = useState('');
   const [result, setResult] = useState<TimezoneConvertResult | null>(null);
-
-  const handleConvert = async () => {
-    if (!input.trim()) return;
+  const run = async () => {
+    if (!input.trim() || mutation.isPending) return;
     try {
-      const res = await timezoneMutation.mutateAsync({
-        input,
-        source_timezone: 'auto',
-      });
-      setResult(res);
+      setResult(await mutation.mutateAsync({ input, source_timezone: 'auto' }));
     } catch {
-      // Mutation hook owns the user-facing error message.
+      // 错误提示由 mutation hook 给
     }
   };
-
-  // 版式和文本翻译一样的两张「纸」：左边现在几点，右边换算；内容少，高度随内容
   return (
-    <div className="grid min-w-0 items-start gap-5 md:grid-cols-2">
-      <section className={PANE} aria-labelledby="timezone-now-label">
-        <header className={PANE_HEADER}>
-          <h2 id="timezone-now-label" className="text-[13px] font-semibold text-text-secondary">现在</h2>
-        </header>
-        <div className="divide-y divide-border-subtle">
-          <LiveTimeRow title="北京时间" timeZone="Asia/Shanghai" />
-          <LiveTimeRow title="美中时间" timeZone="America/Chicago" />
-          <LiveTimeRow title="美西时间" timeZone="America/Los_Angeles" />
-        </div>
+    <div className="border-t border-border-subtle px-4 py-3">
+      <label htmlFor="timezone-input" className="text-xs text-text-muted">也可以直接粘贴一句话（不写时区按美中算）</label>
+      <div className="mt-1.5 flex gap-2">
+        <Input id="timezone-input" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') void run(); }}
+          placeholder="1/26 4pm PT、明天上午9点半、Jan 26 4pm" className="h-9 min-w-0 flex-1" />
+        <Button variant="outline" onClick={() => void run()} disabled={!input.trim() || mutation.isPending} className="h-9 shrink-0">
+          {mutation.isPending ? <Loader2 className="animate-spin" /> : <ArrowRight />} 识别
+        </Button>
+      </div>
+      {result && (
+        <p className="mt-2 text-sm text-text-primary" aria-live="polite">
+          北京时间 <span className="font-semibold tabular-nums">{result.beijing}</span>
+          <span className="ml-2 text-xs text-text-muted">美东 {result.est} · 美西 {result.pst}</span>
+        </p>
+      )}
+    </div>
+  );
+}
+
+export function TimezoneConverter() {
+  const now = useNow();
+  const [source, setSource] = useState('America/Chicago');
+  const [date, setDate] = useState(() => dateIn(new Date(), 'America/Chicago'));
+  const [time, setTime] = useState('09:00');
+  const today = dateIn(now, source);
+  const instant = useMemo(() => zonedToInstant(date, time, source), [date, time, source]);
+
+  const pickSource = (id: string) => {
+    // 换来源时区时，「今天 / 明天」跟着那个时区走
+    const offset = Math.round((Date.parse(date) - Date.parse(dateIn(new Date(), source))) / 86400000);
+    setSource(id);
+    setDate(addDays(dateIn(new Date(), id), offset));
+  };
+
+  const beijing = instant ? describe(instant, BEIJING, now) : null;
+  const targets = ZONES.filter(z => z.id !== BEIJING && z.id !== source && z.id !== 'UTC');
+
+  return (
+    <div className="space-y-5">
+      <section aria-label="现在各地时间" className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {CLOCKS.map(id => <Clock key={id} id={id} now={now} />)}
       </section>
 
       <section className={PANE} aria-labelledby="timezone-convert-label">
         <header className={PANE_HEADER}>
-          <label id="timezone-convert-label" htmlFor="timezone-input" className="text-[13px] font-semibold text-text-secondary">换算一个时间</label>
+          <h2 id="timezone-convert-label" className="text-[13px] font-semibold text-text-secondary">换算一个时间</h2>
+          <span className="text-xs text-text-muted">改了马上出结果，夏令时自动算</span>
         </header>
-        {/* 输入框和按钮同一行，回车也能换算 */}
-        <div className="flex gap-2 border-b border-border-subtle p-3">
-          <Input
-            id="timezone-input"
-            placeholder="例如：今天下午3点、1/26 4pm PT"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') void handleConvert();
-            }}
-            aria-describedby="timezone-input-help"
-            className="h-10 min-w-0 flex-1"
-          />
-          <Button
-            onClick={handleConvert}
-            disabled={!input.trim() || timezoneMutation.isPending}
-            className="h-10 shrink-0"
-          >
-            <RotateCw className={timezoneMutation.isPending ? 'animate-spin' : undefined} />
-            换算
-          </Button>
-        </div>
-        {/* 结果一直占位，没换算时显示「—」；北京时间放最前、最醒目 */}
-        <dl className={`divide-y divide-border-subtle ${timezoneMutation.isPending ? 'opacity-60' : ''}`} aria-live="polite">
-          {RESULT_ROWS.map((row, i) => (
-            <div
-              key={row.key}
-              className={i === 0
-                ? 'flex items-baseline justify-between gap-3 bg-primary-50/50 px-4 py-3'
-                : 'flex items-baseline justify-between gap-3 px-4 py-2.5 text-sm'}
-            >
-              <dt className={i === 0 ? 'text-xs font-medium text-primary-700' : 'text-text-muted'}>{row.label}</dt>
-              <dd className={i === 0 ? 'text-lg font-semibold tabular-nums text-text-primary' : 'tabular-nums text-text-primary'}>
-                {result?.[row.key] || '—'}
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <details className="group border-t border-border-subtle bg-bg-tertiary/40 px-4 py-2 text-xs leading-relaxed text-text-muted">
-          <summary className="inline-flex cursor-pointer select-none list-none items-center gap-1 py-1 text-text-secondary hover:text-text-primary [&::-webkit-details-marker]:hidden">
-            <ChevronRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
-            支持哪些写法？
-          </summary>
-          <div id="timezone-input-help" className="mt-1 space-y-2 pb-2">
-          <p>
-            要带日期；结尾可以加时区，不加按<span className="font-medium text-text-secondary">美中时间</span>算。
-            「今天」「明天」也按这个时区的日期算。
-          </p>
-          <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-            {INPUT_FORMATS.map(format => (
-              <div key={format.label} className="contents">
-                <dt className="text-text-secondary">{format.label}</dt>
-                <dd>{format.examples}</dd>
+        <div className="grid gap-5 p-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          {/* 左：哪个时区的几号几点 */}
+          <div className="space-y-4">
+            <div>
+              <div className="mb-1.5 text-xs text-text-muted">原来的时区</div>
+              <div className="flex flex-wrap gap-1.5" role="group" aria-label="原来的时区">
+                {SOURCES.map(id => <Chip key={id} active={source === id} onClick={() => pickSource(id)}>{zone(id).short}</Chip>)}
               </div>
-            ))}
-          </dl>
-          <p>
-            时区：ET / EST / EDT 美东，CT / CST / CDT 美中，MT / MST / MDT 美山，PT / PST / PDT 美西，还有 UTC、BEIJING，
-            例如 1/26 4pm PT。夏令时自动处理，EST、EDT 写哪个都按当天实际时间算。
-          </p>
-          <p>不支持：只写时间不写日期（3pm EST）、星期（Thursday 3pm）、「晚上8点」（请写「下午8点」或 20:00）。</p>
+            </div>
+            <div>
+              <div className="mb-1.5 text-xs text-text-muted">日期（{zone(source).short}）</div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {['今天', '明天', '后天'].map((label, i) => (
+                  <Chip key={label} active={date === addDays(today, i)} onClick={() => setDate(addDays(today, i))}>{label}</Chip>
+                ))}
+                <input type="date" value={date} onChange={e => e.target.value && setDate(e.target.value)} aria-label="日期"
+                  className="h-8 rounded-full border border-border-subtle bg-white px-3 text-[13px] tabular-nums text-text-primary outline-none focus:border-primary-200" />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="timezone-time" className="mb-1.5 block text-xs text-text-muted">时间（{zone(source).short}）</label>
+              <input id="timezone-time" type="time" value={time} onChange={e => setTime(e.target.value)}
+                className="h-11 w-40 rounded-lg border border-border-subtle bg-white px-3 text-xl font-semibold tabular-nums text-text-primary outline-none focus:border-primary-200 focus:ring-2 focus:ring-primary-50" />
+            </div>
           </div>
-        </details>
+
+          {/* 右：北京时间最大，其他时区列在下面 */}
+          <div aria-live="polite">
+            {source !== BEIJING && (
+              <div className="rounded-xl bg-primary-50/70 px-4 py-3">
+                <div className="text-xs font-medium text-primary-700">北京时间</div>
+                {beijing ? (
+                  <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-[32px] font-semibold leading-tight tabular-nums text-text-primary [font-family:var(--font-display)]">{beijing.time}</span>
+                    <span className="text-sm text-text-secondary">{beijing.date} {beijing.weekday}</span>
+                    {beijing.relative && <span className="rounded-full bg-white px-2 py-0.5 text-xs text-primary-700">{beijing.relative}</span>}
+                  </div>
+                ) : <div className="mt-1 text-lg text-text-muted">—</div>}
+              </div>
+            )}
+            <dl className="mt-2 divide-y divide-border-subtle">
+              {targets.map(z => {
+                const d = instant ? describe(instant, z.id, now) : null;
+                return (
+                  <div key={z.id} className="flex items-baseline justify-between gap-3 px-1 py-2 text-sm">
+                    <dt className="text-text-muted">{z.label}</dt>
+                    <dd className="tabular-nums text-text-primary">
+                      {d ? <>{d.date} {d.weekday} <span className="font-semibold">{d.time}</span>{d.relative && <span className="ml-1.5 text-xs text-text-muted">{d.relative}</span>}</> : '—'}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </div>
+        </div>
+        <PasteConvert />
       </section>
     </div>
   );

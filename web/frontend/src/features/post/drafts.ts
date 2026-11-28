@@ -44,6 +44,38 @@ export interface DraftExtraction {
   latest_ts: string;
 }
 
+/** 建议发送时间：后端从 Slack thread 里摘出来、换算成上海时间（src/services/send_time.py） */
+export interface SendTime {
+  /** 上海时间 ISO（带 +08:00）；只说了日期没说几点时为 null */
+  shanghai: string | null;
+  /** 11月29日 周日 23:00 */
+  shanghai_label: string;
+  date_only: boolean;
+  /** 原文时区的钟点：2026-11-29 09:00 */
+  source_local: string;
+  /** 美中 / 美东… */
+  source_label: string;
+  /** 原话：post tmw 9am */
+  text: string;
+  /** 原文没写时区，按美中算的 */
+  tz_assumed?: boolean;
+}
+
+/** 列表里的短写法：11/29 23:00；只有日期时写 11/29 */
+export function sendTimeShort(sendTime: SendTime): string {
+  const iso = sendTime.shanghai ?? sendTime.source_local;
+  const m = /^\d{4}-(\d{2})-(\d{2})(?:[T ](\d{2}:\d{2}))?/.exec(iso ?? '');
+  if (!m) return sendTime.shanghai_label;
+  const day = `${Number(m[1])}/${Number(m[2])}`;
+  return sendTime.date_only || !m[3] ? day : `${day} ${m[3]}`;
+}
+
+/** 悬停说明：原话、按什么时区换算的 */
+export function sendTimeHint(sendTime: SendTime): string {
+  const basis = sendTime.tz_assumed ? '没写时区，按美中时间算' : `按${sendTime.source_label}时间算`;
+  return `原话：「${sendTime.text}」\n${basis}：${sendTime.source_local} → 上海 ${sendTime.shanghai_label}`;
+}
+
 export interface DraftDoc {
   id: string;
   source: 'manual' | 'slack';
@@ -59,6 +91,7 @@ export interface DraftDoc {
   images: DraftImage[];
   slack?: { channel_id: string; thread_ts: string; channel_name: string; title: string; permalink: string; latest_ts: string } | null;
   extraction?: DraftExtraction;
+  send_time?: SendTime | null;
   created_at: number;
   updated_at: number;
 }
@@ -77,7 +110,7 @@ export const draftsApi = {
   save: (id: string, body: { state: PostSnapshot; rev: number | null } & DraftExtra) =>
     apiClient.put<DraftDoc>(`/post-drafts/${id}`, body, { retry: false }),
   slack: (channelId: string, threadTs: string) =>
-    apiClient.get<{ draft: DraftDoc | null }>(`/post-drafts/slack/${channelId}/${threadTs}`, { retry: false }),
+    apiClient.get<{ draft: DraftDoc | null; running?: boolean }>(`/post-drafts/slack/${channelId}/${threadTs}`, { retry: false }),
   runSlack: (channelId: string, threadTs: string, instruction?: string) =>
     apiClient.post<DraftDoc>(`/post-drafts/slack/${channelId}/${threadTs}/run`, { instruction: instruction || null }, {
       retry: false,

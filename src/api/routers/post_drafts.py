@@ -33,6 +33,7 @@ from src.services.post_drafts import (
     sent_view,
     slack_draft_id,
 )
+from src.services.send_time import resolve_send_time
 from src.services.slack_inbox import SlackInboxError
 from src.settings import settings
 
@@ -97,7 +98,9 @@ async def create_manual_draft(request: Request, body: DraftBody):
 @router.get("/slack/{channel_id}/{thread_ts}")
 async def get_slack_draft(channel_id: str, thread_ts: str):
     doc = await _store(get_draft_store().get, slack_draft_id(channel_id, thread_ts))
-    return {"draft": {**doc, **sent_view(doc)} if doc else None}
+    # running：后台正在提取 / 翻译这个 thread（别的页面点的、或自动翻译），前端据此显示「进行中」并等结果
+    return {"draft": {**doc, **sent_view(doc)} if doc else None,
+            "running": slack_run_in_progress(channel_id, thread_ts)}
 
 
 @router.get("/{draft_id}")
@@ -204,6 +207,15 @@ def _add_version(state: Dict[str, Any], content: str, model_used: Optional[str],
     return version_id
 
 
+def _send_time(raw: Any, to_ts) -> Optional[Dict[str, Any]]:
+    resolved = resolve_send_time(raw)
+    if resolved is None:
+        return None
+    message_id = raw.get("message_id") if isinstance(raw, dict) else None
+    ts = to_ts([message_id]) if isinstance(message_id, int) else []
+    return {**resolved, "message_ts": ts[0] if ts else None}
+
+
 async def run_slack_pipeline(channel_id: str, thread_ts: str, *, instruction: Optional[str] = None,
                              auto: bool = False) -> Dict[str, Any]:
     """提取原文和配图 → 翻译成新版本 → 生成标题，存成翻译稿。已有稿子时保留旧版本，追加新的。"""
@@ -245,6 +257,8 @@ async def run_slack_pipeline(channel_id: str, thread_ts: str, *, instruction: Op
                 "latest_ts": material["latest_ts"],
             },
             "images": [{"id": i, "name": images_by_id[i]["name"]} for i in extraction["image_ids"]],
+            # 建议发送时间（换算成上海时间）；重新挑时没说时间就清掉，不留旧的
+            "send_time": _send_time(extraction.get("send_time"), to_ts),
             "status": "draft",
             "auto": auto if not existing else bool(existing.get("auto")) and auto,
             "seen": not auto,
@@ -273,6 +287,38 @@ async def run_slack_pipeline(channel_id: str, thread_ts: str, *, instruction: Op
         return await _store(store.put_system, doc)
 
 
+_inflight: Dict[str, "asyncio.Task[Dict[str, Any]]"] = {}
+
+
+def _inflight_key(channel_id: str, thread_ts: str, instruction: Optional[str]) -> str:
+    return f"{channel_id}:{thread_ts}\n{(instruction or '').strip()}"
+
+
+def slack_run_in_progress(channel_id: str, thread_ts: str) -> bool:
+    prefix = _inflight_key(channel_id, thread_ts, None)
+    return any(key.startswith(prefix) and not task.done() for key, task in _inflight.items())
+
+
+def _forget(key: str, task: "asyncio.Task[Dict[str, Any]]") -> None:
+    if _inflight.get(key) is task:
+        _inflight.pop(key, None)
+    if not task.cancelled():
+        task.exception()  # 等的人都走了（关掉页面）也不报「异常没人取」
+
+
+async def run_slack_once(channel_id: str, thread_ts: str, *, instruction: Optional[str] = None,
+                         auto: bool = False) -> Dict[str, Any]:
+    """幂等：同一个 thread、同样的要求已经在跑时，等那一次的结果，不再提取翻译一遍
+    （连点、切走再回来再点、和后台自动翻译撞上，都只跑一次）。关掉页面也不会打断正在跑的这次。"""
+    key = _inflight_key(channel_id, thread_ts, instruction)
+    task = _inflight.get(key)
+    if task is None or task.done():
+        task = asyncio.ensure_future(run_slack_pipeline(channel_id, thread_ts, instruction=instruction, auto=auto))
+        _inflight[key] = task
+        task.add_done_callback(lambda done, k=key: _forget(k, done))
+    return await asyncio.shield(task)
+
+
 class RunBody(BaseModel):
     instruction: Optional[str] = Field(None, max_length=500)
 
@@ -281,7 +327,7 @@ class RunBody(BaseModel):
 @limiter.limit("20/minute")
 async def run_slack(request: Request, channel_id: str, thread_ts: str, body: RunBody):
     try:
-        return await _run_ai(run_slack_pipeline(channel_id, thread_ts, instruction=body.instruction), "帖子提取")
+        return await _run_ai(run_slack_once(channel_id, thread_ts, instruction=body.instruction), "帖子提取")
     except DraftError as error:
         raise _draft_error(error) from error
 
@@ -323,7 +369,7 @@ async def auto_translate_once(attempts: Dict[str, float]) -> int:
         attempts[draft_id] = time.time()
         await run_blocking(_save_attempts, attempts)
         try:
-            await run_slack_pipeline(channel_id, thread_ts, auto=True)
+            await run_slack_once(channel_id, thread_ts, auto=True)
             done += 1
         except Exception:  # noqa: BLE001 - 一个 thread 失败不影响其他，一小时后再试
             logger.warning("自动翻译 @我 的 thread 失败 %s", draft_id, exc_info=True)

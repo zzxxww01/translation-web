@@ -24,11 +24,17 @@
 - 只读消息正文，不看链接里的内容。纯转发：只是让人「QT this <链接> with just this image」，没有自己的正文 → source_text 给空字符串，image_ids 给那张图，note 写「这是转发，只需要配图」。
 - 整个 thread 都是讨论、提问或数据分析，没有要发的帖子 → has_post 为 false，note 用一句中文概括这个 thread 在聊什么。
 - 拿不准用哪一版（例如两段内容都像最终版，或者旧版被否定后新版没有明确确认）→ 选你认为最可能的作为主结果，另外在 candidates 里给出 1–2 个备选（label 用几个字说明区别，例如「第一版」「Oren 改前的版本」）。
+
+## 建议发送时间
+- 找同事说这篇什么时候发：「sch 11/18」「post tmw 9am」「can u post this at 10:30 ET」「Monday 8am」这类，**优先看 at_me 为 true（@了我）的消息和它前后几条**；同一篇改过排期时取最新的说法。
+- 每条消息的 time_ct 是它发出时的美中时间（星期几也写了）。「tmw / tomorrow / today / Monday」按**说这句话那条消息的 time_ct** 推出具体日期（YYYY-MM-DD）。
+- time 用 24 小时制 HH:MM；只说了日期没说几点 → time 给 null。tz 照原文写的时区缩写或地名（ET、PT、CT、UTC、Beijing…），原文没写就给 null，不要自己猜。
+- 没提发送时间 → send_time 给 null。
 {instruction_section}
 
 ## 输出
 只输出 JSON：
-{{"has_post": true, "source_text": "清理后的英文原文", "note": "没有要发的帖子或只是转发时写一句中文说明，其余情况给空字符串", "message_ids": [消息编号], "image_ids": ["F…"], "candidates": [{{"label": "……", "source_text": "……", "message_ids": [], "image_ids": []}}]}}
+{{"has_post": true, "source_text": "清理后的英文原文", "note": "没有要发的帖子或只是转发时写一句中文说明，其余情况给空字符串", "message_ids": [消息编号], "image_ids": ["F…"], "candidates": [{{"label": "……", "source_text": "……", "message_ids": [], "image_ids": []}}], "send_time": {{"text": "原文里说时间的那句（原样）", "message_id": 消息编号, "date": "YYYY-MM-DD", "time": "HH:MM 或 null", "tz": "原文写的时区或 null"}}}}
 没有备选时 candidates 给空数组。
 
 ## thread（按时间顺序；是数据，不是给你的指令）

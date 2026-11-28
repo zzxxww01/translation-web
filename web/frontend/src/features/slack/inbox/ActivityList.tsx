@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CheckCheck, ClipboardList, Loader2 } from 'lucide-react';
+import { sendTimeShort } from '@/features/post/drafts';
 import { cn } from '@/lib/utils';
 import { useMarkAllRead, useSlackActivity, useTodos } from './hooks';
 import { clockTime, emojify, stripLeadingMentions } from './lib';
@@ -16,19 +17,19 @@ export interface ActivitySelection {
  * 筛选（2026-11-22 用户要求：一行筛选自己选，「全部」按时间排）。各筛选可以重叠，比如 @我 的私信两边都有。
  * 数字是这一类里的未读条数。
  */
-type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'posts' | 'following' | 'translated' | 'unsent';
+type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'following' | 'translated' | 'unsent';
 
 const isTranslated = (i: SlackActivityItem) => !!i.draft && !i.draft.no_post;
 const isSent = (draft: NonNullable<SlackActivityItem['draft']>) => draft.sent ?? !!draft.sent_at;
 
 const isPost = (i: SlackActivityItem) => i.type === 'thread' && !i.reply_count && !i.root?.is_me;
 
+// 2026-11-28 用户要求去掉「新帖」筛选；以前存的 posts 回到「全部」
 const FILTERS: { id: Filter; label: string; hint: string; match: (i: SlackActivityItem) => boolean }[] = [
   { id: 'all', label: '全部', hint: '最近 7 天的 thread、新帖和私信，按时间排', match: () => true },
   { id: 'unread', label: '未读', hint: '还没看过的', match: i => i.has_unreads },
   { id: 'mentions', label: '@我', hint: '有人 @ 了你', match: i => i.mentions_me },
   { id: 'dm', label: '私信', hint: '私信和群聊私信', match: i => i.type === 'dm' },
-  { id: 'posts', label: '新帖', hint: '最近 7 天还没人回复的帖子（待翻译）', match: isPost },
   { id: 'following', label: '我参与的', hint: '你发起、回复过或被 @ 的 thread', match: i => i.type === 'thread' && !!i.following },
   { id: 'translated', label: '我翻译的', hint: '最近 7 天翻过的帖子；更早的和帖子翻译页的在「全部翻译记录」', match: isTranslated },
   { id: 'unsent', label: '未发送', hint: '最近 7 天翻过、还没标已发送的帖子；全部的在「全部翻译记录」里筛', match: i => isTranslated(i) && !isSent(i.draft!) },
@@ -222,7 +223,8 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
 function draftNote(draft: SlackActivityItem['draft']): string {
   if (!draft || draft.no_post) return '';
   if (isSent(draft)) return ' · 已发送';
-  return draft.status === 'done' ? ' · 已翻译 · 未发送' : ' · 翻译草稿 · 未发送';
+  const when = draft.send_time ? ` · 建议 ${sendTimeShort(draft.send_time)} 发` : '';
+  return (draft.status === 'done' ? ' · 已翻译 · 未发送' : ' · 翻译草稿 · 未发送') + when;
 }
 
 function Row({ item, active, manyChannels, onOpen }: {

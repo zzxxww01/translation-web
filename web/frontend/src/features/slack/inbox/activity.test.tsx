@@ -38,7 +38,9 @@ beforeEach(() => {
       root: message({ text: '@用户组 *Elon post* :fire:\nsecond line', user_name: 'Reyk Knuhtsen' }), reply_count: 17,
       participants: ['Reyk Knuhtsen', 'Daksh Malik', 'Computer'], last: message({ text: '@Felix Zhou' }),
       latest_ts: '1794963980.687079', latest_time: '', has_unreads: true, mentions_me: true,
-      draft: { id: 's_x', status: 'draft', auto: true, seen: false, versions: 1, no_post: false },
+      draft: { id: 's_x', status: 'draft', auto: true, seen: false, versions: 1, no_post: false,
+        send_time: { shanghai: '2026-11-29T23:00:00+08:00', shanghai_label: '11月29日 周日 23:00', date_only: false,
+          source_local: '2026-11-29 09:00', source_label: '美中', text: 'post tmw 9am' } },
     },
     {
       type: 'dm', channel_id: 'D1', channel_name: 'Michelle Shen', kind: 'im', thread_ts: null,
@@ -75,6 +77,7 @@ it('lists everything by time with the original first line, who is talking and th
   expect(first.textContent).toContain('@我');
   expect(first.getAttribute('title')).toContain('自动翻好');      // 后台自动翻好的帖子：只是底色变一点，没有彩色标签
   expect(first.textContent).toContain('翻译草稿');
+  expect(first.textContent).toContain('建议 11/29 23:00 发');      // 建议发送时间（上海时间）
   expect(dm.textContent).toContain('Michelle Shen');
   expect(dm.textContent).toContain('私信');
   await act(async () => first.click());
@@ -88,14 +91,14 @@ it('one row of filters with unread counts, remembered; unread view has mark-all'
   );
   await render();
   expect(Array.from(host.querySelectorAll('[role="tab"]')).map(t => t.textContent))
-    .toEqual(['全部', '未读2', '@我1', '私信', '新帖1', '我参与的', '我翻译的1', '未发送1']);
+    .toEqual(['全部', '未读2', '@我1', '私信', '我参与的', '我翻译的1', '未发送1']);
   await act(async () => tab(/^未读/).click());
   expect(rows().map(r => r.textContent?.includes('Elon') || r.textContent?.includes('Fresh'))).toEqual([true, true]);
   const markButton = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('全部标为已读'))!;
   await act(async () => markButton.click());
   expect(markAll).toHaveBeenCalled();
-  await act(async () => tab(/^新帖/).click());
-  expect(rows()[0].textContent).toContain('Doug O 发帖');
+  await act(async () => tab(/^全部/).click());
+  expect(rows().some(r => r.textContent?.includes('Doug O 发帖'))).toBe(true);
   await act(async () => tab(/^我参与的/).click());
   expect(rows().map(r => r.textContent?.includes('My own thread'))).toEqual([true]);
   expect(localStorage.getItem('slack-activity-filter')).toBe('following');

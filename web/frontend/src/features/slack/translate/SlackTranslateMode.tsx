@@ -9,13 +9,17 @@ import { copyToClipboard } from '@/shared/utils';
 import { createPostStore, type PostStoreHook } from '@/shared/stores/postStore';
 import { WorkColumn } from '@/features/post';
 import { DiscardEditDialog, PendingChip, SaveState } from '@/features/post/components/WorkspaceChrome';
-import { draftKeys, draftsApi, sentTitle, useDraftSync, type DraftDoc, type DraftImage } from '@/features/post/drafts';
+import { draftKeys, draftsApi, sendTimeHint, sentTitle, useDraftSync, type DraftDoc, type DraftImage } from '@/features/post/drafts';
 import { usePostWorkspace } from '@/features/post/usePostWorkspace';
 import { MessageItem } from '../inbox/MessageItem';
 import { useSlackReplies } from '../inbox/hooks';
 
 // 每篇帖子一份工作区 store，放模块里：切走再回来（组件重新挂载）内容和进行中的请求都还在
 const stores = new Map<string, PostStoreHook>();
+/** 正在跑的「提取 → 翻译」：同一个帖子同样的要求只发一次请求，连点、切走再回来都等同一个结果（后端也去重） */
+const inflight = new Map<string, Promise<DraftDoc>>();
+const runKey = (key: string, instruction?: string) => `${key}\n${(instruction ?? '').trim()}`;
+const runningFor = (key: string) => [...inflight.keys()].some(k => k.startsWith(`${key}\n`));
 function storeFor(key: string) {
   let store = stores.get(key);
   if (!store) {
@@ -43,9 +47,10 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const draftQuery = useQuery({
     queryKey: draftKeys.slack(channelId, threadTs),
     queryFn: () => draftsApi.slack(channelId, threadTs),
-    select: data => data.draft,
     staleTime: Infinity,
   });
+  /** 后台正在跑这个帖子（别的页面点的、或者自动翻译），不是这个页面发的请求 */
+  const remoteRunning = !!draftQuery.data?.running;
   const [doc, setDoc] = useState<DraftDoc | null>(null);
   const [images, setImages] = useState<DraftImage[]>([]);
   const [status, setStatus] = useState<'draft' | 'done'>('draft');
@@ -54,7 +59,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const [sentAuto, setSentAuto] = useState(false);
   const isSent = !!sentAt || sentAuto;
   const [sentBusy, setSentBusy] = useState(false);
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState(() => runningFor(key));
   const [instruction, setInstruction] = useState('');
   const [picking, setPicking] = useState(false);
   const draftId = store(state => state.draftId);
@@ -68,36 +73,81 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
     setSentAuto(!!next.sent_auto);
     store.getState().loadSnapshot(next.state, next.id, next.rev);
     sync.markLoaded();
-    queryClient.setQueryData(draftKeys.slack(channelId, threadTs), { draft: next });
+    queryClient.setQueryData(draftKeys.slack(channelId, threadTs), { draft: next, running: false });
+  };
+
+  const finish = (next: DraftDoc) => {
+    load(next);
+    void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'activity'] });
+    void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
+  };
+
+  /** 等一个已经发出去的请求：切走再回来时接着显示「进行中」，跑完换上新结果 */
+  const await_ = async (promise: Promise<DraftDoc>) => {
+    setRunning(true);
+    try {
+      finish(await promise);
+      return true;
+    } catch (error) {
+      toast.error(error instanceof Error ? `没翻出来：${error.message}` : '没翻出来');
+      return false;
+    } finally {
+      setRunning(runningFor(key));
+    }
   };
 
   const run = async (text?: string) => {
-    if (running) return;
-    setRunning(true);
-    try {
-      await sync.flush();
-      load(await draftsApi.runSlack(channelId, threadTs, text));
-      setInstruction('');
-      void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'activity'] });
-      void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
-    } catch (error) {
-      toast.error(error instanceof Error ? `没翻出来：${error.message}` : '没翻出来');
-    } finally {
-      setRunning(false);
+    const k = runKey(key, text);
+    let promise = inflight.get(k);
+    if (!promise) {
+      promise = (async () => {
+        await sync.flush();
+        return draftsApi.runSlack(channelId, threadTs, text);
+      })();
+      inflight.set(k, promise);
+      const forget = () => { if (inflight.get(k) === promise) inflight.delete(k); };
+      promise.then(forget, forget);
     }
+    if (await await_(promise)) setInstruction('');
   };
+
+  // 切走时还在跑的请求：回来后接着等它
+  useEffect(() => {
+    const pending = [...inflight.entries()].find(([k]) => k.startsWith(`${key}\n`));
+    if (!pending) return;
+    const timer = window.setTimeout(() => void await_(pending[1]), 0);
+    return () => window.clearTimeout(timer);
+    // 只在打开这个帖子时看一次
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+
+  // 后台在跑（不是这个页面发的）：每 3 秒看一眼，跑完载入新稿子
+  const wasRemote = useRef(false);
+  useEffect(() => {
+    if (!remoteRunning) {
+      if (wasRemote.current && draftQuery.data?.draft) load(draftQuery.data.draft);
+      wasRemote.current = false;
+      return;
+    }
+    wasRemote.current = true;
+    const timer = window.setInterval(() => void draftQuery.refetch(), 3000);
+    return () => window.clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remoteRunning]);
+
+  const busy = running || remoteRunning;
 
   // 第一次进来：没有稿子就自动跑一遍；有稿子就载入（自动翻好的顺手标成「看过了」）
   const started = useRef(false);
   const ready = !draftQuery.isLoading && !draftQuery.isError;
-  const existing = draftQuery.data;
+  const existing = draftQuery.data?.draft;
   useEffect(() => {
     if (!ready || started.current) return;
     const timer = window.setTimeout(() => {
       if (started.current) return;
       started.current = true;
       if (!existing) {
-        void run();
+        if (!remoteRunning) void run();
         return;
       }
       const current = store.getState();
@@ -185,11 +235,18 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
   const sourcePane = (
     <div className="flex min-h-full flex-col gap-5 px-4 py-4">
-      {running && !doc && (
+      {busy && !doc && (
         <div className="rounded-xl bg-primary-50/60 px-4 py-8 text-center">
           <Loader2 className="mx-auto h-6 w-6 animate-spin text-primary-500" />
           <p className="mt-3 text-sm font-medium text-text-primary">正在从 Slack 原帖里找出要发的帖子</p>
           <p className="mt-1 text-xs text-text-muted">找原文和配图 → 翻译 → 起标题，大约 15 秒</p>
+        </div>
+      )}
+
+      {busy && doc && (
+        <div role="status" className="flex items-center gap-2.5 rounded-xl bg-primary-50/70 px-4 py-3 text-sm text-primary-800">
+          <Loader2 className="h-4 w-4 shrink-0 animate-spin" />
+          <span>正在重新挑选和翻译，大约 20 秒；好了会自动换上新版本，旧译文留在版本记录里</span>
         </div>
       )}
 
@@ -208,12 +265,12 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
           value={ws.originalText}
           onChange={e => ws.setOriginalText(e.target.value)}
           aria-label="帖子原文"
-          placeholder={running ? '正在提取…' : '在这里粘贴或修改英文原文'}
+          placeholder={busy ? '正在提取…' : '在这里粘贴或修改英文原文'}
           className="min-h-[220px] w-full resize-y rounded-lg border border-border-subtle bg-white px-3.5 py-3 text-[14px] leading-relaxed text-text-primary outline-none transition-colors focus:border-primary-200 focus:ring-2 focus:ring-primary-50"
         />
         <div className="mt-2 flex flex-wrap items-center gap-2">
           {(sourceChanged || (!ws.versions.length && ws.originalText.trim())) && (
-            <Button size="sm" className="h-8" onClick={() => void ws.handleTranslate()} disabled={ws.isLoading || running}>
+            <Button size="sm" className="h-8" onClick={() => void ws.handleTranslate()} disabled={ws.isLoading || busy}>
               {ws.pendingAction === 'translate' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
               {ws.versions.length ? '按改过的原文重新翻译' : '翻译'}
             </Button>
@@ -250,22 +307,22 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
               <input
                 value={instruction}
                 onChange={e => setInstruction(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') void run(instruction); }}
+                onKeyDown={e => { if (e.key === 'Enter' && !busy) void run(instruction); }}
                 placeholder="告诉 AI 怎么挑：用第一版 / 把地图那段也加上"
                 aria-label="重新挑选的要求"
-                disabled={running}
+                disabled={busy}
                 className="h-8 min-w-0 flex-1 rounded-md border border-border-subtle bg-white px-2.5 text-sm outline-none focus:border-primary-200"
               />
-              <Button variant="outline" size="sm" className="h-8 shrink-0" onClick={() => void run(instruction)} disabled={running}>
-                {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <RotateCcw className="h-4 w-4" />} 重新挑
+              <Button variant="outline" size="sm" className="h-8 shrink-0" onClick={() => void run(instruction)} disabled={busy}>
+                {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <RotateCcw className="h-4 w-4" />} {busy ? '正在挑…' : '重新挑'}
               </Button>
             </div>
           </div>
         )}
-        {hasNew && (
+        {hasNew && !busy && (
           <p className="mt-2 text-xs text-amber-800">
             原帖后来又有更新，可能有新版本。
-            <button type="button" onClick={() => void run()} disabled={running} className="ml-1 font-medium text-primary-700 hover:underline">重新挑</button>
+            <button type="button" onClick={() => void run()} className="ml-1 font-medium text-primary-700 hover:underline">重新挑</button>
           </p>
         )}
       </section>
@@ -337,6 +394,11 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
         <div className="min-w-0 flex-1 truncate text-sm text-text-primary" title={title}>
           <span className="text-text-muted">#{doc?.slack?.channel_name || channelName} · </span>{title}
         </div>
+        {doc?.send_time && (
+          <span className="shrink-0 whitespace-nowrap rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-900" title={sendTimeHint(doc.send_time)}>
+            建议发送：{doc.send_time.shanghai_label}{doc.send_time.date_only ? '' : '（上海）'}
+          </span>
+        )}
         <span className="shrink-0 whitespace-nowrap"><SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} /></span>
         <PendingChip ws={ws} />
         {draftId && (

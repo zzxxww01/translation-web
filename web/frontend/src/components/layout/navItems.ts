@@ -1,4 +1,4 @@
-import { Bot, FileText, MessageCircle, MessageSquare, Newspaper, Sparkles, Wrench, type LucideIcon } from 'lucide-react';
+import { FileText, MessageCircle, MessageSquare, Newspaper, Sparkles, Wrench, type LucideIcon } from 'lucide-react';
 
 export interface NavItem {
   path: string;
@@ -19,6 +19,5 @@ export const NAV_ITEMS: NavItem[] = [
   { path: '/wechat', label: '微信排版', icon: FileText },
   { path: '/slack', label: 'Slack', icon: MessageCircle, remember: true },
   { path: '/tools', label: '工具箱', icon: Wrench },
-  { path: '/chat', label: 'Chatbot', icon: Bot },
   { path: '/skills', label: 'Agent', icon: Sparkles, remember: true },
 ];

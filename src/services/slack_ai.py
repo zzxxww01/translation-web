@@ -187,7 +187,11 @@ def parse_extraction(data: Any, allowed_images: Sequence[str]) -> Dict[str, Any]
     note = str(data.get("note") or "").strip()[:500]
     if not has_post and not note:
         raise ValueError("模型没有给出提取结果")
+    send_time = data.get("send_time")
+    send_id = _ints([send_time.get("message_id")]) if isinstance(send_time, dict) else []
     return {
+        "send_time": {**send_time, "message_id": send_id[0] if send_id else None}
+        if has_post and isinstance(send_time, dict) and send_time.get("date") else None,
         "has_post": has_post,
         "source_text": source if has_post else "",
         "note": note,

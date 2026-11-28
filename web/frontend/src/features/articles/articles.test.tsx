@@ -1035,6 +1035,30 @@ describe('Workbench', () => {
     expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: 'gpt-6.2-sol', autoAcceptTerms: true, sectionIds: ['s1'] });
   });
 
+  it('starts 继续翻译 once however often it is clicked, shows it is starting, and treats "already running" as fine', async () => {
+    const partial = { ...DATA, rows: DATA.rows.map(row => row.key === 'section:s1' ? { ...row, web: null } : row) };
+    api.workbench.mockResolvedValue(partial);
+    let reject!: (error: unknown) => void;
+    api.startWorkflow.mockReturnValue(new Promise((_, r) => { reject = r; }));
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const links = () => Array.from(host.querySelectorAll('button')).filter(b => b.textContent?.trim() === '继续翻译');
+    const before = links().length;
+    const link = buttonIn(host, '继续翻译');
+    await act(async () => { link.click(); link.click(); });
+    expect(host.textContent).toContain('正在开始…');
+    // 点的这一版收起了按钮（对照栏的 argon 版也缺段，它的按钮还在）
+    expect(links().length).toBe(before - 1);
+    expect(link.isConnected).toBe(false);
+    expect(api.startWorkflow).toHaveBeenCalledTimes(1);
+    const { toast } = await import('sonner');
+    await act(async () => reject(new ApiErrorWrapper('already active', 409)));
+    await flush();
+    expect(toast.info).toHaveBeenCalledWith('这一版已经在翻了');
+    expect(toast.error).not.toHaveBeenCalled();
+    expect(host.textContent).not.toContain('正在开始…');
+  });
+
   it('resumes without retranslating chapters when only a section title is missing', async () => {
     const partial = { ...DATA, rows: DATA.rows.map(row => row.key === 'section:s1' ? { ...row, web: null } : row) };
     api.workbench.mockResolvedValue(partial);
