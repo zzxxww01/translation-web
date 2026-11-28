@@ -409,13 +409,14 @@ async def test_workbench_skips_a_variant_that_vanishes_while_loading(pm, main_id
     assert data["variants"] == []
 
 
-def test_punctuation_only_paragraph_is_kept_as_is(pm, main_id):
-    # 原网页残留的一个「.」：Agent 稿里没有对应块，也不该算缺译
+@pytest.mark.parametrize("source", [".", "https://x.com/SemiAnalysis_/status/2122439949907841067"])
+def test_punctuation_or_link_only_paragraph_is_kept_as_is(pm, main_id, source):
+    # 原网页残留的一个「.」，或嵌入推文拆出来的裸链接：Agent 稿里没有对应块，也不该算缺译
     section = pm.get_sections(main_id)[-1]
     last = section.paragraphs[-1]
-    section.paragraphs.append(last.model_copy(deep=True, update={"id": "pdot", "index": last.index + 1, "source": "."}))
+    section.paragraphs.append(last.model_copy(deep=True, update={"id": "pdot", "index": last.index + 1, "source": source}))
     pm._save_section(main_id, section)
     variant = article_variants.import_claude_translation(
         pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex")["variant_id"]
     paragraph = next(p for s in pm.get_sections(variant) for p in s.paragraphs if p.id == "pdot")
-    assert paragraph.latest_translation(non_empty=True).text == "."
+    assert paragraph.latest_translation(non_empty=True).text == source

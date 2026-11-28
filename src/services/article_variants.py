@@ -40,6 +40,12 @@ _variant_locks_guard = threading.Lock()
 
 
 _WORD = re.compile(r"[^\W_]")
+_URL = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
+
+
+def _has_words(source: str) -> bool:
+    """去掉链接后还有文字：只有标点或只有一个链接（嵌入推文残留的裸链接）的段不用翻。"""
+    return bool(_WORD.search(_URL.sub("", source or "")))
 
 
 def variant_lock(main_id: str) -> threading.RLock:
@@ -158,8 +164,8 @@ def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown:
     alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, targets)
     if not alignment.texts:
         raise ValueError("Agent 的译文和这篇文章对不上，可能不是同一篇")
-    # 只有标点的段（下面原样保留）不算在里面
-    countable = [t for t in targets if t.kind != "image" and _WORD.search(t.source or "")]
+    # 只有标点或链接的段（下面原样保留）不算在里面
+    countable = [t for t in targets if t.kind != "image" and _has_words(t.source)]
     total = len(countable)
     aligned = sum(1 for t in countable if t.key in alignment.texts)
     if not force and total and aligned < MIN_ALIGNED_RATIO * total:
@@ -173,8 +179,10 @@ def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown:
             section.title_translation = title.split("\n")[0].strip()
         for paragraph in section.paragraphs:
             text = alignment.texts.get(f"{section.section_id}/{paragraph.id}")
-            if not text and not _WORD.search(paragraph.source or ""):
-                text = paragraph.source  # 只有标点、符号的段（原网页残留的一个「.」）：原样保留，不算缺译
+            if not text and not _has_words(paragraph.source):
+                # 只有标点、符号的段（原网页残留的一个「.」），或嵌入推文拆出来的裸链接
+                # （Agent 稿把它并进了上一句的链接）：原样保留，不算缺译
+                text = paragraph.source
             if text and paragraph.element_type.value != "image" and paragraph.status != ParagraphStatus.APPROVED:
                 paragraph.add_translation(text, "claude")
                 paragraph.status = ParagraphStatus.TRANSLATED
