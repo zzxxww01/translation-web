@@ -47,6 +47,10 @@ class OpenAIOfficialProvider(VectorEngineProvider):
         success = False
         error_type = None
         content = ""
+        if response_format == "json" and "json" not in prompt.lower():
+            # json_object mode is rejected (HTTP 400) unless the messages mention
+            # "json"; shared templates (e.g. source_batch_translate) may not.
+            prompt = f"{prompt}\n\nRespond with a JSON object."
         params = {"model": model_name, "messages": [{"role": "user", "content": prompt}],
                   "max_completion_tokens": positive_token_limit(kwargs.get("max_tokens", self.max_tokens)),
                   "store": False}

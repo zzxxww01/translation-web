@@ -82,8 +82,12 @@ def test_real_factory_and_phase_transport(loader, monkeypatch):
     provider = phase_provider(create_llm_provider(MODEL), {'temperature':0.3,'max_tokens':64,'timeout':10})
     metadata = {}
     assert provider.generate('只回复好的', response_format='json', result_metadata=metadata) == '好的'
-    assert calls == [{'model':MODEL,'messages':[{'role':'user','content':'只回复好的'}],
+    # json_object 模式下 OpenAI 要求消息里出现 "json"，否则 HTTP 400：缺了就补一句
+    assert calls == [{'model':MODEL,'messages':[{'role':'user','content':'只回复好的\n\nRespond with a JSON object.'}],
                       'max_completion_tokens':64,'store':False,'response_format':{'type':'json_object'}}]
+    calls.clear()
+    assert provider.generate('只回复 JSON：好的', response_format='json') == '好的'
+    assert calls[0]['messages'][0]['content'] == '只回复 JSON：好的'
     assert metadata['provider_used'] == 'openai-official'
     assert metadata['model_used'] == metadata['real_model_used'] == MODEL
     assert metadata['fallback_used'] is False
