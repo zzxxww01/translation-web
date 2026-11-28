@@ -1019,8 +1019,9 @@ describe('Workbench', () => {
     expect(claude.startClaudeTrack).toHaveBeenCalledWith('p1', { harness: 'codex', model: 'gpt-5.5-codex' }, '2027 数据中心');
   });
 
-  it('offers 继续翻译 only for an unfinished web version, never 重新翻译', async () => {
-    const partial = { ...DATA, rows: DATA.rows.map(row => row.key === 's1/p000' ? { ...row, web: null } : row) };
+  it('offers 继续翻译 only for an unfinished web version, never 重新翻译, with the article\'s last model', async () => {
+    const partial = { ...DATA, project: { ...DATA.project, web_model: 'gpt-6.2-sol' },
+      rows: DATA.rows.map(row => row.key === 's1/p000' ? { ...row, web: null } : row) };
     api.workbench.mockResolvedValue(partial);
     api.startWorkflow.mockResolvedValue({ run_id: 'r' });
     vi.spyOn(window, 'confirm').mockReturnValue(true);
@@ -1030,7 +1031,8 @@ describe('Workbench', () => {
     expect(host.textContent).toContain('缺 1 段');
     await act(async () => { buttonIn(host, '继续翻译').click(); });
     await flush();
-    expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: undefined, autoAcceptTerms: true, sectionIds: ['s1'] });
+    // 没另选：用这篇上次的模型（状态行下拉框的默认值）
+    expect(api.startWorkflow).toHaveBeenCalledWith('p1', { model: 'gpt-6.2-sol', autoAcceptTerms: true, sectionIds: ['s1'] });
   });
 
   it('resumes without retranslating chapters when only a section title is missing', async () => {

@@ -215,6 +215,7 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "claude_run_id": meta.claude_run_id,
             "primary_target": meta.primary_target,
             "primary": primary,
+            "web_model": meta.web_model,
             "progress": {"total": meta.progress.total_paragraphs, "approved": meta.progress.approved},
             "status": main_status,
         },
