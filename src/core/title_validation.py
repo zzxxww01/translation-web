@@ -33,8 +33,9 @@ def is_protected_name(text: str) -> bool:
     if re.fullmatch(_MODEL_FAMILY + r"(?:[ -]?[VMK]?\d[\d.Xx-]*)?" + _MODEL_SUFFIXES, text):
         return True
     # A versioned model may end with one codename word ("Gemini 4 Neon",
-    # "GPT-6.2 Astra"); the version is required so "Claude Is" stays prose.
-    if re.fullmatch(_MODEL_FAMILY + r"[ -]?[VMK]?\d[\d.Xx-]*" + _MODEL_SUFFIXES + r"(?: [A-Z][a-z]+)?", text):
+    # "GPT-6.2 Astra", "Kimi K3 AgentX"); the version is required so
+    # "Claude Is" stays prose.
+    if re.fullmatch(_MODEL_FAMILY + r"[ -]?[VMK]?\d[\d.Xx-]*" + _MODEL_SUFFIXES + r"(?: [A-Z][A-Za-z]+)?", text):
         return True
     if not _IDENTIFIER.fullmatch(text):
         return False
