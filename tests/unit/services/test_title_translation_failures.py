@@ -170,7 +170,7 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
     "Google Cloud", "Hugging Face", "Azure", "Intel", "google cloud",
     "Microsoft Azure", "Amazon Web Services", "Semi Analysis", "Tokenomics",
     "GLM 5.3", "MiniMax M3", "DeepSeek V4 Pro 0813", "Qwen3.5 397B", "Kimi K2.X",
-    "Gemini 4 Neon", "Fable 5.2", "GPT-6.2 Astra",
+    "Gemini 4 Neon", "Fable 5.2", "GPT-6.2 Astra", "Kimi K3 AgentX", "Qwen3.5 397B AgentX",
 ])
 @pytest.mark.parametrize("mode", ["existing", "batch", "fallback"])
 async def test_protected_names_agree_across_generation_resume_and_export(name, mode):
